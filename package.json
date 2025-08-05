@@ -4,8 +4,11 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
+    "client-dev": "npx webpack --watch",
+    "server-dev": "npx nodemon --watch server  server/index.js",
     "build": "npx webpack",
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "test": "npx jest"
   },
   "repository": {
     "type": "git",
@@ -20,6 +23,8 @@
   "homepage": "https://github.com/Cache-Me-If-You-Can-org/Atelier#readme",
   "dependencies": {
     "axios": "^1.11.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
     "express": "^4.17.1",
     "jest": "^30.0.5",
     "path": "^0.12.7",
