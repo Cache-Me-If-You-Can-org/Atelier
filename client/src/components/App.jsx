@@ -1,4 +1,6 @@
-import Overview from './Overview.jsx'
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import Overview from './Overview.jsx';
 
 export default function App() {
   const [products, setProducts] = useState(null);
@@ -8,6 +10,10 @@ export default function App() {
          .then(res => setProducts(res.data))
          .catch(err => console.log('failed to get products', err));
   }, []);
+
+  if (products === null) {
+    return (<div>loading...</div>);
+  }
 
   return (
     <div className="app">
