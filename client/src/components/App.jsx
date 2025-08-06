@@ -12,7 +12,7 @@ export default function App() {
   }, []);
 
   if (products === null) {
-    return <div>loading...</div>
+    return (<div>loading...</div>);
   }
 
   return (
