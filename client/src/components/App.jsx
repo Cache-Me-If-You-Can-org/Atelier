@@ -29,7 +29,7 @@ export default function App() {
       <Overview productId={currentProductId}/>
       <RelatedProducts id={currentProductId}/>
       <Outfit />
-      <Reviews productId={currentProductId}/>
+      {/* <Reviews productId={currentProductId}/> */}
     </div>
   )
 };

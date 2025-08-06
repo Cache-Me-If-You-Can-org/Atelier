@@ -23,7 +23,6 @@ export default function Card({ product_id }) {
     )
   }
 
-  console.log('product:', product);
   return (
     <div className="product-card" style={{ minHeight: 150 }}>
       <p>{product.category}</p>
