@@ -51,7 +51,6 @@ export default {
   slidesToShow: 3,
   slidesToScroll: 1,
   variableWidth: false,
-  adaptiveHeight: true,
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />
 };

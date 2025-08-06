@@ -32,7 +32,7 @@ export default function RelatedProducts({ id }) {
   }
 
   return (
-    <div className="related" style={{ position: 'relative', overflow: 'visible'}}>
+    <div className="related">
       <Slider {...settings}>
         {relatedProducts.map((id, index) => (
           <Card key={index} product_id={id} />

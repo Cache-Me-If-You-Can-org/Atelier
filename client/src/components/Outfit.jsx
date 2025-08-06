@@ -17,25 +17,13 @@ export default function Outfit() {
     40346
   ];
 
-  useEffect(() => {
-    //either using axios or props, get the outfit data
-  }, []);
-
-  // if (!outfit.length) {
-  //   return (
-  //     <div className="outfit .group">
-  //       Loading elements...
-  //     </div>
-  //   )
-  // }
-
   return (
-    <div className="related" style={{ position: 'relative', overflow: 'visible'}}>
+    <div className="related">
       <Slider {...settings}>
         <AddToOutfit />
-        {outfit.map((id, index) => {
-          <Card product_id={id} />
-        })}
+        {outfit.map((id, index) => (
+          <Card key={index} product_id={id} />
+        ))}
       </Slider>
     </div>
   );
@@ -43,11 +31,9 @@ export default function Outfit() {
 
 function AddToOutfit() {
   return (<>
-    <div>
-      <button>
-        <p>+</p>
-        <p>Add to Outfit</p>
-      </button>
+    <div className="product-card add-outfit" style={{ minHeight: 150 }}>
+      <p>+</p>
+      <p>Add to Outfit</p>
     </div>
   </>)
 }

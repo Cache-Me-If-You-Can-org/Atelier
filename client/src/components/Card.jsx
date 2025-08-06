@@ -17,13 +17,15 @@ export default function Card({ product_id }) {
 
   if (!product.name) {
     return (
-      <div><p>Loading...</p></div>
+      <div className="product-card" style={{ minHeight: 150 }}>
+        <p>Loading...</p>
+      </div>
     )
   }
 
   console.log('product:', product);
   return (
-    <div className="product-card" style={{ width: 300, padding: 5, background: 'white', border: '2px solid black'}}>
+    <div className="product-card" style={{ minHeight: 150 }}>
       <p>{product.category}</p>
       <h4>{product.name}</h4>
       <small>${product.default_price}</small>

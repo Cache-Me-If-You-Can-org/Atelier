@@ -103,9 +103,19 @@ button {
 }
 
 .related {
-  max-width: 300px;
+  width: 450px;
+  position: 'relative';
+  overflow: 'visible';
 }
 
 .product-card {
+  box-sizing: content-box;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+.add-outfit {
+  text-align: center;
   margin: 5px;
 }
