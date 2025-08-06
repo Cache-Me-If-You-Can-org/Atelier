@@ -101,3 +101,11 @@ button {
   border-radius: 50%;
   border: solid 1px var(--color-border);
 }
+
+.related {
+  max-width: 300px;
+}
+
+.product-card {
+  margin: 5px;
+}
