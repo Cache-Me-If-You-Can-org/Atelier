@@ -9,10 +9,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, "/server")));
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.all("/*", (req, res) => {
-
+  console.log('Route);')
   axios( {
     method: req.method,
     url: `${process.env.API_URL}${req.url}`,
@@ -21,7 +21,7 @@ app.all("/*", (req, res) => {
     }
   })
   .then((data) => {
-    console.log('DATA', data.data);
+    //console.log('DATA', data.data);
     res.send(data.data);
   })
   .catch((error) => {
