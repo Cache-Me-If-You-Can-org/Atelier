@@ -1,6 +1,6 @@
+// Custom arrow for the carousel
 function Arrow(props) {
   const { className, style, onClick } = props;
-  console.log('class name', className);
   var classes = className + ' carousel-arrow';
   return (
     <div
@@ -11,6 +11,7 @@ function Arrow(props) {
   );
 }
 
+// Settings for the carousel
 export default {
   infinite: false,
   speed: 700,

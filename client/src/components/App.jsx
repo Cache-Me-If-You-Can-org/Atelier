@@ -10,13 +10,11 @@ import "slick-carousel/slick/slick.css";
 export default function App() {
 
   const [currentProductId, setCurrentProductId] = useState(null);
-  const [products, setProducts] = useState(null);
 
   useEffect(() => {
     axios.get('/products')
       .then(res => {
         setCurrentProductId(res.data[0].id);
-        setProducts(res.data);
       })
       .catch(err => console.log('failed to get products', err))
   }, []);
@@ -31,7 +29,7 @@ export default function App() {
       <Overview productId={currentProductId}/>
       <RelatedProducts id={currentProductId}/>
       <Outfit />
-      {/* <Reviews productId={currentProductId}/> */}
+      <Reviews productId={currentProductId}/>
     </div>
   )
 };

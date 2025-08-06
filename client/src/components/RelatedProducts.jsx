@@ -9,8 +9,6 @@ export default function RelatedProducts({ id }) {
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
-    //either using axios or props, get the outfit data
-    console.log('beginning to load related data...')
     axios.get(`/products/${id}/related`)
       .then(res => {
         setRelatedProducts(res.data);
@@ -20,19 +18,16 @@ export default function RelatedProducts({ id }) {
       })
   }, []);
 
-  console.log('products', relatedProducts);
-
   if (!relatedProducts.length) {
-    console.log('length', relatedProducts.length);
     return (
-      <div className="related">
+      <div className="related-outfit">
         Loading elements...
       </div>
     )
   }
 
   return (
-    <div className="related">
+    <div className="related-outfit">
       <Slider {...settings}>
         {relatedProducts.map((id, index) => (
           <Card key={index} product_id={id} />

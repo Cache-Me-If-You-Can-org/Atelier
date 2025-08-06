@@ -98,9 +98,8 @@ button {
   border: solid 1px var(--color-border);
 }
 
-.related {
+.related-outfit {
   max-width: 400px;
-  width: 500px;
   position: 'relative';
   overflow: 'visible';
 }

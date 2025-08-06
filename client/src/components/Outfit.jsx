@@ -3,13 +3,11 @@ import axios from "axios";
 import Card from "./Card.jsx";
 import Slider from "react-slick";
 import settings from "./Carousel.jsx";
-//import 'slick-carousel/slick/slick.css';
-//import 'slick-carousel/slick/slick-theme.css';
 
 export default function Outfit() {
 
   var outfit = [
-    40349,
+    40348,
     40349,
     40351,
     40352,
@@ -18,7 +16,7 @@ export default function Outfit() {
   ];
 
   return (
-    <div className="related">
+    <div className="related-outfit">
       <Slider {...settings}>
         <AddToOutfit />
         {outfit.map((id, index) => (
