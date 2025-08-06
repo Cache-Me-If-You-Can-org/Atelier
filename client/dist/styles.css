@@ -86,10 +86,6 @@ button {
 
 /* Custom Styles */
 
-.related {
-  max-width: 300px;
-}
-
 .product-card {
   margin: 5px;
 }
@@ -103,7 +99,8 @@ button {
 }
 
 .related {
-  width: 450px;
+  max-width: 400px;
+  width: 500px;
   position: 'relative';
   overflow: 'visible';
 }
@@ -118,4 +115,18 @@ button {
 .add-outfit {
   text-align: center;
   margin: 5px;
+}
+.carousel-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  width: 25px;
+  height: 100%;
+  font-size: 24px;
+}
+
+.slick-prev::before,
+.slick-next::before {
+  color: black !important;
 }

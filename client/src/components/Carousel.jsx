@@ -1,46 +1,12 @@
-function NextArrow(props) {
+function Arrow(props) {
   const { className, style, onClick } = props;
+  console.log('class name', className);
+  var classes = className + ' carousel-arrow';
   return (
     <div
-      className={className}
+      className={classes}
       onClick={onClick}
-      style={{
-        ...style,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        right: "-30px",
-        zIndex: 1,
-        width: "25px",
-        height: "100%",
-        background: "black",
-        fontSize: "24px",
-        color: "black",
-      }}
-    />
-  );
-}
-
-function PrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      onClick={onClick}
-
-      style={{
-        ...style,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        left: "-30px",
-        zIndex: 1,
-        width: "25px",
-        height: "100%",
-        background: "black",
-        fontSize: "24px",
-        color: "black",
-      }}
+      style={{...style}}
     />
   );
 }
@@ -51,6 +17,6 @@ export default {
   slidesToShow: 3,
   slidesToScroll: 1,
   variableWidth: false,
-  nextArrow: <NextArrow />,
-  prevArrow: <PrevArrow />
+  nextArrow: <Arrow />,
+  prevArrow: <Arrow />
 };
