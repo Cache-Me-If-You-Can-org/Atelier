@@ -195,3 +195,68 @@ button {
 .slick-next::before {
   color: black !important;
 }
+
+
+/***********************/
+/* Ratings and Reviews */
+/***********************/
+
+.ratings {
+  width: 100%;
+  margin: 0 5%;
+  max-width: 60%
+}
+
+.rating {
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  font-weight: bolder;
+}
+/* progress */
+.progress {
+  width: 40%;
+}
+
+.progress .stars {
+  margin: 15px 0;
+}
+.stars .bar {
+  width: 75%;
+  margin: 0 5%;
+}
+.star-rating {
+  margin: 0 5%;
+}
+
+/* Range Slider */
+.slider {
+  -webkit-appearance: none;
+    appearance: none;
+    width: 95%;
+    height: 5px;
+    background: lightgray;
+    outline: none;
+    opacity: 0.7;
+
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  /* background: darkgray; /* Green background */
+  background: url('./assets/caret-down-solid-full.svg');
+  cursor: pointer; /* Cursor on hover */
+}
+
+/* range */
+.range {
+  margin: 10px 0;
+}
+
+.range .bar{
+  justify-content: space-between;
+  width: 90%;
+}
+
