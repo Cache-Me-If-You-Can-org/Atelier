@@ -15,10 +15,8 @@ function Arrow(props) {
 export default {
   infinite: false,
   speed: 700,
-  slidesToShow: 3,
+  slidesToShow: 4,
   slidesToScroll: 1,
-  variableWidth: false,
-  centerMode: false,
   nextArrow: <Arrow />,
   prevArrow: <Arrow />
 };
