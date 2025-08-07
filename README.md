@@ -8,4 +8,4 @@
 
  Once you install the dependencies you can run ```npm start``` which will start the live server for the app.
 
- After the server is running, all you have to do is open your locacl server in a browser (by default it's ```http://localhost:3000/```)
+ After the server is running, all you have to do is open your local server in a browser (by default it's ```http://localhost:3000/```)
