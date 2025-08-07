@@ -5,6 +5,7 @@ import RelatedAndOutfit from './RelatedAndOutfit.jsx';
 import RatingsAndReviews from './RatingsAndReviews.jsx';
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
+axios.defaults.baseURL = "http://localhost:3000";
 
 
 export default function App() {

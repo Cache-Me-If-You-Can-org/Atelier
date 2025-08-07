@@ -152,10 +152,6 @@ button {
   width: 300px;
 }
 
-.product-card {
-  margin: 5px;
-}
-
 .circle {
   width: 50px;
   height: 50px;
@@ -163,25 +159,45 @@ button {
   border-radius: 50%;
   border: solid 1px var(--color-border);
 }
+/*                             */
+/* RELATED PRODUCTS AND OUTFIT */
+/*                             */
+
+.img-container {
+  position: relative;
+  display: inline-block;
+}
+
+.overlay-btn {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
 
 .related-outfit {
-  max-width: 400px;
-  position: 'relative';
-  overflow: 'visible';
+  width: 800px;
+  position: relative;
+  overflow: visible;
 }
 
 .product-card {
   box-sizing: content-box;
   margin: 5px;
-  padding: 5px;
-  border: 1px solid black;
+  border: 1px solid var(--color-border);
+  min-height: 150px;
+}
+
+.product-card-info {
+  padding: 0px 5px 5px 5px;
 }
 
 .add-outfit {
   cursor: pointer;
   text-align: center;
   margin: 5px;
-  min-height: 150px;
 }
 
 .carousel-arrow {
@@ -198,6 +214,15 @@ button {
 .slick-next::before {
   color: black !important;
 }
+
+.slick-track {
+  width: auto !important;
+}
+
+/* .slick-slide {
+  width: 120px !important;
+} */
+
 
 
 /***********************/

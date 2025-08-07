@@ -18,7 +18,8 @@ export default function Outfit({ productId }) {
     axios.post('/cart', {
       params: { sku_id: id }
     })
-      .then(res => setNewItem(id));
+      .then(res => setNewItem(id))
+      .catch(err => console.error('error posting to cart'));
   }
 
   return (
