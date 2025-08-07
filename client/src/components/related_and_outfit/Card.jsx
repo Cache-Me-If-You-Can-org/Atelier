@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
-import axios from "axios"
-axios.defaults.baseURL = 'http://localhost:3000';
+import axios from "axios";
 
-export default function Card({ product_id }) {
+export default function Card({ productId }) {
   const [product, setProduct] = useState(null);
   const [ratings, setRatings] = useState(null);
 
   useEffect(() => {
-    axios.get(`/products/${product_id}`)
+    axios.get(`/products/${productId}`)
       .then(res => {
         setProduct(res.data);
         axios.get(`/reviews/meta`, {
-          params: {product_id: product_id}
+          params: {product_id: productId}
         })
           .then(res => setRatings(res.data.ratings))
           .catch(err => console.error('error loading ratings:', err));
@@ -31,7 +30,6 @@ export default function Card({ product_id }) {
 
   // Get the star unicode for the footer portion of the card
   var stars = Math.round(calculateStars(ratings));
-  console.log('stars', stars);
 
   return (
     <div className="product-card" style={{ minHeight: 150 }}>

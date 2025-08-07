@@ -18,6 +18,7 @@ export default {
   slidesToShow: 3,
   slidesToScroll: 1,
   variableWidth: false,
+  centerMode: false,
   nextArrow: <Arrow />,
   prevArrow: <Arrow />
 };
