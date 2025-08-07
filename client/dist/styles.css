@@ -178,9 +178,12 @@ button {
 }
 
 .add-outfit {
+  cursor: pointer;
   text-align: center;
   margin: 5px;
+  min-height: 150px;
 }
+
 .carousel-arrow {
   display: flex;
   align-items: center;

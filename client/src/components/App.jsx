@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Overview from './Overview.jsx';
-
+import RelatedAndOutfit from './RelatedAndOutfit.jsx';
 import RatingsAndReviews from './RatingsAndReviews.jsx';
-
-import RelatedProducts from './RelatedProducts.jsx';
-import Outfit from './Outfit.jsx';
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
@@ -26,12 +23,10 @@ export default function App() {
 
   return (
     <div className="app container">
-      Our App!!
-
+      <RelatedAndOutfit id={currentProductId}/>
       <div className="center">{totalReviewCount} reviews for product {currentProductId}</div>
       <Overview sectionId={"overview"} productId={currentProductId}/>
-      <RelatedProducts sectionId={"relatedProducts"} id={currentProductId}/>
-      <Outfit sectionId={"outfit"} />
+      <RelatedAndOutfit sectionId={"relatedProductsAndOutfit"} id={currentProductId}/>
       <RatingsAndReviews sectionId={"ratingsAndReviews"} productId={currentProductId} setTotalReviewCount={setTotalReviewCount} />
 
     </div>
