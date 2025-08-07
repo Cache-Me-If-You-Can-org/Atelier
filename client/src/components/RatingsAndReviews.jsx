@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from "react";
-//import Ratings from "./Ratings.jsx";
-//import ReviewList from "./ReviewList.jsx";
+// import Ratings from "./Ratings.jsx";
+// import ReviewList from "./ReviewList.jsx";
 import { Rating } from 'react-simple-star-rating'
 import axios from 'axios';
 
 
-export default function RatingsAndReviews( {sectionId, productId,  setTotalReviewCount } ) {
+export default function RatingsAndReviews( {sectionId, productId,  setTotalReviewCount, setProductRating } ) {
 
 
   const [totalReviews, setTotalReviews] = useState(0);
@@ -24,7 +24,19 @@ export default function RatingsAndReviews( {sectionId, productId,  setTotalRevie
     })
     .then((res) => {
       setMetaData(res.data);
-      setTotalReviewCount(Object.values(res.data.ratings).reduce((memo,count) => {  return memo += 1 * count;}, 0));
+
+      let reviewCount = 0;
+      let productRating = 0;
+      for( let key in res.data.ratings) {
+        reviewCount += 1*res.data.ratings[key];
+        productRating += key * res.data.ratings[key];
+      }
+      productRating /= reviewCount;
+
+      setTotalReviewCount(reviewCount);
+      setProductRating((productRating * 10 | 0) / 10 );
+
+
 
     })
     .catch((err) => {
@@ -34,10 +46,10 @@ export default function RatingsAndReviews( {sectionId, productId,  setTotalRevie
 
   useEffect(()=> {},[rating])
 
-  const handleRating = (rate) => {
-    alert(rate);
-    setRating(rate);
-  }
+  // const handleRating = (rate) => {
+  //   alert(rate);
+  //   setRating(rate);
+  // }
 
 
   return (
@@ -45,9 +57,9 @@ export default function RatingsAndReviews( {sectionId, productId,  setTotalRevie
       <title>Ratings & Reviews</title>
       <h3>RATINGES & REVIEWS</h3>
       <p>Product ID {productId}</p>
-      {/* <Ratings productId={productId}/> */}
+      {/* <Ratings productId={productId} meta={metaData} totalReviews={totalReviews}/> */}
       <div className="group">
-        <Rating key={`stars_${rating}`} onClick={handleRating} initialValue={3.5} readonly={false} allowFraction={true} transition={true}/>
+        {/* <Rating key={`stars_${rating}`} onClick={handleRating} initialValue={3.5} readonly={false} allowFraction={true} transition={true}/> */}
         </div>
     </section>
   )

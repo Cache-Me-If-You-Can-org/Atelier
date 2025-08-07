@@ -13,6 +13,7 @@ import "slick-carousel/slick/slick.css";
 export default function App() {
   const [currentProductId, setCurrentProductId] = useState(null);
   const [totalReviewCount, setTotalReviewCount] = useState(0);
+  const [productRating, setProductRating] = useState(0);
 
   useEffect(() => {
     axios.get('/products')
@@ -27,13 +28,11 @@ export default function App() {
   return (
     <div className="app container">
       Our App!!
-
-      <div className="center">{totalReviewCount} reviews for product {currentProductId}</div>
+      <div className="center">{totalReviewCount} reviews for product {currentProductId} with a rating of {productRating}</div>
       <Overview sectionId={"overview"} productId={currentProductId}/>
       <RelatedProducts sectionId={"relatedProducts"} id={currentProductId}/>
       <Outfit sectionId={"outfit"} />
-      <RatingsAndReviews sectionId={"ratingsAndReviews"} productId={currentProductId} setTotalReviewCount={setTotalReviewCount} />
-
+      <RatingsAndReviews sectionId={"ratingsAndReviews"} productId={currentProductId} setTotalReviewCount={setTotalReviewCount} setProductRating={setProductRating}/>
     </div>
   )
 };
