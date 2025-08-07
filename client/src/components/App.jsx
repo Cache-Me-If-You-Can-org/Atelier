@@ -23,12 +23,10 @@ export default function App() {
 
   return (
     <div className="app container">
-      <RelatedAndOutfit id={currentProductId}/>
       <div className="center">{totalReviewCount} reviews for product {currentProductId}</div>
       <Overview sectionId={"overview"} productId={currentProductId}/>
-      <RelatedAndOutfit sectionId={"relatedProductsAndOutfit"} id={currentProductId}/>
+      <RelatedAndOutfit sectionId={"relatedProductsAndOutfit"} productId={currentProductId}/>
       <RatingsAndReviews sectionId={"ratingsAndReviews"} productId={currentProductId} setTotalReviewCount={setTotalReviewCount} />
-
     </div>
   )
 };
