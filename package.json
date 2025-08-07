@@ -24,18 +24,25 @@
   "dependencies": {
     "axios": "^1.11.0",
     "cors": "^2.8.5",
+    "css-loader": "^7.1.2",
+    "date-fns": "^4.1.0",
     "dotenv": "^17.2.1",
     "express": "^4.17.1",
     "jest": "^30.0.5",
     "path": "^0.12.7",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-simple-star-rating": "^3.0.0",
+    "react-slick": "^0.31.0",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@babel/core": "^7.28.0",
     "@babel/preset-env": "^7.28.0",
     "@babel/preset-react": "^7.27.1",
     "babel-loader": "^10.0.0",
+    "eslint": "^9.32.0",
+    "style-loader": "^4.0.0",
     "webpack": "^5.101.0",
     "webpack-cli": "^6.0.1"
   }
