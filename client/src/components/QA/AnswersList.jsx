@@ -12,7 +12,7 @@ function AnswersList({ question_id }) {
         .then((response) => {
           // console.log('added up to 2 answers for Q', question_id, ':', response.data.results);
           if (response.data.results.length === 0) {
-            console.log('got all!');
+            console.log('got all answers for this Q already!');
             setGotAll(true);
           } else {
             setAnswers(answers.slice().concat(response.data.results));
