@@ -30,6 +30,7 @@ export default function App() {
       <RelatedAndOutfit sectionId={"relatedProductsAndOutfit"} productId={currentProductId}/>
       <QA currentProductId={currentProductId}/>
       <RatingsAndReviews sectionId={"ratingsAndReviews"} productId={currentProductId} setTotalReviewCount={setTotalReviewCount} setProductRating={setProductRating}/>
+      <BenRatingsAndReviews productId={currentProductId}/>
     </div>
   )
 };
