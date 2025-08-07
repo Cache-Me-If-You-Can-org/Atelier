@@ -1,16 +1,17 @@
-/* Light Mode: defaults */
+/* Light Mode: default */
 :root {
   /* Colors */
   --color-bg: white;
   --color-text: black;
-  --color-border: gray;
+  --color-border: darkgray;
 }
 
 /* Dark Mode */
 [data-theme="dark"] {
+  /* Colors */
   --color-bg: black;
   --color-text: white;
-  --color-border: darkgray;
+  --color-border: lightgray;
 }
 
 /* CSS Reset: remove hidden default values affecting html tags */
@@ -53,8 +54,10 @@ h1, h2, h3, h4, h5, h6 {
 /* Utility Classes */
 
 .container {
-  max-width: 840px;
+  max-width: 940px;
   margin: auto;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .center {
@@ -73,6 +76,17 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: row;
 }
 
+.sb {
+  justify-content: space-between;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
 /* UI Standard */
 
 button {
@@ -82,7 +96,6 @@ button {
   border: solid 1px var(--color-border);
   min-width: 45px;
 }
-
 
 /* Custom Styles */
 
@@ -183,6 +196,7 @@ button {
   color: black !important;
 }
 
+
 /***********************/
 /* Ratings and Reviews */
 /***********************/
@@ -245,3 +259,4 @@ button {
   justify-content: space-between;
   width: 90%;
 }
+
