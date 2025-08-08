@@ -33,13 +33,15 @@ function Overview({productId}) {
           styles={styles}
           selectedStyle={selectedStyle}
           // setSelectedStyle={setSelectedStyle}
-          isFullScreen={isFullScreen}
+          // isFullScreen={isFullScreen}
           setIsFullScreen={setIsFullScreen}
         />
         <ProductInfo
           product={product}
           styles={styles}
+          selectedStyle={selectedStyle}
           isFullScreen={isFullScreen}
+          setSelectedStyle={setSelectedStyle}
         />
       </div>
     </section>

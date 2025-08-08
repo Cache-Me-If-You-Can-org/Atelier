@@ -15,7 +15,7 @@ function Gallery({
 
   useEffect(() => {
     setDisplayImage(styles[selectedStyle].photos[selectedImage].url)
-  }, [selectedImage])
+  }, [selectedImage, selectedStyle])
 
   const handleArrows = (direction) => {
     if (direction === 'next' && selectedImage !== styles[selectedStyle].photos.length - 1) {

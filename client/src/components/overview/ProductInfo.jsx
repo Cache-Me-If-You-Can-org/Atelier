@@ -1,23 +1,32 @@
 import React from 'react';
+import StyleSelect from './StyleSelect.jsx'
+import * as css from './styles/overview.module.css';
 
-function ProductInfo({product, styles, isFullScreen}) {
+function ProductInfo({product, styles, selectedStyle, setSelectedStyle, isFullScreen}) {
+  const onSale = styles[selectedStyle].sale_price !== null;
   return (
     <div
-      className='product-info-container'
+      className={css.productInfoContainer}
       style={{display: isFullScreen ? 'none' : ''}}
     >
-      <div className='stack'>
+      <div className={`stack ${css.gap}`}>
         <div>stars</div>
-        <div>category</div>
-        <h2>product name</h2>
-        <div>price</div>
-        <div className='group'>
-          <div>style</div>
-          <div>{'>'}</div>
-          <div>selected style</div>
+        <div>{product.category}</div>
+        <h2>{product.name}</h2>
+        <div style={{ textDecoration: onSale ? 'line-through' : '' }}>
+          {styles[selectedStyle].original_price}
         </div>
-        <div>style circle display</div>
-        <div className='group'>
+        {onSale && <div>{styles[selectedStyle].sale_price}</div>}
+        <div className={`group ${css.gap}`}>
+          <div><strong>style {'>'}</strong></div>
+          <div>{styles[selectedStyle].name}</div>
+        </div>
+        <StyleSelect
+          styles={styles}
+          selectedStyle={selectedStyle}
+          setSelectedStyle={setSelectedStyle}
+        />
+        <div className={`group ${css.gap}`}>
           <select>
             <option>
               select size
@@ -29,7 +38,7 @@ function ProductInfo({product, styles, isFullScreen}) {
             </option>
           </select>
         </div>
-        <div className='group'>
+        <div className={`group ${css.gap}`}>
           <button>Add to bag</button>
           <button>star</button>
         </div>
