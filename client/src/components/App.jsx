@@ -10,14 +10,14 @@ import "slick-carousel/slick/slick.css";
 
 export default function App() {
 
-  const [currentProductId, setCurrentProductId] = useState(37321);
+  const [currentProductId, setCurrentProductId] = useState(null);
   const [totalReviewCount, setTotalReviewCount] = useState(0);
   const [productRating, setProductRating] = useState(0);
 
   useEffect(() => {
-    // axios.get('/products')
-    //      .then(res => setCurrentProductId(res.data[0].id))
-    //      .catch(err => console.log('failed to get products', err));
+    axios.get('/products')
+         .then(res => setCurrentProductId(res.data[0].id))
+         .catch(err => console.log('failed to get products', err));
   }, []);
 
   if (currentProductId === null) {
