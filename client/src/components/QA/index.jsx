@@ -20,7 +20,7 @@ function QA({currentProductId}) {
 
   return (
     <div>
-      {questions.map((question) => (<Question key={question.question_id} question={question} />))}
+      {questions.map((question) => (<Question key={question.question_id} product_id={product_id} question={question} />))}
     </div>
   );
 }
