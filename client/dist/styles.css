@@ -1,16 +1,18 @@
-/* Light Mode: defaults */
+/* Light Mode: default */
 :root {
   /* Colors */
   --color-bg: white;
   --color-text: black;
-  --color-border: gray;
+  --color-border: darkgray;
+  --color-icon: rgb(40, 40, 40);
 }
 
 /* Dark Mode */
 [data-theme="dark"] {
+  /* Colors */
   --color-bg: black;
   --color-text: white;
-  --color-border: darkgray;
+  --color-border: lightgray;
 }
 
 /* CSS Reset: remove hidden default values affecting html tags */
@@ -53,8 +55,10 @@ h1, h2, h3, h4, h5, h6 {
 /* Utility Classes */
 
 .container {
-  max-width: 840px;
+  max-width: 940px;
   margin: auto;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .center {
@@ -73,6 +77,21 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: row;
 }
 
+.sb {
+  justify-content: space-between;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.pointer {
+  cursor: pointer;
+}
 /* UI Standard */
 
 button {
@@ -82,7 +101,6 @@ button {
   border: solid 1px var(--color-border);
   min-width: 45px;
 }
-
 
 /* Custom Styles */
 
@@ -105,7 +123,12 @@ button {
 .thumbnail-container {
   width: 60px;
   height: 100%;
-  gap: 20px
+  gap: 20px;
+  overflow-y: auto;
+}
+
+.thumbnail-container::-webkit-scrollbar {
+  display: none;
 }
 
 .thumbnail-square {
@@ -113,11 +136,33 @@ button {
   border: solid 1px var(--color-border);
   width: 100%;
   height: 50px;
+  cursor: pointer;
+  position: relative;
 }
 
-.thumbnail-arrow {
+.thumbnail-image {
   width: 100%;
-  text-align: center;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  overflow: hidden;
+}
+
+.thumbnail-indicator {
+  width: 100%;
+  height: 3px;
+  background-color: brown;
+  position: absolute;
+  bottom: -10px;
+}
+
+.icon {
+  color: var(--color-icon);
+}
+
+.icon path{
+  stroke: white;
+  stroke-width: 5;
 }
 
 .fs-arrows-container {
@@ -131,16 +176,13 @@ button {
   justify-content: flex-end;
   height: 24px;
 }
-.arrows {
-  margin-top: calc(80% / 2);
+.overview-arrows {
+  margin-top: 180px;
   width: 100%;
 }
+
 .product-info-container {
   width: 300px;
-}
-
-.product-card {
-  margin: 5px;
 }
 
 .circle {
@@ -150,24 +192,47 @@ button {
   border-radius: 50%;
   border: solid 1px var(--color-border);
 }
+/*                             */
+/* RELATED PRODUCTS AND OUTFIT */
+/*                             */
+
+.img-container {
+  position: relative;
+  display: inline-block;
+}
+
+.overlay-btn {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
 
 .related-outfit {
-  max-width: 400px;
-  position: 'relative';
-  overflow: 'visible';
+  width: 800px;
+  position: relative;
+  overflow: visible;
 }
 
 .product-card {
   box-sizing: content-box;
   margin: 5px;
-  padding: 5px;
-  border: 1px solid black;
+  border: 1px solid var(--color-border);
+  min-height: 150px;
+}
+
+.product-card-info {
+  padding: 0px 5px 5px 5px;
 }
 
 .add-outfit {
+  cursor: pointer;
   text-align: center;
   margin: 5px;
 }
+
 .carousel-arrow {
   display: flex;
   align-items: center;
@@ -182,6 +247,16 @@ button {
 .slick-next::before {
   color: black !important;
 }
+
+.slick-track {
+  width: auto !important;
+}
+
+/* .slick-slide {
+  width: 120px !important;
+} */
+
+
 
 /***********************/
 /* Ratings and Reviews */
@@ -267,7 +342,6 @@ button {
   font-size:small;
 }
 
-
 .space-vertical {
   margin: 10px 0;
 }
@@ -284,3 +358,4 @@ button {
   text-decoration: underline;
   margin: 0 0 0 10px;
 }
+
