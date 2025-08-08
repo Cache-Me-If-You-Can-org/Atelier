@@ -5,3 +5,10 @@
 .answerDetails {
   color: gray;
 }
+.question {
+  display: flex;
+  justify-content: space-between;
+}
+.answersList {
+  display: flex;
+}
