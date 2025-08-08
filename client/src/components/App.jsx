@@ -3,6 +3,7 @@ import axios from 'axios';
 import Overview from './Overview.jsx';
 import RelatedAndOutfit from './RelatedAndOutfit.jsx';
 import RatingsAndReviews from './RatingsAndReviews.jsx';
+import BenRatingsAndReviews from './reviews/BenRatingsAndReviews.jsx';
 import QA from './QA/index.jsx';
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -29,6 +30,7 @@ export default function App() {
       <RelatedAndOutfit sectionId={"relatedProductsAndOutfit"} productId={currentProductId}/>
       <QA currentProductId={currentProductId}/>
       <RatingsAndReviews sectionId={"ratingsAndReviews"} productId={currentProductId} setTotalReviewCount={setTotalReviewCount} setProductRating={setProductRating}/>
+      <BenRatingsAndReviews productId={currentProductId}/>
     </div>
   )
 };

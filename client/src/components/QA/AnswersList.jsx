@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import Answer from './Answer.jsx';
 
 function AnswersList({ question_id }) {
   const [answers, setAnswers] = useState([]);
@@ -42,8 +43,8 @@ function AnswersList({ question_id }) {
     setPage(1);
   }
   return (
-    <div>
-      {answers.map((answer) => <li key={answer.answer_id}>{answer.body}</li>)}
+    <div>A:
+      {answers.map((answer) => <Answer key={answer.answer_id} answer={answer} />)}
       { gotAll ? (<input type="button" value="Collapse" onClick={collapseAnswers} />) : (<input type="button" value="Load More Answers" onClick={loadMoreAnswers} />)}
     </div>
   );
