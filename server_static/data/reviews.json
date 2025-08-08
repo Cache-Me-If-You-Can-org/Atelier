@@ -1,0 +1,67 @@
+{
+    "product": "37311",
+    "page": 0,
+    "count": 5,
+    "results": [
+        {
+            "review_id": 1280318,
+            "rating": 3,
+            "summary": "Thog dont caare",
+            "recommend": false,
+            "response": null,
+            "body": "Thog dont caare",
+            "date": "2023-07-07T00:00:00.000Z",
+            "reviewer_name": "Thog",
+            "helpfulness": 217,
+            "photos": []
+        },
+        {
+            "review_id": 1280613,
+            "rating": 4,
+            "summary": "Best purchase ever!",
+            "recommend": true,
+            "response": null,
+            "body": "Absolutely love it!",
+            "date": "2023-08-26T00:00:00.000Z",
+            "reviewer_name": "Amelia",
+            "helpfulness": 1,
+            "photos": []
+        },
+        {
+            "review_id": 1280622,
+            "rating": 1,
+            "summary": "aaa1",
+            "recommend": true,
+            "response": null,
+            "body": "aaa1aaa1",
+            "date": "2023-08-29T00:00:00.000Z",
+            "reviewer_name": "aaa1",
+            "helpfulness": 0,
+            "photos": []
+        },
+        {
+            "review_id": 1280621,
+            "rating": 1,
+            "summary": "test ",
+            "recommend": true,
+            "response": null,
+            "body": "test 1",
+            "date": "2023-08-29T00:00:00.000Z",
+            "reviewer_name": "testman",
+            "helpfulness": 0,
+            "photos": []
+        },
+        {
+            "review_id": 1280620,
+            "rating": 3,
+            "summary": "mwam",
+            "recommend": true,
+            "response": null,
+            "body": "man with a mission",
+            "date": "2023-08-29T00:00:00.000Z",
+            "reviewer_name": "dj santa monica",
+            "helpfulness": 0,
+            "photos": []
+        }
+    ]
+}
