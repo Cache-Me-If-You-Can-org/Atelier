@@ -1,0 +1,45 @@
+.imgContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.overlayBtn {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.relatedOutfit {
+  width: 800px;
+  position: relative;
+  overflow: visible;
+}
+
+.productCard {
+  box-sizing: content-box;
+  margin: 0px 10px 0px 0px;
+  border: 1px solid var(--color-border);
+  min-height: 300px;
+}
+
+.productCardInfo {
+  padding: 0px 5px 5px 5px;
+}
+
+.addOutfit {
+  cursor: pointer;
+  text-align: center;
+}
+
+.carouselArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  width: 25px;
+  height: 100%;
+  font-size: 24px;
+}

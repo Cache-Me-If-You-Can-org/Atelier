@@ -3,6 +3,7 @@ import axios from "axios";
 import Card from "./Card.jsx";
 import Slider from "react-slick";
 import settings from "./Carousel.jsx";
+import * as styles from './relatedOutfit.module.css';
 
 export default function Outfit({ productId }) {
   const [outfit, setOutfit] = useState([]);
@@ -23,7 +24,7 @@ export default function Outfit({ productId }) {
   }
 
   return (
-    <div className="related-outfit">
+    <div className={styles.relatedOutfit}>
       <Slider {...settings}>
         <AddToOutfit onClick={postToCart} productId={productId} />
         {outfit.map((id, index) => (
@@ -36,7 +37,7 @@ export default function Outfit({ productId }) {
 
 function AddToOutfit({ onClick, productId }) {
   return (<>
-    <div className="product-card add-outfit" onClick={() => postToCart(productId)}>
+    <div className={`${styles.productCard} ${styles.addOutfit}`} onClick={() => postToCart(productId)}>
       <p>+</p>
       <p>Add to Outfit</p>
     </div>

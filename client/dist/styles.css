@@ -192,55 +192,10 @@ button {
   border-radius: 50%;
   border: solid 1px var(--color-border);
 }
-/*                             */
-/* RELATED PRODUCTS AND OUTFIT */
-/*                             */
 
-.img-container {
-  position: relative;
-  display: inline-block;
-}
-
-.overlay-btn {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.related-outfit {
-  width: 800px;
-  position: relative;
-  overflow: visible;
-}
-
-.product-card {
-  box-sizing: content-box;
-  margin: 0px 10px 0px 0px;
-  border: 1px solid var(--color-border);
-  min-height: 300px;
-}
-
-.product-card-info {
-  padding: 0px 5px 5px 5px;
-}
-
-.add-outfit {
-  cursor: pointer;
-  text-align: center;
-}
-
-.carousel-arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-  width: 25px;
-  height: 100%;
-  font-size: 24px;
-}
+/***********************/
+/* Related and Outfit  */
+/***********************/
 
 .slick-prev::before,
 .slick-next::before {
@@ -248,14 +203,8 @@ button {
 }
 
 .slick-track {
-  width: auto !important;
+  margin-left: unset !important;
 }
-
-/* .slick-slide {
-  width: 120px !important;
-} */
-
-
 
 /***********************/
 /* Ratings and Reviews */

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import * as styles from './relatedOutfit.module.css';
 
 export default function Card({ productId }) {
   const [product, setProduct] = useState(null);
@@ -29,7 +30,7 @@ export default function Card({ productId }) {
 
   if (!productImages) {
     return (
-      <div className="product-card">
+      <div className={styles.productCard}>
         <p>Loading...</p>
       </div>
     )
@@ -39,9 +40,9 @@ export default function Card({ productId }) {
   var stars = Math.round(calculateStars(ratings));
 
   return (
-    <div className="product-card">
+    <div className={styles.productCard}>
       <ImageWithButton url={productImages[0].thumbnail_url ? productImages[0].thumbnail_url : 'https://blocks.astratic.com/img/general-img-landscape.png'}/>
-      <div className="product-card-info">
+      <div className={styles.productCardInfo}>
         <small>{product.category.toUpperCase()}</small>
         <h4>{product.name}</h4>
         <small>${product.default_price}</small>
@@ -57,7 +58,7 @@ function ImageWithButton({ url }) {
   return (
     <div className="thumbnail-square" style={{height: 200}}>
       <img className="thumbnail-image" src={url} style={{objectPosition: 'center bottom'}}/>
-      <button className="overlay-btn"
+      <button className={styles.overlayBtn}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
@@ -77,26 +78,17 @@ function calculateStars(ratings) {
     ratings['4'],
     ratings['5']
   ]
-  var averageRating = findAverage(allRatings);
-  return averageRating;
-}
 
-// Uses the amount of each rating times the value of that
-// rating divided by the amount of each rating to get the average
-function findAverage(strings) {
+  // Calculates the average using (total * value) / total
   var total = 0;
-  for (var i = 0; i < strings.length; i++) {
-    total += Number(strings[i]) * 1;
-  }
-
   var valueTotal = 0;
-  for (var i = 0; i < strings.length; i++) {
-    valueTotal += Number(strings[i]) * (i + 1);
+  for (var i = 0; i < allRatings.length; i++) {
+    total += Number(allRatings[i]) * 1;
+    valueTotal += Number(allRatings[i]) * (i + 1);
   }
 
   return valueTotal / total;
 }
-
 
 // /* The Modal (background) */
 // .modal {
