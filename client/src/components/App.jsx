@@ -7,7 +7,6 @@ import QA from './QA/index.jsx';
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
-
 export default function App() {
   const [currentProductId, setCurrentProductId] = useState(null);
   const [totalReviewCount, setTotalReviewCount] = useState(0);
