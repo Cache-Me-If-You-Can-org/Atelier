@@ -9,8 +9,7 @@ function Question({ question }) {
   return (
     <div>
       <div>
-        Q:
-        {question.question_body}
+        {`Q: ${question.question_body}`}
       </div>
       <AnswersList key={`answers_${question.question_id}`} question_id={question.question_id}/>
     </div>
