@@ -4,6 +4,7 @@ import { useState } from 'react';
 import AnswersList from './AnswersList.jsx';
 import * as styles from './qanda.module.css';
 import AnswerForm from './AnswerForm.jsx';
+import API from './api.js';
 
 function Question({ product_id, question }) {
   // given the question as a prop, find all answers associated with that question, sorted
@@ -18,6 +19,13 @@ function Question({ product_id, question }) {
           setHelpfulness(helpfulness + 1);
         });
     }
+    // if (!isHelpful) {
+    //   setIsHelpful(true);
+    //   axios.put(`${API.api}/qa/questions/${question.question_id}/helpful`, {headers: API.headers})
+    //     .then(() => {
+    //       setHelpfulness(helpfulness + 1);
+    //     });
+    // }
   }
 
   return (
@@ -36,7 +44,7 @@ function Question({ product_id, question }) {
           </span>
           <span>
             {' | '}
-            <a href='/' target='_blank'>Add Answer</a>
+            <a href='/'>Add Answer</a>
           </span>
         </div>
       </div>
