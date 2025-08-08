@@ -56,7 +56,7 @@ function ImageWithButton({ url }) {
 
   return (
     <div className="thumbnail-square" style={{height: 200}}>
-      <img className="thumbnail-image" src={url} />
+      <img className="thumbnail-image" src={url} style={{objectPosition: 'center'}}/>
       <button className="overlay-btn"
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}

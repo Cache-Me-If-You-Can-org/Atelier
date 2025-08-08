@@ -218,9 +218,9 @@ button {
 
 .product-card {
   box-sizing: content-box;
-  margin: 0px 5px 0px 0px;
+  margin: 0px 10px 0px 0px;
   border: 1px solid var(--color-border);
-  min-height: 150px;
+  min-height: 300px;
 }
 
 .product-card-info {
