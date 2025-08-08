@@ -1,8 +1,8 @@
 import React from 'react';
 import * as css from './shared.module.css';
 
-function Image({src}) {
-  return( <img className={css.image} src={src}/> );
+function Image({...props}) {
+  return( <img className={css.image} {...props}/> );
 }
 
 export default Image;

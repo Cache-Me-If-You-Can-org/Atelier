@@ -2,9 +2,9 @@ import React from 'react';
 import Image from './Image.jsx';
 import * as css from './shared.module.css';
 
-function Thumbnail({src}) {
+function Thumbnail({src, ...props}) {
   return(
-    <div className={css.thumbnail}>
+    <div className={css.thumbnail} {...props}>
       <Image src={src}/>
     </div>
   )
