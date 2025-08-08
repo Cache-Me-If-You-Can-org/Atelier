@@ -40,16 +40,6 @@ function ReviewsList({ productId }) {
     );
   }, []);
 
-  // Scroll to new posts when two new posts load
-  useEffect(() => {
-    let reviewContainer = document.getElementById("reviews");
-    let lastChild = reviewContainer.lastElementChild;
-
-    if (lastChild) {
-      lastChild.scrollIntoView({ behavior: "smooth", block: "end" });
-    }
-  }, [reviews]);
-
   // Get next two reviews
   const getMoreReviews = () => {
     firstReviewRef.current += 2;
@@ -65,9 +55,29 @@ function ReviewsList({ productId }) {
     setReviews(newReviews);
   };
 
+   // Scroll to new posts when two new posts load
+  useEffect(() => {
+    if (Reviews.visibleReviews > 2) {
+      let reviewContainer = document.getElementById("reviews");
+      let lastChild = reviewContainer.lastElementChild;
+      let scrollPosition = lastChild.offsetTop + 100;
+
+      if (lastChild) {
+      lastChild.scrollIntoView({ behavior: "smooth", block: "end" });
+
+      window.scrollTo({
+          top: scrollPosition,
+          behavior: "smooth"
+      });
+
+      }
+
+    }
+  }, [reviews]);
+
   return (
-    <div className="reviews-list-wrapper">
-      <div id="reviews" className={styles.reviewsListWrapper}>
+    <div className={styles.reviewsListContainer}>
+      <div id="reviews" className={styles.reviewsList}>
         <h2>Ratings and Reviews List: </h2>
         {reviews.length
           ? reviews.map((review) => (
@@ -80,6 +90,7 @@ function ReviewsList({ productId }) {
       {reviews.length ? (
         <button
           className={styles.btn}
+          id="btn-reviews"
           type="button"
           onClick={() => getMoreReviews()}
         >
