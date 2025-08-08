@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Question from './Question.jsx';
-import API from './api.js';
+//import API from './api.js';
 import Search from './Search.jsx';
 
 function QuestionsList({product_id}) {

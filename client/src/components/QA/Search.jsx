@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import API from './api.js';
+//import API from './api.js';
+import * as styles from './qanda.module.css';
 
 function Search({setFilterBy}) {
   var updateTerm = (word) => {
@@ -14,7 +15,7 @@ function Search({setFilterBy}) {
     }
   }
   return (
-    <div>
+    <div className={styles.search}>
       <input type="text" placeholder="Have a question? Search for answers…" onChange={(e)=>updateTerm(e.target.value)}></input>
     </div>
   )

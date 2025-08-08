@@ -98,3 +98,4 @@ function calculateStars(ratings) {
   }
 
   return valueTotal / total;
+}
