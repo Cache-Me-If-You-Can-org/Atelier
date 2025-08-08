@@ -100,7 +100,7 @@ export default function Ratings( { productId, metaData, totalReviews, rating, st
 
                   <div key={metaData.characteristics[range.name].id} className="space-vertical">
                     <div>{range.name}</div>
-                    <input type="range" min="0" max="50" value={metaData.characteristics[range.name].value*10} className="slider" id={range.name}></input>
+                    <input type="range" min="0" max="50" defaultValue={metaData.characteristics[range.name].value*10} disabled className="slider" id={range.name}></input>
                     <div className="group bar legend">
                       <div>{range["1"]}</div>
                       <div>{range["5"]}</div>
