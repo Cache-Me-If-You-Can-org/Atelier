@@ -1,7 +1,9 @@
+import * as styles from './relatedOutfit.module.css';
+
 // Custom arrow for the carousel
 function Arrow(props) {
   const { className, style, onClick } = props;
-  var classes = className + ' carousel-arrow';
+  var classes = `${className} ${styles.carouselArrow}`;
   return (
     <div
       className={classes}

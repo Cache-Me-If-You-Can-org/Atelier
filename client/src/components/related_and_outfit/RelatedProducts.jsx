@@ -3,6 +3,7 @@ import axios from "axios";
 import Slider from 'react-slick';
 import Card from "./Card.jsx";
 import settings from "./Carousel.jsx";
+import * as styles from './relatedOutfit.module.css';
 
 export default function RelatedProducts({ productId }) {
   const [relatedProducts, setRelatedProducts] = useState([]);
@@ -19,14 +20,14 @@ export default function RelatedProducts({ productId }) {
 
   if (!relatedProducts.length) {
     return (
-      <div className="related-outfit">
+      <div className={styles.relatedOutfit}>
         Loading elements...
       </div>
     )
   }
 
   return (
-    <div className="related-outfit">
+    <div className={styles.relatedOutfit}>
       <Slider {...settings}>
         {relatedProducts.map((id, index) => (
           <Card key={index} productId={id} />
