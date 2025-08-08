@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import * as styles from './relatedOutfit.module.css';
-import Modal from './Modal.jsx';
+import Modal from '../shared/Modal.jsx';
 
 export default function Card({ productId }) {
   const [product, setProduct] = useState(null);
