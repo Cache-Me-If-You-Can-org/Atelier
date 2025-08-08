@@ -10,7 +10,7 @@ function AnswersList({ question_id }) {
   const [page, setPage] = useState(1);
   useEffect(() => {
     if (!gotAll) {
-      axios.get(`/qa/questions/${question_id}/answers`, { params: { page: page.toString() } })
+      axios.get(`/qa/questions/${question_id}/answers`, { params: { page: page.toString(), count: '2'}})
         .then((response) => {
           // console.log('added up to 2 answers for Q', question_id, ':', response.data.results);
           if (response.data.results.length === 0) {
@@ -24,7 +24,7 @@ function AnswersList({ question_id }) {
           throw new Error(err);
         });
     } else {
-      axios.get(`/qa/questions/${question_id}/answers`, { params: { page: page.toString() } })
+      axios.get(`/qa/questions/${question_id}/answers`, { params: { page: page.toString(), count: '2'} })
         .then((response) => {
           // console.log('collapsed answers for Q', question_id, ':', response.data.results);
           setAnswers(response.data.results);

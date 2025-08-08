@@ -40,7 +40,7 @@ function Question({ product_id, question }) {
           </span>
         </div>
       </div>
-      <AnswerForm product_id={product_id} question={question}/>
+      {/* <AnswerForm product_id={product_id} question={question}/> */}
       <AnswersList key={`answers_${question.question_id}`} question_id={question.question_id}/>
     </div>
   );
