@@ -12,18 +12,24 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.all("/*", (req, res) => {
+  console.log(req.method);
+  console.log(req.url);
+  console.log(req.params);
+  console.log(req.query);
+  console.log(req.body);
   axios( {
     method: req.method,
     url: `${process.env.API_URL}${req.url}`,
-    headers: {
-      Authorization: `${process.env.AUTH_TOKEN}`
-    }
+    headers: { Authorization: `${process.env.AUTH_TOKEN}` },
+    params: req.params,
+    query: req.query,
+    body: req.body
   })
   .then((data) => {
     res.send(data.data);
   })
   .catch((error) => {
-    console.log('ERR',error);
+    //console.log('ERR',error);
     res.sendStatus(error.status);
   })
 })
