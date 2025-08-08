@@ -1,13 +1,12 @@
-import React from 'react';
-import * as styles from '../reviews.module.css';
-/* eslint-disable react/prop-types */
+import React from "react";
+import * as styles from "../reviews.module.css";
 
 function ReviewsList({ review }) {
   const date = new Date(review.date);
 
   const year = date.getFullYear();
-  const monthName = date.toLocaleString('en-US', { month: 'long' });
-  const day = date.getDate().toString().padStart(2, '0');
+  const monthName = date.toLocaleString("en-US", { month: "long" });
+  const day = date.getDate().toString().padStart(2, "0");
 
   const formattedDate = `${monthName} ${day}, ${year}`;
 
@@ -20,12 +19,9 @@ function ReviewsList({ review }) {
         </div>
         <div className={styles.reviewTileAuthorship}>
           <span className={styles.reviewTileUserName}>
-            {review.reviewer_name}
-            ,
+            {review.reviewer_name},
           </span>
-          <span className="review-title__review-date">
-            {formattedDate}
-          </span>
+          <span className="review-title__review-date">{formattedDate}</span>
         </div>
       </div>
       <h2 className="review-tile__summary">{review.summary}</h2>
