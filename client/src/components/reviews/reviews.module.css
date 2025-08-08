@@ -1,5 +1,16 @@
 /* reviews.module.css */
 
+.btn {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.reviewsListWrapper {
+  overflow: scroll;
+  max-height: 800px;
+  margin-bottom: 10px;
+}
+
 .reviewTileWrapper {
   background: rgb(250, 250, 250);
   padding: 15px;
