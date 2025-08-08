@@ -7,9 +7,10 @@ import API from './api.js';
 
 function QA({currentProductId}) {
   const [questions, setQuestions] = useState([]);
-  const product_id = '37313';
-  //const product_id = '40347';
-
+  // const product_id = currentProductId;
+  const product_id ='37322' //multiple answers, 1 q
+  //const product_id = '40347'; //rfp api
+  //const product_id ='37324'; //multiple answers, multiple questions
   return (
     <div>
       <QuestionsList product_id={product_id}/>

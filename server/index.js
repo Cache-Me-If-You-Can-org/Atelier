@@ -15,6 +15,7 @@ app.all("/*", (req, res) => {
   axios( {
     method: req.method,
     url: `${process.env.API_URL}${req.url}`,
+    data: req.query,
     headers: {
       Authorization: `${process.env.AUTH_TOKEN}`
     }

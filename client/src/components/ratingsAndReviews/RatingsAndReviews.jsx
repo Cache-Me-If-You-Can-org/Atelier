@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Ratings from "./Ratings.jsx";
-import ReviewList from "./ReviewList.jsx";
+// import ReviewList from "./ReviewList.jsx";
 import { Rating } from 'react-simple-star-rating'
 import axios from 'axios';
 
