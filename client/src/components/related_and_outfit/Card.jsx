@@ -3,16 +3,25 @@ import axios from "axios";
 
 export default function Card({ productId }) {
   const [product, setProduct] = useState(null);
+  const [productImages, setProductImages] = useState(null);
   const [ratings, setRatings] = useState(null);
 
   useEffect(() => {
+    // Fetch basic data (price, name, category)
     axios.get(`/products/${productId}`)
       .then(res => {
         setProduct(res.data);
-        axios.get(`/reviews/meta`, {
+        // Fetch review data for the time being
+        axios.get('/reviews/meta', {
           params: {product_id: productId}
         })
-          .then(res => setRatings(res.data.ratings))
+          .then(res => {
+            setRatings(res.data.ratings)
+            // Fetch images for slide show and thumbnail
+            axios.get(`/products/${productId}/styles`)
+              .then(res => setProductImages(res.data.results[0].photos))
+              .catch(err => console.error('error loading product images:', err));
+          })
           .catch(err => console.error('error loading ratings:', err));
       })
       .catch(err => {
@@ -20,9 +29,9 @@ export default function Card({ productId }) {
       });
   }, [])
 
-  if (!ratings) {
+  if (!productImages) {
     return (
-      <div className="product-card" style={{ minHeight: 150 }}>
+      <div className="product-card">
         <p>Loading...</p>
       </div>
     )
@@ -32,11 +41,14 @@ export default function Card({ productId }) {
   var stars = Math.round(calculateStars(ratings));
 
   return (
-    <div className="product-card" style={{ minHeight: 150 }}>
-      <p>{product.category}</p>
-      <h4>{product.name}</h4>
-      <small>${product.default_price}</small>
-      <p>{stars} stars</p>
+    <div className="product-card">
+      {productImages[0].thumbnail_url ? <ImageWithButton url={productImages[0].thumbnail_url}/> : 'nothing'}
+      <div className="product-card-info">
+        <p>{product.category.toUpperCase()}</p>
+        <h4>{product.name}</h4>
+        <small>${product.default_price}</small>
+        <p>{stars} stars</p>
+      </div>
     </div>
   )
 }
@@ -70,3 +82,19 @@ function findAverage(strings) {
 
   return valueTotal / total;
 }
+
+function ImageWithButton({ url }) {
+  const [hover, setHover] = useState(false);
+
+  return (
+    <div className="img-container">
+      <img src={url} />
+      <button className="overlay-btn"
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+      >
+        {hover ? '★' : '☆'}
+      </button>
+    </div>
+  );
+};
