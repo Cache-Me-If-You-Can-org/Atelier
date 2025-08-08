@@ -15,6 +15,11 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 app.all("/*", (req, res) => {
   let pathName = req.url;
   console.log(pathName, pathName.length, pathName.lastIndexOf('/'));
+
+  if (pathName.indexOf('?') !== -1) {
+    pathName = pathName.slice(0,pathName.indexOf('?'));
+  }
+
   if (pathName.lastIndexOf('/') === pathName.length - 1) {
     pathName = pathName.slice(0,pathName.length - 1);
   }
