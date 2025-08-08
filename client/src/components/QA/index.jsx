@@ -19,7 +19,7 @@ function QA({currentProductId}) {
 
   return (
     <div>
-      Q & A Module
+      <strong>Q & A Module</strong>
       {questions.map((question) => (<Question key={question.question_id} question={question} />))}
     </div>
   );
