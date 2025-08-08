@@ -1,3 +1,4 @@
+/* Theme */
 /* Light Mode: default */
 :root {
   /* Colors */
@@ -16,6 +17,7 @@
 }
 
 /* CSS Reset: remove hidden default values affecting html tags */
+/* Define our own defaults to html tags */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -52,8 +54,29 @@ h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 }
 
-/* Utility Classes */
+button {
+  padding: 8px;
+  background-color: transparent;
+  border-radius: 0;
+  border: solid 1px var(--color-border);
+  min-width: 45px;
+}
 
+
+
+
+
+
+
+
+
+
+
+/* ************************** WARNING ************************** */
+/* DO NOT WRITE ANY NEW STYLES BEYOND THIS POINT */
+/* SWITCHING OVER TO MODULES                     */
+/* KEEP WHATS ALREADY HERE UNTILL WE REFACTOR    */
+/* ************************** WARNING ************************** */
 .container {
   max-width: 940px;
   margin: auto;
