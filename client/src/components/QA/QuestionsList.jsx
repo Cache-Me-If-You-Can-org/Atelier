@@ -23,17 +23,17 @@ function QuestionsList({product_id}) {
       });
   }, []);
   useEffect(() => {
-    console.log('num qs', allQuestions.slice().length);
+    //console.log('num qs', allQuestions.slice().length);
     let filtered = allQuestions.filter((question) => {
       if (question.question_body.includes(filterBy)) {
-        console.log('found matching q', question.question_body);
+        //console.log('found matching q', question.question_body);
         return question;
       } else {
-        console.log('q does not match', question.question_body);
+        //console.log('q does not match', question.question_body);
         return;
       }
     });
-    console.log('filtered', filtered);
+    // console.log('filtered', filtered);
     setDisplayedQuestions(filtered);
   }, [filterBy]);
 
