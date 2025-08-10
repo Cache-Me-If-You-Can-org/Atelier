@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Answer from './Answer.jsx';
 import * as styles from './qanda.module.css';
-import API from './api.js';
+//import API from './api.js';
 
 function AnswersList({ question_id }) {
   const [answers, setAnswers] = useState([]);
@@ -13,7 +13,7 @@ function AnswersList({ question_id }) {
     if (!gotAll) {
       axios.get(`/qa/questions/${question_id}/answers`, { params: { page: page.toString(), count: '2'}})
         .then((res) => {
-          // console.log('added up to 2 answers for Q', question_id, ':', response.data.results);
+          // console.log('added up to 2 answers for Q', question_id, ':', res.data.results);
           if (res.data.results.length === 0) {
             console.log('got all answers for this Q already!');
             setGotAll(true);
@@ -27,7 +27,7 @@ function AnswersList({ question_id }) {
     } else {
       axios.get(`/qa/questions/${question_id}/answers`, { params: { page: page.toString(), count: '2'}})
         .then((res) => {
-          // console.log('collapsed answers for Q', question_id, ':', response.data.results);
+          // console.log('collapsed answers for Q', question_id, ':', res.data.results);
           setAnswers(res.data.results);
           setGotAll(false);
         })
