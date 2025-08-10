@@ -5,8 +5,8 @@ export default function ComparisonTable({ related, original }) {
   const originalFeatures = original.features;
   var rows = [];
   var features = [];
-  var relatedObj = [];
-  var originalObj = [];
+  var relatedObj = {};
+  var originalObj = {};
 
   function addRow(row, col1, col3) {
     row.col1 = col1;
@@ -15,43 +15,43 @@ export default function ComparisonTable({ related, original }) {
   }
 
   for (var i = 0; i < relatedFeatures.length + originalFeatures.length; i++) {
-    if (!relatedFeatures[i] && !originalFeatures[i]) break;
+    var origin = originalFeatures[i]
+    var rel = relatedFeatures[i];
 
-    if (originalFeatures[i]) {
-      if (!features.includes(originalFeatures[i].feature)) features.push(originalFeatures[i].feature);
-      originalObj[originalFeatures[i].feature] = originalFeatures[i].value;
+    if (!rel && !origin) break;
+
+    if (origin) {
+      features.includes(origin.feature) || features.push(origin.feature);
+      originalObj[origin.feature] = origin.value;
     }
-    if (relatedFeatures[i]) {
-      if (!features.includes(relatedFeatures[i].feature)) features.push(relatedFeatures[i].feature);
-      relatedObj[relatedFeatures[i].feature] = relatedFeatures[i].value;
+
+    if (rel) {
+      features.includes(rel.feature) || features.push(rel.feature);
+      relatedObj[rel.feature] = rel.value;
     }
   }
 
   for (var i = 0; i < features.length; i++) {
+    var feature = features[i];
+    var originFeat = originalObj[feature];
+    var relFeat = relatedObj[feature];
+    var col1Check  = originFeat === true ? '✓' : originFeat;
+    var col3Check  = relFeat === true ? '✓' : relFeat;
     var row = {
       id: i,
-      col2: features[i]
+      col2: feature
     };
-    if (originalObj[features[i]]) {
-      if (relatedObj[features[i]]) {
-        if (originalObj[features[i]] === relatedObj[features[i]]) {
-          if (originalObj[features[i]] === true) {
-            addRow(row, '✓', '✓');
-          } else {
-            addRow(row, originalObj[features[i]], relatedObj[features[i]]);
-          }
-          continue;
-        }
-        addRow(row,
-          originalObj[features[i]] === true ? '✓' : originalObj[features[i]],
-          relatedObj[features[i]] === false ? ' ' : relatedObj[features[i]]
-        );
-        continue;
-      }
-      addRow(row, originalObj[features[i]] === true ? '✓' : originalObj[features[i]], ' ');
-      continue;
+
+    if (!originFeat) {
+      addRow(row, ' ', col3Check);
+    } else if (!relFeat) {
+      addRow(row, col1Check, ' ');
+    } else if (originFeat === relFeat) {
+      addRow(row, col1Check, col3Check);
     } else {
-      addRow(row, ' ', relatedObj[features[i]] === true ? '✓' : relatedObj[features[i]]);
+      addRow(row, col1Check,
+        relFeat === false ? ' ' : relFeat
+      );
     }
   }
 
