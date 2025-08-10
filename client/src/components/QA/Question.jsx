@@ -39,6 +39,11 @@ function Question({ product_id, question }) {
   useEffect(() => {
     if (didMount.current) {
       console.log('gonna hit api with ans', newAnswer);
+      axios.post(`/qa/questions/${question.question_id}/answers`, newAnswer, {headers: {'Content-Type':'application/json'}}).
+        then(() => {
+          console.log('posted!');
+        })
+        .catch((err) => console.log('posting', err));
     } else {
       didMount.current = true;
     }
