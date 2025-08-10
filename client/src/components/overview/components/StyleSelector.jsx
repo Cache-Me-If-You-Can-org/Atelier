@@ -17,7 +17,7 @@ function StyleSelector({styles, selectedStyle, setSelectedStyle, setSku, setQty,
         {styles.map((style, i) => (
           <div key={style.style_id} className={css.circle}>
             {selectedStyle === i &&
-              <div className={`${g.center} ${css.checkmark}`}>
+              <div className={`${css.checkmark} ${g.center}`}>
                 <Check size={10}/>
               </div>
             }
