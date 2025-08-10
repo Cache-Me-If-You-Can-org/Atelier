@@ -1,14 +1,16 @@
 import React from 'react';
+import Image from '../../shared/Image.jsx';
+import * as css from '../styles/thumbnail.module.css';
 
 function Thumbnail({imgUrl, selectedImage, setSelectedImage, i}) {
   return(
     <div
-      className='thumbnail-square'
+      className={css.thumbnail}
       onClick={() => setSelectedImage(i)}
     >
-      <img className='thumbnail-image' src={imgUrl}/>
+      <Image src={imgUrl}/>
       <div
-        className='thumbnail-indicator'
+        className={css.indicator}
         style={{backgroundColor: selectedImage === i ? 'brown' : 'transparent'}}
         />
     </div>

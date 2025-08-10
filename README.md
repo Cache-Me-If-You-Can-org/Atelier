@@ -29,7 +29,7 @@ Follow these steps to get the project running locally:
 
 ---
 
-## 🎨 CSS Guidelines
+## CSS Guidelines
 
 Our structured CSS approach to keep styles consistent and maintainable:
 
@@ -44,9 +44,7 @@ Our structured CSS approach to keep styles consistent and maintainable:
    - Each component can have its own **local module** file.
    - Keeps component styles scoped and avoids conflicts.
 
----
-
-### 🔹 Importing Styles
+### Importing Styles
 So that we are not typing 6 letters 'styles' and 'global' each time we want to use our classes,
 I recommend:
 
@@ -60,13 +58,11 @@ I recommend:
   import * as css from './MyComponent.module.css';
   ```
 
----
-
-### 💡 Example Usage
+### Example Usage
 ```jsx
 import React from 'react';
 import * as g from './styles/global.module.css';
-import * as css from './MyComponent.module.css';
+import * as css from './component.module.css';
 
 function MyComponent() {
   return (
