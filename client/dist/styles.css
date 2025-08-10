@@ -123,6 +123,23 @@ button:hover {
 
 /* Custom Styles */
 
+.thumbnail-square {
+  background-color: white;
+  border: solid 1px var(--color-border);
+  width: 100%;
+  height: 50px;
+  cursor: pointer;
+  position: relative;
+}
+
+.thumbnail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  overflow: hidden;
+}
+
 /***********************/
 /* Related and Outfit  */
 /***********************/
