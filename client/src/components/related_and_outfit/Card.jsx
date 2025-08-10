@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import * as styles from './relatedOutfit.module.css';
+import ComparisonTable from './ComparisonTable.jsx';
 import Modal from '../shared/Modal.jsx';
 
 export default function Card({ productId, originalProductId }) {
@@ -73,108 +74,15 @@ function ImageWithButton({ url, related, original }) {
       >
         {hover ? '★' : '☆'}
       </button>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} Module={() => ComparingTable({ related: related, original: original })}/>
+      <Modal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        Module={<ComparisonTable related={related} original={original} />}
+        style={{ width: "40%" }}
+      />
     </div>
   );
 };
-
-function ComparingTable({ related, original }) {
-  const rows = [];
-  const features = [];
-  const relatedFeatures = related.features;
-  const originalFeatures = original.features;
-  const relatedObj = [];
-  const originalObj = [];
-
-  function addRow(row, col1, col3) {
-    row.col1 = col1;
-    row.col3 = col3;
-    rows.push(row);
-  }
-
-  console.log('NEW CALL features:')
-  console.log('related', related.features);
-  console.log('original', original.features);
-
-  for (var i = 0; i < relatedFeatures.length + originalFeatures.length; i++) {
-    if (!relatedFeatures[i] && !originalFeatures[i]) break;
-
-    if (originalFeatures[i]) {
-      if (!features.includes(originalFeatures[i].feature)) features.push(originalFeatures[i].feature);
-      originalObj[originalFeatures[i].feature] = originalFeatures[i].value;
-    }
-    if (relatedFeatures[i]) {
-      if (!features.includes(relatedFeatures[i].feature)) features.push(relatedFeatures[i].feature);
-      relatedObj[relatedFeatures[i].feature] = relatedFeatures[i].value;
-    }
-  }
-  console.log('original obj', originalObj);
-  console.log('related obj', relatedObj);
-
-  for (var i = 0; i < features.length; i++) {
-    var row = {
-      id: i,
-      col2: features[i]
-    };
-    console.log('original feature', originalObj[features[i]], 'feature name: ', features[i]);
-    console.log('related feature', relatedObj[features[i]], 'feature name: ', features[i]);
-    if (originalObj[features[i]]) {
-      if (relatedObj[features[i]]) {
-        if (originalObj[features[i]] === relatedObj[features[i]]) {
-          if (originalObj[features[i]] === true) {
-            addRow(row, '✓', '✓');
-          } else {
-            addRow(row, originalObj[features[i]], relatedObj[features[i]]);
-          }
-          continue;
-        }
-        addRow(row,
-          originalObj[features[i]] === true ? '✓' : originalObj[features[i]],
-          relatedObj[features[i]] === false ? ' ' : relatedObj[features[i]]
-        );
-        continue;
-      }
-      addRow(row, originalObj[features[i]] === true ? '✓' : originalObj[features[i]], ' ');
-      continue;
-    } else {
-      addRow(row, ' ', relatedObj[features[i]] === true ? '✓' : relatedObj[features[i]]);
-    }
-  }
-
-  console.log('rows', rows);
-  return(
-    <>
-      <small>COMPARING</small>
-      <table role="table">
-        <thead>
-          <tr>
-            <th>{}</th>
-            <th></th>
-            <th>{}</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {rows.length === 0 ? (
-            <tr>
-              <td colSpan={3} style={{ textAlign: "center", padding: 12 }}>
-                No rows
-              </td>
-            </tr>
-          ) : (
-            rows.map((r) => (
-              <tr key={r.id ?? `${r.col1}-${r.col2}-${r.col3}`}>
-                <td>{r.col1}</td>
-                <td>{r.col2}</td>
-                <td>{r.col3}</td>
-              </tr>
-            ))
-          )}
-        </tbody>
-      </table>
-    </>
-  )
-}
 
 function calculateStars(ratings) {
   // Puts the string amounts of each rating

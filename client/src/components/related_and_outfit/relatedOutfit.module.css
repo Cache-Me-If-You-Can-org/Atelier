@@ -43,3 +43,16 @@
   height: 100%;
   font-size: 24px;
 }
+
+.table {
+  width: 100%;
+}
+
+.tableCenter {
+  text-align: center;
+}
+
+th {
+  width: 100px;
+  font-size: large;
+}
