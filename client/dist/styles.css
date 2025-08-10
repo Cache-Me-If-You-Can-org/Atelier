@@ -60,7 +60,12 @@ button {
   border-radius: 0;
   border: solid 1px var(--color-border);
   min-width: 45px;
+  cursor: pointer;
 }
+
+/* button:hover {
+  background-color: #e8e8e8;
+} */
 
 
 
@@ -115,44 +120,8 @@ button {
 .pointer {
   cursor: pointer;
 }
-/* UI Standard */
-
-button {
-  padding: 8px;
-  background-color: transparent;
-  border-radius: 0;
-  border: solid 1px var(--color-border);
-  min-width: 45px;
-}
 
 /* Custom Styles */
-
-.gallery-container {
-  height: 500px;
-  flex: 1;
-  background-color: lightgrey;
-  position: relative;
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 15px;
-}
-
-.thumbnail-container {
-  width: 60px;
-  height: 100%;
-  gap: 20px;
-  overflow-y: auto;
-}
-
-.thumbnail-container::-webkit-scrollbar {
-  display: none;
-}
 
 .thumbnail-square {
   background-color: white;
@@ -169,51 +138,6 @@ button {
   object-fit: cover;
   object-position: top;
   overflow: hidden;
-}
-
-.thumbnail-indicator {
-  width: 100%;
-  height: 3px;
-  background-color: brown;
-  position: absolute;
-  bottom: -10px;
-}
-
-.icon {
-  color: var(--color-icon);
-}
-
-.icon path{
-  stroke: white;
-  stroke-width: 5;
-}
-
-.fs-arrows-container {
-  flex: 1;
-  padding: 10px;
-}
-
-.fullscreen-icon {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  height: 24px;
-}
-.overview-arrows {
-  margin-top: 180px;
-  width: 100%;
-}
-
-.product-info-container {
-  width: 300px;
-}
-
-.circle {
-  width: 50px;
-  height: 50px;
-  background-color: lightgray;
-  border-radius: 50%;
-  border: solid 1px var(--color-border);
 }
 
 /***********************/

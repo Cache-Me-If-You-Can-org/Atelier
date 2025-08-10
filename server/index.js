@@ -29,7 +29,8 @@ app.all("/*", (req, res) => {
     res.send(data.data);
   })
   .catch((error) => {
-    //console.log('ERR',error);
+    // console.log('ERR',error);
+    console.log('failed to request hack reactor api', error.status);
     res.sendStatus(error.status);
   })
 })
