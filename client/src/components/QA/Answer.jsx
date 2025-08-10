@@ -7,10 +7,21 @@ function Answer({ answer }) {
   let date = new Date(answer.date);
   date = date.toDateString();
   const [reported, setReported] = useState(false);
+  const [isHelpful, setIsHelpful] = useState(false);
+  const [helpfulness, setHelpfulness] = useState(answer.helpfulness);
 
   function report() {
     setReported(true);
     axios.put(`/qa/answers/${answer.answer_id}/report`);
+  }
+  function helpfulHandler() {
+     if (!isHelpful) {
+      setIsHelpful(true);
+      axios.put(`/qa/answers/${answer.answer_id}/helpful`)
+        .then(() => {
+          setHelpfulness(helpfulness + 1);
+        });
+    }
   }
   return (
     <div className={styles.answer}>
@@ -20,12 +31,12 @@ function Answer({ answer }) {
         <span>
           {' | Helpful? '}
           <span>
-            <a href='/'>
+            <a onClick={helpfulHandler}>
               Yes
             </a>
           </span>
           <span>
-            {` (${answer.helpfulness})`}
+            {` (${helpfulness})`}
           </span>
         </span>
         <span>
