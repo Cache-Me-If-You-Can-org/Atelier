@@ -1,3 +1,4 @@
+/* Theme */
 /* Light Mode: default */
 :root {
   /* Colors */
@@ -16,6 +17,7 @@
 }
 
 /* CSS Reset: remove hidden default values affecting html tags */
+/* Define our own defaults to html tags */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -52,8 +54,29 @@ h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 }
 
-/* Utility Classes */
+button {
+  padding: 8px;
+  background-color: transparent;
+  border-radius: 0;
+  border: solid 1px var(--color-border);
+  min-width: 45px;
+}
 
+
+
+
+
+
+
+
+
+
+
+/* ************************** WARNING ************************** */
+/* DO NOT WRITE ANY NEW STYLES BEYOND THIS POINT */
+/* SWITCHING OVER TO MODULES                     */
+/* KEEP WHATS ALREADY HERE UNTILL WE REFACTOR    */
+/* ************************** WARNING ************************** */
 .container {
   max-width: 940px;
   margin: auto;
@@ -192,56 +215,10 @@ button {
   border-radius: 50%;
   border: solid 1px var(--color-border);
 }
-/*                             */
-/* RELATED PRODUCTS AND OUTFIT */
-/*                             */
 
-.img-container {
-  position: relative;
-  display: inline-block;
-}
-
-.overlay-btn {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.related-outfit {
-  width: 800px;
-  position: relative;
-  overflow: visible;
-}
-
-.product-card {
-  box-sizing: content-box;
-  margin: 5px;
-  border: 1px solid var(--color-border);
-  min-height: 150px;
-}
-
-.product-card-info {
-  padding: 0px 5px 5px 5px;
-}
-
-.add-outfit {
-  cursor: pointer;
-  text-align: center;
-  margin: 5px;
-}
-
-.carousel-arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-  width: 25px;
-  height: 100%;
-  font-size: 24px;
-}
+/***********************/
+/* Related and Outfit  */
+/***********************/
 
 .slick-prev::before,
 .slick-next::before {
@@ -249,14 +226,8 @@ button {
 }
 
 .slick-track {
-  width: auto !important;
+  margin-left: unset !important;
 }
-
-/* .slick-slide {
-  width: 120px !important;
-} */
-
-
 
 /***********************/
 /* Ratings and Reviews */
