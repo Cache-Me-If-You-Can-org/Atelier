@@ -45,6 +45,7 @@
   float: right;
   font-size: 28px;
   font-weight: bold;
+  line-height: 0.5;
 }
 
 .close:hover,
@@ -52,4 +53,17 @@
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+/* Star Rating (for now)*/
+
+.starDiv {
+  display: flex;
+  gap: 4px;
+  width: fit-content;
+}
+
+.stars {
+  width: 15px;
+  height: 15px;
 }

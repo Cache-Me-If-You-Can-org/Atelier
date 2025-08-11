@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import * as styles from './relatedOutfit.module.css';
+import ComparisonTable from './ComparisonTable.jsx';
 import Modal from '../shared/Modal.jsx';
+import QuarterStarRating from '../shared/QuarterStarRating.jsx';
 
-export default function Card({ productId }) {
+export default function Card({ productId, originalProductId }) {
   const [product, setProduct] = useState(null);
+  const [originalProduct, setOriginalProduct] = useState(null);
   const [productImages, setProductImages] = useState(null);
   const [ratings, setRatings] = useState(null);
 
@@ -13,6 +16,11 @@ export default function Card({ productId }) {
     axios.get(`/products/${productId}`)
       .then(res => {
         setProduct(res.data);
+        // Fetch review data for the time being
+        return axios.get(`/products/${originalProductId}`)
+      })
+      .then(res => {
+        setOriginalProduct(res.data);
         // Fetch review data for the time being
         return axios.get('/reviews/meta', {
           params: {product_id: productId}
@@ -38,22 +46,22 @@ export default function Card({ productId }) {
   }
 
   // Get the star unicode for the footer portion of the card
-  var stars = Math.round(calculateStars(ratings));
+  var number = calculateStars(ratings);
 
   return (
     <div className={styles.productCard}>
-      <ImageWithButton url={productImages[0].thumbnail_url ? productImages[0].thumbnail_url : 'https://blocks.astratic.com/img/general-img-landscape.png'}/>
+      <ImageWithButton url={productImages[0].thumbnail_url ? productImages[0].thumbnail_url : 'https://blocks.astratic.com/img/general-img-landscape.png'} related={product} original={originalProduct} />
       <div className={styles.productCardInfo}>
         <small>{product.category.toUpperCase()}</small>
         <h4>{product.name}</h4>
         <small>${product.default_price}</small>
-        <p>{stars} stars</p>
+        <QuarterStarRating rating={number}/>
       </div>
     </div>
   )
 }
 
-function ImageWithButton({ url }) {
+function ImageWithButton({ url, related, original }) {
   const [hover, setHover] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -67,13 +75,12 @@ function ImageWithButton({ url }) {
       >
         {hover ? '★' : '☆'}
       </button>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} Module={() => (
-        <div>
-          <p>
-            COMPARE THIS! HA!
-          </p>
-        </div>
-      )}/>
+      <Modal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        Module={<ComparisonTable related={related} original={original} />}
+        style={{ width: "40%" }}
+      />
     </div>
   );
 };

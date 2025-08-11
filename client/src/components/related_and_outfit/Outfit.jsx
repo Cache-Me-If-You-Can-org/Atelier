@@ -28,7 +28,7 @@ export default function Outfit({ productId }) {
       <Slider {...settings}>
         <AddToOutfit onClick={postToCart} productId={productId} />
         {outfit.map((id, index) => (
-          <Card key={index} productId={id} />
+          <Card key={index} productId={id} originalProductId={productId} />
         ))}
       </Slider>
     </div>

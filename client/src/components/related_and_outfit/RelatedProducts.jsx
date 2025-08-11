@@ -30,7 +30,7 @@ export default function RelatedProducts({ productId }) {
     <div className={styles.relatedOutfit}>
       <Slider {...settings}>
         {relatedProducts.map((id, index) => (
-          <Card key={index} productId={id} />
+          <Card key={index} productId={id} originalProductId={productId} />
         ))}
       </Slider>
     </div>
