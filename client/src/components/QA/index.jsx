@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Question from './Question.jsx';
 import QuestionsList from './QuestionsList.jsx';
-import API from './api.js';
+//import API from './api.js';
 
 function QA({currentProductId}) {
   const [questions, setQuestions] = useState([]);

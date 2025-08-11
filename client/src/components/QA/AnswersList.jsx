@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Answer from './Answer.jsx';
 import * as styles from './qanda.module.css';
-import API from './api.js';
+//import API from './api.js';
 
 function AnswersList({ question_id }) {
   const [answers, setAnswers] = useState([]);

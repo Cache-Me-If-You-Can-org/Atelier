@@ -3,6 +3,7 @@ import axios from "axios";
 import * as styles from './relatedOutfit.module.css';
 import ComparisonTable from './ComparisonTable.jsx';
 import Modal from '../shared/Modal.jsx';
+import QuarterStarRating from '../shared/QuarterStarRating.jsx';
 
 export default function Card({ productId, originalProductId }) {
   const [product, setProduct] = useState(null);
@@ -45,7 +46,7 @@ export default function Card({ productId, originalProductId }) {
   }
 
   // Get the star unicode for the footer portion of the card
-  var stars = Math.round(calculateStars(ratings));
+  var number = calculateStars(ratings);
 
   return (
     <div className={styles.productCard}>
@@ -54,7 +55,7 @@ export default function Card({ productId, originalProductId }) {
         <small>{product.category.toUpperCase()}</small>
         <h4>{product.name}</h4>
         <small>${product.default_price}</small>
-        <p>{stars} stars</p>
+        <QuarterStarRating rating={number}/>
       </div>
     </div>
   )

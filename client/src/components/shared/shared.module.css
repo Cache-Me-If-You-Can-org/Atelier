@@ -54,3 +54,16 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+/* Star Rating (for now)*/
+
+.starDiv {
+  display: flex;
+  gap: 4px;
+  width: fit-content;
+}
+
+.stars {
+  width: 15px;
+  height: 15px;
+}
