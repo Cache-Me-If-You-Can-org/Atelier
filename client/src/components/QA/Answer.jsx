@@ -11,8 +11,10 @@ function Answer({ answer }) {
   const [helpfulness, setHelpfulness] = useState(answer.helpfulness);
 
   function report() {
-    setReported(true);
-    axios.put(`/qa/answers/${answer.answer_id}/report`);
+    axios.put(`/qa/answers/${answer.answer_id}/report`)
+      .then(() => {
+        setReported(true);
+      });
   }
   function helpfulHandler() {
      if (!isHelpful) {
@@ -43,9 +45,7 @@ function Answer({ answer }) {
           {' | '}
           <span>
             <a onClick={() => {
-              if (reported) {
-                console.log('already reported!');
-              } else {
+              if (!reported) {
                 report();
               }
             }}>

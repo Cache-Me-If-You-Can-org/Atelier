@@ -2,10 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import * as styles from './qanda.module.css';
+import PhotoForm from './PhotoForm.jsx';
+import Modal from '../shared/Modal.jsx';
 
 function AnswerForm({product_id, question, setIsOpen, setNewAnswer}) {
-  // this should be rendered in a new window
-  // axios GET for product_name
+  const [photoIsOpen, setPhotoIsOpen] = useState(false);
+  const [photos, setPhotos] = useState([]);
 
   function validate() {
     const emailReg = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
@@ -37,7 +39,7 @@ function AnswerForm({product_id, question, setIsOpen, setNewAnswer}) {
         body: document.getElementById("answer_body").value,
         name: document.getElementById("name").value,
         email: document.getElementById("email").value,
-        photos: []
+        photos: photos
       }
       //console.log(ans)
       setIsOpen(false);
@@ -66,8 +68,11 @@ function AnswerForm({product_id, question, setIsOpen, setNewAnswer}) {
         <input id="email" placeholder="Example: jack@email.com"></input>
       </div>
       <p>For authentication reasons, you will not be emailed</p>
-      <input type="button" value="Add photos"></input>
+      <input type="button" value="Add photos" onClick={()=>{setPhotoIsOpen(true)}}></input>
       <input type="button" value="Submit answer" onClick={submitAnswerHandler}></input>
+      <Modal isOpen={photoIsOpen} setIsOpen={setPhotoIsOpen} Module={() => (
+        <PhotoForm setIsOpen={setPhotoIsOpen} photos={photos} setPhotos={setPhotos}/>
+      )}/>
     </div>
   )
 }

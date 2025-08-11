@@ -4,12 +4,9 @@ import { useState, useEffect, useRef } from 'react';
 import AnswersList from './AnswersList.jsx';
 import * as styles from './qanda.module.css';
 import AnswerForm from './AnswerForm.jsx';
-//import API from './api.js';
 import Modal from '../shared/Modal.jsx';
 
 function Question({ product_id, question }) {
-  // given the question as a prop, find all answers associated with that question, sorted
-  // sort first by seller, then by helpfulness without upending seller answers
   const [isHelpful, setIsHelpful] = useState(false);
   const [helpfulness, setHelpfulness] = useState(question.question_helpfulness);
   const [isOpen, setIsOpen] = useState(false);
@@ -23,27 +20,20 @@ function Question({ product_id, question }) {
           setHelpfulness(helpfulness + 1);
         });
     }
-    // if (!isHelpful) {
-    //   setIsHelpful(true);
-    //   axios.put(`${API.api}/qa/questions/${question.question_id}/helpful`, {headers: API.headers})
-    //     .then(() => {
-    //       setHelpfulness(helpfulness + 1);
-    //     });
-    // }
   }
-  // whenever isOpen is set to false, save the input data first(?)
   function addAnswer() {
     setIsOpen(true)
   }
   const didMount = useRef(false);
   useEffect(() => {
     if (didMount.current) {
-      console.log('gonna hit api with ans', newAnswer);
-      axios.post(`/qa/questions/${question.question_id}/answers`, newAnswer, {headers: {'Content-Type':'application/json'}}).
+      // console.log('gonna hit api with ans', newAnswer);
+      axios.post(`/qa/questions/${question.question_id}/answers`, JSON.stringify(newAnswer), {headers: {'Content-Type':'application/json'}}).
         then(() => {
           console.log('posted!');
+          // add new answer to all answers (rerender)
         })
-        .catch((err) => console.log('posting', err));
+        .catch((err) => console.log(err));
     } else {
       didMount.current = true;
     }

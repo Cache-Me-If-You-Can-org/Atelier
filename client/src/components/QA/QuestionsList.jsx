@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Question from './Question.jsx';
-//import API from './api.js';
 import Search from './Search.jsx';
 
 function QuestionsList({product_id}) {
@@ -14,7 +13,6 @@ function QuestionsList({product_id}) {
   useEffect(() => {
     axios.get('/qa/questions', { params: { product_id: product_id }})
       .then((res) => {
-        console.log('QUESTIONS FOR PRODUCT', product_id, res.data.results);
         setAllQuestions(res.data.results);
         setDisplayedQuestions(res.data.results.slice(0, count));
       })
@@ -23,7 +21,6 @@ function QuestionsList({product_id}) {
       });
   }, []);
   useEffect(() => {
-    //console.log('num qs', allQuestions.slice().length);
     let filtered = allQuestions.filter((question) => {
       if (question.question_body.includes(filterBy)) {
         //console.log('found matching q', question.question_body);
@@ -37,17 +34,6 @@ function QuestionsList({product_id}) {
     setDisplayedQuestions(filtered);
   }, [filterBy]);
 
-  // useEffect(() => {
-  //   axios.get(`${API.api}/qa/questions`, { params: { product_id: product_id }, headers: API.headers})
-  //     .then((res) => {
-  //       console.log('QUESTIONS FOR PRODUCT', product_id, res.data.results);
-  //       setAllQuestions(res.data.results);
-  //       setDisplayedQuestions(res.data.results.slice(0, count));
-  //     })
-  //     .catch((err) => {
-  //       throw new Error(err);
-  //     });
-  // }, []);
   useEffect(() => {
     let q = allQuestions.slice(0, count);
     setDisplayedQuestions([...q]);

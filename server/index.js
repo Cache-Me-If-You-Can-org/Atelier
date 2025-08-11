@@ -14,15 +14,15 @@ app.all("/*", (req, res) => {
   // console.log(req.method);
   // console.log(req.url);
   // console.log(req.params);
-  console.log('query', req.query);
-  console.log('body', req.body);
+  // console.log('query', req.query);
+  // console.log('body', req.body);
   axios( {
     method: req.method,
     url: `${process.env.API_URL}${req.url}`,
     headers: { Authorization: `${process.env.AUTH_TOKEN}`, 'Content-Type': req.header('Content-Type') },
     params: req.params,
     query: req.query,
-    data: JSON.stringify(req.body)
+    data: req.body
   })
   .then((data) => {
     res.send(data.data);

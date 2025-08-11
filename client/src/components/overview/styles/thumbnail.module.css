@@ -1,0 +1,16 @@
+.thumbnail {
+  background-color: white;
+  border: solid 1px var(--color-border);
+  width: 100%;
+  height: 50px;
+  cursor: pointer;
+  position: relative;
+}
+
+.indicator {
+  width: 100%;
+  height: 3px;
+  background-color: brown;
+  position: absolute;
+  bottom: -10px;
+}
