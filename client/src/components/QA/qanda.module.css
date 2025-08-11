@@ -12,3 +12,7 @@
 .answersList {
   display: flex;
 }
+.search {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import Thumbnail from './Thumbnail.jsx';
-import { CornersOut, ArrowLeft, ArrowRight } from '@phosphor-icons/react'
+import { Thumbnail } from '../components';
+import Image from '../../shared/Image.jsx';
+import { CornersOut, ArrowLeft, ArrowRight } from '@phosphor-icons/react';
+import * as g from '../../global.module.css';
+import * as css from '../styles/gallery.module.css';
 
 function Gallery({
   product,
   styles,
   selectedStyle,
-  // setSelectedStyle
   isFullScreen,
   setIsFullScreen
 }) {
@@ -15,7 +17,7 @@ function Gallery({
 
   useEffect(() => {
     setDisplayImage(styles[selectedStyle].photos[selectedImage].url)
-  }, [selectedImage])
+  }, [selectedImage, selectedStyle])
 
   const handleArrows = (direction) => {
     if (direction === 'next' && selectedImage !== styles[selectedStyle].photos.length - 1) {
@@ -26,13 +28,12 @@ function Gallery({
     }
   }
   return (
-    <div className='gallery-container'>
-      <img className='thumbnail-image' src={displayImage}/>
-      <div className='overlay'>
-        <div className='group full-height'>
-          <div className='thumbnail-container stack full-height'>
-            {styles[selectedStyle].photos.map((photo, i) => {
-              return (
+    <div className={css.galleryWrapper}>
+      <Image src={displayImage} />
+      <div className={css.overlay}>
+        <div className={`${g.group} ${g.fullHeight}`}>
+          <div className={`${g.stack} ${g.fullHeight} ${css.thumbnailWrapper}`}>
+            {styles[selectedStyle].photos.map((photo, i) => (
                 <Thumbnail
                   key={i}
                   i={i}
@@ -41,25 +42,25 @@ function Gallery({
                   setSelectedImage={setSelectedImage}
                 />
               )
-            })}
+            )}
           </div>
-          <div className='stack fs-arrows-container'>
-            <div className='fullscreen-icon' >
+          <div className={`${g.stack} ${css.controlsWrapper}`}>
+            <div className={css.fullscreen} >
               <CornersOut
                 size={32}
-                className='pointer icon'
+                className={`${g.pointer} ${css.icon}`}
                 onClick={() => setIsFullScreen(prev => !prev)}
               />
             </div>
-            <div className='overview-arrows group sb'>
+            <div className={`${g.group} ${g.sb} ${css.arrows}`}>
               <ArrowLeft
                 size={32}
-                className='pointer icon'
+                className={`${g.pointer} ${css.icon}`}
                 onClick={() => handleArrows('prev')}
               />
               <ArrowRight
                 size={32}
-                className='pointer icon'
+                className={`${g.pointer} ${css.icon}`}
                 onClick={() => handleArrows('next')}
               />
             </div>

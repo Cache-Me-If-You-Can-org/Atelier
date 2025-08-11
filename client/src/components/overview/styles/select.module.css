@@ -1,0 +1,42 @@
+.selectWrapper {
+  position: relative;
+}
+
+.selectDisplay {
+  border: 1px solid var(--color-border);
+  padding: 8px 12px;
+  background: var(--color-bg);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow {
+  font-size: 10px;
+}
+
+.selectList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-top: none;
+  position: absolute;
+  width: 100%;
+  background: var(--color-bg);
+  z-index: 100;
+}
+
+.selectOption {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.selectOption:hover {
+  background: #f0f0f0;
+}
+
+.active {
+  background: #e6f3ff;
+}

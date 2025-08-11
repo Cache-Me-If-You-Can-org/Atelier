@@ -1,0 +1,40 @@
+/* Global Utility Classes */
+.container {
+  max-width: 940px;
+  margin: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+}
+
+.sb {
+  justify-content: space-between;
+}
+
+.fullHeight {
+  height: 100%;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
