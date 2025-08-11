@@ -27,7 +27,10 @@ import * as shared from "./shared.module.css";
 // passed in, opposed to having a set button that must be pressed
 // to open the modal by default
 
-export default function Modal({ isOpen, setIsOpen, Module }) {
+// I've also added a custom "style" prop so you can adjust the container of the
+// modal as you wish to
+
+export default function Modal({ isOpen, setIsOpen, Module, style = {} }) {
   if (!isOpen) return null;
 
   return createPortal(
@@ -38,11 +41,11 @@ export default function Modal({ isOpen, setIsOpen, Module }) {
         if (e.target.id === "activeModal") setIsOpen(false);
       }}
     >
-      <div className={shared["modal-content"]}>
+      <div className={shared["modal-content"]} style={style}>
         <span className={shared.close} onClick={() => setIsOpen(false)}>
           &times;
         </span>
-        <Module/>
+        {Module}
       </div>
     </div>,
     document.getElementById("modal-root")

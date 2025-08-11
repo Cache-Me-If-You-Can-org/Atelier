@@ -22,7 +22,7 @@
   box-sizing: content-box;
   margin: 0px 10px 0px 0px;
   border: 1px solid var(--color-border);
-  min-height: 300px;
+  min-height: 295px;
 }
 
 .productCardInfo {
@@ -42,4 +42,17 @@
   width: 25px;
   height: 100%;
   font-size: 24px;
+}
+
+.table {
+  width: 100%;
+}
+
+.tableCenter {
+  text-align: center;
+}
+
+th {
+  width: 100px;
+  font-size: large;
 }

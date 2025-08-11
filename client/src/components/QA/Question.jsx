@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 import AnswersList from './AnswersList.jsx';
 import * as styles from './qanda.module.css';
 import AnswerForm from './AnswerForm.jsx';
-//import API from './api.js';
 import Modal from '../shared/Modal.jsx';
 
 function Question({ product_id, question }) {
