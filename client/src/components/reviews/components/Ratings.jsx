@@ -41,7 +41,7 @@ const [meta, setMeta] = useState([]);
       <div className={styles.ratingsBreakdown}>
         <StarRatingBreakdown ratings={meta.ratings} totalRatings={totalRatings} recommended={meta.recommended}/>
       </div>
-      <div className={styles.productBreakdown}>
+      <div>
         <ProductBreakdown characteristics={meta.characteristics} />
       </div>
     </div>

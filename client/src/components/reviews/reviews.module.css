@@ -174,11 +174,11 @@
   font-size: 13px;
 }
 
-.prodBreakdownBarWrapper :first-child {
+.prodBreakdownBarWrapper .two:first-child {
   margin: 0 2px 0;
 }
 
-.prodBreakdownBarWrapper :last-child {
+.prodBreakdownBarWrapper .two:last-child {
   margin: 0 0 0 2px;
 }
 
