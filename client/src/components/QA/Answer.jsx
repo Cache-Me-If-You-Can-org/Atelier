@@ -6,6 +6,12 @@ import * as styles from './qanda.module.css';
 function Answer({ answer }) {
   let date = new Date(answer.date);
   date = date.toDateString();
+  const [reported, setReported] = useState(false);
+
+  function report() {
+    setReported(true);
+    axios.put(`/qa/answers/${answer.answer_id}/report`);
+  }
   return (
     <div className={styles.answer}>
       <div>{answer.body}</div>
@@ -25,8 +31,14 @@ function Answer({ answer }) {
         <span>
           {' | '}
           <span>
-            <a href='/'>
-              Report
+            <a onClick={() => {
+              if (reported) {
+                console.log('already reported!');
+              } else {
+                report();
+              }
+            }}>
+              {reported ? 'Reported' : 'Report'}
             </a>
           </span>
         </span>

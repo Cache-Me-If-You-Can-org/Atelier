@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Answer from './Answer.jsx';
 import * as styles from './qanda.module.css';
+//import API from './api.js';
 
 function AnswersList({ question_id }) {
   const [answers, setAnswers] = useState([]);
@@ -11,23 +12,23 @@ function AnswersList({ question_id }) {
   useEffect(() => {
     if (!gotAll) {
       axios.get(`/qa/questions/${question_id}/answers`, { params: { page: page.toString(), count: '2'}})
-        .then((response) => {
-          // console.log('added up to 2 answers for Q', question_id, ':', response.data.results);
-          if (response.data.results.length === 0) {
+        .then((res) => {
+          // console.log('added up to 2 answers for Q', question_id, ':', res.data.results);
+          if (res.data.results.length === 0) {
             console.log('got all answers for this Q already!');
             setGotAll(true);
           } else {
-            setAnswers(answers.slice().concat(response.data.results));
+            setAnswers(answers.slice().concat(res.data.results));
           }
         })
         .catch((err) => {
           throw new Error(err);
         });
     } else {
-      axios.get(`/qa/questions/${question_id}/answers`, { params: { page: page.toString(), count: '2'} })
-        .then((response) => {
-          // console.log('collapsed answers for Q', question_id, ':', response.data.results);
-          setAnswers(response.data.results);
+      axios.get(`/qa/questions/${question_id}/answers`, { params: { page: page.toString(), count: '2'}})
+        .then((res) => {
+          // console.log('collapsed answers for Q', question_id, ':', res.data.results);
+          setAnswers(res.data.results);
           setGotAll(false);
         })
         .catch((err) => {
@@ -35,6 +36,33 @@ function AnswersList({ question_id }) {
         });
     }
   }, [page]);
+  // useEffect(() => {
+  //   if (!gotAll) {
+  //     axios.get(`${API.api}/qa/questions/${question_id}/answers`, { params: { page: page.toString(), count: '2'}, headers: API.headers})
+  //       .then((res) => {
+  //         // console.log('added up to 2 answers for Q', question_id, ':', response.data.results);
+  //         if (res.data.results.length === 0) {
+  //           console.log('got all answers for this Q already!');
+  //           setGotAll(true);
+  //         } else {
+  //           setAnswers(answers.slice().concat(res.data.results));
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         throw new Error(err);
+  //       });
+  //   } else {
+  //     axios.get(`${API.api}/qa/questions/${question_id}/answers`, { params: { page: page.toString(), count: '2'}, headers: API.headers })
+  //       .then((res) => {
+  //         // console.log('collapsed answers for Q', question_id, ':', response.data.results);
+  //         setAnswers(res.data.results);
+  //         setGotAll(false);
+  //       })
+  //       .catch((err) => {
+  //         throw new Error(err);
+  //       });
+  //   }
+  // }, [page]);
   function loadMoreAnswers() {
     // show all remaining answers
     // confined to half the screen and scrollable

@@ -1,0 +1,51 @@
+.galleryWrapper {
+  height: 500px;
+  flex: 1;
+  background-color: lightgrey;
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 15px;
+}
+
+.thumbnailWrapper {
+  width: 60px;
+  height: 100%;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+.thumbnailWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.icon {
+  color: var(--color-icon);
+}
+
+.icon path{
+  stroke: white;
+  stroke-width: 5;
+}
+
+.controlsWrapper {
+  flex: 1;
+  padding: 10px;
+}
+
+.fullscreen {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  height: 24px;
+}
+.arrows {
+  margin-top: 180px;
+  width: 100%;
+}

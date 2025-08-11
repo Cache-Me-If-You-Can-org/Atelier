@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Overview from './Overview.jsx';
+import Overview from './overview/Overview.jsx';
 import RelatedAndOutfit from './RelatedAndOutfit.jsx';
 import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews.jsx';
 import BenRatingsAndReviews from './reviews/BenRatingsAndReviews.jsx';
 import QA from './QA/index.jsx';
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-
 
 export default function App() {
   const [currentProductId, setCurrentProductId] = useState(null);
