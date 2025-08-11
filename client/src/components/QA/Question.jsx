@@ -43,9 +43,10 @@ function Question({ product_id, question }) {
     <div>
       <div className={styles.question}>
         <div>
-          <strong>{`Q: ${question.question_body}`} </strong>
+          <strong>Q:</strong>
+          <strong className={styles.questionBody}>{question.question_body}</strong>
         </div>
-        <div>
+        <div className={styles.questionDetails}>
           {'Helpful? '}
           <span>
             <a onClick={helpfulHandler}>Yes</a>
