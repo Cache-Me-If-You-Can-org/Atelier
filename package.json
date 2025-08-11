@@ -9,7 +9,8 @@
     "build": "npx webpack",
     "start": "node server/index.js",
     "test": "npx jest",
-    "lint": "eslint ."
+    "lint": "npx eslint client/src",
+    "lint:fix": "npx eslint client/src --fix"
   },
   "repository": {
     "type": "git",

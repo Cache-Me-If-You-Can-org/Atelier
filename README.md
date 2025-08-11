@@ -15,7 +15,7 @@ Follow these steps to get the project running locally:
    ```bash
    npm run server-dev
    ```
-   This will start the server.
+
    then run:
    ```bash
    npm run client-dev
@@ -29,56 +29,9 @@ Follow these steps to get the project running locally:
 
 ---
 
-## 🎨 CSS Guidelines
+## Guidelines
 
-Our structured CSS approach to keep styles consistent and maintainable:
+Our team conventions and best practices:
 
-1. **`styles.css`**
-   - Holds **theme variables** (`:root`) such as colors, spacing, typography.
-   - Sets **default styles** for base HTML tags (`body`, `h1`, `p`, etc.).
-
-2. **`global.module.css`**
-   - Contains **utility classes** (e.g., `.flex`, `.stack`, `.fullWidth`) used across the application.
-
-3. **Component-Specific `.module.css` Files**
-   - Each component can have its own **local module** file.
-   - Keeps component styles scoped and avoids conflicts.
-
----
-
-### 🔹 Importing Styles
-So that we are not typing 6 letters 'styles' and 'global' each time we want to use our classes,
-I recommend:
-
-- **Global module** is imported using the alias `g`:
-  ```jsx
-  import * as g from '../path/to/global.module.css';
-  ```
-
-- **Component module** is imported using the alias `css`:
-  ```jsx
-  import * as css from './MyComponent.module.css';
-  ```
-
----
-
-### 💡 Example Usage
-```jsx
-import React from 'react';
-import * as g from './styles/global.module.css';
-import * as css from './MyComponent.module.css';
-
-function MyComponent() {
-  return (
-   // multiple classes use case
-    <div className={`${g.stack} ${g.fullWidth}`}>
-      {/* single class use case */}
-      <h1 className={css.title}>Hello World</h1>
-      <p className={css.description}>This is my component.</p>
-    </div>
-  );
-}
-
-export default MyComponent;
-```
----
+- [CSS Guidelines](./guidelines/css-guidelines.md)
+- [Before You Push](./guidelines/before-you-push.md)
