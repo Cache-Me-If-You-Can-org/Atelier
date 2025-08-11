@@ -55,7 +55,7 @@ function ReviewsList({ productId }) {
     setReviews(newReviews);
   };
 
-   // Scroll to new posts when two new posts load
+   // Scroll to new reviews when two new reviews load
   useEffect(() => {
     if (Reviews.visibleReviews > 2) {
       let reviewContainer = document.getElementById("reviews");
@@ -76,9 +76,8 @@ function ReviewsList({ productId }) {
   }, [reviews]);
 
   return (
-    <div className={styles.reviewsListContainer}>
+    <div className={styles.reviewsListWrapper}>
       <div id="reviews" className={styles.reviewsList}>
-        <h2>Ratings and Reviews List: </h2>
         {reviews.length
           ? reviews.map((review) => (
               <div key={review.review_id} id="review-tile">

@@ -23,6 +23,20 @@ const ReviewsServices = {
         throw new Error(err);
       });
   },
+  getMeta: (productId, callback) => {
+    api
+      .get ('/reviews/meta/', {
+        params: {
+          product_id: productId,
+        },
+      })
+      .then((response) => {
+        callback(response.data);
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  },
 };
 
 export default ReviewsServices;

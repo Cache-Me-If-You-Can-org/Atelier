@@ -1,4 +1,5 @@
 import React from "react";
+import StarRating from "./StarRating.jsx";
 import * as styles from "../reviews.module.css";
 
 function ReviewsList({ review }) {
@@ -14,8 +15,7 @@ function ReviewsList({ review }) {
     <div className={styles.reviewTileWrapper}>
       <div className={styles.reviewTileHeading}>
         <div className={styles.reviewTileStarRating}>
-          ☆☆☆☆☆:
-          {review.rating}
+          <StarRating starRating={review.rating} starSize={18}/>
         </div>
         <div className={styles.reviewTileAuthorship}>
           <span className={styles.reviewTileUserName}>
