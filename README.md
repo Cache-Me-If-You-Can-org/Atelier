@@ -26,7 +26,7 @@ Follow these steps to get the project running locally:
    ```
    http://localhost:3000/
    ```
-
+   
 ---
 
 ## Guidelines
