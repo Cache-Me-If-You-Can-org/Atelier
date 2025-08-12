@@ -3,7 +3,7 @@ function getSkus(style) {
 }
 
 function getQtys(style, sku) {
-  return Array.from({length: style.skus[sku].quantity}, (_, i) => '' + (i + 1));
+  return Array.from({ length: style.skus[sku].quantity }, (_, i) => `${i + 1}`);
 }
 
 export { getSkus, getQtys };

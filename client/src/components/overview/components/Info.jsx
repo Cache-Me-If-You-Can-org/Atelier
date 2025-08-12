@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSelector, Price, CartForm } from '../components';
-import { getSkus, getQtys } from '../lib/helpers.js';
+import React, { useState } from 'react';
+import axios from 'axios';
+import StyleSelector from './StyleSelector';
+import Price from './Price';
+import CartForm from './CartForm';
+import { getSkus, getQtys } from '../lib/helpers';
 import * as g from '../../global.module.css';
 import * as css from '../styles/info.module.css';
-import axios from 'axios';
 
 function Info({
   product,
@@ -12,18 +14,18 @@ function Info({
   setSelectedStyle,
   isFullScreen,
 }) {
-  const [sku, setSku] = useState(getSkus(styles[selectedStyle])[0]);
-  const [qty, setQty] = useState(getQtys(styles[selectedStyle], sku)[0]);
+  const [skuId, setSkuId] = useState(getSkus(styles[selectedStyle])[0]);
+  const [qty, setQty] = useState(getQtys(styles[selectedStyle], skuId)[0]);
 
   const postToCart = () => {
-    axios.post('/cart', {sku_id: parseInt(sku)})
-         .then(res => console.log('successfully added to cart', res))
-         .catch(err => console.log('failed to add to cart', err));
-  }
+    axios.post('/cart', { sku_id: parseInt(skuId, 10) })
+      .then((res) => console.debug('successfully added to cart', res))
+      .catch((err) => console.error('failed to add to cart', err));
+  };
   return (
     <div
       className={css.infoWrapper}
-      style={{display: isFullScreen ? 'none' : ''}}
+      style={{ display: isFullScreen ? 'none' : '' }}
     >
       <div className={`${g.stack} ${css.gap}`}>
         <div>stars</div>
@@ -34,22 +36,22 @@ function Info({
           styles={styles}
           selectedStyle={selectedStyle}
           setSelectedStyle={setSelectedStyle}
-          setSku={setSku}
+          setSkuId={setSkuId}
           setQty={setQty}
-          sku={sku}
+          skuId={skuId}
         />
         <CartForm
           styles={styles}
           selectedStyle={selectedStyle}
           postToCart={postToCart}
-          setSku={setSku}
+          setSkuId={setSkuId}
           setQty={setQty}
-          sku={sku}
+          skuId={skuId}
           qty={qty}
         />
       </div>
     </div>
-  )
+  );
 }
 
 export default Info;
