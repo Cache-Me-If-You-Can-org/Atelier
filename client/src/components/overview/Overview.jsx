@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Gallery, Info } from './components';
-import { getSkus, getQtys } from './lib/helpers.js';
-import * as g from '../global.module.css';
 import axios from 'axios';
+import Gallery from './components/Gallery';
+import Info from './components/Info';
+import * as g from '../global.module.css';
 
-function Overview({productId}) {
+function Overview({ productId }) {
   const [product, setProduct] = useState(null);
   const [styles, setStyles] = useState(null);
   const [selectedStyle, setSelectedStyle] = useState(0);
@@ -12,15 +12,15 @@ function Overview({productId}) {
 
   useEffect(() => {
     axios.get(`/products/${productId}`)
-         .then(res => {setProduct(res.data); return res.data;})
-        //  .then(res => console.log('product: ', res))
-         .catch(err => console.log('failed to get product by id', err));
+      .then((res) => { setProduct(res.data); return res.data; })
+      //  .then(res => console.log('product: ', res))
+      .catch((err) => console.error('failed to get product by id', err));
 
     axios.get(`/products/${productId}/styles`)
-         .then(res => {setStyles(res.data.results); return res.data.results;})
-        //  .then(res => console.log('styles: ', res))
-         .catch(err => console.log('failed to get styles by id', err));
-  }, [])
+      .then((res) => { setStyles(res.data.results); return res.data.results; })
+      //  .then(res => console.log('styles: ', res))
+      .catch((err) => console.error('failed to get styles by id', err));
+  }, [productId]);
 
   if (styles === null || product === null) {
     return (<div>loading...</div>);
@@ -44,7 +44,7 @@ function Overview({productId}) {
         />
       </div>
     </section>
-  )
+  );
 }
 
 export default Overview;

@@ -1,32 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { Thumbnail } from '../components';
-import Image from '../../shared/Image.jsx';
 import { CornersOut, ArrowLeft, ArrowRight } from '@phosphor-icons/react';
+import React, { useState, useEffect } from 'react';
+import Thumbnail from './Thumbnail';
+import Image from '../../shared/Image';
 import * as g from '../../global.module.css';
 import * as css from '../styles/gallery.module.css';
 
 function Gallery({
-  product,
   styles,
   selectedStyle,
-  isFullScreen,
-  setIsFullScreen
+  setIsFullScreen,
 }) {
   const [selectedImage, setSelectedImage] = useState(0);
   const [displayImage, setDisplayImage] = useState(styles[selectedStyle].photos[selectedImage].url);
 
   useEffect(() => {
-    setDisplayImage(styles[selectedStyle].photos[selectedImage].url)
-  }, [selectedImage, selectedStyle])
+    setDisplayImage(styles[selectedStyle].photos[selectedImage].url);
+  }, [selectedImage, selectedStyle, styles]);
 
   const handleArrows = (direction) => {
     if (direction === 'next' && selectedImage !== styles[selectedStyle].photos.length - 1) {
-      setSelectedImage(prev => prev + 1);
+      setSelectedImage((prev) => prev + 1);
     }
     if (direction === 'prev' && selectedImage !== 0) {
-      setSelectedImage(prev => prev - 1);
+      setSelectedImage((prev) => prev - 1);
     }
-  }
+  };
+
   return (
     <div className={css.galleryWrapper}>
       <Image src={displayImage} />
@@ -34,22 +33,21 @@ function Gallery({
         <div className={`${g.group} ${g.fullHeight}`}>
           <div className={`${g.stack} ${g.fullHeight} ${css.thumbnailWrapper}`}>
             {styles[selectedStyle].photos.map((photo, i) => (
-                <Thumbnail
-                  key={i}
-                  i={i}
-                  imgUrl={photo.thumbnail_url}
-                  selectedImage={selectedImage}
-                  setSelectedImage={setSelectedImage}
-                />
-              )
-            )}
+              <Thumbnail
+                key={photo.thumbnail_url}
+                i={i}
+                imgUrl={photo.thumbnail_url}
+                selectedImage={selectedImage}
+                setSelectedImage={setSelectedImage}
+              />
+            ))}
           </div>
           <div className={`${g.stack} ${css.controlsWrapper}`}>
-            <div className={css.fullscreen} >
+            <div className={css.fullscreen}>
               <CornersOut
                 size={32}
                 className={`${g.pointer} ${css.icon}`}
-                onClick={() => setIsFullScreen(prev => !prev)}
+                onClick={() => setIsFullScreen((prev) => !prev)}
               />
             </div>
             <div className={`${g.group} ${g.sb} ${css.arrows}`}>
@@ -68,7 +66,7 @@ function Gallery({
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default Gallery;
