@@ -16,7 +16,7 @@ function CartForm({
 }) {
   return (
     <>
-      <div className={`${g.group} ${css.gap}`}>
+      <div className={`${g.group} ${css.gap} ${g.fullWidth}`}>
         <Select
           className={css.fill}
           options={getSkus(styles[selectedStyle]).map((sku) => (

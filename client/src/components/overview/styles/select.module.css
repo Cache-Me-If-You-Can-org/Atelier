@@ -3,13 +3,13 @@
 }
 
 .selectDisplay {
-  border: 1px solid var(--color-border);
   padding: 8px 12px;
   background: var(--color-bg);
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 .arrow {
@@ -31,6 +31,9 @@
 .selectOption {
   padding: 8px 12px;
   cursor: pointer;
+  border: unset;
+  width: 100%;
+  text-align: left;
 }
 
 .selectOption:hover {
