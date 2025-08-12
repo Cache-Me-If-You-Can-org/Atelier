@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Slider from 'react-slick';
-import Card from "./Card.jsx";
-import settings from "./Carousel.jsx";
+import Card from './Card';
+import settings from './Carousel';
 import * as styles from './relatedOutfit.module.css';
 
 export default function RelatedProducts({ productId }) {
@@ -10,29 +10,32 @@ export default function RelatedProducts({ productId }) {
 
   useEffect(() => {
     axios.get(`/products/${productId}/related`)
-      .then(res => {
+      .then((res) => {
         setRelatedProducts(res.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error('error loading related products:', err);
-      })
-  }, []);
+      });
+  }, [productId]);
 
   if (!relatedProducts.length) {
     return (
-      <div className={styles.relatedOutfit}>
+      <div
+        className={styles.relatedOutfit}
+      >
         Loading elements...
       </div>
-    )
+    );
   }
 
   return (
     <div className={styles.relatedOutfit}>
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <Slider {...settings}>
-        {relatedProducts.map((id, index) => (
-          <Card key={index} productId={id} originalProductId={productId} />
+        {relatedProducts.map((id) => (
+          <Card key={id} productId={id} originalProductId={productId} />
         ))}
       </Slider>
     </div>
   );
-};
+}
