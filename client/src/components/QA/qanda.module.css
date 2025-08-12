@@ -1,18 +1,40 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: darkslategray;
+}
 .answer {
-  border: 1px solid gray;
-  padding: 10px;
+  padding: 0px 10px 10px;
+  font-size: small;
+  line-height: normal;
 }
 .answerDetails {
   color: gray;
+  padding-top: 10px;
+  font-size: x-small;
 }
 .question {
   display: flex;
   justify-content: space-between;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.questionBody {
+  padding-left: 10px;
+}
+.questionDetails {
+  color: gray;
+  font-size: x-small;
 }
 .answersList {
   display: flex;
+  align-items: baseline;
 }
 .search {
   display: flex;
   flex-direction: column;
+}
+.inlineThumbnail {
+  width: 50px;
+  display: inline-flex;
+  padding: 5px;
 }
