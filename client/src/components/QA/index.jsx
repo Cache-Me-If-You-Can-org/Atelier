@@ -1,14 +1,16 @@
 import React from 'react';
+import axios from 'axios';
 import QuestionsList from './QuestionsList';
 
 function QA({ currentProductId }) {
-  // const product_id = currentProductId; //product from server
-  // const product_id ='37322' // multiple answers, 1 q
-  const product_id = '37324'; // multiple answers, multiple questions
+  // const productId = currentProductId; //product from server
+  // const productId ='37322' // multiple answers, 1 q
+  const productId = '37324'; // multiple answers, multiple questions
+  axios.get(`/products/${productId}`);
   return (
     <div>
       <h4>QUESTIONS & ANSWERS</h4>
-      <QuestionsList product_id={product_id} />
+      <QuestionsList productId={productId} />
     </div>
   );
 }

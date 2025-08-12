@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { useState, useEffect, useRef } from 'react';
 import AnswersList from './AnswersList';
 import * as styles from './qanda.module.css';
 import AnswerForm from './AnswerForm';
 import Modal from '../shared/Modal';
 
-function Question({ product_id, question }) {
+function Question({ productId, question }) {
   const [isHelpful, setIsHelpful] = useState(false);
   const [helpfulness, setHelpfulness] = useState(question.question_helpfulness);
   const [isOpen, setIsOpen] = useState(false);
@@ -62,15 +61,15 @@ function Question({ product_id, question }) {
       </div>
       <AnswersList
         key={`answers_${question.question_id}`}
-        question_id={question.question_id}
+        questionId={question.question_id}
       />
       <Modal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         Module={() => (
           <AnswerForm
-            product_id={product_id}
             question={question}
+            productId={productId}
             setIsOpen={setIsOpen}
             setNewAnswer={setNewAnswer}
           />

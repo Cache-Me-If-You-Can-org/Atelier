@@ -1,16 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
 import Answer from './Answer';
 import * as styles from './qanda.module.css';
 
-function AnswersList({ question_id }) {
+function AnswersList({ questionId }) {
   const [answers, setAnswers] = useState([]);
   const [gotAll, setGotAll] = useState(false);
   const [page, setPage] = useState(1);
   useEffect(() => {
     if (!gotAll) {
-      axios.get(`/qa/questions/${question_id}/answers`, { params: { page: page.toString(), count: '2' } })
+      axios.get(`/qa/questions/${questionId}/answers`, { params: { page: page.toString(), count: '2' } })
         .then((res) => {
           if (res.data.results.length === 0) {
             setGotAll(true);
@@ -22,7 +21,7 @@ function AnswersList({ question_id }) {
           throw new Error(err);
         });
     } else {
-      axios.get(`/qa/questions/${question_id}/answers`, { params: { page: page.toString(), count: '2' } })
+      axios.get(`/qa/questions/${questionId}/answers`, { params: { page: page.toString(), count: '2' } })
         .then((res) => {
           setAnswers(res.data.results);
           setGotAll(false);

@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as styles from './qanda.module.css';
 import Image from '../shared/Image';
 
