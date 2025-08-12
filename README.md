@@ -2,10 +2,36 @@
 
 ## Setup
 
- The intial setup for this app for now is simply obtaining the dependacies.
+Follow these steps to get the project running locally:
 
- Inside of the root directory of the app (```path/to/Atelier```) open the terminal and execute ```npm install``` (you must have NodeJS on your machine)
+1. **Install Dependencies**
+   Inside the root directory of the app (`path/to/Atelier`), open your terminal and run:
+   ```bash
+   npm install
+   ```
 
- Once you install the dependencies you can run ```npm start``` which will start the live server for the app.
+2. **Start the Development Server**
+   After installing dependencies, run:
+   ```bash
+   npm run server-dev
+   ```
 
- After the server is running, all you have to do is open your local server in a browser (by default it's ```http://localhost:3000/```)
+   then run:
+   ```bash
+   npm run client-dev
+   ```
+
+3. **Open in Browser**
+   By default, the app will be available at:
+   ```
+   http://localhost:3000/
+   ```
+   
+---
+
+## Guidelines
+
+Our team conventions and best practices:
+
+- [CSS Guidelines](./guidelines/css-guidelines.md)
+- [Before You Push](./guidelines/before-you-push.md)

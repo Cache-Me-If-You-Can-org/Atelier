@@ -1,64 +1,30 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import * as styles from './relatedOutfit.module.css';
-import ComparisonTable from './ComparisonTable.jsx';
-import Modal from '../shared/Modal.jsx';
-import QuarterStarRating from '../shared/QuarterStarRating.jsx';
+import ComparisonTable from './ComparisonTable';
+import Modal from '../shared/Modal';
+import QuarterStarRating from '../shared/QuarterStarRating';
 
-export default function Card({ productId, originalProductId }) {
-  const [product, setProduct] = useState(null);
-  const [originalProduct, setOriginalProduct] = useState(null);
-  const [productImages, setProductImages] = useState(null);
-  const [ratings, setRatings] = useState(null);
+function calculateStars(ratings) {
+  // Puts the string amounts of each rating
+  // in a single place
+  const allRatings = [
+    ratings['1'],
+    ratings['2'],
+    ratings['3'],
+    ratings['4'],
+    ratings['5'],
+  ];
+  let total = 0;
+  let valueTotal = 0;
 
-  useEffect(() => {
-    // Fetch basic data (price, name, category)
-    axios.get(`/products/${productId}`)
-      .then(res => {
-        setProduct(res.data);
-        // Fetch review data for the time being
-        return axios.get(`/products/${originalProductId}`)
-      })
-      .then(res => {
-        setOriginalProduct(res.data);
-        // Fetch review data for the time being
-        return axios.get('/reviews/meta', {
-          params: {product_id: productId}
-        })
-      })
-      .then(res => {
-        setRatings(res.data.ratings)
-        // Fetch images for slide show and thumbnail
-        return axios.get(`/products/${productId}/styles`)
-      })
-      .then(res => setProductImages(res.data.results[0].photos))
-      .catch(err => {
-        console.error('error loading product by id:', err)
-      });
-  }, [])
-
-  if (!productImages) {
-    return (
-      <div className={styles.productCard}>
-        <p>Loading...</p>
-      </div>
-    )
+  // Calculates the average using (total * value) / total
+  for (let i = 0; i < allRatings.length; i + 1) {
+    total += Number(allRatings[i]) * 1;
+    valueTotal += Number(allRatings[i]) * (i + 1);
   }
 
-  // Get the star unicode for the footer portion of the card
-  var number = calculateStars(ratings);
-
-  return (
-    <div className={styles.productCard}>
-      <ImageWithButton url={productImages[0].thumbnail_url ? productImages[0].thumbnail_url : 'https://blocks.astratic.com/img/general-img-landscape.png'} related={product} original={originalProduct} />
-      <div className={styles.productCardInfo}>
-        <small>{product.category.toUpperCase()}</small>
-        <h4>{product.name}</h4>
-        <small>${product.default_price}</small>
-        <QuarterStarRating rating={number}/>
-      </div>
-    </div>
-  )
+  return valueTotal / total;
 }
 
 function ImageWithButton({ url, related, original }) {
@@ -66,9 +32,16 @@ function ImageWithButton({ url, related, original }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="thumbnail-square" style={{height: 200}}>
-      <img className="thumbnail-image" src={url} style={{objectPosition: 'center bottom'}}/>
-      <button className={styles.overlayBtn}
+    <div className='thumbnail-square' style={{ height: 200 }}>
+      <img
+        className='thumbnail-image'
+        src={url}
+        alt={original.name}
+        style={{ objectPosition: 'center bottom' }}
+      />
+      <button
+        type='button'
+        className={styles.overlayBtn}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         onClick={() => setIsOpen(true)}
@@ -79,30 +52,64 @@ function ImageWithButton({ url, related, original }) {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         Module={<ComparisonTable related={related} original={original} />}
-        style={{ width: "40%" }}
+        style={{ width: '40%' }}
       />
     </div>
   );
-};
+}
 
-function calculateStars(ratings) {
-  // Puts the string amounts of each rating
-  // in a single place
-  var allRatings = [
-    ratings['1'],
-    ratings['2'],
-    ratings['3'],
-    ratings['4'],
-    ratings['5']
-  ]
+export default function Card({ productId, originalProductId }) {
+  const [product, setProduct] = useState(null);
+  const [originalProduct, setOriginalProduct] = useState(null);
+  const [productImages, setProductImages] = useState(null);
+  const [ratings, setRatings] = useState(null);
 
-  // Calculates the average using (total * value) / total
-  var total = 0;
-  var valueTotal = 0;
-  for (var i = 0; i < allRatings.length; i++) {
-    total += Number(allRatings[i]) * 1;
-    valueTotal += Number(allRatings[i]) * (i + 1);
+  useEffect(() => {
+    // Fetch basic data (price, name, category)
+    axios.get(`/products/${productId}`)
+      .then((res) => {
+        setProduct(res.data);
+        // Fetch review data for the time being
+        return axios.get(`/products/${originalProductId}`);
+      })
+      .then((res) => {
+        setOriginalProduct(res.data);
+        // Fetch review data for the time being
+        return axios.get('/reviews/meta', {
+          params: { product_id: productId },
+        });
+      })
+      .then((res) => {
+        setRatings(res.data.ratings);
+        // Fetch images for slide show and thumbnail
+        return axios.get(`/products/${productId}/styles`);
+      })
+      .then((res) => setProductImages(res.data.results[0].photos))
+      .catch((err) => {
+        console.error('error loading product by id:', err);
+      });
+  }, [originalProductId, productId]);
+
+  if (!productImages) {
+    return (
+      <div className={styles.productCard}>
+        <p>Loading...</p>
+      </div>
+    );
   }
 
-  return valueTotal / total;
+  // Get the star unicode for the footer portion of the card
+  const number = calculateStars(ratings);
+
+  return (
+    <div className={styles.productCard}>
+      <ImageWithButton url={productImages[0].thumbnail_url ? productImages[0].thumbnail_url : 'https://blocks.astratic.com/img/general-img-landscape.png'} related={product} original={originalProduct} />
+      <div className={styles.productCardInfo}>
+        <small>{product.category.toUpperCase()}</small>
+        <h4>{product.name}</h4>
+        <small>{product.default_price}</small>
+        <QuarterStarRating rating={number} />
+      </div>
+    </div>
+  );
 }

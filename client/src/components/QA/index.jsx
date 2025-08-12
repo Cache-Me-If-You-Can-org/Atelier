@@ -7,11 +7,13 @@ import QuestionsList from './QuestionsList.jsx';
 
 function QA({currentProductId}) {
   const [questions, setQuestions] = useState([]);
-  const product_id = '37313';
-  //const product_id = '40347';
-
+  // const product_id = currentProductId;
+  //const product_id ='37322' //multiple answers, 1 q
+  //const product_id = '40347'; //rfp api
+  const product_id ='37324'; //multiple answers, multiple questions
   return (
     <div>
+      <h4>QUESTIONS & ANSWERS</h4>
       <QuestionsList product_id={product_id}/>
     </div>
   );

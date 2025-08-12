@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Overview from './Overview.jsx';
+import Overview from './overview/Overview.jsx';
 import RelatedAndOutfit from './RelatedAndOutfit.jsx';
 import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews.jsx';
 import BenRatingsAndReviews from './reviews/BenRatingsAndReviews.jsx';
