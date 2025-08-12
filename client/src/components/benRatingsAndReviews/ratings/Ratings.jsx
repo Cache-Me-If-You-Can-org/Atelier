@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from "react";
-import ReviewsServices from "../services/ReviewsServices.js";
-import StarRating from "./StarRating.jsx";
-import StarRatingBreakdown from "./StarRatingBreakdown.jsx";
-import ProductBreakdown from "./ProductBreakdown.jsx";
-import * as styles from "../reviews.module.css";
+import React, {useState, useEffect} from 'react';
+import ReviewsServices from '../services/ReviewsServices.js';
+import StarRating from '../reviews/starRating/StarRating.jsx';
+import StarRatingBreakdown from './StarRatingBreakdown.jsx';
+import ProductBreakdown from './ProductBreakdown.jsx';
+import * as styles from '../reviews.module.css';
 
 function Ratings({ productId }) {
 const [meta, setMeta] = useState([]);

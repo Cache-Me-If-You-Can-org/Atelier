@@ -1,7 +1,7 @@
-import React from "react";
-import ReviewsList from "./components/ReviewsList.jsx";
-import Ratings from "./components/Ratings.jsx";
-import * as styles from "./reviews.module.css";
+import React from 'react';
+import ReviewsList from './reviews/ReviewsList.jsx';
+import Ratings from './ratings/Ratings.jsx';
+import * as styles from './reviews.module.css';
 
 function BenRatingsAndReviews({ productId }) {
   return (

@@ -2,7 +2,7 @@
 const Reviews = {
   count: 9999,
   page: 1,
-  product: "",
+  product: '',
   totalResults: 0,
   visibleReviews: 0,
   totalResults: [],

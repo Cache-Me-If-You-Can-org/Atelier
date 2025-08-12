@@ -1,9 +1,7 @@
-import React from "react";
-import * as styles from "./starRating.module.css";
-import { Star, StarHalf } from "@phosphor-icons/react";
+import React from 'react';
+import * as styles from './starRating.module.css';
 
 function StarRating({ starRating, starSize }) {
-
   const imgSize = starSize || 32;
 
   let fullStars = Math.floor(starRating);
@@ -30,7 +28,7 @@ function StarRating({ starRating, starSize }) {
         if (el === 100) {
           return (
             <span key={i}>
-              <img width={imgSize} src="./assets/star-full.svg" />
+              <img alt="a star" width={imgSize} src="./assets/star-full.svg" />
             </span>
           );
         } else if (el === 75) {

@@ -1,13 +1,13 @@
-import React from "react";
-import StarRating from "./StarRating.jsx";
-import * as styles from "../reviews.module.css";
+import React from 'react';
+import StarRating from './starRating/StarRating.jsx';
+import * as styles from '../reviews.module.css';
 
 function ReviewsList({ review }) {
   const date = new Date(review.date);
 
   const year = date.getFullYear();
-  const monthName = date.toLocaleString("en-US", { month: "long" });
-  const day = date.getDate().toString().padStart(2, "0");
+  const monthName = date.toLocaleString('en-US', { month: 'long' });
+  const day = date.getDate().toString().padStart(2, '0');
 
   const formattedDate = `${monthName} ${day}, ${year}`;
 
@@ -15,11 +15,12 @@ function ReviewsList({ review }) {
     <div className={styles.reviewTileWrapper}>
       <div className={styles.reviewTileHeading}>
         <div className={styles.reviewTileStarRating}>
-          <StarRating starRating={review.rating} starSize={18}/>
+          <StarRating starRating={review.rating} starSize={18} />
         </div>
         <div className={styles.reviewTileAuthorship}>
           <span className={styles.reviewTileUserName}>
-            {review.reviewer_name},
+            {review.reviewer_name}
+            ,
           </span>
           <span className="review-title__review-date">{formattedDate}</span>
         </div>

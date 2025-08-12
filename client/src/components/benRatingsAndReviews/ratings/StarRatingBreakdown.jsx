@@ -1,5 +1,5 @@
-import React from "react";
-import * as styles from "../reviews.module.css";
+import React from 'react';
+import * as styles from '../reviews.module.css';
 
 function StarRatingBreakdown({ ratings, totalRatings, recommended }) {
 
