@@ -66,7 +66,7 @@ function Question({ productId, question }) {
       <Modal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        Module={() => (
+        Module={(
           <AnswerForm
             question={question}
             productId={productId}

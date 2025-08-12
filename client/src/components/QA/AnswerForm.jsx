@@ -12,7 +12,7 @@ function AnswerForm({
   useEffect(() => {
     axios.get(`/products/${productId}`)
       .then((res) => {
-        setProductName(res.data);
+        setProductName(res.data.name);
       })
       .catch((err) => {
         throw new Error(err);
@@ -83,7 +83,7 @@ function AnswerForm({
       <Modal
         isOpen={photoIsOpen}
         setIsOpen={setPhotoIsOpen}
-        Module={() => (
+        Module={(
           <PhotoForm setIsOpen={setPhotoIsOpen} photos={photos} setPhotos={setPhotos} />
         )}
       />

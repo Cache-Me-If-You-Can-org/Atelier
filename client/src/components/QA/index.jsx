@@ -8,10 +8,10 @@ function QA({ currentProductId }) {
   const productId = '37324'; // multiple answers, multiple questions
   axios.get(`/products/${productId}`);
   return (
-    <div>
+    <section id='questionsAndAnswers'>
       <h4>QUESTIONS & ANSWERS</h4>
       <QuestionsList productId={productId} />
-    </div>
+    </section>
   );
 }
 

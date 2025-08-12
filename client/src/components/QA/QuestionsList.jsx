@@ -3,7 +3,7 @@ import axios from 'axios';
 import Question from './Question';
 import Search from './Search';
 import Modal from '../shared/Modal';
-// import QuestionForm from './QuestionForm';
+import QuestionForm from './QuestionForm';
 
 function QuestionsList({ productId }) {
   const [allQuestions, setAllQuestions] = useState([]);
@@ -77,14 +77,14 @@ function QuestionsList({ productId }) {
           />
         ))}
         { count < allQuestions.length && filterBy === '' ? (<input type='button' value='More Answered Questions' onClick={moreQuestions} />) : (<div />)}
+        <input type='button' value='Add a Question' onClick={addQuestion} />
       </div>
-      <input type='button' value='Add a Question' onClick={addQuestion} />
       <Modal
         isOpen={isQFormOpen}
         setIsOpen={setQFormIsOpen}
-        Module={() => (
+        Module={(
           <QuestionForm
-            product={product}
+            productId={productId}
             setIsOpen={setQFormIsOpen}
             setNewQuestion={setNewQuestion}
           />

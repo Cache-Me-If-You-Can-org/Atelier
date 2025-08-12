@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function QuestionForm({
-  productId, setIsOpen, allQuestions, setAllQuestions,
+  productId, setIsOpen, newQuestion, setNewQuestion,
 }) {
   const [productName, setProductName] = useState(null);
   useEffect(() => {
     axios.get(`/products/${productId}`)
       .then((res) => {
-        setProductName(res.data);
+        setProductName(res.data.name);
       })
       .catch((err) => {
         throw new Error(err);
@@ -43,6 +43,7 @@ function QuestionForm({
         body: document.getElementById('question_body').value,
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
+        product_id: parseInt(productId, 10),
       };
       console.log(q);
       setIsOpen(false);
