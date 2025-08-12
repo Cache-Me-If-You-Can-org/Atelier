@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import Answer from './Answer.jsx';
+import Answer from './Answer';
 import * as styles from './qanda.module.css';
 
 function AnswersList({ question_id }) {
@@ -10,7 +10,7 @@ function AnswersList({ question_id }) {
   const [page, setPage] = useState(1);
   useEffect(() => {
     if (!gotAll) {
-      axios.get(`/qa/questions/${question_id}/answers`, { params: { page: page.toString(), count: '2'}})
+      axios.get(`/qa/questions/${question_id}/answers`, { params: { page: page.toString(), count: '2' } })
         .then((res) => {
           if (res.data.results.length === 0) {
             setGotAll(true);
@@ -22,7 +22,7 @@ function AnswersList({ question_id }) {
           throw new Error(err);
         });
     } else {
-      axios.get(`/qa/questions/${question_id}/answers`, { params: { page: page.toString(), count: '2'}})
+      axios.get(`/qa/questions/${question_id}/answers`, { params: { page: page.toString(), count: '2' } })
         .then((res) => {
           setAnswers(res.data.results);
           setGotAll(false);
@@ -48,7 +48,7 @@ function AnswersList({ question_id }) {
       </div>
       <div>
         {answers.map((answer) => <Answer key={answer.answer_id} answer={answer} />)}
-        { gotAll ? (<input type="button" value="Collapse" onClick={collapseAnswers} />) : (<input type="button" value="Load More Answers" onClick={loadMoreAnswers} />)}
+        { gotAll ? (<input type='button' value='Collapse' onClick={collapseAnswers} />) : (<input type='button' value='Load More Answers' onClick={loadMoreAnswers} />)}
       </div>
     </div>
 

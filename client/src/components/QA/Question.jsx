@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
-import AnswersList from './AnswersList.jsx';
+import AnswersList from './AnswersList';
 import * as styles from './qanda.module.css';
-import AnswerForm from './AnswerForm.jsx';
-import Modal from '../shared/Modal.jsx';
+import AnswerForm from './AnswerForm';
+import Modal from '../shared/Modal';
 
 function Question({ product_id, question }) {
   const [isHelpful, setIsHelpful] = useState(false);
@@ -22,18 +22,18 @@ function Question({ product_id, question }) {
     }
   }
   function addAnswer() {
-    setIsOpen(true)
+    setIsOpen(true);
   }
   const didMount = useRef(false);
   useEffect(() => {
     if (didMount.current) {
       // console.log('gonna hit api with ans', newAnswer);
-      axios.post(`/qa/questions/${question.question_id}/answers`, JSON.stringify(newAnswer), {headers: {'Content-Type':'application/json'}}).
-        then(() => {
+      axios.post(`/qa/questions/${question.question_id}/answers`, JSON.stringify(newAnswer), { headers: { 'Content-Type': 'application/json' } })
+        .then(() => {
           console.log('posted!');
           // add new answer to all answers (rerender)
         })
-        .catch((err) => console.log(err));
+        .catch((err) => { throw new Error(err); });
     } else {
       didMount.current = true;
     }
@@ -60,10 +60,22 @@ function Question({ product_id, question }) {
           </span>
         </div>
       </div>
-      <AnswersList key={`answers_${question.question_id}`} question_id={question.question_id}/>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} Module={() => (
-        <AnswerForm product_id={product_id} question={question} setIsOpen={setIsOpen} setNewAnswer={setNewAnswer}/>
-      )}/>
+      <AnswersList
+        key={`answers_${question.question_id}`}
+        question_id={question.question_id}
+      />
+      <Modal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        Module={() => (
+          <AnswerForm
+            product_id={product_id}
+            question={question}
+            setIsOpen={setIsOpen}
+            setNewAnswer={setNewAnswer}
+          />
+        )}
+      />
     </div>
   );
 }

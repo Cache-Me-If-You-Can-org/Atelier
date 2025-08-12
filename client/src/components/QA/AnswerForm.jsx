@@ -1,27 +1,27 @@
 import React from 'react';
-import axios from 'axios';
-import { useState, useEffect, useRef } from 'react';
-import * as styles from './qanda.module.css';
-import PhotoForm from './PhotoForm.jsx';
-import Modal from '../shared/Modal.jsx';
+import { useState } from 'react';
+import PhotoForm from './PhotoForm';
+import Modal from '../shared/Modal';
 
-function AnswerForm({product_id, question, setIsOpen, setNewAnswer}) {
+function AnswerForm({
+  product_id, question, setIsOpen, setNewAnswer,
+}) {
   const [photoIsOpen, setPhotoIsOpen] = useState(false);
   const [photos, setPhotos] = useState([]);
 
   function validate() {
     const emailReg = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-    let errMsg = ''
-    if (document.getElementById("answer_body").value === '') {
+    let errMsg = '';
+    if (document.getElementById('answer_body').value === '') {
       errMsg += 'Answer\n';
     }
-    if (document.getElementById("name").value === '') {
+    if (document.getElementById('name').value === '') {
       errMsg += 'Nickname\n';
     }
-    if (document.getElementById("email").value === '') {
+    if (document.getElementById('email').value === '') {
       errMsg += 'Email\n';
     } else {
-      const em = document.getElementById("email").value;
+      const em = document.getElementById('email').value;
       if (!emailReg.test(em)) {
         errMsg += 'Email with valid format';
       }
@@ -29,52 +29,58 @@ function AnswerForm({product_id, question, setIsOpen, setNewAnswer}) {
     if (errMsg) {
       alert('You must enter the following:\n' + errMsg);
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
   function submitAnswerHandler() {
     if (validate()) {
-      let ans = {
-        body: document.getElementById("answer_body").value,
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        photos: photos
-      }
-      //console.log(ans)
+      const ans = {
+        body: document.getElementById('answer_body').value,
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        photos,
+      };
+      // console.log(ans)
       setIsOpen(false);
       setNewAnswer(ans);
-      console.log('saved ans', ans);
-
+      // console.log('saved ans', ans);
     }
   }
 
-  const product_name = 'product name'
+  const productName = 'product name';
   return (
     <div>
-      <h3>Submit your Answer</h3>
-      <h5>{product_name}: {question.question_body}</h5>
+      <h3>Submit your Answer </h3>
+      <h5>
+        {productName}
+        :
+        {question.question_body}
+      </h5>
       <div>
-        <label>Your Answer: </label>
-        <input id="answer_body" placeholder="Your Answer"></input>
+        <p>Your Answer: </p>
+        <input id='answer_body' placeholder='Your Answer' />
       </div>
       <div>
-        <label>What is your nickname: </label>
-        <input id="name" placeholder="Example: jack543!"></input>
+        <p>What is your nickname: </p>
+        <input id='name' placeholder='Example: jack543!' />
       </div>
-      <p>For privacy reasons, do not use your full name or email address</p>
+      <p>For privacy reasons, do not use your full name or email address </p>
       <div>
-        <label>Your email: </label>
-        <input id="email" placeholder="Example: jack@email.com"></input>
+        <p>Your email: </p>
+        <input id='email' placeholder='Example: jack@email.com' />
       </div>
-      <p>For authentication reasons, you will not be emailed</p>
-      <input type="button" value="Add photos" onClick={()=>{setPhotoIsOpen(true)}}></input>
-      <input type="button" value="Submit answer" onClick={submitAnswerHandler}></input>
-      <Modal isOpen={photoIsOpen} setIsOpen={setPhotoIsOpen} Module={() => (
-        <PhotoForm setIsOpen={setPhotoIsOpen} photos={photos} setPhotos={setPhotos}/>
-      )}/>
+      <p>For authentication reasons, you will not be emailed </p>
+      <input type='button' value='Add photos' onClick={() => { setPhotoIsOpen(true); }} />
+      <input type='button' value='Submit answer' onClick={submitAnswerHandler} />
+      <Modal
+        isOpen={photoIsOpen}
+        setIsOpen={setPhotoIsOpen}
+        Module={() => (
+          <PhotoForm setIsOpen={setPhotoIsOpen} photos={photos} setPhotos={setPhotos} />
+        )}
+      />
     </div>
-  )
+  );
 }
 
 export default AnswerForm;

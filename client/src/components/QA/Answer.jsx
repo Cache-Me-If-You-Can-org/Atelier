@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import * as styles from './qanda.module.css';
 
 function Answer({ answer }) {
@@ -17,7 +17,7 @@ function Answer({ answer }) {
       });
   }
   function helpfulHandler() {
-     if (!isHelpful) {
+    if (!isHelpful) {
       setIsHelpful(true);
       axios.put(`/qa/answers/${answer.answer_id}/helpful`)
         .then(() => {
@@ -48,14 +48,14 @@ function Answer({ answer }) {
               if (!reported) {
                 report();
               }
-            }}>
-              {reported ? 'Reported' : 'Report'}
-            </a>
+            }}
+            />
+            {reported ? 'Reported' : 'Report'}
           </span>
         </span>
       </div>
     </div>
-  )
+  );
 }
 
 export default Answer;
