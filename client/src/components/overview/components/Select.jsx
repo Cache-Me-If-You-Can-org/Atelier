@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { CaretDown, CaretUp } from '@phosphor-icons/react';
 import * as css from '../styles/select.module.css';
 
@@ -7,11 +7,11 @@ function Select({
   value = '',
   onChange,
   placeholder = 'Select...',
-  className = ''
+  className = '',
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const selectedOption = options.find(opt => opt.value === value);
+  const selectedOption = options.find((opt) => opt.value === value);
 
   const handleSelect = (val) => {
     onChange(val);
@@ -20,24 +20,29 @@ function Select({
 
   return (
     <div className={`${css.selectWrapper} ${className}`.trim()}>
-      <div
+      <button
+        type='button'
         className={css.selectDisplay}
-        onClick={() => setIsOpen(prev => !prev)}
+        onClick={() => setIsOpen((prev) => !prev)}
       >
         {selectedOption ? selectedOption.label : placeholder}
         <span className={css.arrow}>
           {isOpen ? <CaretUp size={20} /> : <CaretDown size={20} />}
         </span>
-      </div>
+      </button>
       {isOpen && (
         <ul className={css.selectList}>
           {options.map(({ value: optionValue, label }) => (
-            <li
-              key={optionValue}
-              className={`${css.selectOption} ${optionValue === value ? css.active : ''}`}
-              onClick={() => handleSelect(optionValue)}
-            >
-              {label}
+            <li key={optionValue} role='none'>
+              <button
+                type='button'
+                role='option'
+                aria-selected={optionValue === value}
+                className={`${css.selectOption} ${optionValue === value ? css.active : ''}`}
+                onClick={() => handleSelect(optionValue)}
+              >
+                {label}
+              </button>
             </li>
           ))}
         </ul>

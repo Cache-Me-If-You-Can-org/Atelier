@@ -1,0 +1,10 @@
+/* starRating.module.css */
+
+.starRating {
+  display: flex;
+  align-self: flex-start;
+}
+
+.starRating img {
+  display: block;
+}

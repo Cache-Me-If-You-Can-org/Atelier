@@ -1,38 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import { Select } from '../components';
-import { getSkus, getQtys } from '../lib/helpers.js';
+import React from 'react';
 import { Plus } from '@phosphor-icons/react';
+import Select from './Select';
+import { getSkus, getQtys } from '../lib/helpers';
 import * as g from '../../global.module.css';
 import * as css from '../styles/cart_form.module.css';
 
 function CartForm({
   styles,
   selectedStyle,
-  setSku,
+  setSkuId,
   setQty,
-  sku,
+  skuId,
   qty,
-  postToCart
+  postToCart,
 }) {
   return (
     <>
-      <div className={`${g.group} ${css.gap}`}>
+      <div className={`${g.group} ${css.gap} ${g.fullWidth}`}>
         <Select
           className={css.fill}
-          options={getSkus(styles[selectedStyle]).map(sku => (
+          options={getSkus(styles[selectedStyle]).map((sku) => (
             {
               label: styles[selectedStyle].skus[sku].size,
-              value: sku
+              value: sku,
             }
           ))}
-          onChange={(value) => setSku(value)}
-          value={sku}
+          onChange={(value) => setSkuId(value)}
+          value={skuId}
         />
         <Select
-          options={getQtys(styles[selectedStyle], sku).map(amount => (
+          options={getQtys(styles[selectedStyle], skuId).map((amount) => (
             {
               label: amount,
-              value: amount
+              value: amount,
             }
           ))}
           onChange={(value) => setQty(value)}
@@ -41,15 +41,16 @@ function CartForm({
       </div>
       <div className={`${g.group} ${css.gap}`}>
         <button
+          type='submit'
           className={`${g.center} ${g.sb} ${css.fill}`}
           onClick={postToCart}
         >
           Add to bag
-          <Plus size={15}/>
+          <Plus size={15} />
         </button>
       </div>
     </>
-  )
+  );
 }
 
 export default CartForm;

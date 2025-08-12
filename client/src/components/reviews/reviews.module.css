@@ -1,11 +1,29 @@
 /* reviews.module.css */
 
+/* -------------- Ratings & Reviews -- */
+
+.ratingsAndReviewsLayout {
+  display: flex;
+  flex-direction: row;
+}
+
+.ratingsWrapper {
+  width: 28%;
+  margin-right: 8%;
+}
+
+.reviewsWrapper {
+  width: 64%;
+}
+
+/* -------------- Reviews -- */
+
 .btn {
   cursor: pointer;
   font-weight: bold;
 }
 
-.reviewsListContainer {
+.reviewsListWrapper {
   margin-bottom: 50px;
 }
 
@@ -49,4 +67,143 @@
 
 .reviewTileStarRating {
   font-weight: bold;
+}
+
+/* -------------- Ratings -- */
+
+.ratingsHeader {
+  display: flex;
+}
+
+.ratingsTitle {
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.ratingsAverage {
+  font-size: 70px;
+  margin-right: 15px;
+}
+
+.ratingsStars {
+  margin-top: 30px;
+}
+
+.ratingsBreakdown {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.ratingsBreakdownList {
+  list-style: none;
+  padding: 0;
+}
+
+.ratingBarWrapper, .ratingBar, .ratingPercentage {
+  height: 8px;
+}
+
+.ratingBar, .ratingPercentage {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.ratingBar {
+  width: 100%;
+  background-color: #d7d7d7;
+  z-index: 100;
+}
+
+.ratingPercentage {
+  width: var(--percentageWidth);
+  background-color: #30d39a;
+  z-index: 200;
+}
+
+.ratingBreakdown {
+  width: 100%;
+}
+
+.ratingBarWrapper {
+  position: relative;
+  width: 80%;
+}
+
+.ratingBreakdown {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.starTitle {
+  margin-right: 10px;
+  border-bottom: solid #ccc 1px;
+}
+
+.recPercentage {
+  margin-bottom: 20px;
+  font-size: 14.5px;
+}
+
+.prodBreakdown {
+  margin-bottom: 10px;
+}
+
+.prodBreakdownBarWrapper {
+  position: relative;
+  display: flex;
+  margin-bottom: 6px;
+}
+
+.prodBreakdownBarWrapper span {
+  background-color: #d7d7d7;
+  height: 8px;
+  display: block;
+  flex: 1 1 0;
+}
+
+.ratingsTitles {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ratingsTitles span {
+  display: block;
+  font-size: 13px;
+}
+
+.prodBreakdownBarWrapper .two:first-child {
+  margin: 0 2px 0;
+}
+
+.prodBreakdownBarWrapper .two:last-child {
+  margin: 0 0 0 2px;
+}
+
+
+.prodBreakdownBarWrapper .three {
+  margin: 0 4px;
+}
+
+.prodTitle {
+  margin-bottom: 6px;
+  display: block;
+}
+
+.prodBreakdownWrapper {
+  position: relative;
+}
+
+.prodBreakdownMarker {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 13px solid rgb(39, 39, 39);
+  top: 0px;
+  z-index: 200;
+  left: var(--percentageLeft);
 }

@@ -26,6 +26,12 @@ npm run lint:fix
 
 > Note: Not all issues can be auto-fixed — you may still need to resolve some manually.
 
+Target a specific folder or file
+
+```bash
+npx eslint --ext .js,.jsx path/to/folder/or/file
+```
+
 ## 3. Final Touchups
 
 Remove any debugging logs (`console.log`)
