@@ -22,7 +22,8 @@ function QuestionsList({ productId }) {
       .catch((err) => {
         throw new Error(err);
       });
-  }, [newQuestion]);
+  }, []);
+
   useEffect(() => {
     const filtered = [];
     allQuestions.forEach((question) => {
@@ -40,12 +41,12 @@ function QuestionsList({ productId }) {
     // });
     // console.log('filtered', filtered);
     setDisplayedQuestions(filtered);
-  }, [filterBy, allQuestions]);
+  }, [filterBy]);
 
   useEffect(() => {
     const q = allQuestions.slice(0, count);
     setDisplayedQuestions([...q]);
-  }, [count]);
+  }, [count, allQuestions]);
 
   function moreQuestions() {
     setCount(count + 2);
@@ -60,8 +61,15 @@ function QuestionsList({ productId }) {
   const didMount = useRef(false);
   useEffect(() => {
     if (didMount.current) {
-      // console.log('gonna hit api with ans', newAnswer);
       axios.post('/qa/questions', JSON.stringify(newQuestion), { headers: { 'Content-Type': 'application/json' } })
+        .then(() => {
+          axios.get('/qa/questions', { params: { product_id: productId, count: 999 } })
+            .then((res) => {
+              setAllQuestions(res.data.results);
+              setCount(4);
+            })
+            .catch((err) => { throw new Error(err); });
+        })
         .catch((err) => { throw new Error(err); });
     } else {
       didMount.current = true;
