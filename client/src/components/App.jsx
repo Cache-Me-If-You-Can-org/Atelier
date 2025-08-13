@@ -1,20 +1,12 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Overview from './overview/Overview';
 import RelatedAndOutfit from './RelatedAndOutfit';
 import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews';
-import BenRatingsAndReviews from './reviews/BenRatingsAndReviews';
+import BenRatingsAndReviews from './benRatingsAndReviews/BenRatingsAndReviews';
 import QA from './QA/index';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-import Overview from './overview/Overview.jsx';
-import RelatedAndOutfit from './RelatedAndOutfit.jsx';
-import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews.jsx';
-import BenRatingsAndReviews from './BenRatingsAndReviews/BenRatingsAndReviews.jsx';
-import QA from './QA/index.jsx';
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
 
 export default function App() {
   const [currentProductId, setCurrentProductId] = useState(null);
@@ -24,7 +16,7 @@ export default function App() {
   useEffect(() => {
     axios.get('/products')
       .then(res => setCurrentProductId(res.data[0].id))
-      .catch(err => console.error('failed to get products', err))
+      .catch(err => console.error('failed to get products', err));
   }, []);
 
   if (currentProductId === null) {
@@ -38,7 +30,7 @@ export default function App() {
       <RelatedAndOutfit sectionId={"relatedProductsAndOutfit"} productId={currentProductId}/>
       <QA currentProductId={currentProductId}/>
       <RatingsAndReviews sectionId={"ratingsAndReviews"} productId={currentProductId} setTotalReviewCount={setTotalReviewCount} setProductRating={setProductRating}/>
-      <BenRatingsAndReviews productId={currentProductId}/>
+      <BenRatingsAndReviews productId={currentProductId} />
     </div>
   )
 };
