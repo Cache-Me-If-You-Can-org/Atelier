@@ -16,7 +16,7 @@ function AnswersList({ questionId, newAnswer }) {
       .catch((err) => {
         throw new Error(err);
       });
-  }, [newAnswer]);
+  }, [questionId, count]);
 
   useEffect(() => {
     const a = allAnswers.slice(0, count);
@@ -48,7 +48,7 @@ function AnswersList({ questionId, newAnswer }) {
     } else {
       didMount.current = true;
     }
-  }, [newAnswer]);
+  }, [count, newAnswer, questionId]);
 
   return (
     <div className={[styles.answersList, styles.scrollable].join(' ')}>

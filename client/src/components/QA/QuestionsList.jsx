@@ -23,7 +23,7 @@ function QuestionsList({ productId }) {
       .catch((err) => {
         throw new Error(err);
       });
-  }, []);
+  }, [count, productId]);
 
   useEffect(() => {
     const filtered = [];
@@ -38,7 +38,7 @@ function QuestionsList({ productId }) {
       });
       setDisplayedQuestions(filtered);
     }
-  }, [filterBy]);
+  }, [allQuestions, count, filterBy]);
 
   useEffect(() => {
     const q = allQuestions.slice(0, count);
@@ -63,7 +63,6 @@ function QuestionsList({ productId }) {
           axios.get('/qa/questions', { params: { product_id: productId, count: 999 } })
             .then((res) => {
               setAllQuestions(res.data.results);
-              setCount(count);
             })
             .catch((err) => { throw new Error(err); });
         })
@@ -71,7 +70,7 @@ function QuestionsList({ productId }) {
     } else {
       didMount.current = true;
     }
-  }, [newQuestion]);
+  }, [newQuestion, productId]);
 
   return (
     <div>

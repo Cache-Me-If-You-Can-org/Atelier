@@ -16,7 +16,7 @@ function QuestionForm({
       .catch((err) => {
         throw new Error(err);
       });
-  }, []);
+  }, [productId]);
   function validate() {
     const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
     if (document.getElementById('question_body').value === '') {
