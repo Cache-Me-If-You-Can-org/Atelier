@@ -72,6 +72,7 @@ function Question({ productId, question }) {
       <AnswersList
         key={`answers_${question.question_id}`}
         questionId={question.question_id}
+        newAnswer={newAnswer}
       />
       <Modal
         isOpen={isOpen}

@@ -22,18 +22,25 @@ function QuestionsList({ productId }) {
       .catch((err) => {
         throw new Error(err);
       });
-  }, []);
+  }, [newQuestion]);
   useEffect(() => {
-    const filtered = allQuestions.filter((question) => {
+    const filtered = [];
+    allQuestions.forEach((question) => {
       if (question.question_body.includes(filterBy)) {
         // console.log('found matching q', question.question_body);
-        return question;
+        filtered.push(question);
       }
-      return;
     });
+    // const filtered = allQuestions.filter((question) => {
+    //   if (question.question_body.includes(filterBy)) {
+    //     // console.log('found matching q', question.question_body);
+    //     return question;
+    //   }
+    //   return;
+    // });
     // console.log('filtered', filtered);
     setDisplayedQuestions(filtered);
-  }, [filterBy]);
+  }, [filterBy, allQuestions]);
 
   useEffect(() => {
     const q = allQuestions.slice(0, count);

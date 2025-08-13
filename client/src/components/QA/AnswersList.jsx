@@ -3,7 +3,7 @@ import axios from 'axios';
 import Answer from './Answer';
 import * as styles from './qanda.module.css';
 
-function AnswersList({ questionId }) {
+function AnswersList({ questionId, newAnswer }) {
   const [allAnswers, setAllAnswers] = useState([]);
   const [displayedAnswers, setDisplayedAnswers] = useState([]);
   useEffect(() => {
@@ -15,7 +15,7 @@ function AnswersList({ questionId }) {
       .catch((err) => {
         throw new Error(err);
       });
-  }, []);
+  }, [newAnswer]);
 
   function loadAllAnswers() {
     // show all remaining answers
