@@ -67,4 +67,5 @@
   background: none;
   padding: 0;
   cursor: pointer;
+  min-width: initial;
 }
