@@ -8,13 +8,13 @@ import QuestionForm from './QuestionForm';
 function QuestionsList({ productId }) {
   const [allQuestions, setAllQuestions] = useState([]);
   const [displayedQuestions, setDisplayedQuestions] = useState([]);
-  const [count, setCount] = useState(2);
+  const [count, setCount] = useState(4);
   const [filterBy, setFilterBy] = useState('');
   const [isQFormOpen, setQFormIsOpen] = useState(false);
   const [newQuestion, setNewQuestion] = useState({});
 
   useEffect(() => {
-    axios.get('/qa/questions', { params: { product_id: productId } })
+    axios.get('/qa/questions', { params: { product_id: productId, count: 999 } })
       .then((res) => {
         setAllQuestions(res.data.results);
         setDisplayedQuestions(res.data.results.slice(0, count));
