@@ -32,9 +32,12 @@ function Answer({ answer }) {
         <span>
           {' | Helpful? '}
           <span>
-            <a onClick={helpfulHandler}>
-              Yes
-            </a>
+            <input
+              className={styles.btnLinkify}
+              type='button'
+              onClick={helpfulHandler}
+              value='Yes'
+            />
           </span>
           <span>
             {` (${helpfulness})`}
@@ -43,13 +46,16 @@ function Answer({ answer }) {
         <span>
           {' | '}
           <span>
-            <a onClick={() => {
-              if (!reported) {
-                report();
-              }
-            }}
+            <input
+              type='button'
+              className={styles.btnLinkify}
+              value={reported ? 'Reported' : 'Report'}
+              onClick={() => {
+                if (!reported) {
+                  report();
+                }
+              }}
             />
-            {reported ? 'Reported' : 'Report'}
           </span>
         </span>
       </div>
