@@ -59,11 +59,12 @@
 
 .starDiv {
   display: flex;
-  gap: 4px;
   width: fit-content;
 }
 
-.stars {
-  width: 15px;
-  height: 15px;
+.starsHover {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import StarRating from './starRating/StarRating';
+import QuarterStarRating from '../../shared/QuarterStarRating';
 import * as styles from '../reviews.module.css';
 
 function ReviewsList({ review }) {
@@ -15,7 +15,7 @@ function ReviewsList({ review }) {
     <div className={styles.reviewTileWrapper}>
       <div className={styles.reviewTileHeading}>
         <div className={styles.reviewTileStarRating}>
-          <StarRating starRating={review.rating} starSize={18} />
+          <QuarterStarRating rating={review.rating} size={18} />
         </div>
         <div className={styles.reviewTileAuthorship}>
           <span className={styles.reviewTileUserName}>
