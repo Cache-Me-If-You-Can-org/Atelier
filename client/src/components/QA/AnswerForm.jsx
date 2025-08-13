@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PhotoForm from '../shared/PhotoForm';
 import Modal from '../shared/Modal';
+import * as styles from './qanda.module.css';
 
 function AnswerForm({
   productId, question, setIsOpen, setNewAnswer,
@@ -9,6 +10,8 @@ function AnswerForm({
   const [productName, setProductName] = useState(null);
   const [photoIsOpen, setPhotoIsOpen] = useState(false);
   const [photos, setPhotos] = useState([]);
+  const [errMsg, setErrMsg] = useState(null);
+  let errBuilder = '';
   useEffect(() => {
     axios.get(`/products/${productId}`)
       .then((res) => {
@@ -20,23 +23,22 @@ function AnswerForm({
   }, []);
   function validate() {
     const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
-    let errMsg = '';
     if (document.getElementById('answer_body').value === '') {
-      errMsg += 'Answer\n';
+      errBuilder += 'Answer\n';
     }
     if (document.getElementById('name').value === '') {
-      errMsg += 'Nickname\n';
+      errBuilder += 'Nickname\n';
     }
     if (document.getElementById('email').value === '') {
-      errMsg += 'Email\n';
+      errBuilder += 'Email\n';
     } else {
       const em = document.getElementById('email').value;
       if (!emailReg.test(em)) {
-        errMsg += 'Email with valid format';
+        errBuilder += 'Email with valid format';
       }
     }
-    if (errMsg) {
-      alert(`You must enter the following:\n${errMsg}`);
+    if (errBuilder.length > 0) {
+      setErrMsg(errBuilder);
       return false;
     }
     return true;
@@ -61,9 +63,10 @@ function AnswerForm({
       <h3>Submit your Answer </h3>
       <h5>
         {productName}
-        :
+        {': '}
         {question.question_body}
       </h5>
+      {errMsg && <p className={styles.error}>{`You must enter the following:\n${errMsg}`}</p>}
       <div>
         <p>Your Answer: </p>
         <input id='answer_body' placeholder='Your Answer' />

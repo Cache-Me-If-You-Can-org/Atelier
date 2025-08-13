@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import * as styles from './qanda.module.css';
 
 function QuestionForm({
-  productId, setIsOpen, newQuestion, setNewQuestion,
+  productId, setIsOpen, setNewQuestion,
 }) {
   const [productName, setProductName] = useState(null);
+  const [errMsg, setErrMsg] = useState(null);
+  let errBuilder = '';
   useEffect(() => {
     axios.get(`/products/${productId}`)
       .then((res) => {
@@ -16,23 +19,22 @@ function QuestionForm({
   }, []);
   function validate() {
     const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
-    let errMsg = '';
     if (document.getElementById('question_body').value === '') {
-      errMsg += 'Question\n';
+      errBuilder += 'Question\n';
     }
     if (document.getElementById('name').value === '') {
-      errMsg += 'Nickname\n';
+      errBuilder += 'Nickname\n';
     }
     if (document.getElementById('email').value === '') {
-      errMsg += 'Email\n';
+      errBuilder += 'Email\n';
     } else {
       const em = document.getElementById('email').value;
       if (!emailReg.test(em)) {
-        errMsg += 'Email with valid format';
+        errBuilder += 'Email with valid format';
       }
     }
-    if (errMsg) {
-      alert(`You must enter the following:\n${errMsg}`);
+    if (errBuilder.length > 0) {
+      setErrMsg(errBuilder);
       return false;
     }
     return true;
@@ -45,19 +47,18 @@ function QuestionForm({
         email: document.getElementById('email').value,
         product_id: parseInt(productId, 10),
       };
-      console.log(q);
       setIsOpen(false);
       setNewQuestion(q);
-      console.log('saved q', q);
     }
   }
   return (
     <div>
       <h3>Ask Your Question </h3>
       <h5>
-        About the
+        {'About the '}
         {productName}
       </h5>
+      {errMsg && <p className={styles.error}>{`You must enter the following:\n${errMsg}`}</p>}
       <div>
         <p>Your Question: </p>
         <input id='question_body' placeholder='Your Question' />
