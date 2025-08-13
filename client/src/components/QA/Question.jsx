@@ -28,10 +28,6 @@ function Question({ productId, question }) {
     if (didMount.current) {
       // console.log('gonna hit api with ans', newAnswer);
       axios.post(`/qa/questions/${question.question_id}/answers`, JSON.stringify(newAnswer), { headers: { 'Content-Type': 'application/json' } })
-        .then(() => {
-          console.log('posted!');
-          // add new answer to all answers (rerender)
-        })
         .catch((err) => { throw new Error(err); });
     } else {
       didMount.current = true;
