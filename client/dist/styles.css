@@ -21,8 +21,8 @@
   --text-lg: 1.25rem;
 
   /* Font Weight */
-  --text-reg: 400;
-  --text-bold: 700;
+  --text-reg: normal;
+  --text-bold: bold;
 
   /* Spacing */
   --spacing-sm: 0.625rem;
