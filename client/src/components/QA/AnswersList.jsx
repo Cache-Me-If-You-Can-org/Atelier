@@ -26,7 +26,7 @@ function AnswersList({ questionId, newAnswer }) {
     setDisplayedAnswers(allAnswers.slice(0, 2));
   }
   return (
-    <div className={styles.answersList}>
+    <div className={[styles.answersList, styles.scrollable].join(' ')}>
       <div>
         <strong>A:</strong>
       </div>

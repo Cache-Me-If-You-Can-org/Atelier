@@ -15,6 +15,9 @@ h4 {
   padding-top: 10px;
   font-size: x-small;
 }
+.questionsList {
+  max-height: 80vh;
+}
 .question {
   display: flex;
   justify-content: space-between;
@@ -31,6 +34,7 @@ h4 {
 .answersList {
   display: flex;
   align-items: baseline;
+  max-height: 50vh;
 }
 .search {
   display: flex;
@@ -46,4 +50,8 @@ h4 {
   text-decoration: underline;
   cursor: pointer;
   color: gray;
+}
+.scrollable {
+  overflow-y : auto;
+  height: inherit;
 }

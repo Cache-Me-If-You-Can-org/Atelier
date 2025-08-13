@@ -4,6 +4,7 @@ import Question from './Question';
 import Search from './Search';
 import Modal from '../shared/Modal';
 import QuestionForm from './QuestionForm';
+import * as styles from './qanda.module.css';
 
 function QuestionsList({ productId }) {
   const [allQuestions, setAllQuestions] = useState([]);
@@ -80,13 +81,16 @@ function QuestionsList({ productId }) {
     <div>
       <div>
         <Search setFilterBy={setFilterBy} />
-        {displayedQuestions.map((question) => (
-          <Question
-            key={question.question_id}
-            productId={productId}
-            question={question}
-          />
-        ))}
+        <div className={[styles.scrollable, styles.questionsList].join(' ')}>
+          {displayedQuestions.map((question) => (
+            <Question
+              key={question.question_id}
+              productId={productId}
+              question={question}
+            />
+          ))}
+        </div>
+
         { count < allQuestions.length && filterBy === '' ? (<input type='button' value='More Answered Questions' onClick={moreQuestions} />) : (<div />)}
         <input type='button' value='Add a Question' onClick={addQuestion} />
       </div>
