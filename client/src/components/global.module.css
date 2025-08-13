@@ -1,9 +1,31 @@
 /* Global Utility Classes */
-.container {
-  max-width: 940px;
+
+/* Containers */
+.containerLg {
+  max-width: 1040px;
   margin: auto;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.containerMd {
+  max-width: 840px;
+  margin: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* deprecated */
+.container {
+  max-width: 880px;
+  margin: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* Flex Classes */
+.flex {
+  display: flex;
 }
 
 .center {
@@ -22,10 +44,81 @@
   flex-direction: row;
 }
 
+.end {
+  justify-content: flex-end;
+}
+
+.start {
+  justify-content: flex-start;
+}
+
 .sb {
   justify-content: space-between;
 }
 
+
+/* Spacing Classes */
+.gapSm {
+  gap: var(--spacing-sm);
+}
+
+.gapMd {
+  gap: var(--spacing-md);
+}
+
+.gapLg {
+  gap: var(--spacing-lg);
+}
+
+.pSm {
+  padding: var(--spacing-sm);
+}
+
+.pMd {
+  padding: var(--spacing-md);
+}
+
+.pLg {
+  padding: var(--spacing-lg);
+}
+
+.mSm {
+  margin: var(--spacing-sm);
+}
+
+.mMd {
+  margin: var(--spacing-md);
+}
+
+.mLg {
+  margin: var(--spacing-lg);
+}
+
+/* Font Classes */
+.textXs {
+  font-size: var(--text-xs);
+}
+
+.textSm {
+  font-size: var(--text-sm);
+}
+
+.textMd {
+  font-size: var(--text-md);
+}
+
+.textLg {
+  font-size: var(--text-lg);
+}
+
+.bold {
+  font-weight: var(--text-bold);
+}
+
+.upper {
+  text-transform: uppercase;
+}
+/* Full Height and Width */
 .fullHeight {
   height: 100%;
 }
@@ -34,6 +127,7 @@
   width: 100%;
 }
 
+/* Cursor */
 .pointer {
   cursor: pointer;
 }

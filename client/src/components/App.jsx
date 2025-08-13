@@ -5,6 +5,7 @@ import RelatedAndOutfit from './RelatedAndOutfit';
 import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews';
 import BenRatingsAndReviews from './benRatingsAndReviews/BenRatingsAndReviews';
 import QA from './QA/index';
+import * as g from './global.module.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
@@ -15,8 +16,8 @@ export default function App() {
 
   useEffect(() => {
     axios.get('/products')
-      .then(res => setCurrentProductId(res.data[0].id))
-      .catch(err => console.error('failed to get products', err));
+      .then((res) => setCurrentProductId(res.data[0].id))
+      .catch((err) => console.error('failed to get products', err));
   }, []);
 
   if (currentProductId === null) {
@@ -24,13 +25,25 @@ export default function App() {
   }
 
   return (
-    <div className="app container">
-      <div className="center">{totalReviewCount} reviews for product {currentProductId} with a rating of {productRating}</div>
-      <Overview sectionId={"overview"} productId={currentProductId}/>
-      <RelatedAndOutfit sectionId={"relatedProductsAndOutfit"} productId={currentProductId}/>
-      <QA currentProductId={currentProductId}/>
-      <RatingsAndReviews sectionId={"ratingsAndReviews"} productId={currentProductId} setTotalReviewCount={setTotalReviewCount} setProductRating={setProductRating}/>
-      <BenRatingsAndReviews productId={currentProductId} />
+    <div className={[g.stack, g.gapLg].join(' ')}>
+      <div className={g.center}>
+        {`${totalReviewCount} reviews for product ${currentProductId} with a rating of ${productRating}`}
+      </div>
+      <Overview productId={currentProductId} />
+      <div className={[g.container, g.stack, g.gapLg].join(' ')}>
+        <RelatedAndOutfit
+          sectionId='relatedProductsAndOutfit'
+          productId={currentProductId}
+        />
+        <QA currentProductId={currentProductId} />
+        <RatingsAndReviews
+          sectionId='ratingsAndReviews'
+          productId={currentProductId}
+          setTotalReviewCount={setTotalReviewCount}
+          setProductRating={setProductRating}
+        />
+        <BenRatingsAndReviews productId={currentProductId} />
+      </div>
     </div>
-  )
-};
+  );
+}
