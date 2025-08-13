@@ -48,14 +48,24 @@ function Question({ productId, question }) {
         <div className={styles.questionDetails}>
           {'Helpful? '}
           <span>
-            <a onClick={helpfulHandler}>Yes</a>
+            <input
+              className={styles.btnLinkify}
+              type='button'
+              onClick={helpfulHandler}
+              value='Yes'
+            />
           </span>
           <span>
             {` (${helpfulness})`}
           </span>
           <span>
             {' | '}
-            <a onClick={addAnswer}>Add Answer</a>
+            <input
+              className={styles.btnLinkify}
+              type='button'
+              onClick={addAnswer}
+              value='Add Answer'
+            />
           </span>
         </div>
       </div>
