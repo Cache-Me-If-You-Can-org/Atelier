@@ -1,12 +1,10 @@
-import React from "react";
-import * as styles from "./starRating.module.css";
-import { Star, StarHalf } from "@phosphor-icons/react";
+import React from 'react';
+import * as styles from './starRating.module.css';
 
 function StarRating({ starRating, starSize }) {
-
   const imgSize = starSize || 32;
 
-  let fullStars = Math.floor(starRating);
+  const fullStars = Math.floor(starRating);
 
   const decimal = starRating - fullStars;
 
@@ -30,35 +28,37 @@ function StarRating({ starRating, starSize }) {
         if (el === 100) {
           return (
             <span key={i}>
-              <img width={imgSize} src="./assets/star-full.svg" />
-            </span>
-          );
-        } else if (el === 75) {
-          return (
-            <span key={i}>
-              <img width={imgSize} src="./assets/star-three-quarter.svg" />
-            </span>
-          );
-        } else if (el === 50) {
-          return (
-            <span key={i}>
-              <img width={imgSize} src="./assets/star-half.svg" />
-            </span>
-          );
-        } else if (el === 25) {
-          return (
-            <span key={i}>
-              <img width={imgSize} src="./assets/star-quarter.svg" />
-              1/4: {el}
-            </span>
-          );
-        } else {
-          return (
-            <span key={i}>
-              <img width={imgSize} src="./assets/star-empty.svg" />
+              <img alt='a star' width={imgSize} src='./assets/star-full.svg' />
             </span>
           );
         }
+        if (el === 75) {
+          return (
+            <span key={i}>
+              <img alt='a star' width={imgSize} src='./assets/star-three-quarter.svg' />
+            </span>
+          );
+        }
+        if (el === 50) {
+          return (
+            <span key={i}>
+              <img alt='a star' width={imgSize} src='./assets/star-half.svg' />
+            </span>
+          );
+        }
+        if (el === 25) {
+          return (
+            <span key={i}>
+              <img alt='a star' width={imgSize} src='./assets/star-quarter.svg' />
+              1/4: {el}
+            </span>
+          );
+        }
+        return (
+          <span key={i}>
+            <img alt='a star' width={imgSize} src='./assets/star-empty.svg' />
+          </span>
+        );
       })}
     </div>
   );

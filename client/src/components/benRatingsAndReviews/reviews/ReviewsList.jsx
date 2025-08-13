@@ -1,14 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
-import ReviewTile from "./ReviewTile.jsx";
-import ReviewsServices from "../services/ReviewsServices.js";
-import Reviews from "../controllers/ReviewsStore.js";
-import * as styles from "../reviews.module.css";
+import React, { useState, useEffect, useRef } from 'react';
+import ReviewTile from './ReviewTile';
+import ReviewsServices from '../services/ReviewsServices';
+import Reviews from '../controllers/ReviewsStore';
+import Modal from '../../shared/Modal';
+import AddReview from './addReview/AddReview';
+import * as styles from '../reviews.module.css';
 
 function ReviewsList({ productId }) {
   const [reviews, setReviews] = useState([]);
-
   const firstReviewRef = useRef(0);
   const lastReviewRef = useRef(2);
+  const [isOpen, setIsOpen] = useState(false);
 
   // Get first 2 reviews on first page load
   useEffect(() => {
@@ -18,12 +20,12 @@ function ReviewsList({ productId }) {
       Reviews.page,
       (data) => {
         Reviews.totalResults = data.results;
-        let renderedReviews = data.results.slice(
+        const renderedReviews = data.results.slice(
           firstReviewRef.current,
-          lastReviewRef.current
+          lastReviewRef.current,
         );
         setReviews(renderedReviews);
-      }
+      },
     );
 
     ReviewsServices.getReviews(
@@ -33,10 +35,8 @@ function ReviewsList({ productId }) {
       (nextData) => {
         if (nextData.results.length !== 0) {
           Reviews.totalResults = [...data.results, ...nextData.results];
-        } else {
-          return;
         }
-      }
+      },
     );
   }, []);
 
@@ -47,55 +47,55 @@ function ReviewsList({ productId }) {
 
     Reviews.visibleReviews = lastReviewRef.current;
 
-    let nextReviews = Reviews.totalResults.slice(
+    const nextReviews = Reviews.totalResults.slice(
       firstReviewRef.current,
-      lastReviewRef.current
+      lastReviewRef.current,
     );
-    let newReviews = [...reviews, ...nextReviews];
+    const newReviews = [...reviews, ...nextReviews];
     setReviews(newReviews);
   };
 
-   // Scroll to new reviews when two new reviews load
+  // Scroll to new reviews when two new reviews load
   useEffect(() => {
     if (Reviews.visibleReviews > 2) {
-      let reviewContainer = document.getElementById("reviews");
-      let lastChild = reviewContainer.lastElementChild;
-      let scrollPosition = lastChild.offsetTop + 100;
+      const reviewContainer = document.getElementById('reviews');
+      const lastChild = reviewContainer.lastElementChild;
+      const scrollPosition = lastChild.offsetTop + 100;
 
       if (lastChild) {
-      lastChild.scrollIntoView({ behavior: "smooth", block: "end" });
+        lastChild.scrollIntoView({ behavior: 'smooth', block: 'end' });
 
-      window.scrollTo({
+        window.scrollTo({
           top: scrollPosition,
-          behavior: "smooth"
-      });
-
+          behavior: 'smooth',
+        });
       }
-
     }
   }, [reviews]);
 
   return (
     <div className={styles.reviewsListWrapper}>
-      <div id="reviews" className={styles.reviewsList}>
+      <div id='reviews' className={styles.reviewsList}>
         {reviews.length
           ? reviews.map((review) => (
-              <div key={review.review_id} id="review-tile">
-                <ReviewTile review={review} />
-              </div>
-            ))
+            <div key={review.review_id} id='review-tile'>
+              <ReviewTile review={review} />
+            </div>
+          ))
           : null}
       </div>
       {reviews.length ? (
         <button
           className={styles.btn}
-          id="btn-reviews"
-          type="button"
+          id='btn-reviews'
+          type='button'
           onClick={() => getMoreReviews()}
         >
           More Reviews
         </button>
       ) : null}
+      <button type='button' onClick={() => setIsOpen(true)}>Add Review +</button>
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} Module={<AddReview />} />
     </div>
   );
 }

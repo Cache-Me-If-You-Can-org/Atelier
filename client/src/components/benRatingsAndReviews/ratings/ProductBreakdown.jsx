@@ -31,17 +31,17 @@ function ProductBreakdown({ characteristics }) {
               <span
                 className={styles.prodBreakdownMarker}
                 style={{ '--percentageLeft': prodBreakdown.value + '%' }}
-              ></span>
+              />
               {prodBreakdown.ratingsLength === 2 ? (
                 <div className={styles.prodBreakdownBarWrapper}>
-                  <span className={styles.two}></span>
-                  <span className={styles.two}></span>
+                  <span className={styles.two} />
+                  <span className={styles.two} />
                 </div>
               ) : (
                 <div className={styles.prodBreakdownBarWrapper}>
-                  <span></span>
-                  <span className={styles.three}></span>
-                  <span></span>
+                  <span />
+                  <span className={styles.three} />
+                  <span />
                 </div>
               )}
             </div>

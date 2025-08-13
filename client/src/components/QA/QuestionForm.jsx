@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import PhotoForm from '../shared/PhotoForm';
-import Modal from '../shared/Modal';
 
-function AnswerForm({
-  productId, question, setIsOpen, setNewAnswer,
+function QuestionForm({
+  productId, setIsOpen, newQuestion, setNewQuestion,
 }) {
   const [productName, setProductName] = useState(null);
-  const [photoIsOpen, setPhotoIsOpen] = useState(false);
-  const [photos, setPhotos] = useState([]);
   useEffect(() => {
     axios.get(`/products/${productId}`)
       .then((res) => {
@@ -21,8 +17,8 @@ function AnswerForm({
   function validate() {
     const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
     let errMsg = '';
-    if (document.getElementById('answer_body').value === '') {
-      errMsg += 'Answer\n';
+    if (document.getElementById('question_body').value === '') {
+      errMsg += 'Question\n';
     }
     if (document.getElementById('name').value === '') {
       errMsg += 'Nickname\n';
@@ -41,36 +37,34 @@ function AnswerForm({
     }
     return true;
   }
-  function submitAnswerHandler() {
+  function submitQuestionHandler() {
     if (validate()) {
-      const ans = {
-        body: document.getElementById('answer_body').value,
+      const q = {
+        body: document.getElementById('question_body').value,
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
-        photos,
+        product_id: parseInt(productId, 10),
       };
-      // console.log(ans)
+      console.log(q);
       setIsOpen(false);
-      setNewAnswer(ans);
-      // console.log('saved ans', ans);
+      setNewQuestion(q);
+      console.log('saved q', q);
     }
   }
-
   return (
     <div>
-      <h3>Submit your Answer </h3>
+      <h3>Ask Your Question </h3>
       <h5>
+        About the
         {productName}
-        :
-        {question.question_body}
       </h5>
       <div>
-        <p>Your Answer: </p>
-        <input id='answer_body' placeholder='Your Answer' />
+        <p>Your Question: </p>
+        <input id='question_body' placeholder='Your Question' />
       </div>
       <div>
         <p>What is your nickname: </p>
-        <input id='name' placeholder='Example: jack543!' />
+        <input id='name' placeholder='Example: jackson11!' />
       </div>
       <p>For privacy reasons, do not use your full name or email address </p>
       <div>
@@ -78,23 +72,9 @@ function AnswerForm({
         <input id='email' placeholder='Example: jack@email.com' />
       </div>
       <p>For authentication reasons, you will not be emailed </p>
-      <input type='button' value='Add photos' onClick={() => { setPhotoIsOpen(true); }} />
-      <input type='button' value='Submit answer' onClick={submitAnswerHandler} />
-      <Modal
-        isOpen={photoIsOpen}
-        setIsOpen={setPhotoIsOpen}
-        Module={(
-          <PhotoForm
-            setIsOpen={setPhotoIsOpen}
-            photos={photos}
-            setPhotos={setPhotos}
-            photoCount={5}
-            isModal
-          />
-        )}
-      />
+      <input type='button' value='Submit question' onClick={submitQuestionHandler} />
     </div>
   );
 }
 
-export default AnswerForm;
+export default QuestionForm;
