@@ -3,7 +3,7 @@ import axios from 'axios';
 import Overview from './overview/Overview';
 import RelatedAndOutfit from './RelatedAndOutfit';
 import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews';
-import BenRatingsAndReviews from './reviews/BenRatingsAndReviews';
+import BenRatingsAndReviews from './benRatingsAndReviews/BenRatingsAndReviews';
 import QA from './QA/index';
 import * as g from './global.module.css';
 import 'slick-carousel/slick/slick-theme.css';

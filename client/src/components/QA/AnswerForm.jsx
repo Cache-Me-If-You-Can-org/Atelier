@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import PhotoForm from './PhotoForm';
+import PhotoForm from '../shared/PhotoForm';
 import Modal from '../shared/Modal';
 
 function AnswerForm({
@@ -84,7 +84,13 @@ function AnswerForm({
         isOpen={photoIsOpen}
         setIsOpen={setPhotoIsOpen}
         Module={(
-          <PhotoForm setIsOpen={setPhotoIsOpen} photos={photos} setPhotos={setPhotos} />
+          <PhotoForm
+            setIsOpen={setPhotoIsOpen}
+            photos={photos}
+            setPhotos={setPhotos}
+            photoCount={5}
+            isModal
+          />
         )}
       />
     </div>

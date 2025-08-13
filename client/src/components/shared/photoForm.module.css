@@ -1,0 +1,20 @@
+.placeHolderWrapper {
+  display: flex;
+}
+
+.placeholderImage {
+  height: 50px;
+  width: 50px;
+  border: solid #ccc 1px;
+  margin-right: 10px;
+}
+
+.inlineThumbnail {
+  width: 50px;
+  display: inline-flex;
+  padding: 5px;
+}
+
+.error {
+  color: red;
+}
