@@ -81,8 +81,8 @@ function AnswerForm({
         <input id='email' placeholder='Example: jack@email.com' />
       </div>
       <p>For authentication reasons, you will not be emailed </p>
-      <input type='button' value='Add photos' onClick={() => { setPhotoIsOpen(true); }} />
-      <input type='button' value='Submit answer' onClick={submitAnswerHandler} />
+      <button type='button' onClick={() => { setPhotoIsOpen(true); }}>Add photos</button>
+      <button type='button' onClick={submitAnswerHandler}>Submit answer</button>
       <Modal
         isOpen={photoIsOpen}
         setIsOpen={setPhotoIsOpen}

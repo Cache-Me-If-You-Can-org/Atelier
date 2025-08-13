@@ -86,8 +86,8 @@ function QuestionsList({ productId }) {
           ))}
         </div>
 
-        { count < allQuestions.length && filterBy === '' ? (<input type='button' value='More Answered Questions' onClick={moreQuestions} />) : (<div />)}
-        <input type='button' value='Add a Question' onClick={addQuestion} />
+        { count < allQuestions.length && filterBy === '' ? (<button type='button' onClick={moreQuestions}>More Answered Questions</button>) : (<div />)}
+        <button type='button' onClick={addQuestion}>Add a Question +</button>
       </div>
       <Modal
         isOpen={isQFormOpen}

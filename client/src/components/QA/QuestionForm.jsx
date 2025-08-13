@@ -73,7 +73,7 @@ function QuestionForm({
         <input id='email' placeholder='Example: jack@email.com' />
       </div>
       <p>For authentication reasons, you will not be emailed </p>
-      <input type='button' value='Submit question' onClick={submitQuestionHandler} />
+      <button type='button' onClick={submitQuestionHandler}>Submit question</button>
     </div>
   );
 }

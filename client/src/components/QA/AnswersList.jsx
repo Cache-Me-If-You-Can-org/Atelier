@@ -57,8 +57,8 @@ function AnswersList({ questionId, newAnswer }) {
       </div>
       <div>
         {displayedAnswers.map((answer) => <Answer key={answer.answer_id} answer={answer} />)}
-        { (count > 2) ? (<input type='button' value='Collapse' onClick={collapseAnswers} />) : (<div />)}
-        {(allAnswers.length > 2 && count === 2) ? (<input type='button' value='Load More Answers' onClick={loadAllAnswers} />) : (<div />)}
+        { (count > 2) ? (<button type='button' onClick={collapseAnswers}>Collapse</button>) : (<div />)}
+        {(allAnswers.length > 2 && count === 2) ? (<button type='button' onClick={loadAllAnswers}>Load More Answers</button>) : (<div />)}
       </div>
     </div>
 
