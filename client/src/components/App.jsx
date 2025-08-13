@@ -15,22 +15,25 @@ export default function App() {
 
   useEffect(() => {
     axios.get('/products')
-      .then(res => setCurrentProductId(res.data[0].id))
-      .catch(err => console.error('failed to get products', err));
+      .then((res) => setCurrentProductId(res.data[0].id))
+      .catch((err) => console.error('failed to get products', err));
   }, []);
 
   if (currentProductId === null) {
     return (<div>loading...</div>);
   }
 
+  const topText = `${totalReviewCount} reviews for product ${currentProductId} with a rating of ${productRating}`;
   return (
-    <div className="app container">
-      <div className="center">{totalReviewCount} reviews for product {currentProductId} with a rating of {productRating}</div>
-      <Overview sectionId={"overview"} productId={currentProductId}/>
-      <RelatedAndOutfit sectionId={"relatedProductsAndOutfit"} productId={currentProductId}/>
-      <QA currentProductId={currentProductId}/>
-      <RatingsAndReviews sectionId={"ratingsAndReviews"} productId={currentProductId} setTotalReviewCount={setTotalReviewCount} setProductRating={setProductRating}/>
+    <div className='app container'>
+      <div className='center'>
+        {topText}
+      </div>
+      <Overview sectionId='overview' productId={currentProductId} />
+      <RelatedAndOutfit sectionId='relatedProductsAndOutfit' productId={currentProductId} />
+      <QA currentProductId={currentProductId} />
+      <RatingsAndReviews sectionId='ratingsAndReviews' productId={currentProductId} setTotalReviewCount={setTotalReviewCount} setProductRating={setProductRating} />
       <BenRatingsAndReviews productId={currentProductId} />
     </div>
-  )
-};
+  );
+}

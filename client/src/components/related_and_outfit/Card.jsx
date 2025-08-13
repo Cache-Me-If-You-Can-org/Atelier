@@ -5,40 +5,13 @@ import ComparisonTable from './ComparisonTable';
 import Modal from '../shared/Modal';
 import QuarterStarRating from '../shared/QuarterStarRating';
 
-function calculateStars(ratings) {
-  // Puts the string amounts of each rating
-  // in a single place
-  const allRatings = [
-    ratings['1'],
-    ratings['2'],
-    ratings['3'],
-    ratings['4'],
-    ratings['5'],
-  ];
-  let total = 0;
-  let valueTotal = 0;
-
-  // Calculates the average using (total * value) / total
-  for (let i = 0; i < allRatings.length; i + 1) {
-    total += Number(allRatings[i]) * 1;
-    valueTotal += Number(allRatings[i]) * (i + 1);
-  }
-
-  return valueTotal / total;
-}
-
 function ImageWithButton({ url, related, original }) {
   const [hover, setHover] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className='thumbnail-square' style={{ height: 200 }}>
-      <img
-        className='thumbnail-image'
-        src={url}
-        alt={original.name}
-        style={{ objectPosition: 'center bottom' }}
-      />
+      <img className='thumbnail-image' src={url} alt={original.name} style={{ objectPosition: 'center bottom' }} />
       <button
         type='button'
         className={styles.overlayBtn}
@@ -56,6 +29,28 @@ function ImageWithButton({ url, related, original }) {
       />
     </div>
   );
+}
+
+function calculateStars(ratings) {
+  // Puts the string amounts of each rating
+  // in a single place
+  const allRatings = [
+    ratings['1'],
+    ratings['2'],
+    ratings['3'],
+    ratings['4'],
+    ratings['5'],
+  ];
+  let total = 0;
+  let valueTotal = 0;
+
+  // Calculates the average using (total * value) / total
+  for (let i = 0; i < allRatings.length; i += 1) {
+    total += Number(allRatings[i]) * 1;
+    valueTotal += Number(allRatings[i]) * (i + 1);
+  }
+
+  return valueTotal / total;
 }
 
 export default function Card({ productId, originalProductId }) {

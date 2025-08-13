@@ -20,9 +20,7 @@ export default function RelatedProducts({ productId }) {
 
   if (!relatedProducts.length) {
     return (
-      <div
-        className={styles.relatedOutfit}
-      >
+      <div className={styles.relatedOutfit}>
         Loading elements...
       </div>
     );
@@ -33,7 +31,7 @@ export default function RelatedProducts({ productId }) {
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <Slider {...settings}>
         {relatedProducts.map((id) => (
-          <Card key={id} productId={id} originalProductId={productId} />
+          <Card key={`key-${id}`} productId={id} originalProductId={productId} />
         ))}
       </Slider>
     </div>

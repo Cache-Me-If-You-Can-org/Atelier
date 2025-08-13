@@ -1,14 +1,14 @@
-import RelatedProducts from "./related_and_outfit/RelatedProducts.jsx";
-import Outfit from "./related_and_outfit/Outfit.jsx";
-import axios from "axios";
+import React from 'react';
+import RelatedProducts from './related_and_outfit/RelatedProducts';
+import Outfit from './related_and_outfit/Outfit';
 
 export default function RelatedAndOutfit({ productId, sectionId }) {
   return (
-    <section id={sectionId} className="container">
+    <section id={sectionId} className='container'>
       RELATED PRODUCTS
-      <RelatedProducts productId={productId}/>
+      <RelatedProducts productId={productId} />
       YOUR OUTFIT
-      <Outfit productId={productId}/>
+      <Outfit productId={productId} />
     </section>
   );
 }

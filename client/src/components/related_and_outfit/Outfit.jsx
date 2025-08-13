@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import Slider from 'react-slick';
 import Card from './Card';
 import settings from './Carousel';
 import * as styles from './relatedOutfit.module.css';
 
-async function postToCart(setNewItem, id) {
-  axios.post('/cart', {
-    params: { sku_id: id },
-  })
-    .then(() => setNewItem(id))
-    .catch((err) => console.error('error posting to cart', err));
+function addToOutfit(setNewItem, id) {
+
 }
 
 function AddToOutfit({ setNewItem, productId }) {
@@ -18,7 +14,7 @@ function AddToOutfit({ setNewItem, productId }) {
     <div className={`${styles.productCard} ${styles.addOutfit}`}>
       <span
         onClick={() => {}}
-        onKeyPress={() => postToCart(setNewItem, productId)}
+        onKeyPress={() => addToOutfit(setNewItem, productId)}
         role='button'
         tabIndex='0'
       >
@@ -32,12 +28,6 @@ function AddToOutfit({ setNewItem, productId }) {
 export default function Outfit({ productId }) {
   const [outfit, setOutfit] = useState([]);
   const [newItem, setNewItem] = useState(null);
-
-  useEffect(() => {
-    axios.get('/cart')
-      .then((res) => setOutfit(res.data))
-      .catch((err) => console.error('error loading outfit:', err));
-  }, [newItem]);
 
   return (
     <div className={styles.relatedOutfit}>
