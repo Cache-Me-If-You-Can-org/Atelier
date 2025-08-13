@@ -15,20 +15,19 @@
 
 
   /* Font Sizes */
-  --text-xs: 12px;
-  --text-sm: 14px;
-  --text-md: 16px;
-  --text-lg: 20px;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
 
   /* Font Weight */
   --text-reg: 400;
   --text-bold: 700;
 
   /* Spacing */
-  --spacing-sm: 10px;
-  --spacing-md: 15px;
-  --spacing-lg: 20px;
-}
+  --spacing-sm: 0.625rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.25rem;
 
 /* Dark Mode */
 [data-theme="dark"] {
