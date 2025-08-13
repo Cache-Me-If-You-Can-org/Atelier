@@ -18,8 +18,8 @@ function Info({
   const [qty, setQty] = useState(getQtys(styles[selectedStyle], skuId)[0]);
 
   const postToCart = () => {
-    axios.post('/cart', { sku_id: parseInt(skuId, 10) })
-      .then((res) => console.debug('successfully added to cart', res))
+    axios.post('/cart', JSON.stringify({ sku_id: parseInt(skuId, 10) }), { headers: { 'Content-Type': 'application/json' } })
+      .then((res) => console.log('successfully added to cart', res))
       .catch((err) => console.error('failed to add to cart', err));
   };
   return (
@@ -27,10 +27,10 @@ function Info({
       className={css.infoWrapper}
       style={{ display: isFullScreen ? 'none' : '' }}
     >
-      <div className={`${g.stack} ${css.gap}`}>
+      <div className={[g.stack, g.gapMd].join(' ')}>
         <div>stars</div>
-        <div>{product.category.toUpperCase()}</div>
-        <h2>{product.name}</h2>
+        <p className={[g.textMd, g.upper].join(' ')}>{product.category}</p>
+        <h2 className={[g.textLg, g.bold].join(' ')}>{product.name}</h2>
         <Price styles={styles} selectedStyle={selectedStyle} />
         <StyleSelector
           styles={styles}
