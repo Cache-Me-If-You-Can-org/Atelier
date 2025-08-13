@@ -1,43 +1,53 @@
 import React, { useState } from 'react';
 import CharacteristicInput from './CharacteristicInput';
 import PhotoForm from '../../../shared/PhotoForm';
+import QuarterStarRating from '../../../shared/QuarterStarRating';
 import * as styles from '../../reviews.module.css';
 
 function AddReview() {
   const [recommended, setRecommended] = useState('');
-  const [size, setSize] = useState('');
-  const [width, setWidth] = useState('');
-  const [comfort, setComfort] = useState('');
-  const [quality, setQuality] = useState('');
-  const [length, setLength] = useState('');
-  const [fit, setFit] = useState('');
+  const [size, setSize] = useState({ '': 0 });
+  const [width, setWidth] = useState({ '': 0 });
+  const [comfort, setComfort] = useState({ '': 0 });
+  const [quality, setQuality] = useState({ '': 0 });
+  const [length, setLength] = useState({ '': 0 });
+  const [fit, setFit] = useState({ '': 0 });
   const [summary, setSummary] = useState('');
   const [body, setBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
+  const [stars, setStars] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const characteristics = {
+      ...size,
+      ...width,
+      ...comfort,
+      ...quality,
+      ...length,
+      ...fit,
+    };
     console.log({
       recommended,
-      size,
-      width,
-      comfort,
-      quality,
-      length,
-      fit,
       summary,
       body,
       nickname,
       email,
       photos,
+      stars,
+      characteristics,
     });
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <h1>Add Review</h1>
+      <div className={styles.formBlock}>
+        <h2>Overall Rating</h2>
+        <QuarterStarRating isReview size={32} getRating={setStars} />
+      </div>
       <div className={styles.formBlock}>
         <h2>Recommendation</h2>
         <p>Do you recommend this product?</p>
@@ -48,9 +58,9 @@ function AddReview() {
               className={styles.formRadio}
               type='radio'
               name='radioRecommendedGroup'
-              value='yes'
-              checked={recommended === 'yes'}
-              onChange={(e) => setRecommended(e.target.value)}
+              value='true'
+              checked={recommended === true}
+              onChange={(e) => setRecommended(e.target.value === 'true')}
             />
           </label>
           <label className={styles.radioLabel} htmlFor='recommended'>
@@ -59,9 +69,9 @@ function AddReview() {
               className={styles.formRadio}
               type='radio'
               name='radioRecommendedGroup'
-              value='no'
-              checked={recommended === 'no'}
-              onChange={(e) => setRecommended(e.target.value)}
+              value='false'
+              checked={recommended === false}
+              onChange={(e) => setRecommended(e.target.value === 'true')}
             />
           </label>
         </div>
