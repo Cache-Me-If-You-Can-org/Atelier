@@ -1,0 +1,24 @@
+.features {
+    width: max-content;
+  }
+  
+  .featureRow {
+    align-items: center;
+  }
+  
+  .icon {
+    width: 20px;
+    height: 20px;
+    flex: none;
+  }
+  
+  .text {
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  .divider {
+    background-color: var(--color-dark);
+    width: 2px;
+    align-self: stretch;
+  }
