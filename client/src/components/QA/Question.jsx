@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import AnswersList from './AnswersList';
 import * as styles from './qanda.module.css';
