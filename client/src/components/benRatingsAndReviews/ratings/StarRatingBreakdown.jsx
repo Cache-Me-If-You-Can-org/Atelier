@@ -10,15 +10,15 @@ function StarRatingBreakdown({ ratings, totalRatings, recommended }) {
   let percentages = [];
 
   Object.entries(ratings || {}).forEach(([key, value], index) => {
-      percentages.push(
-        {
-          index: index + 1,
-          width: ((value / totalRatings) * 100).toFixed(2),
-        }
-      );
+    percentages.push(
+      {
+        index: index + 1,
+        width: ((value / totalRatings) * 100).toFixed(2),
+      },
+    );
   });
 
-  percentages.sort((a, b) => b.index - a.index)
+  percentages.sort((a, b) => b.index - a.index);
 
   return (
     <div>
@@ -28,8 +28,8 @@ function StarRatingBreakdown({ ratings, totalRatings, recommended }) {
           <li key={index} className={styles.ratingBreakdown}>
             <span className={styles.starTitle}>{percentageListItem.index} stars</span>
             <div className={styles.ratingBarWrapper}>
-              <span className={styles.ratingPercentage} style={{ '--percentageWidth': percentageListItem.width + '%' }}></span>
-              <span className={styles.ratingBar}></span>
+              <span className={styles.ratingPercentage} style={{ '--percentageWidth': percentageListItem.width + '%' }} />
+              <span className={styles.ratingBar} />
             </div>
           </li>
         ))}

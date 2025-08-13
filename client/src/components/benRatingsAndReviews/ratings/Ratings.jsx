@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import ReviewsServices from '../services/ReviewsServices.js';
-import StarRating from '../reviews/starRating/StarRating.jsx';
-import StarRatingBreakdown from './StarRatingBreakdown.jsx';
-import ProductBreakdown from './ProductBreakdown.jsx';
+import React, { useState, useEffect } from 'react';
+import ReviewsServices from '../services/ReviewsServices';
+import StarRating from '../reviews/starRating/StarRating';
+import StarRatingBreakdown from './StarRatingBreakdown';
+import ProductBreakdown from './ProductBreakdown';
 import * as styles from '../reviews.module.css';
 
 function Ratings({ productId }) {
-const [meta, setMeta] = useState([]);
+  const [meta, setMeta] = useState([]);
 
   useEffect(() => {
     ReviewsServices.getMeta(productId, (meta) => {
@@ -19,11 +19,11 @@ const [meta, setMeta] = useState([]);
   const starRatingsArray = Object.entries(starRatings || {});
   const totalScore = starRatingsArray.reduce(
     (sum, [starValue, count]) => sum + Number(starValue) * Number(count),
-    0
+    0,
   );
   const totalRatings = starRatingsArray.reduce(
     (sum, [starValue, count]) => sum + Number(count),
-    0
+    0,
   );
 
   const averageRating = totalScore > 0 ? totalScore / totalRatings : 0;
@@ -39,7 +39,11 @@ const [meta, setMeta] = useState([]);
         </div>
       </div>
       <div className={styles.ratingsBreakdown}>
-        <StarRatingBreakdown ratings={meta.ratings} totalRatings={totalRatings} recommended={meta.recommended}/>
+        <StarRatingBreakdown
+          ratings={meta.ratings}
+          totalRatings={totalRatings}
+          recommended={meta.recommended}
+        />
       </div>
       <div>
         <ProductBreakdown characteristics={meta.characteristics} />
