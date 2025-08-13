@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ReviewsServices from '../services/ReviewsServices';
-// import StarRating from '../reviews/starRating/StarRating';
 import QuarterStarRating from '../../shared/QuarterStarRating';
 import StarRatingBreakdown from './StarRatingBreakdown';
 import ProductBreakdown from './ProductBreakdown';
