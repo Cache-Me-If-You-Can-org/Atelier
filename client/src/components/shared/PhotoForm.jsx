@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as styles from './photoForm.module.css';
-import Image from '../shared/Image';
+import Image from './Image';
 
 function PhotoForm({
   photos = [],

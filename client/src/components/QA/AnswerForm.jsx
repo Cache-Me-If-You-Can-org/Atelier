@@ -49,7 +49,7 @@ function AnswerForm({
         email: document.getElementById('email').value,
         photos,
       };
-      console.log(ans);
+      // console.log(ans)
       setIsOpen(false);
       setNewAnswer(ans);
       // console.log('saved ans', ans);

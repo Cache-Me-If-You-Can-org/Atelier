@@ -1,5 +1,13 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Overview from './overview/Overview';
+import RelatedAndOutfit from './RelatedAndOutfit';
+import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews';
+import BenRatingsAndReviews from './reviews/BenRatingsAndReviews';
+import QA from './QA/index';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
 import Overview from './overview/Overview.jsx';
 import RelatedAndOutfit from './RelatedAndOutfit.jsx';
 import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews.jsx';
@@ -34,4 +42,3 @@ export default function App() {
     </div>
   )
 };
-

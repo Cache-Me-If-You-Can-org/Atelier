@@ -33,3 +33,8 @@ body {
   display: flex;
   flex-direction: column;
 }
+.inlineThumbnail {
+  width: 50px;
+  display: inline-flex;
+  padding: 5px;
+}

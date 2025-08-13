@@ -1,21 +1,17 @@
 import React from 'react';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import Question from './Question.jsx';
-import QuestionsList from './QuestionsList.jsx';
-//import API from './api.js';
+import QuestionsList from './QuestionsList';
 
-function QA({currentProductId}) {
-  const [questions, setQuestions] = useState([]);
-  // const product_id = currentProductId;
-  //const product_id ='37322' //multiple answers, 1 q
-  //const product_id = '40347'; //rfp api
-  const product_id ='37324'; //multiple answers, multiple questions
+function QA({ currentProductId }) {
+  // const productId = currentProductId; //product from server
+  // const productId ='37322' // multiple answers, 1 q
+  const productId = '37324'; // multiple answers, multiple questions
+  axios.get(`/products/${productId}`);
   return (
-    <div>
+    <section id='questionsAndAnswers'>
       <h4>QUESTIONS & ANSWERS</h4>
-      <QuestionsList product_id={product_id}/>
-    </div>
+      <QuestionsList productId={productId} />
+    </section>
   );
 }
 
