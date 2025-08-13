@@ -63,7 +63,7 @@ function QuestionsList({ productId }) {
           axios.get('/qa/questions', { params: { product_id: productId, count: 999 } })
             .then((res) => {
               setAllQuestions(res.data.results);
-              setCount(4);
+              setCount(count);
             })
             .catch((err) => { throw new Error(err); });
         })

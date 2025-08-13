@@ -23,16 +23,6 @@ function Question({ productId, question }) {
   function addAnswer() {
     setIsOpen(true);
   }
-  const didMount = useRef(false);
-  useEffect(() => {
-    if (didMount.current) {
-      // console.log('gonna hit api with ans', newAnswer);
-      axios.post(`/qa/questions/${question.question_id}/answers`, JSON.stringify(newAnswer), { headers: { 'Content-Type': 'application/json' } })
-        .catch((err) => { throw new Error(err); });
-    } else {
-      didMount.current = true;
-    }
-  }, [newAnswer]);
 
   return (
     <div>
