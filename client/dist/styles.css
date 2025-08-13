@@ -2,16 +2,41 @@
 /* Light Mode: default */
 :root {
   /* Colors */
+
+  /* refactoring to following names */
   --color-bg: white;
+  --color-dark: #525252;
+  --color-light: #EBEBEB;
+
+  /* deprecated the following color variables */
   --color-text: black;
   --color-border: darkgray;
   --color-icon: rgb(40, 40, 40);
-}
+
+
+  /* Font Sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+
+  /* Font Weight */
+  --text-reg: normal;
+  --text-bold: bold;
+
+  /* Spacing */
+  --spacing-sm: 0.625rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.25rem;
 
 /* Dark Mode */
 [data-theme="dark"] {
   /* Colors */
   --color-bg: black;
+  --color-dark: #EBEBEB;
+  --color-light: #525252;
+
+  /* deprecated the following color variables */
   --color-text: white;
   --color-border: lightgray;
 }
@@ -30,7 +55,8 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   background-color: var(--color-bg);
-  color: var(--color-text);
+  color: var(--color-dark);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 img, picture, video, canvas, svg {
@@ -54,11 +80,16 @@ h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 }
 
+a {
+  color: var(--color-dark);
+}
+
 button {
   padding: 8px;
+  /* background-color: var(--color-bg); */
   background-color: transparent;
   border-radius: 0;
-  border: solid 1px var(--color-border);
+  border: solid 1px var(--color-dark);
   min-width: 45px;
   cursor: pointer;
 }
@@ -80,7 +111,7 @@ button {
 /* ************************** WARNING ************************** */
 /* DO NOT WRITE ANY NEW STYLES BEYOND THIS POINT */
 /* SWITCHING OVER TO MODULES                     */
-/* KEEP WHATS ALREADY HERE UNTILL WE REFACTOR    */
+/* KEEP WHATS ALREADY HERE UNTIL WE REFACTOR    */
 /* ************************** WARNING ************************** */
 .container {
   max-width: 940px;
@@ -173,9 +204,9 @@ button {
 .stars {
   margin: 15px 0;
 }
-.stars .bar {
+/* .stars .bar {
 
-}
+} */
 .stars .label {
   width: 20%;
 }
