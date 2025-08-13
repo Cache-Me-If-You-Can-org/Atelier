@@ -28,6 +28,7 @@
   --spacing-sm: 0.625rem;
   --spacing-md: 1rem;
   --spacing-lg: 1.25rem;
+}
 
 /* Dark Mode */
 [data-theme="dark"] {
