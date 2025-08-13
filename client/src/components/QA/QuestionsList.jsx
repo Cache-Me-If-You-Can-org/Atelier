@@ -27,21 +27,17 @@ function QuestionsList({ productId }) {
 
   useEffect(() => {
     const filtered = [];
-    allQuestions.forEach((question) => {
-      if (question.question_body.includes(filterBy)) {
-        // console.log('found matching q', question.question_body);
-        filtered.push(question);
-      }
-    });
-    // const filtered = allQuestions.filter((question) => {
-    //   if (question.question_body.includes(filterBy)) {
-    //     // console.log('found matching q', question.question_body);
-    //     return question;
-    //   }
-    //   return;
-    // });
-    // console.log('filtered', filtered);
-    setDisplayedQuestions(filtered);
+    if (filterBy.length < 3) {
+      setDisplayedQuestions(allQuestions.slice(0, count));
+    } else {
+      allQuestions.forEach((question) => {
+        if (question.question_body.includes(filterBy)) {
+          // console.log('found matching q', question.question_body);
+          filtered.push(question);
+        }
+      });
+      setDisplayedQuestions(filtered);
+    }
   }, [filterBy]);
 
   useEffect(() => {
