@@ -44,3 +44,6 @@
   overflow-y : auto;
   height: inherit;
 }
+.sellerName {
+  font-weight: bold;
+}

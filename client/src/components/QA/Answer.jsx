@@ -29,7 +29,15 @@ function Answer({ answer }) {
     <div className={styles.answer}>
       <div>{answer.body}</div>
       <div className={styles.answerDetails}>
-        <span>{`by ${answer.answerer_name}, ${date.slice(3)}`}</span>
+        <span>
+          {'by '}
+        </span>
+        <span className={answer.answerer_name === 'Seller' ? styles.sellerName : ''}>
+          {answer.answerer_name}
+        </span>
+        <span>
+          {`, ${date.slice(3)}`}
+        </span>
         <span>
           {' | Helpful? '}
           <span>
