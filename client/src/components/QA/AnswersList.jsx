@@ -7,11 +7,22 @@ function AnswersList({ questionId, newAnswer }) {
   const [allAnswers, setAllAnswers] = useState([]);
   const [displayedAnswers, setDisplayedAnswers] = useState([]);
   const [count, setCount] = useState(2);
+  function sortSellerFirst(a, b) {
+    if (a.answerer_name === 'Seller' && b.answerer_name !== 'Seller') {
+      return -1;
+    }
+    if (b.answerer_name === 'Seller' && a.answerer_name !== 'Seller') {
+      return 1;
+    }
+    return 0;
+  }
   useEffect(() => {
     axios.get(`/qa/questions/${questionId}/answers`, { params: { count: 999 } })
       .then((res) => {
-        setAllAnswers(res.data.results);
-        setDisplayedAnswers(res.data.results.slice(0, count));
+        const ans = res.data.results;
+        ans.sort(sortSellerFirst);
+        setAllAnswers(ans);
+        setDisplayedAnswers(ans.slice(0, count));
       })
       .catch((err) => {
         throw new Error(err);
@@ -37,10 +48,7 @@ function AnswersList({ questionId, newAnswer }) {
         .then(() => {
           axios.get(`/qa/questions/${questionId}/answers`, { params: { count: 999 } })
             .then((res) => {
-              setAllAnswers(res.data.results);
-              if (count !== 2) {
-                setCount(res.data.results.length);
-              }
+              setAllAnswers(res.data.results.sort(sortSellerFirst));
             })
             .catch((err) => { throw new Error(err); });
         })
@@ -48,7 +56,7 @@ function AnswersList({ questionId, newAnswer }) {
     } else {
       didMount.current = true;
     }
-  }, [count, newAnswer, questionId]);
+  }, [newAnswer, questionId]);
 
   return (
     <div className={[styles.answersList, styles.scrollable].join(' ')}>
