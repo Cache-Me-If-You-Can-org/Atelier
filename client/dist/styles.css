@@ -86,7 +86,7 @@ a {
 }
 
 button {
-  padding: 8px;
+  padding: var(--spacing-sm);
   /* background-color: var(--color-bg); */
   background-color: transparent;
   border-radius: 0;

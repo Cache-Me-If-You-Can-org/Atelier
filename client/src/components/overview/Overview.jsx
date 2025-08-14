@@ -37,6 +37,7 @@ function Overview({ productId }) {
               styles={styles}
               selectedStyle={selectedStyle}
               setIsFullScreen={setIsFullScreen}
+              isFullScreen={isFullScreen}
             />
             <Info
               product={product}

@@ -9,7 +9,10 @@ function Thumbnail({
     <button
       type='button'
       className={css.thumbnail}
-      onClick={() => setSelectedImage(i)}
+      onClick={(e) => {
+        e.stopPropagation();
+        setSelectedImage(i);
+      }}
     >
       <Image src={imgUrl} />
       <div

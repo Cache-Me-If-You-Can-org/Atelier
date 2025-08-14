@@ -9,6 +9,7 @@ function Gallery({
   styles,
   selectedStyle,
   setIsFullScreen,
+  isFullScreen,
 }) {
   const [selectedImage, setSelectedImage] = useState(0);
   const [displayImage, setDisplayImage] = useState(styles[selectedStyle].photos[selectedImage].url);
@@ -27,7 +28,11 @@ function Gallery({
   };
 
   return (
-    <div className={css.galleryWrapper}>
+    <div 
+      className={css.galleryWrapper} 
+      style={{ cursor: isFullScreen ? 'zoom-out' : 'zoom-in' }}
+      onClick={() => setIsFullScreen((prev) => !prev)}
+    >
       <Image src={displayImage} />
       <div className={css.overlay}>
         <div className={`${g.group} ${g.fullHeight}`}>
@@ -47,19 +52,25 @@ function Gallery({
               <CornersOut
                 size={32}
                 className={`${g.pointer} ${css.icon}`}
-                onClick={() => setIsFullScreen((prev) => !prev)}
+                // onClick={() => setIsFullScreen((prev) => !prev)}
               />
             </div>
             <div className={`${g.group} ${g.sb} ${css.arrows}`}>
               <ArrowLeft
                 size={32}
                 className={`${g.pointer} ${css.icon}`}
-                onClick={() => handleArrows('prev')}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleArrows('prev');
+                }}
               />
               <ArrowRight
                 size={32}
                 className={`${g.pointer} ${css.icon}`}
-                onClick={() => handleArrows('next')}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleArrows('next');
+                }}
               />
             </div>
           </div>
