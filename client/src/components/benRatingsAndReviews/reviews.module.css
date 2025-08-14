@@ -69,6 +69,22 @@
   font-weight: bold;
 }
 
+.photoContainer {
+  display: flex;
+  gap: 5px;
+  margin: 10px 0;
+}
+
+.reviewPhotoSm {
+  border: solid #ccc 1px;
+  width: 100px;
+  height: 100px;
+}
+
+.reviewPhotoLg{
+  width: 100%;
+}
+
 /* -------------- Ratings -- */
 
 .ratingsHeader {
@@ -234,6 +250,12 @@
   margin-bottom: 20px;
 }
 
+.requiredFlag {
+  color: red;
+  font-size: 24px;
+  padding-left: 3px;
+}
+
 .formLabel {
   display: block;
   margin-bottom: 5px;
@@ -261,6 +283,8 @@
 
 .radioTitle {
   display: block;
+  font-size: 14px;
+  font-weight: normal;
 }
 
 .formRadio {
@@ -270,6 +294,7 @@
 .formInput {
   width: 100%;
   padding: 10px;
+  font-weight: normal;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 0;
@@ -277,11 +302,19 @@
   font-size: 14px;
 }
 
+.starWrapper {
+  display: flex;
+}
+
+.starWrapper p {
+  margin-left: 10px;
+  padding-top: 4px;
+}
+
 .errorMessage {
   color: red;
-  font-size: 12px;
-  margin-top: -10px;
-  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: normal;
 }
 
 .submitButton {

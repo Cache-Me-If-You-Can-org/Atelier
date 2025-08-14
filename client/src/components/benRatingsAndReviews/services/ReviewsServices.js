@@ -47,6 +47,26 @@ const ReviewsServices = {
         throw new Error(err);
       });
   },
+  markReviewAsHelpful: (reviewId, callback) => {
+    api
+      .put(`/reviews/${reviewId}/helpful`)
+      .then((response) => {
+        callback(response.data);
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  },
+  reportReview: (reviewId, callback) => {
+    api
+      .put(`/reviews/${reviewId}/report`)
+      .then((response) => {
+        callback(response.data);
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  },
 };
 
 export default ReviewsServices;

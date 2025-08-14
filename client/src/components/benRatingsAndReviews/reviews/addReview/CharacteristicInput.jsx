@@ -7,7 +7,7 @@ function CharacteristicInput({
 }) {
   return (
     <div className={styles.characteristic}>
-      <h3 className={styles.radioSectionTitle}>
+      <h4 className={styles.radioSectionTitle}>
         {label}
         :
         <span>
@@ -15,7 +15,7 @@ function CharacteristicInput({
           {value?.[id] ? options[value[id] - 1] : 'Nothing selected'}
           )
         </span>
-      </h3>
+      </h4>
       <div className={styles.radioSection}>
         {options.map((optionLabel, index) => (
           <label className={styles.radioLabel} key={String(optionLabel)} htmlFor={name}>
