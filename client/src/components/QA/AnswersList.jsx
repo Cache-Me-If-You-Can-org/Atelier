@@ -1,53 +1,72 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Answer from './Answer';
 import * as styles from './qanda.module.css';
 
-function AnswersList({ questionId }) {
-  const [answers, setAnswers] = useState([]);
-  const [gotAll, setGotAll] = useState(false);
-  const [page, setPage] = useState(1);
-  useEffect(() => {
-    if (!gotAll) {
-      axios.get(`/qa/questions/${questionId}/answers`, { params: { page: page.toString(), count: '2' } })
-        .then((res) => {
-          if (res.data.results.length === 0) {
-            setGotAll(true);
-          } else {
-            setAnswers(answers.slice().concat(res.data.results));
-          }
-        })
-        .catch((err) => {
-          throw new Error(err);
-        });
-    } else {
-      axios.get(`/qa/questions/${questionId}/answers`, { params: { page: page.toString(), count: '2' } })
-        .then((res) => {
-          setAnswers(res.data.results);
-          setGotAll(false);
-        })
-        .catch((err) => {
-          throw new Error(err);
-        });
+function AnswersList({ questionId, newAnswer }) {
+  const [allAnswers, setAllAnswers] = useState([]);
+  const [displayedAnswers, setDisplayedAnswers] = useState([]);
+  const [count, setCount] = useState(2);
+  function sortSellerFirst(a, b) {
+    if (a.answerer_name === 'Seller' && b.answerer_name !== 'Seller') {
+      return -1;
     }
-  }, [page]);
+    if (b.answerer_name === 'Seller' && a.answerer_name !== 'Seller') {
+      return 1;
+    }
+    return 0;
+  }
+  useEffect(() => {
+    axios.get(`/qa/questions/${questionId}/answers`, { params: { count: 999 } })
+      .then((res) => {
+        const ans = res.data.results;
+        ans.sort(sortSellerFirst);
+        setAllAnswers(ans);
+        setDisplayedAnswers(ans.slice(0, count));
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  }, [questionId, count]);
 
-  function loadMoreAnswers() {
-    // show all remaining answers
-    // confined to half the screen and scrollable
-    setPage(page + 1);
+  useEffect(() => {
+    const a = allAnswers.slice(0, count);
+    setDisplayedAnswers([...a]);
+  }, [count, allAnswers]);
+
+  function loadAllAnswers() {
+    setCount(allAnswers.length);
   }
   function collapseAnswers() {
-    setPage(1);
+    setCount(2);
   }
+  const didMount = useRef(false);
+  useEffect(() => {
+    if (didMount.current) {
+      // console.log('gonna hit api with ans', newAnswer);
+      axios.post(`/qa/questions/${questionId}/answers`, JSON.stringify(newAnswer), { headers: { 'Content-Type': 'application/json' } })
+        .then(() => {
+          axios.get(`/qa/questions/${questionId}/answers`, { params: { count: 999 } })
+            .then((res) => {
+              setAllAnswers(res.data.results.sort(sortSellerFirst));
+            })
+            .catch((err) => { throw new Error(err); });
+        })
+        .catch((err) => { throw new Error(err); });
+    } else {
+      didMount.current = true;
+    }
+  }, [newAnswer, questionId]);
+
   return (
-    <div className={styles.answersList}>
+    <div className={[styles.answersList, styles.scrollable].join(' ')}>
       <div>
         <strong>A:</strong>
       </div>
       <div>
-        {answers.map((answer) => <Answer key={answer.answer_id} answer={answer} />)}
-        { gotAll ? (<input type='button' value='Collapse' onClick={collapseAnswers} />) : (<input type='button' value='Load More Answers' onClick={loadMoreAnswers} />)}
+        {displayedAnswers.map((answer) => <Answer key={answer.answer_id} answer={answer} />)}
+        { (count > 2) ? (<button type='button' onClick={collapseAnswers}>Collapse</button>) : (<div />)}
+        {(allAnswers.length > 2 && count === 2) ? (<button type='button' onClick={loadAllAnswers}>Load More Answers</button>) : (<div />)}
       </div>
     </div>
 

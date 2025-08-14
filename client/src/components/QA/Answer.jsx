@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import * as styles from './qanda.module.css';
+import * as g from '../shared/shared.module.css';
 
 function Answer({ answer }) {
   let date = new Date(answer.date);
@@ -28,13 +29,24 @@ function Answer({ answer }) {
     <div className={styles.answer}>
       <div>{answer.body}</div>
       <div className={styles.answerDetails}>
-        <span>{`by ${answer.answerer_name}, ${date.slice(3)}`}</span>
+        <span>
+          {'by '}
+        </span>
+        <span className={answer.answerer_name === 'Seller' ? styles.sellerName : ''}>
+          {answer.answerer_name}
+        </span>
+        <span>
+          {`, ${date.slice(3)}`}
+        </span>
         <span>
           {' | Helpful? '}
           <span>
-            <a onClick={helpfulHandler}>
-              Yes
-            </a>
+            <input
+              className={g.btnLinkify}
+              type='button'
+              onClick={helpfulHandler}
+              value='Yes'
+            />
           </span>
           <span>
             {` (${helpfulness})`}
@@ -43,13 +55,16 @@ function Answer({ answer }) {
         <span>
           {' | '}
           <span>
-            <a onClick={() => {
-              if (!reported) {
-                report();
-              }
-            }}
+            <input
+              type='button'
+              className={g.btnLinkify}
+              value={reported ? 'Reported' : 'Report'}
+              onClick={() => {
+                if (!reported) {
+                  report();
+                }
+              }}
             />
-            {reported ? 'Reported' : 'Report'}
           </span>
         </span>
       </div>

@@ -63,8 +63,8 @@ function PhotoForm({
             placeholder='image url'
             onChange={(e) => setInputValue(e.target.value)}
           />
-          <input type='button' value='Upload' onClick={submitPhotoHandler} />
-          {isModal ? <input type='button' value='Done' onClick={() => setIsOpen(false)} /> : null}
+          <button type='button' onClick={submitPhotoHandler}>Upload</button>
+          {isModal ? <button type='button' onClick={() => setIsOpen(false)}>Done</button> : null}
         </div>
       ) : (
         <div>
@@ -74,7 +74,7 @@ function PhotoForm({
             &nbsp;
             photos may be uploaded
           </p>
-          {isModal ? <input type='button' value='Done' onClick={() => setIsOpen(false)} /> : null}
+          {isModal ? <button type='button' onClick={() => setIsOpen(false)}>Done</button> : null}
         </div>
       )}
     </div>

@@ -1,3 +1,6 @@
+.qaTitle {
+  font-weight: lighter;
+}
 .answer {
   padding: 0px 10px 10px;
   font-size: small;
@@ -7,6 +10,9 @@
   color: gray;
   padding-top: 10px;
   font-size: x-small;
+}
+.questionsList {
+  max-height: 80vh;
 }
 .question {
   display: flex;
@@ -24,13 +30,20 @@
 .answersList {
   display: flex;
   align-items: baseline;
+  max-height: 50vh;
 }
 .search {
   display: flex;
   flex-direction: column;
 }
-.inlineThumbnail {
-  width: 50px;
-  display: inline-flex;
-  padding: 5px;
+.error {
+  color: red;
+  white-space: pre;
+}
+.scrollable {
+  overflow-y : auto;
+  height: inherit;
+}
+.sellerName {
+  font-weight: bold;
 }

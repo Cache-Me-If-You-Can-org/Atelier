@@ -4,17 +4,18 @@ import Question from './Question';
 import Search from './Search';
 import Modal from '../shared/Modal';
 import QuestionForm from './QuestionForm';
+import * as styles from './qanda.module.css';
 
 function QuestionsList({ productId }) {
   const [allQuestions, setAllQuestions] = useState([]);
   const [displayedQuestions, setDisplayedQuestions] = useState([]);
-  const [count, setCount] = useState(2);
+  const [count, setCount] = useState(4);
   const [filterBy, setFilterBy] = useState('');
   const [isQFormOpen, setQFormIsOpen] = useState(false);
   const [newQuestion, setNewQuestion] = useState({});
 
   useEffect(() => {
-    axios.get('/qa/questions', { params: { product_id: productId } })
+    axios.get('/qa/questions', { params: { product_id: productId, count: 999 } })
       .then((res) => {
         setAllQuestions(res.data.results);
         setDisplayedQuestions(res.data.results.slice(0, count));
@@ -22,23 +23,27 @@ function QuestionsList({ productId }) {
       .catch((err) => {
         throw new Error(err);
       });
-  }, []);
+  }, [count, productId]);
+
   useEffect(() => {
-    const filtered = allQuestions.filter((question) => {
-      if (question.question_body.includes(filterBy)) {
-        // console.log('found matching q', question.question_body);
-        return question;
-      }
-      return;
-    });
-    // console.log('filtered', filtered);
-    setDisplayedQuestions(filtered);
-  }, [filterBy]);
+    const filtered = [];
+    if (filterBy.length < 3) {
+      setDisplayedQuestions(allQuestions.slice(0, count));
+    } else {
+      allQuestions.forEach((question) => {
+        if (question.question_body.includes(filterBy)) {
+          // console.log('found matching q', question.question_body);
+          filtered.push(question);
+        }
+      });
+      setDisplayedQuestions(filtered);
+    }
+  }, [allQuestions, count, filterBy]);
 
   useEffect(() => {
     const q = allQuestions.slice(0, count);
     setDisplayedQuestions([...q]);
-  }, [count]);
+  }, [count, allQuestions]);
 
   function moreQuestions() {
     setCount(count + 2);
@@ -53,31 +58,36 @@ function QuestionsList({ productId }) {
   const didMount = useRef(false);
   useEffect(() => {
     if (didMount.current) {
-      // console.log('gonna hit api with ans', newAnswer);
       axios.post('/qa/questions', JSON.stringify(newQuestion), { headers: { 'Content-Type': 'application/json' } })
         .then(() => {
-          console.log('posted!');
-          // add new answer to all answers (rerender)
+          axios.get('/qa/questions', { params: { product_id: productId, count: 999 } })
+            .then((res) => {
+              setAllQuestions(res.data.results);
+            })
+            .catch((err) => { throw new Error(err); });
         })
         .catch((err) => { throw new Error(err); });
     } else {
       didMount.current = true;
     }
-  }, [newQuestion]);
+  }, [newQuestion, productId]);
 
   return (
     <div>
       <div>
         <Search setFilterBy={setFilterBy} />
-        {displayedQuestions.map((question) => (
-          <Question
-            key={question.question_id}
-            productId={productId}
-            question={question}
-          />
-        ))}
-        { count < allQuestions.length && filterBy === '' ? (<input type='button' value='More Answered Questions' onClick={moreQuestions} />) : (<div />)}
-        <input type='button' value='Add a Question' onClick={addQuestion} />
+        <div className={[styles.scrollable, styles.questionsList].join(' ')}>
+          {displayedQuestions.map((question) => (
+            <Question
+              key={question.question_id}
+              productId={productId}
+              question={question}
+            />
+          ))}
+        </div>
+
+        { count < allQuestions.length && filterBy === '' ? (<button type='button' onClick={moreQuestions}>More Answered Questions</button>) : (<div />)}
+        <button type='button' onClick={addQuestion}>Add a Question +</button>
       </div>
       <Modal
         isOpen={isQFormOpen}
