@@ -69,3 +69,12 @@
   cursor: pointer;
   min-width: initial;
 }
+
+/*Buttons that look like links*/
+.btnLinkify {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  color: gray;
+}
