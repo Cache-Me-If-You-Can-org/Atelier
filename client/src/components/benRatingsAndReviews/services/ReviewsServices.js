@@ -37,6 +37,16 @@ const ReviewsServices = {
         throw new Error(err);
       });
   },
+  addReview: (reviewData, callback) => {
+    api
+      .post('/reviews', reviewData)
+      .then((response) => {
+        callback(response.data);
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  },
 };
 
 export default ReviewsServices;

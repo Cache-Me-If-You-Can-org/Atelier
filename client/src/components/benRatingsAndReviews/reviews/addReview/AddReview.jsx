@@ -4,20 +4,77 @@ import PhotoForm from '../../../shared/PhotoForm';
 import QuarterStarRating from '../../../shared/QuarterStarRating';
 import * as styles from '../../reviews.module.css';
 
-function AddReview() {
-  const [recommended, setRecommended] = useState('');
-  const [size, setSize] = useState({ '': 0 });
-  const [width, setWidth] = useState({ '': 0 });
-  const [comfort, setComfort] = useState({ '': 0 });
-  const [quality, setQuality] = useState({ '': 0 });
-  const [length, setLength] = useState({ '': 0 });
-  const [fit, setFit] = useState({ '': 0 });
+function AddReview({ productId, meta, handleAddReview }) {
+  const [recommend, setRecommend] = useState('');
+  const [size, setSize] = useState({});
+  const [width, setWidth] = useState({});
+  const [comfort, setComfort] = useState({});
+  const [quality, setQuality] = useState({});
+  const [length, setLength] = useState({});
+  const [fit, setFit] = useState({});
   const [summary, setSummary] = useState('');
   const [body, setBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
   const [stars, setStars] = useState([]);
+
+  const characteristicOptions = {
+    size: [
+      'A size too small',
+      '½ a size too small',
+      'Perfect',
+      '½ a size too big',
+      'A size too wide',
+    ],
+    width: [
+      'Too narrow',
+      'Slightly narrow',
+      'Perfect',
+      'Slightly wide',
+      'Too wide',
+    ],
+    comfort: [
+      'Uncomfortable',
+      'Slightly uncomfortable',
+      'Ok',
+      'Comfortable',
+      'Perfect',
+    ],
+    quality: [
+      'Poor',
+      'Below average',
+      'What I expected',
+      'Pretty great',
+      'Perfect',
+    ],
+    length: [
+      'Runs short',
+      'Runs slightly short',
+      'Perfect',
+      'Runs slightly long',
+      'Runs long',
+    ],
+    fit: [
+      'Runs tight',
+      'Runs slightly tight',
+      'Perfect',
+      'Runs slightly long',
+      'Runs long',
+    ],
+  };
+
+  const metaCharacteristics = meta?.characteristics || [];
+
+  const characteristicsArr = Object.entries(metaCharacteristics).map(([name, data]) => ({
+    name,
+    ...data,
+  }));
+
+  const fullCharArr = characteristicsArr.map((obj) => ({
+    ...obj,
+    options: characteristicOptions[obj.name.toLowerCase()],
+  }));
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -29,16 +86,37 @@ function AddReview() {
       ...length,
       ...fit,
     };
-    console.log({
-      recommended,
+    const newReview = {
+      product_id: productId,
+      rating: stars,
       summary,
       body,
-      nickname,
+      recommend,
+      name: nickname,
       email,
       photos,
-      stars,
       characteristics,
-    });
+    };
+
+    handleAddReview(newReview);
+  };
+
+  const setters = {
+    size: setSize,
+    width: setWidth,
+    comfort: setComfort,
+    quality: setQuality,
+    length: setLength,
+    fit: setFit,
+  };
+
+  const values = {
+    size,
+    width,
+    comfort,
+    quality,
+    length,
+    fit,
   };
 
   return (
@@ -52,26 +130,26 @@ function AddReview() {
         <h2>Recommendation</h2>
         <p>Do you recommend this product?</p>
         <div className={styles.radioSection}>
-          <label className={styles.radioLabel} htmlFor='recommended'>
+          <label className={styles.radioLabel} htmlFor='recommend'>
             <span className={styles.radioTitle}>Yes</span>
             <input
               className={styles.formRadio}
               type='radio'
-              name='radioRecommendedGroup'
+              name='radioRecommendGroup'
               value='true'
-              checked={recommended === true}
-              onChange={(e) => setRecommended(e.target.value === 'true')}
+              checked={recommend === true}
+              onChange={(e) => setRecommend(e.target.value === 'true')}
             />
           </label>
-          <label className={styles.radioLabel} htmlFor='recommended'>
+          <label className={styles.radioLabel} htmlFor='recommend'>
             <span className={styles.radioTitle}>No</span>
             <input
               className={styles.formRadio}
               type='radio'
-              name='radioRecommendedGroup'
+              name='radioRecommendGroup'
               value='false'
-              checked={recommended === false}
-              onChange={(e) => setRecommended(e.target.value === 'true')}
+              checked={recommend === false}
+              onChange={(e) => setRecommend(e.target.value === 'true')}
             />
           </label>
         </div>
@@ -79,89 +157,18 @@ function AddReview() {
 
       <div className={styles.formBlock}>
         <h2>Characteristics</h2>
-        <CharacteristicInput
-          label='Size'
-          name='size'
-          options={[
-            'A size too small',
-            '½ a size too small',
-            'Perfect',
-            '½ a size too big',
-            'A size too wide',
-          ]}
-          value={size}
-          setValue={setSize}
-        />
 
-        <CharacteristicInput
-          label='Width'
-          name='width'
-          options={[
-            'Too narrow',
-            'Slightly narrow',
-            'Perfect',
-            'Slightly wide',
-            'Too wide',
-          ]}
-          value={width}
-          setValue={setWidth}
-        />
-
-        <CharacteristicInput
-          label='Comfort'
-          name='comfort'
-          options={[
-            'Uncomfortable',
-            'Slightly uncomfortable',
-            'Ok',
-            'Comfortable',
-            'Perfect',
-          ]}
-          value={comfort}
-          setValue={setComfort}
-        />
-
-        <CharacteristicInput
-          label='Quality'
-          name='quality'
-          options={[
-            'Poor',
-            'Below average',
-            'What I expected',
-            'Pretty great',
-            'Perfect',
-          ]}
-          value={quality}
-          setValue={setQuality}
-        />
-
-        <CharacteristicInput
-          label='Length'
-          name='length'
-          options={[
-            'Runs short',
-            'Runs slightly short',
-            'Perfect',
-            'Runs slightly long',
-            'Runs long',
-          ]}
-          value={length}
-          setValue={setLength}
-        />
-
-        <CharacteristicInput
-          label='Fit'
-          name='fit'
-          options={[
-            'Runs tight',
-            'Runs slightly tight',
-            'Perfect',
-            'Runs slightly long',
-            'Runs long',
-          ]}
-          value={fit}
-          setValue={setFit}
-        />
+        {fullCharArr.map((characteristic) => (
+          <CharacteristicInput
+            key={characteristic.id}
+            id={characteristic.id.toString()}
+            label={characteristic.name}
+            name={characteristic.name}
+            options={characteristic.options}
+            value={values[characteristic.name.toLowerCase()]}
+            setValue={setters[characteristic.name.toLowerCase()]}
+          />
+        ))}
       </div>
 
       <div className={styles.formBlock}>
