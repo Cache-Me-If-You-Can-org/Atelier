@@ -40,13 +40,6 @@
   color: red;
   white-space: pre;
 }
-.btnLinkify {
-  background: none;
-  border: none;
-  text-decoration: underline;
-  cursor: pointer;
-  color: gray;
-}
 .scrollable {
   overflow-y : auto;
   height: inherit;

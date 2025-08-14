@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import AnswersList from './AnswersList';
 import * as styles from './qanda.module.css';
+import * as g from '../shared/shared.module.css';
 import AnswerForm from './AnswerForm';
 import Modal from '../shared/Modal';
 
@@ -35,7 +36,7 @@ function Question({ productId, question }) {
           {'Helpful? '}
           <span>
             <input
-              className={styles.btnLinkify}
+              className={g.btnLinkify}
               type='button'
               onClick={helpfulHandler}
               value='Yes'
@@ -47,7 +48,7 @@ function Question({ productId, question }) {
           <span>
             {' | '}
             <input
-              className={styles.btnLinkify}
+              className={g.btnLinkify}
               type='button'
               onClick={addAnswer}
               value='Add Answer'

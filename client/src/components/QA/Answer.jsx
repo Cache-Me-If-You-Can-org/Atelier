@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import * as styles from './qanda.module.css';
+import * as g from '../shared/shared.module.css';
 
 function Answer({ answer }) {
   let date = new Date(answer.date);
@@ -33,7 +34,7 @@ function Answer({ answer }) {
           {' | Helpful? '}
           <span>
             <input
-              className={styles.btnLinkify}
+              className={g.btnLinkify}
               type='button'
               onClick={helpfulHandler}
               value='Yes'
@@ -48,7 +49,7 @@ function Answer({ answer }) {
           <span>
             <input
               type='button'
-              className={styles.btnLinkify}
+              className={g.btnLinkify}
               value={reported ? 'Reported' : 'Report'}
               onClick={() => {
                 if (!reported) {
