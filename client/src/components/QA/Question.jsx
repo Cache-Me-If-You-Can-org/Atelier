@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import AnswersList from './AnswersList';
 import * as styles from './qanda.module.css';
+import * as g from '../shared/shared.module.css';
 import AnswerForm from './AnswerForm';
 import Modal from '../shared/Modal';
 
@@ -23,20 +24,6 @@ function Question({ productId, question }) {
   function addAnswer() {
     setIsOpen(true);
   }
-  const didMount = useRef(false);
-  useEffect(() => {
-    if (didMount.current) {
-      // console.log('gonna hit api with ans', newAnswer);
-      axios.post(`/qa/questions/${question.question_id}/answers`, JSON.stringify(newAnswer), { headers: { 'Content-Type': 'application/json' } })
-        .then(() => {
-          console.log('posted!');
-          // add new answer to all answers (rerender)
-        })
-        .catch((err) => { throw new Error(err); });
-    } else {
-      didMount.current = true;
-    }
-  }, [newAnswer]);
 
   return (
     <div>
@@ -48,20 +35,31 @@ function Question({ productId, question }) {
         <div className={styles.questionDetails}>
           {'Helpful? '}
           <span>
-            <a onClick={helpfulHandler}>Yes</a>
+            <input
+              className={g.btnLinkify}
+              type='button'
+              onClick={helpfulHandler}
+              value='Yes'
+            />
           </span>
           <span>
             {` (${helpfulness})`}
           </span>
           <span>
             {' | '}
-            <a onClick={addAnswer}>Add Answer</a>
+            <input
+              className={g.btnLinkify}
+              type='button'
+              onClick={addAnswer}
+              value='Add Answer'
+            />
           </span>
         </div>
       </div>
       <AnswersList
         key={`answers_${question.question_id}`}
         questionId={question.question_id}
+        newAnswer={newAnswer}
       />
       <Modal
         isOpen={isOpen}

@@ -6,7 +6,7 @@ import Modal from '../../shared/Modal';
 import AddReview from './addReview/AddReview';
 import * as styles from '../reviews.module.css';
 
-function ReviewsList({ productId }) {
+function ReviewsList({ productId, meta }) {
   const [reviews, setReviews] = useState([]);
   const firstReviewRef = useRef(0);
   const lastReviewRef = useRef(2);
@@ -38,7 +38,7 @@ function ReviewsList({ productId }) {
         }
       },
     );
-  }, []);
+  }, [productId]);
 
   // Get next two reviews
   const getMoreReviews = () => {
@@ -53,6 +53,13 @@ function ReviewsList({ productId }) {
     );
     const newReviews = [...reviews, ...nextReviews];
     setReviews(newReviews);
+  };
+
+  const addNewreview = (reviewData) => {
+    ReviewsServices.addReview(reviewData, (response) => {
+      console.log(response);
+      setIsOpen(false);
+    });
   };
 
   // Scroll to new reviews when two new reviews load
@@ -95,7 +102,17 @@ function ReviewsList({ productId }) {
         </button>
       ) : null}
       <button type='button' onClick={() => setIsOpen(true)}>Add Review +</button>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} Module={<AddReview />} />
+      <Modal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        Module={(
+          <AddReview
+            productId={productId}
+            handleAddReview={addNewreview}
+            meta={meta}
+          />
+        )}
+      />
     </div>
   );
 }
