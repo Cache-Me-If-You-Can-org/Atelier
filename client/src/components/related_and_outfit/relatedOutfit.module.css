@@ -13,7 +13,7 @@
 }
 
 .relatedOutfit {
-  width: 800px;
+  /* width: 800px; */
   position: relative;
   overflow: visible;
 }
@@ -22,11 +22,17 @@
   box-sizing: content-box;
   margin: 0px 10px 0px 0px;
   border: 1px solid var(--color-border);
-  min-height: 295px;
+  min-height: 320px;
 }
 
 .productCardInfo {
-  padding: 0px 5px 5px 5px;
+  padding: 0px 5px 0px 5px;
+}
+
+.cardStars {
+  position: absolute;
+  bottom: 0px;
+  padding: 0px 5px 5px 0px;
 }
 
 .addOutfit {
