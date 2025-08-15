@@ -42,8 +42,8 @@ export default function App() {
           setTotalReviewCount={setTotalReviewCount}
           setProductRating={setProductRating}
         />
-        <BenRatingsAndReviews productId={currentProductId} />
       </div>
+      <BenRatingsAndReviews productId={currentProductId} />
     </div>
   );
 }

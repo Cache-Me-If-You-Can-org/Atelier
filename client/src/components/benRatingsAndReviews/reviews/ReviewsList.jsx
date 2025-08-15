@@ -4,6 +4,7 @@ import ReviewsServices from '../services/ReviewsServices';
 import Reviews from '../controllers/ReviewsStore';
 import Modal from '../../shared/Modal';
 import AddReview from './addReview/AddReview';
+import * as g from '../../global.module.css';
 import * as styles from '../reviews.module.css';
 
 function ReviewsList({ productId, meta }) {
@@ -93,7 +94,7 @@ function ReviewsList({ productId, meta }) {
       </div>
       {reviews.length ? (
         <button
-          className={styles.btn}
+          className={g.textMd}
           id='btn-reviews'
           type='button'
           onClick={() => getMoreReviews()}
@@ -101,7 +102,7 @@ function ReviewsList({ productId, meta }) {
           More Reviews
         </button>
       ) : null}
-      <button type='button' onClick={() => setIsOpen(true)}>Add Review +</button>
+      <button className={g.textMd} type='button' onClick={() => setIsOpen(true)}>Add Review +</button>
       <Modal
         isOpen={isOpen}
         setIsOpen={setIsOpen}

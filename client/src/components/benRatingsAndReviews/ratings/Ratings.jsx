@@ -2,6 +2,7 @@ import React from 'react';
 import QuarterStarRating from '../../shared/QuarterStarRating';
 import StarRatingBreakdown from './StarRatingBreakdown';
 import ProductBreakdown from './ProductBreakdown';
+import * as g from '../../global.module.css';
 import * as styles from '../reviews.module.css';
 
 function Ratings({ meta }) {
@@ -22,11 +23,11 @@ function Ratings({ meta }) {
 
   return (
     <div>
-      <h2 className={styles.ratingsTitle}>Ratings & Reviews</h2>
+      <h2 className={`${styles.ratingsTitle} ${g.textMd}`}>Ratings & Reviews</h2>
       <div className={styles.ratingsHeader}>
         <h3 className={styles.ratingsAverage}>{displayRating}</h3>
         <div className={styles.ratingsStars}>
-          <QuarterStarRating rating={averageRating} size={32} />
+          <QuarterStarRating rating={averageRating} size={18} />
         </div>
       </div>
       <div className={styles.ratingsBreakdown}>

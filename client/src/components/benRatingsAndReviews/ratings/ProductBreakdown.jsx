@@ -1,4 +1,5 @@
 import React from 'react';
+import * as g from '../../global.module.css';
 import * as styles from '../reviews.module.css';
 
 function ProductBreakdown({ characteristics }) {
@@ -18,7 +19,7 @@ function ProductBreakdown({ characteristics }) {
       value: Math.floor((Number(value) / 5) * 100), // convert to number
       ratings: ratingsMap[title] || [],
       ratingsLength: ratingsMap[title].length,
-    })
+    }),
   );
 
   return (
@@ -26,7 +27,7 @@ function ProductBreakdown({ characteristics }) {
       <ul className={styles.ratingsBreakdownList}>
         {prodBreakdowns.map((prodBreakdown) => (
           <li key={prodBreakdown.id} className={styles.prodBreakdown}>
-            <span className={styles.prodTitle}>{prodBreakdown.title}</span>
+            <span className={`${styles.prodTitle} ${g.textSm}`}>{prodBreakdown.title}</span>
             <div className={styles.prodBreakdownWrapper}>
               <span
                 className={styles.prodBreakdownMarker}
@@ -45,7 +46,7 @@ function ProductBreakdown({ characteristics }) {
                 </div>
               )}
             </div>
-            <div className={styles.ratingsTitles}>
+            <div className={`${styles.ratingsTitles} ${g.textXs}`}>
               {prodBreakdown.ratings.map((rating, index) => (
                 <span key={index}>{rating}</span>
               ))}

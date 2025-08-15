@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CharacteristicsSelector from './CharacteristicsSelector';
 import PhotoForm from '../../../shared/PhotoForm';
 import QuarterStarRating from '../../../shared/QuarterStarRating';
+import * as g from '../../../global.module.css';
 import * as styles from '../../reviews.module.css';
 
 function AddReview({
@@ -87,34 +88,34 @@ function AddReview({
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>Write Your Review</h1>
-      <h2>
+      <h1 className={g.textLg}>Write Your Review</h1>
+      <h2 className={g.textMd}>
         About the&nbsp;
         {/* {productName} */}
       </h2>
 
       <div className={styles.formBlock}>
-        <h3>
+        <h3 className={g.textMd}>
           Overall rating
           <span className={styles.requiredFlag}>*</span>
         </h3>
-        <div className={styles.errorContainer}>
-          {overallRatingError ? <p className={styles.errorMessage}>Selection required</p> : null}
+        <div>
+          {overallRatingError ? <p className={`${styles.errorMessage} ${g.textSm}`}>Selection required</p> : null}
         </div>
         <div className={styles.starWrapper}>
-          <QuarterStarRating isReview size={32} getRating={setStars} />
+          <QuarterStarRating isReview size={24} getRating={setStars} />
           <p>{starMeaning[stars - 1]}</p>
         </div>
       </div>
       <div className={styles.formBlock}>
-        <h3>
+        <h3 className={g.textMd}>
           Do you recommend this product?
           <span className={styles.requiredFlag}>*</span>
         </h3>
-        <div className={styles.errorContainer}>
-          {recommendError ? <p className={styles.errorMessage}>Selection required</p> : null}
+        <div>
+          {recommendError ? <p className={`${styles.errorMessage} ${g.textSm}`}>Selection required</p> : null}
         </div>
-        <div className={styles.radioSection}>
+        <div className={`${styles.radioSection} ${g.textSm}`}>
           <label className={styles.radioLabel} htmlFor='recommend'>
             <span className={styles.radioTitle}>Yes</span>
             <input
@@ -141,13 +142,13 @@ function AddReview({
       </div>
 
       <div className={styles.formBlock}>
-        <h3>
+        <h3 className={g.textMd}>
           Characteristics
           <span className={styles.requiredFlag}>*</span>
         </h3>
-        <div className={styles.errorContainer}>
+        <div>
           {characteristicsError && (
-            <p className={styles.errorMessage}>Please select a value for every characteristic</p>
+            <p className={`${styles.errorMessage} ${g.textSm}`}>Please select a value for every characteristic</p>
           )}
         </div>
         <CharacteristicsSelector
@@ -158,11 +159,11 @@ function AddReview({
 
       <div className={styles.formBlock}>
         <label className={styles.formLabel} htmlFor='summary'>
-          <h3>
+          <h3 className={g.textMd}>
             Summary
           </h3>
           {summaryError ? (
-            <p className={styles.errorMessage}>
+            <p className={`${styles.errorMessage} ${g.textSm}`}>
               Summary must be less than 60 characters
             </p>
           ) : null}
@@ -177,13 +178,13 @@ function AddReview({
           />
         </label>
         <label className={styles.formLabel} htmlFor='body'>
-          <h3>
+          <h3 className={g.textMd}>
             Review body
             <span className={styles.requiredFlag}>*</span>
           </h3>
           {bodyError
             ? (
-              <p className={styles.errorMessage}>
+              <p className={`${styles.errorMessage} ${g.textSm}`}>
                 Body must be greater than 50 characters
               </p>
             ) : null}
@@ -199,7 +200,7 @@ function AddReview({
             placeholder='Why did you like the product or not?'
           />
         </label>
-        <p>
+        <p className={g.textSm}>
           Minimum required characters left:&nbsp;
           {body.length < 50
             ? <span>{50 - body.length}</span>
@@ -208,7 +209,7 @@ function AddReview({
       </div>
 
       <div className={styles.formBlock}>
-        <h3>
+        <h3 className={g.textMd}>
           Upload your photos
         </h3>
         <PhotoForm setPhotos={setPhotos} photos={photos} photoCount={5} isModal={false} />
@@ -216,12 +217,12 @@ function AddReview({
 
       <div className={styles.formBlock}>
         <label className={styles.formLabel} htmlFor='nickname'>
-          <h3>
+          <h3 className={g.textMd}>
             What is your nickname?
             <span className={styles.requiredFlag}>*</span>
           </h3>
-          <div className={styles.errorContainer}>
-            {nicknameError ? <p className={styles.errorMessage}>Name required</p> : null}
+          <div>
+            {nicknameError ? <p className={`${styles.errorMessage} ${g.textSm}`}>Name required</p> : null}
           </div>
           <input
             className={styles.formInput}
@@ -233,12 +234,12 @@ function AddReview({
           />
         </label>
         <label className={styles.formLabel} htmlFor='email'>
-          <h3>
+          <h3 className={g.textMd}>
             Your email
             <span className={styles.requiredFlag}>*</span>
           </h3>
-          <div className={styles.errorContainer}>
-            {emailError ? <p className={styles.errorMessage}>Please submit a valid email</p> : null}
+          <div>
+            {emailError ? <p className={`${styles.errorMessage} ${g.textSm}`}>Please submit a valid email</p> : null}
           </div>
           <input
             className={styles.formInput}

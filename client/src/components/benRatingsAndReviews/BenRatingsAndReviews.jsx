@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReviewsList from './reviews/ReviewsList';
 import Ratings from './ratings/Ratings';
 import ReviewsServices from './services/ReviewsServices';
+import * as g from '../global.module.css';
 import * as styles from './reviews.module.css';
 
 function BenRatingsAndReviews({ productId }) {
@@ -12,7 +13,7 @@ function BenRatingsAndReviews({ productId }) {
     });
   }, [productId]);
   return (
-    <div>
+    <div className={[styles.benRatingsAndReviews, g.container, g.gapLg].join(' ')}>
       <div className={styles.ratingsAndReviewsLayout}>
         <div className={styles.ratingsWrapper}>
           <Ratings productId={productId} meta={meta} />
