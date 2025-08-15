@@ -10,39 +10,51 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
 export default function App() {
-  const [currentProductId, setCurrentProductId] = useState(null);
+  const [product, setProduct] = useState(null);
   const [totalReviewCount, setTotalReviewCount] = useState(0);
   const [productRating, setProductRating] = useState(0);
 
+  // assuming we don't get a product id passed to us,
+  // use the first product we find
   useEffect(() => {
     axios.get('/products')
-      .then((res) => setCurrentProductId(res.data[0].id))
+      .then((res) => {
+        axios.get(`/products/${res.data[0].id}`)
+          .then((response) => {
+            setProduct(response.data);
+          });
+      })
       .catch((err) => console.error('failed to get products', err));
   }, []);
 
-  if (currentProductId === null) {
+  if (product === null) {
     return (<div>loading...</div>);
   }
 
   return (
     <div className={[g.stack, g.gapLg].join(' ')}>
       <div className={g.center}>
-        {`${totalReviewCount} reviews for product ${currentProductId} with a rating of ${productRating}`}
+        {`${totalReviewCount} reviews for product ${product.id} with a rating of ${productRating}`}
       </div>
-      <Overview productId={currentProductId} />
+      <Overview productId={product.id} product={product} />
       <div className={[g.container, g.stack, g.gapLg].join(' ')}>
         <RelatedAndOutfit
           sectionId='relatedProductsAndOutfit'
-          productId={currentProductId}
+          productId={product.id}
+          product={product}
         />
-        <QA currentProductId={currentProductId} />
+        <QA product={product} />
         <RatingsAndReviews
           sectionId='ratingsAndReviews'
-          productId={currentProductId}
+          productId={product.id}
           setTotalReviewCount={setTotalReviewCount}
           setProductRating={setProductRating}
+          product={product}
         />
-        <BenRatingsAndReviews productId={currentProductId} />
+        <BenRatingsAndReviews
+          productId={product.id}
+          product={product}
+        />
       </div>
     </div>
   );
