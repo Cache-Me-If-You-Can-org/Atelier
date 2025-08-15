@@ -1,7 +1,5 @@
 .infoWrapper {
   padding: 10px;
+  flex-basis: 290px;
 }
 
-.gap {
-  gap: 10px
-}

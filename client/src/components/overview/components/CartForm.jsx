@@ -16,7 +16,7 @@ function CartForm({
 }) {
   return (
     <>
-      <div className={`${g.group} ${css.gap} ${g.fullWidth}`}>
+      <div className={[g.group, g.gapSm, g.fullWidth].join(' ')}>
         <Select
           className={css.fill}
           options={getSkus(styles[selectedStyle]).map((sku) => (
@@ -39,14 +39,14 @@ function CartForm({
           value={qty}
         />
       </div>
-      <div className={`${g.group} ${css.gap}`}>
+      <div className={[g.group, css.gap].join(' ')}>
         <button
           type='submit'
-          className={`${g.center} ${g.sb} ${css.fill}`}
+          className={[g.center, g.sb, css.fill].join(' ')}
           onClick={postToCart}
         >
           Add to bag
-          <Plus size={15} />
+          <Plus className={g.textMd} weight='bold' />
         </button>
       </div>
     </>

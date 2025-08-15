@@ -21,4 +21,8 @@ function calculateStars(ratings) {
     return valueTotal / total;
 }
 
-export { calculateStars };
+function getReviewCount(ratings) {
+    return Object.values(ratings).reduce((acc, curr) => acc + Number(curr), 0);
+}
+
+export { calculateStars, getReviewCount };

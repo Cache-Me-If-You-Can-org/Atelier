@@ -4,6 +4,7 @@ import * as css from './shared.module.css';
 function Image({ className = '', ...props }) {
   return (
     <img
+      alt=''
       className={`${css.image} ${className}`.trim()}
       {...props}
     />

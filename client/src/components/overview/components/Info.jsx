@@ -4,7 +4,7 @@ import StyleSelector from './StyleSelector';
 import Price from './Price';
 import CartForm from './CartForm';
 import QuarterStarRating from '../../shared/QuarterStarRating';
-import { calculateStars } from '../../lib/helpers';
+import { calculateStars, getReviewCount } from '../../lib/helpers';
 import { getSkus, getQtys } from '../lib/helpers';
 import * as g from '../../global.module.css';
 import * as css from '../styles/info.module.css';
@@ -31,11 +31,26 @@ function Info({
       style={{ display: isFullScreen ? 'none' : '' }}
     >
       <div className={[g.stack, g.gapMd].join(' ')}>
-        <div className={[g.group, g.gapSm].join(' ')}>
+        <div className={[g.group, g.gapSm, g.alignCenter].join(' ')}>
           <QuarterStarRating rating={calculateStars(ratings)} />
+          <a
+            className={g.textSm}
+            href="#ratingsAndReviews"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById('ratingsAndReviews').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }}
+          >
+            {`Read all ${getReviewCount(ratings)} reviews`}
+          </a>
         </div>
-        <p className={[g.textMd, g.upper].join(' ')}>{product.category}</p>
-        <h2 className={[g.textLg, g.bold].join(' ')}>{product.name}</h2>
+        <div className={g.stack}>
+          <p className={[g.textMd, g.upper].join(' ')}>{product.category}</p>
+          <h2 className={[g.textLg, g.bold].join(' ')}>{product.name}</h2>
+        </div>
         <Price styles={styles} selectedStyle={selectedStyle} />
         <StyleSelector
           styles={styles}

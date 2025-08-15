@@ -1,11 +1,10 @@
-.gap {
-  gap: 10px
+.alignCenter {
+  align-items: center;
 }
-
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  gap: var(--spacing-sm);
 }
 
 .circle {

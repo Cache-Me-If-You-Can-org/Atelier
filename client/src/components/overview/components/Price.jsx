@@ -5,7 +5,7 @@ import * as css from '../styles/price.module.css';
 function Price({ styles, selectedStyle }) {
   const onSale = styles[selectedStyle].sale_price !== null;
   return (
-    <div className={`${g.group} ${css.gap}`}>
+    <div className={[g.group, g.gapSm].join(' ')}>
       <div style={{ textDecoration: onSale ? 'line-through' : '' }}>
         {`$${styles[selectedStyle].original_price}`}
       </div>

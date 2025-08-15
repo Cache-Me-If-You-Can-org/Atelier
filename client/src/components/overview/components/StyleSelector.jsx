@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check } from '@phosphor-icons/react';
+import { Check, CaretRight } from '@phosphor-icons/react';
 import Image from '../../shared/Image';
 import { getSkus, getQtys } from '../lib/helpers';
 import * as g from '../../global.module.css';
@@ -10,14 +10,10 @@ function StyleSelector({
 }) {
   return (
     <>
-      <div className={`${g.group} ${css.gap}`}>
-        <div>
-          <strong>
-            STYLE
-            {'>'}
-          </strong>
-        </div>
-        <div>{styles[selectedStyle].name.toUpperCase()}</div>
+      <div className={[g.group, g.gapSm, css.alignCenter].join(' ')}>
+        <p className={[g.textMd, g.bold, g.upper].join(' ')}>style</p>
+        <CaretRight className={g.textMd} weight='bold'/>
+        <p className={[g.textMd, g.upper].join(' ')}>{styles[selectedStyle].name}</p>
       </div>
       <div className={css.grid}>
         {styles.map((style, i) => (
