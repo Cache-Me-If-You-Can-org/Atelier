@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import * as styles from './photoForm.module.css';
-import Image from './Image';
+import * as shared from './shared.module.css';
+import * as g from '../global.module.css';
+import Thumbnail from './Thumbnail';
 
 function PhotoForm({
   photos = [],
@@ -39,16 +40,16 @@ function PhotoForm({
   return (
     <div>
       <h5>Images</h5>
-      <div className={styles.placeHolderWrapper}>
-        {currPhotos.map((url, index) => (
+      <div className={g.flex}>
+        {currPhotos.map((url) => (
           url ? (
-            <Image
-              key={index}
-              className={styles.inlineThumbnail}
+            <Thumbnail
+              key={crypto.randomUUID()}
+              className={g.mSm}
               src={url}
             />
           ) : (
-            <div key={index} className={styles.placeholderImage} />
+            <div key={crypto.randomUUID()} className={[shared.placeholderImage, g.mSm].join(' ')} />
           )
         ))}
       </div>
@@ -56,7 +57,7 @@ function PhotoForm({
       {canUpload ? (
         <div>
           <p>Upload your image: </p>
-          {noUrl && <p className={styles.error}>You must enter a URL</p>}
+          {noUrl && <p className={shared.error}>You must enter a URL</p>}
           <input
             id='photos_upload'
             value={inputValue}

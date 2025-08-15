@@ -24,7 +24,6 @@ function Question({ productName, question }) {
   function addAnswer() {
     setIsOpen(true);
   }
-
   return (
     <div className={g.stack}>
       <div className={[styles.question, g.textM].join(' ')}>

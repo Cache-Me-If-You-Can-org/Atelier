@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import * as styles from './qanda.module.css';
-import * as g from '../global.module.css';
 
 function QuestionForm({
   productId, productName, setIsOpen, setNewQuestion,

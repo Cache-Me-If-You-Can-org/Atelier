@@ -46,7 +46,7 @@
 .sellerName {
   font-weight: bold;
 }
-.unstyledBtn {
+button.unstyledBtn, input.unstyledBtn{
   background: none;
   border: none;
   cursor: pointer;
