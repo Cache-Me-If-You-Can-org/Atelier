@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PhotoForm from '../shared/PhotoForm';
 import Modal from '../shared/Modal';
 import * as styles from './qanda.module.css';
-import * as g from '../global.module.css';
 
 function AnswerForm({
   productName, question, setIsOpen, setNewAnswer,
