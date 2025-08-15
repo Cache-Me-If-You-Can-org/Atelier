@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import * as styles from './qanda.module.css';
-import * as g from '../shared/shared.module.css';
+import * as g from '../global.module.css';
 
 function Answer({ answer }) {
   let date = new Date(answer.date);
@@ -26,9 +26,9 @@ function Answer({ answer }) {
     }
   }
   return (
-    <div className={styles.answer}>
-      <div>{answer.body}</div>
-      <div className={styles.answerDetails}>
+    <div className={[styles.answer, g.stack, g.gapSm].join(' ')}>
+      <div className={g.textSm}>{answer.body}</div>
+      <div className={[styles.answerDetails, g.textXs].join(' ')}>
         <span>
           {'by '}
         </span>

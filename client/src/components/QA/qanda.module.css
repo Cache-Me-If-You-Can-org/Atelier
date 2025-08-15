@@ -1,5 +1,6 @@
 .qaTitle {
   font-weight: lighter;
+  padding-bottom: var(--spacing-sm);
 }
 .answer {
   padding: 0px 10px 10px;
@@ -8,11 +9,10 @@
 }
 .answerDetails {
   color: gray;
-  padding-top: 10px;
-  font-size: x-small;
 }
 .questionsList {
   max-height: 80vh;
+  padding-bottom: var(--spacing-md);
 }
 .question {
   display: flex;
@@ -25,7 +25,6 @@
 }
 .questionDetails {
   color: gray;
-  font-size: x-small;
 }
 .answersList {
   display: flex;
@@ -46,4 +45,16 @@
 }
 .sellerName {
   font-weight: bold;
+}
+.unstyledBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.emphasize {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.multiBtn {
+  margin-right: var(--spacing-sm);
 }
