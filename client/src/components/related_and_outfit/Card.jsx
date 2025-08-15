@@ -5,28 +5,46 @@ import ComparisonTable from './ComparisonTable';
 import Modal from '../shared/Modal';
 import QuarterStarRating from '../shared/QuarterStarRating';
 
-function ImageWithButton({ url, related, original }) {
+function ImageWithButton({
+  url,
+  related,
+  original,
+  remove,
+}) {
   const [hover, setHover] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className='thumbnail-square' style={{ height: 200 }}>
       <img className='thumbnail-image' src={url} alt={original.name} style={{ objectPosition: 'center bottom' }} />
-      <button
-        type='button'
-        className={styles.overlayBtn}
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-        onClick={() => setIsOpen(true)}
-      >
-        {hover ? '★' : '☆'}
-      </button>
-      <Modal
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        Module={<ComparisonTable related={related} original={original} />}
-        style={{ width: '40%' }}
-      />
+      {remove ? (
+        <button
+          type='button'
+          className={styles.overlayBtn}
+          onClick={() => remove()}
+        >
+          &times;
+        </button>
+      )
+        : (
+          <>
+            <button
+              type='button'
+              className={styles.overlayBtn}
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+              onClick={() => setIsOpen(true)}
+            >
+              {hover ? '★' : '☆'}
+            </button>
+            <Modal
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              Module={<ComparisonTable related={related} original={original} />}
+              style={{ width: '40%' }}
+            />
+          </>
+        )}
     </div>
   );
 }
@@ -53,7 +71,9 @@ function calculateStars(ratings) {
   return valueTotal / total;
 }
 
-export default function Card({ productId, originalProductId }) {
+// remove is used to see if the card is an outfit card
+// (if remove is a valid function then it's an outfit card)
+export default function Card({ productId, originalProductId, remove }) {
   const [product, setProduct] = useState(null);
   const [originalProduct, setOriginalProduct] = useState(null);
   const [productImages, setProductImages] = useState(null);
@@ -98,7 +118,7 @@ export default function Card({ productId, originalProductId }) {
 
   return (
     <div className={styles.productCard}>
-      <ImageWithButton url={productImages[0].thumbnail_url ? productImages[0].thumbnail_url : 'https://blocks.astratic.com/img/general-img-landscape.png'} related={product} original={originalProduct} />
+      <ImageWithButton url={productImages[0].thumbnail_url ? productImages[0].thumbnail_url : 'https://blocks.astratic.com/img/general-img-landscape.png'} related={product} original={originalProduct} remove={remove} />
       <div className={styles.productCardInfo}>
         <small>{product.category.toUpperCase()}</small>
         <h4>{product.name}</h4>
