@@ -108,7 +108,12 @@ export default function Card({ productId, originalProductId, remove }) {
   if (!productImages) {
     return (
       <div className={styles.productCard}>
-        <p>Loading...</p>
+        <div className='thumbnail-square' style={{ height: 200 }}>
+          <img className='thumbnail-image' src='https://blocks.astratic.com/img/general-img-landscape.png' alt='loading...' style={{ objectPosition: 'center bottom' }} />
+        </div>
+        <div className={styles.productCardInfo}>
+          <small>LOADING...</small>
+        </div>
       </div>
     );
   }
