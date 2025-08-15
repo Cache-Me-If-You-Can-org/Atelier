@@ -1,14 +1,18 @@
+import React from 'react';
 import * as styles from './relatedOutfit.module.css';
 
 // Custom arrow for the carousel
 function Arrow(props) {
   const { className, style, onClick } = props;
-  var classes = `${className} ${styles.carouselArrow}`;
+  const classes = `${className} ${styles.carouselArrow}`;
   return (
     <div
       className={classes}
+      style={{ ...style }}
       onClick={onClick}
-      style={{...style}}
+      onKeyPress={() => onClick}
+      role='button'
+      tabIndex='0'
     />
   );
 }
@@ -20,5 +24,5 @@ export default {
   slidesToShow: 4,
   slidesToScroll: 1,
   nextArrow: <Arrow />,
-  prevArrow: <Arrow />
+  prevArrow: <Arrow />,
 };

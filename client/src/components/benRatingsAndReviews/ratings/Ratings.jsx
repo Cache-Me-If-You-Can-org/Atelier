@@ -1,20 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import ReviewsServices from '../services/ReviewsServices';
+import React from 'react';
 import QuarterStarRating from '../../shared/QuarterStarRating';
 import StarRatingBreakdown from './StarRatingBreakdown';
 import ProductBreakdown from './ProductBreakdown';
+import * as g from '../../global.module.css';
 import * as styles from '../reviews.module.css';
 
-function Ratings({ productId }) {
-  const [meta, setMeta] = useState([]);
-
-  useEffect(() => {
-    ReviewsServices.getMeta(productId, (meta) => {
-      setMeta(meta);
-    })
-  }, []);
-
-  let starRatings = meta?.ratings;
+function Ratings({ meta }) {
+  const starRatings = meta?.ratings;
 
   const starRatingsArray = Object.entries(starRatings || {});
   const totalScore = starRatingsArray.reduce(
@@ -31,11 +23,11 @@ function Ratings({ productId }) {
 
   return (
     <div>
-      <h2 className={styles.ratingsTitle}>Ratings & Reviews</h2>
+      <h2 className={`${styles.ratingsTitle} ${g.textMd}`}>Ratings & Reviews</h2>
       <div className={styles.ratingsHeader}>
         <h3 className={styles.ratingsAverage}>{displayRating}</h3>
         <div className={styles.ratingsStars}>
-          <QuarterStarRating rating={averageRating} size={32} />
+          <QuarterStarRating rating={averageRating} size={18} />
         </div>
       </div>
       <div className={styles.ratingsBreakdown}>

@@ -4,9 +4,10 @@ import ReviewsServices from '../services/ReviewsServices';
 import Reviews from '../controllers/ReviewsStore';
 import Modal from '../../shared/Modal';
 import AddReview from './addReview/AddReview';
+import * as g from '../../global.module.css';
 import * as styles from '../reviews.module.css';
 
-function ReviewsList({ productId }) {
+function ReviewsList({ productId, meta }) {
   const [reviews, setReviews] = useState([]);
   const firstReviewRef = useRef(0);
   const lastReviewRef = useRef(2);
@@ -38,7 +39,7 @@ function ReviewsList({ productId }) {
         }
       },
     );
-  }, []);
+  }, [productId]);
 
   // Get next two reviews
   const getMoreReviews = () => {
@@ -53,6 +54,13 @@ function ReviewsList({ productId }) {
     );
     const newReviews = [...reviews, ...nextReviews];
     setReviews(newReviews);
+  };
+
+  const addNewreview = (reviewData) => {
+    ReviewsServices.addReview(reviewData, (response) => {
+      console.log(response);
+      setIsOpen(false);
+    });
   };
 
   // Scroll to new reviews when two new reviews load
@@ -86,7 +94,7 @@ function ReviewsList({ productId }) {
       </div>
       {reviews.length ? (
         <button
-          className={styles.btn}
+          className={g.textMd}
           id='btn-reviews'
           type='button'
           onClick={() => getMoreReviews()}
@@ -94,8 +102,18 @@ function ReviewsList({ productId }) {
           More Reviews
         </button>
       ) : null}
-      <button type='button' onClick={() => setIsOpen(true)}>Add Review +</button>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} Module={<AddReview />} />
+      <button className={g.textMd} type='button' onClick={() => setIsOpen(true)}>Add Review +</button>
+      <Modal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        Module={(
+          <AddReview
+            productId={productId}
+            handleAddReview={addNewreview}
+            meta={meta}
+          />
+        )}
+      />
     </div>
   );
 }
