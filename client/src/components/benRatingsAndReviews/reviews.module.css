@@ -1,19 +1,24 @@
 /* reviews.module.css */
 
-/* -------------- Ratings & Reviews -- */
+/* -------------- Ratings & Reviesws -- */
+
+.benRatingsAndReviews {
+  width: 100%;
+  margin-bottom: 100px;
+}
 
 .ratingsAndReviewsLayout {
   display: flex;
-  flex-direction: row;
 }
 
 .ratingsWrapper {
-  width: 28%;
-  margin-right: 8%;
+  width: 255px;
+  flex-shrink: 0;
+  margin-right: 3em;
 }
 
 .reviewsWrapper {
-  width: 64%;
+  flex-grow: 1;
 }
 
 /* -------------- Reviews -- */
@@ -23,27 +28,66 @@
   font-weight: bold;
 }
 
-.reviewsListWrapper {
-  margin-bottom: 50px;
+.reviewsListWrapper button {
+  margin-right: var(--spacing-sm);
 }
 
 .reviewsList {
   overflow: scroll;
   max-height: 700px;
-  margin-bottom: 10px;
+  margin-bottom: var(--spacing-sm);
+  padding-right: var(--spacing-md);
 }
 
 .reviewTileWrapper {
-  background: rgb(250, 250, 250);
-  padding: 15px;
-  margin-bottom: 10px;
-  border: solid #ccc 1px;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
   width: 100%;
+  border-bottom: solid var(--color-dark) 1px;
 }
 
 .reviewTileHeading {
   display: flex;
   justify-content: space-between;
+  margin-bottom: var(--spacing-sm);
+}
+
+.reviewTileSummary {
+  margin-bottom: var(--spacing-sm);
+}
+
+.reviewTileBody {
+  margin-bottom: var(--spacing-sm);
+  word-break: break-word;
+}
+
+.reviewTileBodyButton {
+  margin-bottom: var(--spacing-sm);
+}
+
+.reviewTilesHelpfulSection button {
+  padding: 0;
+  min-width: auto;
+  border: none;
+  border-bottom: solid var(--color-dark) 1px;
+}
+
+.reviewTilesHelpfulSection p {
+  display: flex;
+}
+
+.reviewTilesHelpfulSection span:first-child {
+  margin-left: var(--spacing-sm);
+  padding-right: var(--spacing-sm);
+}
+
+.reviewTilesHelpfulSection span:last-child {
+  padding-left: var(--spacing-sm);
+  border-left: solid var(--color-dark) 1px;
+}
+
+.reviewTilesHelpfulSection button:first-child {
+  margin-right: 4px;
 }
 
 .reviewTitleResponse {
@@ -52,13 +96,12 @@
 }
 
 .reviewTitleResponseTitle {
-  font-size: 16px;
   margin: 0;
   padding: 0;
 }
 
-.reviewTileAuthorship {
-  font-size: 14px;
+.reviewTileRecommend {
+  margin-bottom: var(--spacing-sm);
 }
 
 .reviewTileUserName {
@@ -71,8 +114,13 @@
 
 .photoContainer {
   display: flex;
-  gap: 5px;
-  margin: 10px 0;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.photoContainer button {
+  padding: 0;
+  border: none;
 }
 
 .reviewPhotoSm {
@@ -93,21 +141,21 @@
 
 .ratingsTitle {
   text-transform: uppercase;
-  font-size: 18px;
+  font-weight: normal;
 }
 
 .ratingsAverage {
-  font-size: 70px;
   margin-right: 15px;
+  font-size: 3em;
 }
 
 .ratingsStars {
-  margin-top: 30px;
+  margin-top: 15px;
 }
 
 .ratingsBreakdown {
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: var(--spacing-lg);
 }
 
 .ratingsBreakdownList {
@@ -116,7 +164,7 @@
 }
 
 .ratingBarWrapper, .ratingBar, .ratingPercentage {
-  height: 8px;
+  height: 6px;
 }
 
 .ratingBar, .ratingPercentage {
@@ -128,7 +176,7 @@
 
 .ratingBar {
   width: 100%;
-  background-color: #d7d7d7;
+  background-color: var(--color-light);
   z-index: 100;
 }
 
@@ -150,32 +198,32 @@
 .ratingBreakdown {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: var(--spacing-sm);
 }
 
 .starTitle {
-  margin-right: 10px;
+  margin-right: var(--spacing-sm);
   border-bottom: solid #ccc 1px;
 }
 
 .recPercentage {
-  margin-bottom: 20px;
-  font-size: 14.5px;
+  font-weight: normal;
+  margin-bottom: var(--spacing-sm);
 }
 
 .prodBreakdown {
-  margin-bottom: 10px;
+  margin-bottom: var(--spacing-sm);
 }
 
 .prodBreakdownBarWrapper {
   position: relative;
   display: flex;
-  margin-bottom: 6px;
+  margin-bottom: var(--spacing-sm);
 }
 
 .prodBreakdownBarWrapper span {
-  background-color: #d7d7d7;
-  height: 8px;
+  background-color: var(--color-light);
+  height: 6px;
   display: block;
   flex: 1 1 0;
 }
@@ -187,7 +235,6 @@
 
 .ratingsTitles span {
   display: block;
-  font-size: 13px;
 }
 
 .prodBreakdownBarWrapper .two:first-child {
@@ -216,9 +263,9 @@
   position: absolute;
   width: 0;
   height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-top: 13px solid rgb(39, 39, 39);
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 12px solid var(--color-dark);
   top: 0px;
   z-index: 200;
   left: var(--percentageLeft);
@@ -228,13 +275,12 @@
 
 .formTitle {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 24px;
+  margin-bottom: var(--spacing-md);
   color: #333;
 }
 
 .radioLabel {
-  max-width: 200px;
+  max-width: 250px;
   display: block;
   text-align: center;
   margin-bottom: 5px;
@@ -244,15 +290,14 @@
 }
 
 .formBlock {
-  padding: 20px;
-  background-color: #f6f5f5;
-  border: solid #d3d1d1 1px;
-  margin-bottom: 20px;
+  padding: var(--spacing-sm);
+  background-color: var(--color-light);
+  border: solid var(--color-border) 1px;
+  margin-bottom: var(--spacing-md);
 }
 
 .requiredFlag {
   color: red;
-  font-size: 24px;
   padding-left: 3px;
 }
 
@@ -265,7 +310,7 @@
 }
 
 .characteristic {
-  padding: 15px 0;
+  padding-bottom: var(--spacing-sm);
 }
 
 .radioSection {
@@ -273,17 +318,16 @@
 }
 
 .radioSectionTitle {
-  margin-bottom: 10px;
+  margin-bottom: var(--spacing-sm);
 }
 
 .radioSectionTitle span {
   font-weight: 100;
-  margin-left: 10px;
+  margin-left: var(--spacing-sm);
 }
 
 .radioTitle {
   display: block;
-  font-size: 14px;
   font-weight: normal;
 }
 
@@ -293,13 +337,12 @@
 
 .formInput {
   width: 100%;
-  padding: 10px;
+  padding: var(--spacing-sm);
   font-weight: normal;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
+  margin-bottom: var(--spacing-sm);
+  border: 1px solid var(--color-light);
   border-radius: 0;
   box-sizing: border-box;
-  font-size: 14px;
 }
 
 .starWrapper {
@@ -307,31 +350,15 @@
 }
 
 .starWrapper p {
-  margin-left: 10px;
+  margin-left: var(--spacing-sm);
   padding-top: 4px;
 }
 
 .errorMessage {
   color: red;
-  font-size: 14px;
   font-weight: normal;
 }
 
-.errorContainer {
+/* .errorContainer {
   height: 20px;
-}
-
-.submitButton {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  border: none;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.submitButton:hover {
-  background-color: #0056b3;
-}
+} */

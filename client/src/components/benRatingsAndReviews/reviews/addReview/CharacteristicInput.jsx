@@ -1,4 +1,5 @@
 import React from 'react';
+import * as g from '../../../global.module.css';
 import * as styles from '../../reviews.module.css';
 
 function CharacteristicInput({
@@ -6,7 +7,7 @@ function CharacteristicInput({
 }) {
   return (
     <div className={styles.characteristic}>
-      <h4 className={styles.radioSectionTitle}>
+      <h4 className={`${styles.radioSectionTitle} ${g.textSm}`}>
         {label}
         :
         <span>
@@ -15,7 +16,7 @@ function CharacteristicInput({
           )
         </span>
       </h4>
-      <div className={styles.radioSection}>
+      <div className={`${styles.radioSection} ${g.textXs}`}>
         {options.map((optionLabel, index) => (
           <label className={styles.radioLabel} key={optionLabel} htmlFor={name}>
             <span className={styles.radioTitle}>{optionLabel}</span>

@@ -4,6 +4,7 @@ import QuarterStarRating from '../../shared/QuarterStarRating';
 import ReviewsServices from '../services/ReviewsServices';
 import Modal from '../../shared/Modal';
 import Image from '../../shared/Image';
+import * as g from '../../global.module.css';
 import * as styles from '../reviews.module.css';
 
 function ReviewsList({ review }) {
@@ -38,7 +39,7 @@ function ReviewsList({ review }) {
         <div className={styles.reviewTileStarRating}>
           <QuarterStarRating rating={review.rating} size={18} />
         </div>
-        <div className={styles.reviewTileAuthorship}>
+        <div className={g.textXs}>
           <span className={styles.reviewTileUserName}>
             {review.reviewer_name}
             ,
@@ -46,35 +47,39 @@ function ReviewsList({ review }) {
           <span>{formattedDate}</span>
         </div>
       </div>
-      <h2>{review.summary}</h2>
+      <h2 className={`${styles.reviewTileSummary} ${g.textMd}`}>{review.summary}</h2>
       <TruncatedText text={review.body} />
-      <div className={styles.photoContainer}>
-        {review.photos.map((photo) => (
-          <div key={photo.id}>
-            <button type='button' onClick={() => setIsOpen(true)}>
-              <Image className={styles.reviewPhotoSm} src={photo.url} />
-            </button>
-            <Modal
-              isOpen={isOpen}
-              setIsOpen={setIsOpen}
-              Module={
-                <Image className={styles.reviewPhotoLg} src={photo.url} />
-              }
-            />
+      {review.photos.length > 0
+        ? (
+          <div className={styles.photoContainer}>
+            {review.photos.map((photo) => (
+              <div key={photo.id}>
+                <button type='button' onClick={() => setIsOpen(true)}>
+                  <Image className={styles.reviewPhotoSm} src={photo.url} />
+                </button>
+                <Modal
+                  isOpen={isOpen}
+                  setIsOpen={setIsOpen}
+                  Module={
+                    <Image className={styles.reviewPhotoLg} src={photo.url} />
+                  }
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      {review.recommend ? <p>✓ I recommend this product</p> : null}
+        )
+        : null}
+      {review.recommend ? <p className={`${styles.reviewTileRecommend} ${g.textSm}`}>✓ I recommend this product</p> : null}
       {review.response ? (
-        <div className={styles.reviewTitleResponse}>
-          <h3 className={styles.reviewTitleResponseTitle}>Response from seller: </h3>
-          <p>{review.response}</p>
+        <div className={`${styles.reviewTitleResponse} ${g.textSm}`}>
+          <h3 className={`${styles.reviewTitleResponseTitle} ${g.textSm}`}>Response from seller: </h3>
+          <p className={g.textSm}>{review.response}</p>
         </div>
       ) : null}
-      <div>
+      <div className={`${styles.reviewTilesHelpfulSection} ${g.textXs}`}>
         <p>
+          Helpful?
           <span>
-            Helpful?
             <button onClick={() => handleHelpfulClick(review.review_id)} disabled={isHelpful} type='button'>Yes</button>
             (
             {helpfulness}

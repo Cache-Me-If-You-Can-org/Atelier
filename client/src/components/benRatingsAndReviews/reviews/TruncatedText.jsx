@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import * as g from '../../global.module.css';
+import * as styles from '../reviews.module.css';
 // import * as styles from '../reviews.module.css';
 
 function TruncatedText({ text, charLimit = 250 }) {
@@ -12,9 +14,9 @@ function TruncatedText({ text, charLimit = 250 }) {
 
   return (
     <div>
-      <p>{text.length > charLimit ? truncatedText : text}</p>
+      <p className={`${styles.reviewTileBody} ${g.textSm}`}>{text.length > charLimit ? truncatedText : text}</p>
       {text.length > charLimit && (
-        <button type='button' onClick={toggleExpanded}>
+        <button className={`${styles.reviewTileBodyButton} ${g.textXs}`} type='button' onClick={toggleExpanded}>
           {isExpanded ? 'Show less' : 'Show more'}
         </button>
       )}
