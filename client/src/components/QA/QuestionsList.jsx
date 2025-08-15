@@ -5,17 +5,18 @@ import Search from './Search';
 import Modal from '../shared/Modal';
 import QuestionForm from './QuestionForm';
 import * as styles from './qanda.module.css';
+import * as g from '../global.module.css';
 
-function QuestionsList({ productId }) {
+function QuestionsList({ product }) {
   const [allQuestions, setAllQuestions] = useState([]);
   const [displayedQuestions, setDisplayedQuestions] = useState([]);
-  const [count, setCount] = useState(4);
+  const [count, setCount] = useState(2);
   const [filterBy, setFilterBy] = useState('');
   const [isQFormOpen, setQFormIsOpen] = useState(false);
   const [newQuestion, setNewQuestion] = useState({});
 
   useEffect(() => {
-    axios.get('/qa/questions', { params: { product_id: productId, count: 999 } })
+    axios.get('/qa/questions', { params: { product_id: product.id, count: 999 } })
       .then((res) => {
         setAllQuestions(res.data.results);
         setDisplayedQuestions(res.data.results.slice(0, count));
@@ -23,7 +24,7 @@ function QuestionsList({ productId }) {
       .catch((err) => {
         throw new Error(err);
       });
-  }, [count, productId]);
+  }, [count, product]);
 
   useEffect(() => {
     const filtered = [];
@@ -60,7 +61,7 @@ function QuestionsList({ productId }) {
     if (didMount.current) {
       axios.post('/qa/questions', JSON.stringify(newQuestion), { headers: { 'Content-Type': 'application/json' } })
         .then(() => {
-          axios.get('/qa/questions', { params: { product_id: productId, count: 999 } })
+          axios.get('/qa/questions', { params: { product_id: product.id, count: 999 } })
             .then((res) => {
               setAllQuestions(res.data.results);
             })
@@ -70,7 +71,7 @@ function QuestionsList({ productId }) {
     } else {
       didMount.current = true;
     }
-  }, [newQuestion, productId]);
+  }, [newQuestion, product]);
 
   return (
     <div>
@@ -80,21 +81,23 @@ function QuestionsList({ productId }) {
           {displayedQuestions.map((question) => (
             <Question
               key={question.question_id}
-              productId={productId}
               question={question}
+              productName={product.name}
             />
           ))}
         </div>
-
-        { count < allQuestions.length && filterBy === '' ? (<button type='button' onClick={moreQuestions}>More Answered Questions</button>) : (<div />)}
-        <button type='button' onClick={addQuestion}>Add a Question +</button>
+        <div>
+          { count < allQuestions.length && filterBy === '' ? (<button className={[styles.emphasize, g.textM, styles.multiBtn].join(' ')} type='button' onClick={moreQuestions}>More Answered Questions</button>) : (<div />)}
+          <button className={[styles.emphasize, g.textM, styles.multiBtn].join(' ')} type='button' onClick={addQuestion}>Add a Question +</button>
+        </div>
       </div>
       <Modal
         isOpen={isQFormOpen}
         setIsOpen={setQFormIsOpen}
         Module={(
           <QuestionForm
-            productId={productId}
+            productId={product.id}
+            productName={product.name}
             setIsOpen={setQFormIsOpen}
             setNewQuestion={setNewQuestion}
           />

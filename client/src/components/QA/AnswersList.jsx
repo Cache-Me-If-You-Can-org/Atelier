@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Answer from './Answer';
 import * as styles from './qanda.module.css';
+import * as g from '../global.module.css';
 
 function AnswersList({ questionId, newAnswer }) {
   const [allAnswers, setAllAnswers] = useState([]);
@@ -60,13 +61,13 @@ function AnswersList({ questionId, newAnswer }) {
 
   return (
     <div className={[styles.answersList, styles.scrollable].join(' ')}>
-      <div>
+      <div className={g.textM}>
         <strong>A:</strong>
       </div>
       <div>
         {displayedAnswers.map((answer) => <Answer key={answer.answer_id} answer={answer} />)}
         { (count > 2) ? (<button type='button' onClick={collapseAnswers}>Collapse</button>) : (<div />)}
-        {(allAnswers.length > 2 && count === 2) ? (<button type='button' onClick={loadAllAnswers}>Load More Answers</button>) : (<div />)}
+        {(allAnswers.length > 2 && count === 2) ? (<input type='button' className={[styles.unstyledBtn, styles.emphasize, g.textSm].join(' ')} value='Load More Answers' onClick={loadAllAnswers} />) : (<div />)}
       </div>
     </div>
 

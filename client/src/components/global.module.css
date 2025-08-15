@@ -132,3 +132,11 @@
   cursor: pointer;
 }
 
+/*Button that looks like a link*/
+.btnLinkify {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  color: gray;
+}

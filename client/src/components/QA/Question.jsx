@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import AnswersList from './AnswersList';
 import * as styles from './qanda.module.css';
-import * as g from '../shared/shared.module.css';
+import * as g from '../global.module.css';
 import AnswerForm from './AnswerForm';
 import Modal from '../shared/Modal';
 
-function Question({ productId, question }) {
+function Question({ productName, question }) {
   const [isHelpful, setIsHelpful] = useState(false);
   const [helpfulness, setHelpfulness] = useState(question.question_helpfulness);
   const [isOpen, setIsOpen] = useState(false);
@@ -26,13 +26,13 @@ function Question({ productId, question }) {
   }
 
   return (
-    <div>
-      <div className={styles.question}>
+    <div className={g.stack}>
+      <div className={[styles.question, g.textM].join(' ')}>
         <div>
           <strong>Q:</strong>
           <strong className={styles.questionBody}>{question.question_body}</strong>
         </div>
-        <div className={styles.questionDetails}>
+        <div className={[styles.questionDetails, g.textXs].join(' ')}>
           {'Helpful? '}
           <span>
             <input
@@ -67,7 +67,7 @@ function Question({ productId, question }) {
         Module={(
           <AnswerForm
             question={question}
-            productId={productId}
+            productName={productName}
             setIsOpen={setIsOpen}
             setNewAnswer={setNewAnswer}
           />
