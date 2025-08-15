@@ -16,7 +16,7 @@ export default function ComparisonTable({ related, original }) {
     rows.push(newRow);
   }
 
-  for (let i = 0; i < relatedFeatures.length + originalFeatures.length; i + 1) {
+  for (let i = 0; i < relatedFeatures.length + originalFeatures.length; i += 1) {
     const origin = originalFeatures[i];
     const rel = relatedFeatures[i];
 
@@ -33,7 +33,7 @@ export default function ComparisonTable({ related, original }) {
     }
   }
 
-  for (let i = 0; i < features.length; i + 1) {
+  for (let i = 0; i < features.length; i += 1) {
     const feature = features[i];
     const originFeat = originalObj[feature];
     const relFeat = relatedObj[feature];

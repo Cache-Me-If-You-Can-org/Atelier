@@ -103,7 +103,9 @@ export default function Card({ productId, originalProductId }) {
         <small>{product.category.toUpperCase()}</small>
         <h4>{product.name}</h4>
         <small>{product.default_price}</small>
-        <QuarterStarRating rating={number} />
+        <div className={styles.cardStars}>
+          <QuarterStarRating rating={number} />
+        </div>
       </div>
     </div>
   );
