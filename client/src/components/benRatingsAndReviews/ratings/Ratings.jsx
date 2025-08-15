@@ -5,7 +5,7 @@ import ProductBreakdown from './ProductBreakdown';
 import * as g from '../../global.module.css';
 import * as styles from '../reviews.module.css';
 
-function Ratings({ meta }) {
+function Ratings({ meta, getFilters }) {
   const starRatings = meta?.ratings;
 
   const starRatingsArray = Object.entries(starRatings || {});
@@ -21,6 +21,10 @@ function Ratings({ meta }) {
   const averageRating = totalScore > 0 ? totalScore / totalRatings : 0;
   const displayRating = averageRating.toFixed(1);
 
+  const starFilters = (filterArray) => {
+    getFilters(filterArray);
+  };
+
   return (
     <div>
       <h2 className={`${styles.ratingsTitle} ${g.textMd}`}>Ratings & Reviews</h2>
@@ -35,6 +39,7 @@ function Ratings({ meta }) {
           ratings={meta.ratings}
           totalRatings={totalRatings}
           recommended={meta.recommended}
+          handleStarFilterClick={starFilters}
         />
       </div>
       <div>

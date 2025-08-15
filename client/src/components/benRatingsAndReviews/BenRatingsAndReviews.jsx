@@ -7,19 +7,26 @@ import * as styles from './reviews.module.css';
 
 function BenRatingsAndReviews({ productId }) {
   const [meta, setMeta] = useState([]);
+  const [starFilters, setStarFilters] = useState([]);
+
+  const getFilters = (filterArray) => {
+    setStarFilters(filterArray);
+  };
+
   useEffect(() => {
     ReviewsServices.getMeta(productId, (metaData) => {
       setMeta(metaData);
     });
   }, [productId]);
+
   return (
     <div className={[styles.benRatingsAndReviews, g.container, g.gapLg].join(' ')}>
       <div className={styles.ratingsAndReviewsLayout}>
         <div className={styles.ratingsWrapper}>
-          <Ratings productId={productId} meta={meta} />
+          <Ratings getFilters={getFilters} productId={productId} meta={meta} />
         </div>
         <div className={styles.reviewsWrapper}>
-          <ReviewsList productId={productId} meta={meta} />
+          <ReviewsList starFilters={starFilters} productId={productId} meta={meta} />
         </div>
       </div>
     </div>

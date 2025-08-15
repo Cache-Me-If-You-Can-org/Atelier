@@ -16,7 +16,7 @@ function ProductBreakdown({ characteristics }) {
     ([title, { id, value }]) => ({
       title,
       id,
-      value: Math.floor((Number(value) / 5) * 100), // convert to number
+      value: Math.floor((Number(value) / 5) * 100),
       ratings: ratingsMap[title] || [],
       ratingsLength: ratingsMap[title].length,
     }),
@@ -31,7 +31,7 @@ function ProductBreakdown({ characteristics }) {
             <div className={styles.prodBreakdownWrapper}>
               <span
                 className={styles.prodBreakdownMarker}
-                style={{ '--percentageLeft': prodBreakdown.value + '%' }}
+                style={{ '--percentageLeft': `${prodBreakdown.value}%` }}
               />
               {prodBreakdown.ratingsLength === 2 ? (
                 <div className={styles.prodBreakdownBarWrapper}>
@@ -47,8 +47,8 @@ function ProductBreakdown({ characteristics }) {
               )}
             </div>
             <div className={`${styles.ratingsTitles} ${g.textXs}`}>
-              {prodBreakdown.ratings.map((rating, index) => (
-                <span key={index}>{rating}</span>
+              {prodBreakdown.ratings.map((rating) => (
+                <span key={crypto.randomUUID()}>{rating}</span>
               ))}
             </div>
           </li>

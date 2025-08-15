@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import ReviewTile from './ReviewTile';
+import ReviewsFilters from './ReviewsFilters';
 import ReviewsServices from '../services/ReviewsServices';
 import Reviews from '../controllers/ReviewsStore';
 import Modal from '../../shared/Modal';
@@ -7,53 +8,51 @@ import AddReview from './addReview/AddReview';
 import * as g from '../../global.module.css';
 import * as styles from '../reviews.module.css';
 
-function ReviewsList({ productId, meta }) {
-  const [reviews, setReviews] = useState([]);
+function ReviewsList({ productId, meta, starFilters }) {
+  const [totalReviews, setTotalReviews] = useState([]);
+  const [visibleReviews, setVisibleReviews] = useState([]);
   const firstReviewRef = useRef(0);
   const lastReviewRef = useRef(2);
   const [isOpen, setIsOpen] = useState(false);
+  const defaultReviewsRef = useRef([]);
 
-  // Get first 2 reviews on first page load
-  useEffect(() => {
+  const getRelevant = useCallback(() => {
     ReviewsServices.getReviews(
       productId,
       Reviews.count,
       Reviews.page,
       (data) => {
-        Reviews.totalResults = data.results;
-        const renderedReviews = data.results.slice(
-          firstReviewRef.current,
-          lastReviewRef.current,
-        );
-        setReviews(renderedReviews);
-      },
-    );
-
-    ReviewsServices.getReviews(
-      productId,
-      Reviews.count,
-      Reviews.page + 1,
-      (nextData) => {
-        if (nextData.results.length !== 0) {
-          Reviews.totalResults = [...data.results, ...nextData.results];
-        }
+        const initialTotalReviews = data.results;
+        setTotalReviews(initialTotalReviews);
+        const firstTwoReviews = data.results.slice(0, lastReviewRef.current);
+        setVisibleReviews(firstTwoReviews);
+        defaultReviewsRef.current = initialTotalReviews;
       },
     );
   }, [productId]);
+
+  // Get first 2 reviews on first page load
+  useEffect(() => {
+    getRelevant();
+  }, [getRelevant]);
+
+  const filterReviews = (filteredTotal) => {
+    setTotalReviews(filteredTotal);
+    const updatedVisibleReviews = totalReviews.slice(0, lastReviewRef.current);
+    setVisibleReviews(updatedVisibleReviews);
+  };
 
   // Get next two reviews
   const getMoreReviews = () => {
     firstReviewRef.current += 2;
     lastReviewRef.current += 2;
 
-    Reviews.visibleReviews = lastReviewRef.current;
-
-    const nextReviews = Reviews.totalResults.slice(
+    const nextReviews = totalReviews.slice(
       firstReviewRef.current,
       lastReviewRef.current,
     );
-    const newReviews = [...reviews, ...nextReviews];
-    setReviews(newReviews);
+    const newReviews = [...visibleReviews, ...nextReviews];
+    setVisibleReviews(newReviews);
   };
 
   const addNewreview = (reviewData) => {
@@ -65,7 +64,7 @@ function ReviewsList({ productId, meta }) {
 
   // Scroll to new reviews when two new reviews load
   useEffect(() => {
-    if (Reviews.visibleReviews > 2) {
+    if (visibleReviews.length > 2) {
       const reviewContainer = document.getElementById('reviews');
       const lastChild = reviewContainer.lastElementChild;
       const scrollPosition = lastChild.offsetTop + 100;
@@ -79,20 +78,30 @@ function ReviewsList({ productId, meta }) {
         });
       }
     }
-  }, [reviews]);
+  }, [visibleReviews]);
 
   return (
     <div className={styles.reviewsListWrapper}>
+      <p>{starFilters}</p>
+      <ReviewsFilters
+        totalReviews={totalReviews}
+        filterTotalReviews={filterReviews}
+        handleRelevantSelection={getRelevant}
+      />
       <div id='reviews' className={styles.reviewsList}>
-        {reviews.length
-          ? reviews.map((review) => (
-            <div key={review.review_id} id='review-tile'>
-              <ReviewTile review={review} />
-            </div>
-          ))
+        {visibleReviews.length
+          ? visibleReviews
+            .filter((review) => (starFilters.length > 0
+              ? starFilters.includes(review.rating) : (review)
+            ))
+            .map((review) => (
+              <div key={review.review_id} id='review-tile'>
+                <ReviewTile review={review} />
+              </div>
+            ))
           : null}
       </div>
-      {reviews.length ? (
+      {visibleReviews.length ? (
         <button
           className={g.textMd}
           id='btn-reviews'
