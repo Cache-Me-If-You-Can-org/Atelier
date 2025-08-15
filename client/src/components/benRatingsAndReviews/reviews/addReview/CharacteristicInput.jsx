@@ -1,36 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as styles from '../../reviews.module.css';
 
-// Reusable component for a characteristic radio group
 function CharacteristicInput({
-  label, options, value, setValue, name, id,
+  label, options, value, onChange, name,
 }) {
   return (
     <div className={styles.characteristic}>
-      <h3 className={styles.radioSectionTitle}>
+      <h4 className={styles.radioSectionTitle}>
         {label}
         :
         <span>
           (
-          {value?.[id] ? options[value[id] - 1] : 'Nothing selected'}
+          {value ? options[value - 1] : 'Nothing selected'}
           )
         </span>
-      </h3>
+      </h4>
       <div className={styles.radioSection}>
         {options.map((optionLabel, index) => (
-          <label className={styles.radioLabel} key={String(optionLabel)} htmlFor={name}>
+          <label className={styles.radioLabel} key={optionLabel} htmlFor={name}>
             <span className={styles.radioTitle}>{optionLabel}</span>
             <input
               className={styles.formRadio}
               type='radio'
               name={name}
               value={String(index + 1)}
-              checked={value?.[id] === index + 1}
-              onChange={(e) => setValue(
-                {
-                  [id]: Number(e.target.value),
-                },
-              )}
+              checked={value === index + 1}
+              onChange={() => onChange(index + 1)}
             />
           </label>
         ))}

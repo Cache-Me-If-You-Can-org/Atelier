@@ -97,8 +97,12 @@ export default function QuarterStarRating({
 
   const handleStarClick = (starNum) => {
     setHoverable(!hoverable);
-    setStars(numberToStars(starNum));
-    if (getRating) getRating(starNum);
+    if (!hoverable) {
+      if (getRating) getRating(0);
+    } else {
+      setStars(numberToStars(starNum));
+      if (getRating) getRating(starNum);
+    }
   };
 
   if (!stars) return null;
