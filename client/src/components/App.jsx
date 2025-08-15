@@ -24,7 +24,6 @@ export default function App() {
     return (<div>loading...</div>);
   }
 
-  const topText = `${totalReviewCount} reviews for product ${currentProductId} with a rating of ${productRating}`;
   return (
     <div className={[g.stack, g.gapLg].join(' ')}>
       <div className={g.center}>

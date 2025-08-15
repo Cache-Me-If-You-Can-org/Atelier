@@ -4,7 +4,7 @@ import Outfit from './related_and_outfit/Outfit';
 
 export default function RelatedAndOutfit({ productId, sectionId }) {
   return (
-    <section id={sectionId} className='container'>
+    <section id={sectionId}>
       RELATED PRODUCTS
       <RelatedProducts productId={productId} />
       YOUR OUTFIT

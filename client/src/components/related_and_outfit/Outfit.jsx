@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
+import Cookies from 'js-cookie';
 import Card from './Card';
 import settings from './Carousel';
 import * as styles from './relatedOutfit.module.css';
@@ -24,17 +25,17 @@ function AddOutfitButton({ addNewItem, productId }) {
 
 function useOutfit() {
   const [outfit, setOutfit] = useState(() => {
-    const saved = sessionStorage.getItem('outfit');
+    const saved = Cookies.get('outfit');
     return saved ? JSON.parse(saved) : [];
   });
 
   useEffect(() => {
-    sessionStorage.setItem('outfit', JSON.stringify(outfit));
+    Cookies.set('outfit', JSON.stringify(outfit), { expires: 7, path: '/' });
   }, [outfit]);
 
   const addItem = (productId) => {
     setOutfit((prev) => {
-      const exists = prev.find((item) => item.productId === productId);
+      const exists = prev.find((id) => id === productId);
       if (exists) {
         return prev;
       }
