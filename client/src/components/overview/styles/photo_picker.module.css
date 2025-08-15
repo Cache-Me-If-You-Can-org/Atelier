@@ -1,0 +1,50 @@
+.thumbnailWrapper {
+  --thumbnail-width: 58px;
+  width: var(--thumbnail-width);
+  /* height: calc((var(--thumbnail-width) + var(--spacing-sm)) * 7); */
+  overflow-y: auto;
+  position: relative;
+}
+
+.thumbnailWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.thumbnail {
+  width: 100%;
+  aspect-ratio: 1/1;
+  position: relative;
+  padding: unset;
+  max-height: var(--thumbnail-width);
+}
+
+.indicator {
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  bottom: -6px;
+}
+
+.topScroll {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding-top: 4px;
+  pointer-events: none;
+  background-color: darkcyan;
+}
+
+.bottomScroll {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-bottom: 4px;
+  pointer-events: none;
+  background-color: darkgoldenrod;
+}
+
+.scrollIndicator {
+  color: var(--color-light);
+}

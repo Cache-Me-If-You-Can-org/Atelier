@@ -13,21 +13,28 @@ export default function App() {
   const [product, setProduct] = useState(null);
   const [totalReviewCount, setTotalReviewCount] = useState(0);
   const [productRating, setProductRating] = useState(0);
+  const [ratings, setRatings] = useState(null);
 
   // assuming we don't get a product id passed to us,
   // use the first product we find
   useEffect(() => {
     axios.get('/products')
       .then((res) => {
-        axios.get(`/products/${res.data[0].id}`)
-          .then((response) => {
-            setProduct(response.data);
-          });
+        return axios.get(`/products/${res.data[0].id}`);
+      })
+      .then((res) => {
+        setProduct(res.data);
+        return axios.get('/reviews/meta', {
+          params: { product_id: res.data.id },
+        });
+      })
+      .then((res) => {
+        setRatings(res.data.ratings);
       })
       .catch((err) => console.error('failed to get products', err));
   }, []);
 
-  if (product === null) {
+  if (product === null || ratings === null) {
     return (<div>loading...</div>);
   }
 
@@ -36,7 +43,7 @@ export default function App() {
       <div className={g.center}>
         {`${totalReviewCount} reviews for product ${product.id} with a rating of ${productRating}`}
       </div>
-      <Overview productId={product.id} product={product} />
+      <Overview product={product} ratings={ratings} />
       <div className={[g.container, g.stack, g.gapLg].join(' ')}>
         <RelatedAndOutfit
           sectionId='relatedProductsAndOutfit'
@@ -56,7 +63,6 @@ export default function App() {
           product={product}
         />
       </div>
-      <BenRatingsAndReviews productId={currentProductId} />
     </div>
   );
 }

@@ -3,6 +3,8 @@ import axios from 'axios';
 import StyleSelector from './StyleSelector';
 import Price from './Price';
 import CartForm from './CartForm';
+import QuarterStarRating from '../../shared/QuarterStarRating';
+import { calculateStars } from '../../lib/helpers';
 import { getSkus, getQtys } from '../lib/helpers';
 import * as g from '../../global.module.css';
 import * as css from '../styles/info.module.css';
@@ -13,6 +15,7 @@ function Info({
   selectedStyle,
   setSelectedStyle,
   isFullScreen,
+  ratings,
 }) {
   const [skuId, setSkuId] = useState(getSkus(styles[selectedStyle])[0]);
   const [qty, setQty] = useState(getQtys(styles[selectedStyle], skuId)[0]);
@@ -28,7 +31,9 @@ function Info({
       style={{ display: isFullScreen ? 'none' : '' }}
     >
       <div className={[g.stack, g.gapMd].join(' ')}>
-        <div>stars</div>
+        <div className={[g.group, g.gapSm].join(' ')}>
+          <QuarterStarRating rating={calculateStars(ratings)} />
+        </div>
         <p className={[g.textMd, g.upper].join(' ')}>{product.category}</p>
         <h2 className={[g.textLg, g.bold].join(' ')}>{product.name}</h2>
         <Price styles={styles} selectedStyle={selectedStyle} />

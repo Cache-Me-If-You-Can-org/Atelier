@@ -5,23 +5,18 @@ import Footer from './components/Footer';
 import Info from './components/Info';
 import * as g from '../global.module.css';
 
-function Overview({ productId }) {
-  const [product, setProduct] = useState(null);
+function Overview({ product, ratings }) {
+  // const [product, setProduct] = useState(null);
   const [styles, setStyles] = useState(null);
   const [selectedStyle, setSelectedStyle] = useState(0);
   const [isFullScreen, setIsFullScreen] = useState(false);
 
   useEffect(() => {
-    axios.get(`/products/${productId}`)
-      .then((res) => { setProduct(res.data); return res.data; })
-      // .then((res) => console.log('product: ', res))
-      .catch((err) => console.error('failed to get product by id', err));
-
-    axios.get(`/products/${productId}/styles`)
+    axios.get(`/products/${product.id}/styles`)
       .then((res) => { setStyles(res.data.results); return res.data.results; })
       // .then((res) => console.log('styles: ', res))
       .catch((err) => console.error('failed to get styles by id', err));
-  }, [productId]);
+  }, [product.id]);
 
   if (styles === null || product === null) {
     return (<div>loading...</div>);
@@ -45,6 +40,7 @@ function Overview({ productId }) {
               selectedStyle={selectedStyle}
               isFullScreen={isFullScreen}
               setSelectedStyle={setSelectedStyle}
+              ratings={ratings}
             />
           </div>
         </div>
