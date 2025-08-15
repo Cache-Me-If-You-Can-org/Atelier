@@ -1,46 +1,75 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import Card from "./Card.jsx";
-import Slider from "react-slick";
-import settings from "./Carousel.jsx";
+import React, { useState, useEffect } from 'react';
+import Slider from 'react-slick';
+import Cookies from 'js-cookie';
+import Card from './Card';
+import settings from './Carousel';
 import * as styles from './relatedOutfit.module.css';
 
-export default function Outfit({ productId }) {
-  const [outfit, setOutfit] = useState([]);
-  const [newItem, setNewItem] = useState(null);
+function AddOutfitButton({ addNewItem, productId }) {
+  return (
+    <div className={`${styles.productCard} ${styles.addOutfit}`}>
+      <span
+        onClick={() => {
+          addNewItem(productId);
+        }}
+        onKeyPress={() => {}}
+        role='button'
+        tabIndex='0'
+      >
+        <p>+</p>
+        <p>Add to Outfit</p>
+      </span>
+    </div>
+  );
+}
+
+function useOutfit() {
+  const [outfit, setOutfit] = useState(() => {
+    const saved = Cookies.get('outfit');
+    return saved ? JSON.parse(saved) : [];
+  });
 
   useEffect(() => {
-    axios.get('/cart')
-      .then(res => setOutfit(res.data))
-      .catch(err => console.error('error loading outfit:', err));
-  }, [newItem])
+    Cookies.set('outfit', JSON.stringify(outfit), { expires: 7, path: '/' });
+  }, [outfit]);
 
-  async function postToCart(id) {
-    axios.post('/cart', {
-      params: { sku_id: id }
-    })
-      .then(res => setNewItem(id))
-      .catch(err => console.error('error posting to cart'));
-  }
+  const addItem = (productId) => {
+    setOutfit((prev) => {
+      const exists = prev.find((id) => id === productId);
+      if (exists) {
+        return prev;
+      }
+      return [...prev, productId];
+    });
+  };
+
+  const removeItem = (productId) => {
+    setOutfit((prev) => prev.filter((item) => item.productId !== productId));
+  };
+
+  return {
+    outfit,
+    addItem,
+    removeItem,
+  };
+}
+
+export default function Outfit({ productId }) {
+  const {
+    outfit,
+    addItem,
+    removeItem,
+  } = useOutfit();
 
   return (
     <div className={styles.relatedOutfit}>
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <Slider {...settings}>
-        <AddToOutfit onClick={postToCart} productId={productId} />
-        {outfit.map((id, index) => (
-          <Card key={index} productId={id} originalProductId={productId} />
+        <AddOutfitButton addNewItem={addItem} productId={productId} />
+        {outfit.map((id) => (
+          <Card key={`key-${id}`} productId={id} originalProductId={productId} remove={removeItem} />
         ))}
       </Slider>
     </div>
   );
-};
-
-function AddToOutfit({ onClick, productId }) {
-  return (<>
-    <div className={`${styles.productCard} ${styles.addOutfit}`} onClick={() => postToCart(productId)}>
-      <p>+</p>
-      <p>Add to Outfit</p>
-    </div>
-  </>
-  );
-};
+}
