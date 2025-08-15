@@ -1,19 +1,14 @@
 import React, { useState } from 'react';
-import CharacteristicInput from './CharacteristicInput';
+import CharacteristicsSelector from './CharacteristicsSelector';
 import PhotoForm from '../../../shared/PhotoForm';
 import QuarterStarRating from '../../../shared/QuarterStarRating';
 import * as styles from '../../reviews.module.css';
 
 function AddReview({
-  productId, productName, meta, handleAddReview,
+  productId, meta, handleAddReview,
 }) {
   const [recommend, setRecommend] = useState('');
-  const [size, setSize] = useState({});
-  const [width, setWidth] = useState({});
-  const [comfort, setComfort] = useState({});
-  const [quality, setQuality] = useState({});
-  const [length, setLength] = useState({});
-  const [fit, setFit] = useState({});
+  const [characteristics, setCharacteristics] = useState({});
   const [summary, setSummary] = useState('');
   const [body, setBody] = useState('');
   const [nickname, setNickname] = useState('');
@@ -29,49 +24,8 @@ function AddReview({
   const [nicknameError, setNicknameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
 
-  const characteristicOptions = {
-    size: [
-      'A size too small',
-      '½ a size too small',
-      'Perfect',
-      '½ a size too big',
-      'A size too wide',
-    ],
-    width: [
-      'Too narrow',
-      'Slightly narrow',
-      'Perfect',
-      'Slightly wide',
-      'Too wide',
-    ],
-    comfort: [
-      'Uncomfortable',
-      'Slightly uncomfortable',
-      'Ok',
-      'Comfortable',
-      'Perfect',
-    ],
-    quality: [
-      'Poor',
-      'Below average',
-      'What I expected',
-      'Pretty great',
-      'Perfect',
-    ],
-    length: [
-      'Runs short',
-      'Runs slightly short',
-      'Perfect',
-      'Runs slightly long',
-      'Runs long',
-    ],
-    fit: [
-      'Runs tight',
-      'Runs slightly tight',
-      'Perfect',
-      'Runs slightly long',
-      'Runs long',
-    ],
+  const getCharacteristics = (newCharacteristics) => {
+    setCharacteristics(newCharacteristics);
   };
 
   const starMeaning = [
@@ -81,20 +35,6 @@ function AddReview({
     'Good',
     'Great',
   ];
-
-  const metaCharacteristics = meta?.characteristics || [];
-
-  const characteristicsArr = Object.entries(metaCharacteristics).map(([name, data]) => ({
-    name,
-    ...data,
-  }));
-
-  const fullCharArr = characteristicsArr.map((obj) => ({
-    ...obj,
-    options: characteristicOptions[obj.name.toLowerCase()],
-  }));
-
-  console.log(fullCharArr);
 
   const emailPattern = /\S+@\S+\.\S+/;
 
@@ -106,39 +46,28 @@ function AddReview({
     const trimmedName = nickname.trim();
     const trimmedEmail = email.trim();
 
-    if (stars === 0) {
-      setOverallRatingError(!overallRatingError);
-    }
+    setCharacteristicsError(Object.keys(characteristics).length
+    !== Object.keys(meta?.characteristics).length);
+    setOverallRatingError(stars === 0);
+    setRecommendError(recommend === '');
+    setSummaryError(trimmedSummary.length > 60);
+    setBodyError(trimmedBody.length < 50);
+    setNicknameError(trimmedName === '');
+    setEmailError(!emailPattern.test(trimmedEmail) || trimmedEmail.length === 0);
 
-    if (recommend === '') {
-      setRecommendError(!recommendError);
-    }
-
-    if (trimmedSummary.length > 60) {
-      setSummaryError(!summaryError);
-    }
-
-    if (trimmedBody.length < 50) {
-      setBodyError(!bodyError);
-    }
-
-    if (trimmedName === '') {
-      setNicknameError(!nicknameError);
-    }
-
-    if (!emailPattern.test(trimmedEmail) || trimmedEmail.length === 0) {
-      setEmailError(!emailError);
+    if (
+      Object.keys(characteristics).length !== Object.keys(meta?.characteristics).length
+      || stars === 0
+      || recommend === ''
+      || trimmedSummary.length > 60
+      || trimmedBody.length < 50
+      || trimmedName === ''
+      || !emailPattern.test(trimmedEmail)
+      || trimmedEmail.length === 0
+    ) {
       return;
     }
 
-    const characteristics = {
-      ...size,
-      ...width,
-      ...comfort,
-      ...quality,
-      ...length,
-      ...fit,
-    };
     const newReview = {
       product_id: productId,
       rating: stars,
@@ -151,25 +80,9 @@ function AddReview({
       characteristics,
     };
 
+    console.log(newReview);
+
     handleAddReview(newReview);
-  };
-
-  const setters = {
-    size: setSize,
-    width: setWidth,
-    comfort: setComfort,
-    quality: setQuality,
-    length: setLength,
-    fit: setFit,
-  };
-
-  const values = {
-    size,
-    width,
-    comfort,
-    quality,
-    length,
-    fit,
   };
 
   return (
@@ -179,12 +92,15 @@ function AddReview({
         About the&nbsp;
         {/* {productName} */}
       </h2>
+
       <div className={styles.formBlock}>
         <h3>
           Overall rating
           <span className={styles.requiredFlag}>*</span>
         </h3>
-        {overallRatingError ? <p className={styles.errorMessage}>Selection required</p> : null}
+        <div className={styles.errorContainer}>
+          {overallRatingError ? <p className={styles.errorMessage}>Selection required</p> : null}
+        </div>
         <div className={styles.starWrapper}>
           <QuarterStarRating isReview size={32} getRating={setStars} />
           <p>{starMeaning[stars - 1]}</p>
@@ -195,7 +111,9 @@ function AddReview({
           Do you recommend this product?
           <span className={styles.requiredFlag}>*</span>
         </h3>
-        {recommendError ? <p className={styles.errorMessage}>Selection required</p> : null}
+        <div className={styles.errorContainer}>
+          {recommendError ? <p className={styles.errorMessage}>Selection required</p> : null}
+        </div>
         <div className={styles.radioSection}>
           <label className={styles.radioLabel} htmlFor='recommend'>
             <span className={styles.radioTitle}>Yes</span>
@@ -227,18 +145,15 @@ function AddReview({
           Characteristics
           <span className={styles.requiredFlag}>*</span>
         </h3>
-
-        {fullCharArr.map((characteristic) => (
-          <CharacteristicInput
-            key={characteristic.id}
-            id={characteristic.id.toString()}
-            label={characteristic.name}
-            name={characteristic.name}
-            options={characteristic.options}
-            value={values[characteristic.name.toLowerCase()]}
-            setValue={setters[characteristic.name.toLowerCase()]}
-          />
-        ))}
+        <div className={styles.errorContainer}>
+          {characteristicsError && (
+            <p className={styles.errorMessage}>Please select a value for every characteristic</p>
+          )}
+        </div>
+        <CharacteristicsSelector
+          getCharacteristics={getCharacteristics}
+          characteristics={meta?.characteristics}
+        />
       </div>
 
       <div className={styles.formBlock}>
@@ -305,7 +220,9 @@ function AddReview({
             What is your nickname?
             <span className={styles.requiredFlag}>*</span>
           </h3>
-          {nicknameError ? <p className={styles.errorMessage}>Name required</p> : null}
+          <div className={styles.errorContainer}>
+            {nicknameError ? <p className={styles.errorMessage}>Name required</p> : null}
+          </div>
           <input
             className={styles.formInput}
             value={nickname}
@@ -320,7 +237,9 @@ function AddReview({
             Your email
             <span className={styles.requiredFlag}>*</span>
           </h3>
-          {emailError ? <p className={styles.errorMessage}>Please submit a valid email</p> : null}
+          <div className={styles.errorContainer}>
+            {emailError ? <p className={styles.errorMessage}>Please submit a valid email</p> : null}
+          </div>
           <input
             className={styles.formInput}
             value={email}

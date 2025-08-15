@@ -317,6 +317,10 @@
   font-weight: normal;
 }
 
+.errorContainer {
+  height: 20px;
+}
+
 .submitButton {
   width: 100%;
   padding: 10px;
