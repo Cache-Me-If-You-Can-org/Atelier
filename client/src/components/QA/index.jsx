@@ -8,7 +8,7 @@ function QA({ product, setSelectedProductId }) {
   // const productId = '37322'; // multiple answers, 1 q
   // const productId = '37324'; // multiple answers, multiple questions
   function differentProduct() {
-    setSelectedProductId(37324);
+    setSelectedProductId(37322);
   }
   return (
     <section id='questionsAndAnswers'>
