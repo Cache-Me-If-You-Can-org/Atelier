@@ -21,7 +21,10 @@ function ImageWithButton({
         <button
           type='button'
           className={styles.overlayBtn}
-          onClick={() => remove()}
+          onClick={(e) => {
+            e.stopPropagation();
+            remove();
+          }}
         >
           &times;
         </button>
@@ -33,7 +36,10 @@ function ImageWithButton({
               className={styles.overlayBtn}
               onMouseEnter={() => setHover(true)}
               onMouseLeave={() => setHover(false)}
-              onClick={() => setIsOpen(true)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsOpen(true);
+              }}
             >
               {hover ? '★' : '☆'}
             </button>
@@ -73,7 +79,12 @@ function calculateStars(ratings) {
 
 // remove is used to see if the card is an outfit card
 // (if remove is a valid function then it's an outfit card)
-export default function Card({ productId, originalProductId, remove }) {
+export default function Card({
+  productId,
+  originalProductId,
+  setSelectedProductId,
+  remove,
+}) {
   const [product, setProduct] = useState(null);
   const [originalProduct, setOriginalProduct] = useState(null);
   const [productImages, setProductImages] = useState(null);
@@ -122,7 +133,13 @@ export default function Card({ productId, originalProductId, remove }) {
   const number = calculateStars(ratings);
 
   return (
-    <div className={styles.productCard}>
+    <div
+      className={styles.productCard}
+      onClick={() => setSelectedProductId(productId)}
+      onKeyPress={() => {}}
+      role='button'
+      tabIndex='0'
+    >
       <ImageWithButton url={productImages[0].thumbnail_url ? productImages[0].thumbnail_url : 'https://blocks.astratic.com/img/general-img-landscape.png'} related={product} original={originalProduct} remove={remove} />
       <div className={styles.productCardInfo}>
         <small>{product.category.toUpperCase()}</small>

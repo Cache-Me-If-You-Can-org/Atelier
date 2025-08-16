@@ -189,6 +189,10 @@ button {
   margin-left: unset !important;
 }
 
+.slick-disabled {
+  display: none !important;
+}
+
 /***********************/
 /* Ratings and Reviews */
 /***********************/

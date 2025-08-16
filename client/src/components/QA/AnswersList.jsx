@@ -61,7 +61,7 @@ function AnswersList({ questionId, newAnswer }) {
 
   return (
     <div className={[styles.answersList, styles.scrollable].join(' ')}>
-      <div className={g.textM}>
+      <div className={g.textMd}>
         <strong>A:</strong>
       </div>
       <div>

@@ -54,7 +54,7 @@ function useOutfit() {
   };
 }
 
-export default function Outfit({ productId }) {
+export default function Outfit({ productId, setSelectedProductId }) {
   const {
     outfit,
     addItem,
@@ -67,7 +67,13 @@ export default function Outfit({ productId }) {
       <Slider {...settings}>
         <AddOutfitButton addNewItem={addItem} productId={productId} />
         {outfit.map((id) => (
-          <Card key={`key-${id}`} productId={id} originalProductId={productId} remove={removeItem} />
+          <Card
+            key={`key-${id}`}
+            productId={id}
+            originalProductId={productId}
+            remove={removeItem}
+            setSelectedProductId={setSelectedProductId}
+          />
         ))}
       </Slider>
     </div>

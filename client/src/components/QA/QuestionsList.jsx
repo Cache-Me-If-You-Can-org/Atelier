@@ -87,8 +87,8 @@ function QuestionsList({ product }) {
           ))}
         </div>
         <div>
-          { count < allQuestions.length && filterBy === '' ? (<button className={[styles.emphasize, g.textM, styles.multiBtn].join(' ')} type='button' onClick={moreQuestions}>More Answered Questions</button>) : (<div />)}
-          <button className={[styles.emphasize, g.textM, styles.multiBtn].join(' ')} type='button' onClick={addQuestion}>Add a Question +</button>
+          { count < allQuestions.length && filterBy === '' ? (<button className={[styles.emphasize, g.textMd, styles.multiBtn].join(' ')} type='button' onClick={moreQuestions}>More Answered Questions</button>) : (<div />)}
+          <button className={[styles.emphasize, g.textMd, styles.multiBtn].join(' ')} type='button' onClick={addQuestion}>Add a Question +</button>
         </div>
       </div>
       <Modal

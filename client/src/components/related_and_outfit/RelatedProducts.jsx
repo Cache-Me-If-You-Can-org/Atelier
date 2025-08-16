@@ -5,7 +5,7 @@ import Card from './Card';
 import settings from './Carousel';
 import * as styles from './relatedOutfit.module.css';
 
-export default function RelatedProducts({ productId }) {
+export default function RelatedProducts({ productId, setSelectedProductId }) {
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function RelatedProducts({ productId }) {
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <Slider {...settings}>
         {relatedProducts.map((id) => (
-          <Card key={`key-${id}`} productId={id} originalProductId={productId} />
+          <Card key={`key-${id}`} productId={id} originalProductId={productId} setSelectedProductId={setSelectedProductId} />
         ))}
       </Slider>
     </div>
