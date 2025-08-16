@@ -26,7 +26,7 @@ function Question({ productName, question }) {
   }
   return (
     <div className={g.stack}>
-      <div className={[styles.question, g.textM].join(' ')}>
+      <div className={[styles.question, g.textMd].join(' ')}>
         <div>
           <strong>Q:</strong>
           <strong className={styles.questionBody}>{question.question_body}</strong>

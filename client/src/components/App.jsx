@@ -10,18 +10,30 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
 export default function App() {
+  // replaces [selectedProduct, setSelectedProduct]
+  const [selectedProductId, setSelectedProductId] = useState(null);
   const [product, setProduct] = useState(null);
   const [totalReviewCount, setTotalReviewCount] = useState(0);
   const [productRating, setProductRating] = useState(0);
   const [ratings, setRatings] = useState(null);
 
-  // assuming we don't get a product id passed to us,
-  // use the first product we find
+  // on mount, set initial product
   useEffect(() => {
     axios.get('/products')
       .then((res) => {
-        return axios.get(`/products/${res.data[0].id}`);
+        setSelectedProductId(res.data[0].id);
       })
+      .catch((err) => {
+        console.error('failed to set first product', err);
+      });
+  }, []);
+
+  useEffect(() => {
+    // We have to reset the states to null so nothing tries to render
+    // when we change products
+    setProduct(null);
+    setRatings(null);
+    axios.get(`/products/${selectedProductId}`)
       .then((res) => {
         setProduct(res.data);
         return axios.get('/reviews/meta', {
@@ -31,8 +43,10 @@ export default function App() {
       .then((res) => {
         setRatings(res.data.ratings);
       })
-      .catch((err) => console.error('failed to get products', err));
-  }, []);
+      .catch((err) => {
+        console.error('failed to get products', err);
+      });
+  }, [selectedProductId]);
 
   if (product === null || ratings === null) {
     return (<div>loading...</div>);
@@ -40,7 +54,7 @@ export default function App() {
 
   return (
     <div className={[g.stack, g.gapLg].join(' ')}>
-      <div className={g.center}>
+      <div className={[g.center, g.stack].join(' ')}>
         {`${totalReviewCount} reviews for product ${product.id} with a rating of ${productRating}`}
       </div>
       <Overview product={product} ratings={ratings} />
@@ -50,7 +64,7 @@ export default function App() {
           productId={product.id}
           product={product}
         />
-        <QA product={product} />
+        <QA product={product} setSelectedProductId={setSelectedProductId} />
         <RatingsAndReviews
           sectionId='ratingsAndReviews'
           productId={product.id}
