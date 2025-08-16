@@ -56,7 +56,6 @@ export default function App() {
           product={product}
         />
       </div>
-      <BenRatingsAndReviews productId={currentProductId} />
     </div>
   );
 }

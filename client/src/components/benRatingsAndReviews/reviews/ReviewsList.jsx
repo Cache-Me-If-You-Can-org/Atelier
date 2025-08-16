@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, {
+  useState, useEffect, useRef, useCallback,
+} from 'react';
 import ReviewTile from './ReviewTile';
 import ReviewsFilters from './ReviewsFilters';
 import ReviewsServices from '../services/ReviewsServices';
@@ -80,26 +82,26 @@ function ReviewsList({ productId, meta, starFilters }) {
     }
   }, [visibleReviews]);
 
+  const filteredReviews = visibleReviews.filter((review) => (starFilters.length > 0
+    ? starFilters.includes(review.rating) : true));
+
   return (
     <div className={styles.reviewsListWrapper}>
-      <p>{starFilters}</p>
       <ReviewsFilters
         totalReviews={totalReviews}
         filterTotalReviews={filterReviews}
         handleRelevantSelection={getRelevant}
       />
       <div id='reviews' className={styles.reviewsList}>
-        {visibleReviews.length
-          ? visibleReviews
-            .filter((review) => (starFilters.length > 0
-              ? starFilters.includes(review.rating) : (review)
-            ))
-            .map((review) => (
-              <div key={review.review_id} id='review-tile'>
-                <ReviewTile review={review} />
-              </div>
-            ))
-          : null}
+        {filteredReviews.length > 0 ? (
+          filteredReviews.map((review) => (
+            <div key={review.review_id} id='review-tile'>
+              <ReviewTile review={review} />
+            </div>
+          ))
+        ) : (
+          <p className={styles.noReviews}>No reviews to display</p>
+        )}
       </div>
       {visibleReviews.length ? (
         <button

@@ -133,6 +133,22 @@
   width: 100%;
 }
 
+.noReviews {
+  color: var(--color-dark);
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.reviewsFilter {
+  margin-bottom: var(--spacing-md);
+}
+
+.reviewsFilterTitle {
+  font-weight: bold;
+}
+
 /* -------------- Ratings -- */
 
 .ratingsHeader {

@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import * as g from '../../global.module.css';
+import * as styles from '../reviews.module.css';
 
 function ReviewsFilters({ totalReviews, filterTotalReviews, handleRelevantSelection }) {
   const [selectedFilter, setSelectedFilter] = useState('relevance');
+  const safeReviews = Array.isArray(totalReviews) ? totalReviews : [];
 
   const filter = (filterVal) => {
     const currentFilter = filterVal[0];
@@ -17,8 +20,12 @@ function ReviewsFilters({ totalReviews, filterTotalReviews, handleRelevantSelect
   };
 
   return (
-    <div>
-      <label htmlFor='reviewsFilters'>reviews, sorted by</label>
+    <div className={styles.reviewsFilter}>
+      <label className={`${styles.reviewsFilterTitle} ${g.textMd}`} htmlFor='reviewsFilters'>
+        {safeReviews.length}
+        &nbsp;
+        reviews, sorted by&nbsp;
+      </label>
       <select
         value={selectedFilter}
         onChange={(e) => {
