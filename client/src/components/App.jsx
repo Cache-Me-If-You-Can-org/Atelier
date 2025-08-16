@@ -70,12 +70,8 @@ export default function App() {
           productId={product.id}
           setTotalReviewCount={setTotalReviewCount}
           setProductRating={setProductRating}
-          product={product}
         />
-        <BenRatingsAndReviews
-          productId={product.id}
-          product={product}
-        />
+        <BenRatingsAndReviews productId={currentProductId} />
       </div>
     </div>
   );
