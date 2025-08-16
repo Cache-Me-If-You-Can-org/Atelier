@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import * as styles from './qanda.module.css';
-import * as g from '../shared/shared.module.css';
+import * as g from '../global.module.css';
+import Image from '../shared/Image';
+import Thumbnail from '../shared/Thumbnail';
+import Modal from '../shared/Modal';
 
 function Answer({ answer }) {
   let date = new Date(answer.date);
@@ -9,6 +12,8 @@ function Answer({ answer }) {
   const [reported, setReported] = useState(false);
   const [isHelpful, setIsHelpful] = useState(false);
   const [helpfulness, setHelpfulness] = useState(answer.helpfulness);
+  const [isOpen, setIsOpen] = useState(false);
+  const [url, setUrl] = useState(null);
 
   function report() {
     axios.put(`/qa/answers/${answer.answer_id}/report`)
@@ -25,10 +30,31 @@ function Answer({ answer }) {
         });
     }
   }
+  function expandPhoto(photo) {
+    setIsOpen(true);
+    setUrl(photo);
+  }
   return (
-    <div className={styles.answer}>
-      <div>{answer.body}</div>
-      <div className={styles.answerDetails}>
+    <div className={[styles.answer, g.stack, g.gapSm].join(' ')}>
+      <div className={g.textSm}>{answer.body}</div>
+      <div>
+        {answer.photos.map((photo) => (
+          <button type='button' className={styles.unstyledBtn} onClick={() => expandPhoto(photo.url)} key={photo.id}>
+            <Thumbnail
+              className={g.flex}
+              src={photo.url}
+            />
+          </button>
+        ))}
+        <Modal
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          Module={(
+            <Image src={url} setIsOpen={setIsOpen} />
+          )}
+        />
+      </div>
+      <div className={[styles.answerDetails, g.textXs].join(' ')}>
         <span>
           {'by '}
         </span>

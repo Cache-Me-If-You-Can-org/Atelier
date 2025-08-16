@@ -1,22 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import * as styles from './qanda.module.css';
 
 function QuestionForm({
-  productId, setIsOpen, setNewQuestion,
+  productId, productName, setIsOpen, setNewQuestion,
 }) {
-  const [productName, setProductName] = useState(null);
   const [errMsg, setErrMsg] = useState(null);
   let errBuilder = '';
-  useEffect(() => {
-    axios.get(`/products/${productId}`)
-      .then((res) => {
-        setProductName(res.data.name);
-      })
-      .catch((err) => {
-        throw new Error(err);
-      });
-  }, [productId]);
   function validate() {
     const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
     if (document.getElementById('question_body').value === '') {
@@ -60,17 +49,17 @@ function QuestionForm({
       </h5>
       {errMsg && <p className={styles.error}>{`You must enter the following:\n${errMsg}`}</p>}
       <div>
-        <p>Your Question: </p>
-        <input id='question_body' placeholder='Your Question' />
+        <p>Your Question:* </p>
+        <input id='question_body' placeholder='Your Question' cols='50' rows='6' maxLength='1000' />
       </div>
       <div>
-        <p>What is your nickname: </p>
-        <input id='name' placeholder='Example: jackson11!' />
+        <p>What is your nickname:* </p>
+        <textarea id='name' placeholder='Example: jackson11!' maxLength='60' />
       </div>
       <p>For privacy reasons, do not use your full name or email address </p>
       <div>
-        <p>Your email: </p>
-        <input id='email' placeholder='Example: jack@email.com' />
+        <p>Your email:* </p>
+        <input id='email' placeholder='Example: jack@email.com' maxLength='60' />
       </div>
       <p>For authentication reasons, you will not be emailed </p>
       <button type='button' onClick={submitQuestionHandler}>Submit question</button>

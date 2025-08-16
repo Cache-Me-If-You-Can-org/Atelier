@@ -70,11 +70,14 @@
   min-width: initial;
 }
 
-/*Buttons that look like links*/
-.btnLinkify {
-  background: none;
-  border: none;
-  text-decoration: underline;
-  cursor: pointer;
-  color: gray;
+/* Photo Form */
+.placeholderImage {
+  height: 50px;
+  width: 50px;
+  border: solid #ccc 1px;
+  /* margin-right: 10px; */
+}
+
+.error {
+  color: red;
 }
