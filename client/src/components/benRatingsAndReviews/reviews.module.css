@@ -12,7 +12,7 @@
 }
 
 .ratingsWrapper {
-  width: 255px;
+  width: 282px;
   flex-shrink: 0;
   margin-right: 3em;
 }
@@ -133,6 +133,22 @@
   width: 100%;
 }
 
+.noReviews {
+  color: var(--color-dark);
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.reviewsFilter {
+  margin-bottom: var(--spacing-md);
+}
+
+.reviewsFilterTitle {
+  font-weight: bold;
+}
+
 /* -------------- Ratings -- */
 
 .ratingsHeader {
@@ -199,6 +215,14 @@
   display: flex;
   align-items: center;
   margin-bottom: var(--spacing-sm);
+}
+
+.ratingBreakdown button {
+  padding: 0;
+  border: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .starTitle {
@@ -269,6 +293,30 @@
   top: 0px;
   z-index: 200;
   left: var(--percentageLeft);
+}
+
+/* Filters */
+
+.starFiltersWrapper {
+  margin-bottom: var(--spacing-sm);
+}
+
+.starFilterHover:hover {
+  background-color: #fdec9f;
+  box-shadow: 0 0 8px rgb(250 216 0);
+  opacity: 0.6;
+}
+
+.starFilterSelected {
+  background-color: #fdec9f;
+  box-shadow: 0 0 8px rgb(250 216 0);
+}
+
+.clearStarFiltersBtn {
+  border: none;
+  min-width: auto;
+  text-decoration: underline;
+  padding: 0;
 }
 
 /* -------------- Characteristics & Add Review Form -- */
@@ -358,7 +406,3 @@
   color: red;
   font-weight: normal;
 }
-
-/* .errorContainer {
-  height: 20px;
-} */
