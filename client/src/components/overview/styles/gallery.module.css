@@ -3,6 +3,8 @@
   flex: 1;
   background-color: lightgrey;
   position: relative;
+  padding: unset;
+  border: unset;
 }
 
 .overlay {
@@ -14,23 +16,13 @@
   padding: 15px;
 }
 
-.thumbnailWrapper {
-  width: 60px;
-  height: 100%;
-  gap: 20px;
-  overflow-y: auto;
-}
-
-.thumbnailWrapper::-webkit-scrollbar {
-  display: none;
-}
 
 .icon {
-  color: var(--color-icon);
+  color: var(--color-dark);
 }
 
 .icon path{
-  stroke: white;
+  stroke: var(--color-light);
   stroke-width: 5;
 }
 

@@ -6,4 +6,13 @@ function getQtys(style, sku) {
   return Array.from({ length: style.skus[sku].quantity }, (_, i) => `${i + 1}`);
 }
 
-export { getSkus, getQtys };
+function checkScrollable(element) {
+  if (!element) return false;
+  const { scrollTop, scrollHeight, clientHeight } = element;
+  const isScrollable = scrollHeight > clientHeight;
+  const isAtBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
+  return isScrollable && !isAtBottom;
+}
+
+
+export { getSkus, getQtys, checkScrollable };

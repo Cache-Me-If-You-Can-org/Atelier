@@ -15,10 +15,10 @@
 
 
   /* Font Sizes */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-md: 1rem;
-  --text-lg: 1.25rem;
+  --text-xs: 0.625rem;
+  --text-sm: 0.75rem;
+  --text-md: 0.875rem;
+  --text-lg: 2rem;
 
   /* Font Weight */
   --text-reg: normal;
@@ -86,13 +86,17 @@ a {
 }
 
 button {
-  padding: 8px;
+  padding: var(--spacing-sm);
   /* background-color: var(--color-bg); */
   background-color: transparent;
   border-radius: 0;
   border: solid 1px var(--color-dark);
   min-width: 45px;
   cursor: pointer;
+  text-transform: uppercase;
+  font-size: var(--text-md);
+  font-weight: var(--text-bold);
+  color: var(--color-dark);
 }
 
 /* button:hover {
