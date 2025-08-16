@@ -9,24 +9,13 @@ import * as g from './global.module.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
-export default function App() {
+export default function App({ productId }) {
   // replaces [selectedProduct, setSelectedProduct]
-  const [selectedProductId, setSelectedProductId] = useState(null);
+  const [selectedProductId, setSelectedProductId] = useState(productId);
   const [product, setProduct] = useState(null);
   const [totalReviewCount, setTotalReviewCount] = useState(0);
   const [productRating, setProductRating] = useState(0);
   const [ratings, setRatings] = useState(null);
-
-  // on mount, set initial product
-  useEffect(() => {
-    axios.get('/products')
-      .then((res) => {
-        setSelectedProductId(res.data[0].id);
-      })
-      .catch((err) => {
-        console.error('failed to set first product', err);
-      });
-  }, []);
 
   useEffect(() => {
     // We have to reset the states to null so nothing tries to render
@@ -63,6 +52,7 @@ export default function App() {
           sectionId='relatedProductsAndOutfit'
           productId={product.id}
           product={product}
+          setSelectedProductId={setSelectedProductId}
         />
         <QA product={product} setSelectedProductId={setSelectedProductId} />
         <RatingsAndReviews

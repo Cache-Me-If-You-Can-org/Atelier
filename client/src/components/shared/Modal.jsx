@@ -49,7 +49,10 @@ export default function Modal({
         <span
           className={shared.close}
           onKeyPress={() => {}}
-          onClick={() => setIsOpen(false)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsOpen(false);
+          }}
           role='button'
           tabIndex='0'
         >
