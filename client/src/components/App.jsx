@@ -10,17 +10,23 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
 export default function App() {
+  const [selectedProduct, setSelectedProduct] = useState(0);
   const [product, setProduct] = useState(null);
+  const [totalProducts, setTotalProducts] = useState(null);
   const [totalReviewCount, setTotalReviewCount] = useState(0);
   const [productRating, setProductRating] = useState(0);
   const [ratings, setRatings] = useState(null);
 
-  // assuming we don't get a product id passed to us,
-  // use the first product we find
   useEffect(() => {
+    // We have to reset the states to null so nothing tries to render
+    // when we change products
+    setProduct(null);
+    setRatings(null);
+
     axios.get('/products')
       .then((res) => {
-        return axios.get(`/products/${res.data[0].id}`);
+        setTotalProducts(res.data.length);
+        return axios.get(`/products/${res.data[selectedProduct].id}`);
       })
       .then((res) => {
         setProduct(res.data);
@@ -31,17 +37,35 @@ export default function App() {
       .then((res) => {
         setRatings(res.data.ratings);
       })
-      .catch((err) => console.error('failed to get products', err));
-  }, []);
+      .catch((err) => {
+        console.error('failed to get products', err);
+      });
+  }, [selectedProduct]);
 
   if (product === null || ratings === null) {
     return (<div>loading...</div>);
   }
 
+  const handleProductSwitch = (direction) => {
+    if (direction === 'next' && selectedProduct < totalProducts - 1) {
+      setSelectedProduct((prev) => prev + 1);
+    } 
+    if (direction === 'prev' && selectedProduct > 0) {
+      setSelectedProduct((prev) => prev - 1);
+    }
+  };
   return (
     <div className={[g.stack, g.gapLg].join(' ')}>
-      <div className={g.center}>
+      <div className={[g.center, g.stack].join(' ')}>
         {`${totalReviewCount} reviews for product ${product.id} with a rating of ${productRating}`}
+        <div className={[g.group, g.gapSm].join(' ')}>
+          <button type='button' onClick={() => handleProductSwitch('prev')}>
+            prev
+          </button>
+          <button type='button' onClick={() => handleProductSwitch('next')}>
+            next
+          </button>
+        </div>
       </div>
       <Overview product={product} ratings={ratings} />
       <div className={[g.container, g.stack, g.gapLg].join(' ')}>

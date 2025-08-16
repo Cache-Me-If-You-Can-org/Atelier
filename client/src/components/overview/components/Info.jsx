@@ -35,12 +35,12 @@ function Info({
           <QuarterStarRating rating={calculateStars(ratings)} />
           <a
             className={g.textSm}
-            href="#ratingsAndReviews"
+            href='#ratingsAndReviews'
             onClick={(e) => {
               e.preventDefault();
-              document.getElementById('ratingsAndReviews').scrollIntoView({ 
+              document.getElementById('ratingsAndReviews').scrollIntoView({
                 behavior: 'smooth',
-                block: 'start'
+                block: 'start',
               });
             }}
           >
