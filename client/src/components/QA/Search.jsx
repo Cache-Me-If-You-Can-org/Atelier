@@ -13,7 +13,7 @@ function Search({ setFilterBy }) {
 
   return (
     <div className={styles.search}>
-      <input className={[styles.emphasize, g.pSm, g.textMd].join(' ')} type='text' placeholder='Have a question? Search for answers…' onChange={(e) => updateTerm(e.target.value)} />
+      <input className={[g.pSm, g.textMd].join(' ')} type='text' placeholder='Have a question? Search for answers…' onChange={(e) => updateTerm(e.target.value)} />
     </div>
   );
 }
