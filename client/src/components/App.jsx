@@ -54,7 +54,7 @@ export default function App({ productId }) {
           product={product}
           setSelectedProductId={setSelectedProductId}
         />
-        <QA product={product} setSelectedProductId={setSelectedProductId} />
+        <QA product={product} />
         <RatingsAndReviews
           sectionId='ratingsAndReviews'
           productId={product.id}

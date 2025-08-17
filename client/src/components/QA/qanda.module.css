@@ -51,7 +51,7 @@ button.unstyledBtn, input.unstyledBtn{
   border: none;
   cursor: pointer;
 }
-.emphasize {
+.emphasize, .search input::placeholder {
   text-transform: uppercase;
   font-weight: bold;
 }
