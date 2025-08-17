@@ -1,7 +1,7 @@
-import React from 'react';
-import { Plus } from '@phosphor-icons/react';
+import React, { useState, useEffect } from 'react';
+import { Plus, Check } from '@phosphor-icons/react';
 import Select from './Select';
-import { getInStockSkus, hasInStockItems, getQtysWithLimit } from '../lib/helpers';
+import { hasInStockItems, formatSizeOptions, formatQuantityOptions } from '../lib/helpers';
 import * as g from '../../global.module.css';
 import * as css from '../styles/cart_form.module.css';
 
@@ -14,59 +14,134 @@ function CartForm({
   qty,
   postToCart,
 }) {
+  const [showSizeMessage, setShowSizeMessage] = useState(false);
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
+  const [isSizeSelectOpen, setIsSizeSelectOpen] = useState(false);
+
   const currentStyle = styles[selectedStyle];
-  const inStockSkus = getInStockSkus(currentStyle);
   const hasStock = hasInStockItems(currentStyle);
 
-  const handleSizeChange = (value) => {
+  useEffect(() => {
+    if (skuId) {
+      setShowSizeMessage(false);
+    }
+  }, [skuId]);
+
+  useEffect(() => {
+    resetAllStates();
+  }, [selectedStyle]);
+
+  const resetAllStates = () => {
+    setShowSizeMessage(false);
+    setIsAddedToCart(false);
+    setIsSizeSelectOpen(false);
+  };
+
+  const handleSizeSelection = (value) => {
     setSkuId(value);
     setQty(1);
   };
 
-  const sizeOptions = hasStock 
-    ? inStockSkus.map((sku) => ({
-        label: currentStyle.skus[sku].size,
-        value: sku,
-      }))
-    : [];
+  const handleQuantitySelection = (value) => {
+    setQty(Number(value));
+  };
 
-  const qtyOptions = skuId && hasStock
-    ? getQtysWithLimit(currentStyle, skuId).map((amount) => ({
-        label: amount,
-        value: amount,
-      }))
-    : [];
+  const promptSizeSelection = () => {
+    setShowSizeMessage(true);
+    setIsSizeSelectOpen(true);
+  };
+
+  const handleAddToCartClick = () => {
+    if (!skuId) {
+      promptSizeSelection();
+      return;
+    }
+    postToCart()
+      .then(() => {
+        setIsAddedToCart(true);
+        setTimeout(() => setIsAddedToCart(false), 2000);
+      })
+      .catch((error) => {
+        console.error('Failed to add to cart:', error);
+      });
+  };
+
+  const renderOutOfStockView = () => (
+    <div className={[g.group, g.gapMd, g.fullWidth].join(' ')}>
+      <Select
+        className={css.fill}
+        onChange={handleSizeSelection}
+        value=""
+        options={[]}
+        placeholder="OUT OF STOCK"
+        disabled={true}
+      />
+      <Select
+        onChange={handleQuantitySelection}
+        value=""
+        options={[]}
+        placeholder="-"
+        disabled={true}
+      />
+    </div>
+  );
+
+  const renderSizeMessage = () => {
+    if (!showSizeMessage) return null;
+    
+    return (
+      <div className={css.sizeMessage}>
+        Please select size
+      </div>
+    );
+  };
+
+  const renderDropdowns = () => (
+    <div className={[g.group, g.gapMd, g.fullWidth].join(' ')}>
+      <Select
+        className={css.fill}
+        onChange={handleSizeSelection}
+        value={skuId || ''}
+        options={formatSizeOptions(currentStyle)}
+        placeholder="Select Size"
+        disabled={false}
+        isOpen={isSizeSelectOpen}
+        onOpenChange={setIsSizeSelectOpen}
+      />
+      <Select
+        onChange={handleQuantitySelection}
+        value={skuId ? qty : ''}
+        options={formatQuantityOptions(currentStyle, skuId)}
+        placeholder={skuId ? qty : '-'}
+        disabled={!skuId}
+      />
+    </div>
+  );
 
   return (
     <>
-      <div className={[g.group, g.gapMd, g.fullWidth].join(' ')}>
-        <Select
-          className={css.fill}
-          onChange={handleSizeChange}
-          value={skuId || ''}
-          options={sizeOptions}
-          placeholder={hasStock ? 'Select Size' : 'OUT OF STOCK'}
-          disabled={!hasStock}
-        />
-        <Select
-          onChange={(value) => setQty(value)}
-          value={skuId ? qty : ''}
-          options={qtyOptions}
-          placeholder={skuId ? qty : '-'}
-          disabled={!skuId}
-        />
-      </div>
-      <div className={[g.group, css.gap].join(' ')}>
-        <button
-          type='submit'
-          className={[g.center, g.sb, css.fill].join(' ')}
-          onClick={postToCart}
-          disabled={!skuId}
-        >
-          Add to bag
-          <Plus className={g.textMd} weight='bold' />
-        </button>
-      </div>
+      {!hasStock ? renderOutOfStockView() :
+        <>
+          <div className={g.stack}>
+            {renderSizeMessage()}
+            {renderDropdowns()}
+          </div>
+          <div className={g.flex}>
+            <button
+              type='button'
+              className={[g.center, g.sb, css.fill].join(' ')}
+              onClick={handleAddToCartClick}
+            >
+              Add to Cart
+              {isAddedToCart ? 
+                <Check className={g.textMd} weight='bold' /> 
+                :
+                <Plus className={g.textMd} weight='bold' />
+              }
+            </button> 
+          </div>
+        </>
+      }
     </>
   );
 }

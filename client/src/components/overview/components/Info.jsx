@@ -26,10 +26,14 @@ function Info({
 
   const postToCart = () => {
     if (!skuId) return;
-    axios.post('/cart', JSON.stringify({ sku_id: parseInt(skuId, 10) }), { headers: { 'Content-Type': 'application/json' } })
-      .then((res) => console.log('successfully added to cart', res))
-      .catch((err) => console.error('failed to add to cart', err));
+    
+    return axios.post(
+      '/cart', 
+      JSON.stringify({ sku_id: parseInt(skuId, 10) }), 
+      { headers: { 'Content-Type': 'application/json' } }
+    );
   };
+
   return (
     <div
       className={css.infoWrapper}

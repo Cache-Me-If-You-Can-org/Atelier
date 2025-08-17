@@ -28,4 +28,32 @@ function getQtysWithLimit(style, sku) {
   return Array.from({ length: maxQty }, (_, i) => `${i + 1}`);
 }
 
-export { getSkus, getQtys, checkScrollable, getInStockSkus, hasInStockItems, getQtysWithLimit };
+function formatSizeOptions(style) {
+  if (!hasInStockItems(style)) return [];
+  
+  const inStockSkus = getInStockSkus(style);
+  return inStockSkus.map((sku) => ({
+    label: style.skus[sku].size,
+    value: sku,
+  }));
+}
+
+function formatQuantityOptions(style, skuId) {
+  if (!skuId || !hasInStockItems(style)) return [];
+  
+  return getQtysWithLimit(style, skuId).map((amount) => ({
+    label: amount,
+    value: amount,
+  }));
+}
+
+export { 
+  getSkus, 
+  getQtys, 
+  checkScrollable, 
+  getInStockSkus, 
+  hasInStockItems, 
+  getQtysWithLimit,
+  formatSizeOptions,
+  formatQuantityOptions
+};

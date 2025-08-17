@@ -11,10 +11,15 @@ function Select({
   placeholder = '',
   className = '',
   disabled = false,
+  isOpen: externalIsOpen,
+  onOpenChange,
 }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [internalIsOpen, setInternalIsOpen] = useState(false);
   const [showScrollIndicator, setShowScrollIndicator] = useState(false);
   const scrollContainerRef = useRef(null);
+
+  const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
+  const setIsOpen = onOpenChange || setInternalIsOpen;
 
   const selectedOption = options.find((opt) => opt.value === value);
 
