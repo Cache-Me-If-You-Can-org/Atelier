@@ -1,7 +1,7 @@
 import React from 'react';
 import * as css from './shared.module.css';
 
-function Image({ className = '', ...props }) {
+function Image({ className = '', setIsOpen, ...props }) {
   return (
     <img
       alt=''
