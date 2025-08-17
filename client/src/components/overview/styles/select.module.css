@@ -63,9 +63,19 @@
 }
 
 .selectOption:hover {
-  background: #f0f0f0;
+  background: var(--color-light);
 }
 
 .active {
   background: #e6f3ff;
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--color-light);
+}
+
+.disabled:hover {
+  background: var(--color-light);
 }

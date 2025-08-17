@@ -8,8 +8,9 @@ function Select({
   options = [],
   value = '',
   onChange,
-  placeholder = 'Select...',
+  placeholder = '',
   className = '',
+  disabled = false,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [showScrollIndicator, setShowScrollIndicator] = useState(false);
@@ -18,8 +19,14 @@ function Select({
   const selectedOption = options.find((opt) => opt.value === value);
 
   const handleSelect = (val) => {
+    if (disabled) return;
     onChange(val);
     setIsOpen(false);
+  };
+
+  const handleToggle = () => {
+    if (disabled) return;
+    setIsOpen((prev) => !prev);
   };
 
   const handleScroll = () => {
@@ -38,15 +45,16 @@ function Select({
     <div className={`${css.selectWrapper} ${className}`.trim()}>
       <button
         type='button'
-        className={css.selectDisplay}
-        onClick={() => setIsOpen((prev) => !prev)}
+        className={`${css.selectDisplay} ${disabled ? css.disabled : ''}`}
+        onClick={handleToggle}
+        disabled={disabled}
       >
         {selectedOption ? selectedOption.label : placeholder}
         <span className={css.arrow}>
           {isOpen ? <CaretUp className={g.textMd} weight='bold' /> : <CaretDown className={g.textMd} weight='bold' />}
         </span>
       </button>
-      {isOpen && (
+      {isOpen && !disabled && (
         <div className={css.selectList}>
           <div
             className={css.relative}

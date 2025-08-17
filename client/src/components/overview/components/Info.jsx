@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import StyleSelector from './StyleSelector';
 import Price from './Price';
 import CartForm from './CartForm';
 import QuarterStarRating from '../../shared/QuarterStarRating';
 import { calculateStars, getReviewCount } from '../../lib/helpers';
-import { getSkus, getQtys } from '../lib/helpers';
 import * as g from '../../global.module.css';
 import * as css from '../styles/info.module.css';
 
@@ -17,10 +16,16 @@ function Info({
   isFullScreen,
   ratings,
 }) {
-  const [skuId, setSkuId] = useState(getSkus(styles[selectedStyle])[0]);
-  const [qty, setQty] = useState(getQtys(styles[selectedStyle], skuId)[0]);
+  const [skuId, setSkuId] = useState(null);
+  const [qty, setQty] = useState(1);
+
+  useEffect(() => {
+    setSkuId(null);
+    setQty(1);
+  }, [selectedStyle]);
 
   const postToCart = () => {
+    if (!skuId) return;
     axios.post('/cart', JSON.stringify({ sku_id: parseInt(skuId, 10) }), { headers: { 'Content-Type': 'application/json' } })
       .then((res) => console.log('successfully added to cart', res))
       .catch((err) => console.error('failed to add to cart', err));
@@ -35,12 +40,12 @@ function Info({
           <QuarterStarRating rating={calculateStars(ratings)} />
           <a
             className={g.textSm}
-            href="#ratingsAndReviews"
+            href='#ratingsAndReviews'
             onClick={(e) => {
               e.preventDefault();
               document.getElementById('ratingsAndReviews').scrollIntoView({ 
                 behavior: 'smooth',
-                block: 'start'
+                block: 'start',
               });
             }}
           >

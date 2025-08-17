@@ -14,5 +14,18 @@ function checkScrollable(element) {
   return isScrollable && !isAtBottom;
 }
 
+function getInStockSkus(style) {
+  return Object.keys(style.skus).filter(sku => style.skus[sku].quantity > 0);
+}
 
-export { getSkus, getQtys, checkScrollable };
+function hasInStockItems(style) {
+  return getInStockSkus(style).length > 0;
+}
+
+function getQtysWithLimit(style, sku) {
+  if (!sku || !style.skus[sku]) return [];
+  const maxQty = Math.min(style.skus[sku].quantity, 15);
+  return Array.from({ length: maxQty }, (_, i) => `${i + 1}`);
+}
+
+export { getSkus, getQtys, checkScrollable, getInStockSkus, hasInStockItems, getQtysWithLimit };
