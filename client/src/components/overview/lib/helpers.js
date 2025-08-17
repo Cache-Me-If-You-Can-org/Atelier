@@ -6,12 +6,14 @@ function getQtys(style, sku) {
   return Array.from({ length: style.skus[sku].quantity }, (_, i) => `${i + 1}`);
 }
 
-function checkScrollable(element) {
-  if (!element) return false;
+function getScrollIndicators(element) {
+  if (!element) return { showTop: false, showBottom: false };
+  
   const { scrollTop, scrollHeight, clientHeight } = element;
-  const isScrollable = scrollHeight > clientHeight;
-  const isAtBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
-  return isScrollable && !isAtBottom;
+  const showTop = scrollTop > 0;
+  const showBottom = scrollHeight - scrollTop - clientHeight > 1;
+  
+  return { showTop, showBottom };
 }
 
 function getInStockSkus(style) {
@@ -50,7 +52,7 @@ function formatQuantityOptions(style, skuId) {
 export { 
   getSkus, 
   getQtys, 
-  checkScrollable, 
+  getScrollIndicators,
   getInStockSkus, 
   hasInStockItems, 
   getQtysWithLimit,

@@ -39,7 +39,19 @@
   display: none;
 }
 
-.indicatorWrapper {
+.topScrollIndicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 4px;
+  background: linear-gradient(to bottom, var(--color-bg) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.bottomScrollIndicator {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -50,6 +62,7 @@
   background: linear-gradient(to top, var(--color-bg) 0%, transparent 100%);
   pointer-events: none;
 }
+
 
 .scrollIndicator {
   color: var(--color-dark);

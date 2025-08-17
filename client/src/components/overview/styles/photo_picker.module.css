@@ -1,16 +1,20 @@
-.thumbnailWrapper {
-  --thumbnail-width: 58px;
+.photoWrapper {
+  --thumbnail-width: 50px;
   width: var(--thumbnail-width);
-  /* height: calc((var(--thumbnail-width) + var(--spacing-sm)) * 7); */
-  overflow-y: auto;
+  height: calc((var(--thumbnail-width) + var(--spacing-sm)) * 7);
   position: relative;
 }
 
-.thumbnailWrapper::-webkit-scrollbar {
+.scrollContainer {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.scrollContainer::-webkit-scrollbar {
   display: none;
 }
 
-.thumbnail {
+.photo {
   width: 100%;
   aspect-ratio: 1/1;
   position: relative;
@@ -18,7 +22,7 @@
   max-height: var(--thumbnail-width);
 }
 
-.indicator {
+.photoIndicator {
   width: 100%;
   height: 2px;
   position: absolute;
@@ -27,22 +31,16 @@
 
 .topScroll {
   position: absolute;
-  top: 0;
+  top: -10px;
   left: 0;
   right: 0;
-  padding-top: 4px;
-  pointer-events: none;
-  background-color: darkcyan;
 }
 
 .bottomScroll {
   position: absolute;
-  bottom: 0;
+  bottom: -10px;
   left: 0;
   right: 0;
-  padding-bottom: 4px;
-  pointer-events: none;
-  background-color: darkgoldenrod;
 }
 
 .scrollIndicator {
