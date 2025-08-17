@@ -43,6 +43,11 @@
   right: 0;
 }
 
-.scrollIndicator {
-  color: var(--color-light);
+.icon {
+  color: var(--color-dark);
+}
+
+.icon path{
+  stroke: var(--color-light);
+  stroke-width: 5;
 }

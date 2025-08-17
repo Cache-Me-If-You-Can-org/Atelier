@@ -49,6 +49,29 @@ function formatQuantityOptions(style, skuId) {
   }));
 }
 
+function scrollToImageInContainer(containerRef, imageIndex) {
+  if (!containerRef.current) return;
+
+  const container = containerRef.current;
+  const photos = container.children;
+  
+  if (imageIndex < 0 || imageIndex >= photos.length) return;
+
+  const targetPhoto = photos[imageIndex];
+  const containerRect = container.getBoundingClientRect();
+  const photoRect = targetPhoto.getBoundingClientRect();
+
+  const isAboveView = photoRect.top < containerRect.top;
+  const isBelowView = photoRect.bottom > containerRect.bottom;
+
+  if (isAboveView || isBelowView) {
+    targetPhoto.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest'
+    });
+  }
+}
+
 export { 
   getSkus, 
   getQtys, 
@@ -57,5 +80,6 @@ export {
   hasInStockItems, 
   getQtysWithLimit,
   formatSizeOptions,
-  formatQuantityOptions
+  formatQuantityOptions,
+  scrollToImageInContainer,
 };

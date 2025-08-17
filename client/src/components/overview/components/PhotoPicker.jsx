@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CaretDown, CaretUp } from '@phosphor-icons/react';
 import Image from '../../shared/Image';
-import { getScrollIndicators } from '../lib/helpers';
+import { getScrollIndicators, scrollToImageInContainer } from '../lib/helpers';
 import * as css from '../styles/photo_picker.module.css';
 import * as g from '../../global.module.css';
 
@@ -18,6 +18,11 @@ function PhotoPicker({
     }
   };
 
+  // Scroll to selected image when it changes
+  useEffect(() => {
+    scrollToImageInContainer(scrollContainerRef, selectedImage);
+  }, [selectedImage]);
+
   useEffect(() => {
     handleScroll();
   }, []);
@@ -33,7 +38,7 @@ function PhotoPicker({
       >
         {photos.map((photo, i) => (
           <button
-            key={photo.thumbnail_url}
+            key={crypto.randomUUID()}
             type='button'
             className={css.photo}
             onClick={(e) => {
@@ -51,12 +56,12 @@ function PhotoPicker({
       </div>
       {indicators.showTop && (
         <div className={[g.center, css.topScroll].join(' ')}>
-          <CaretUp className={[g.textMd, css.scrollIndicator].join(' ')} weight='bold' />
+          <CaretUp className={[g.textMd, css.icon].join(' ')} weight='bold' />
         </div>
       )}
       {indicators.showBottom && (
         <div className={[g.center, css.bottomScroll].join(' ')}>
-          <CaretDown className={[g.textMd, css.scrollIndicator].join(' ')} weight='bold' />
+          <CaretDown className={[g.textMd, css.icon].join(' ')} weight='bold' />
         </div>
       )}
     </div>
