@@ -3,8 +3,8 @@
   flex: 1;
   background-color: lightgrey;
   position: relative;
-  padding: unset;
-  border: unset;
+  cursor: pointer;
+  overflow: hidden;
 }
 
 .overlay {
@@ -14,8 +14,12 @@
   right: 0;
   bottom: 0;
   padding: 15px;
+  transition: opacity 0.2s ease;
 }
 
+.overlayHidden {
+  display: none;
+}
 
 .icon {
   color: var(--color-dark);

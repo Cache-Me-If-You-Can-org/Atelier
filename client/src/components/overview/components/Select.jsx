@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { CaretDown, CaretUp } from '@phosphor-icons/react';
 import * as css from '../styles/select.module.css';
 import * as g from '../../global.module.css';
-import { checkScrollable, getScrollIndicators } from '../lib/helpers';
+import { getScrollIndicators } from '../lib/helpers';
 
 function Select({
   options = [],

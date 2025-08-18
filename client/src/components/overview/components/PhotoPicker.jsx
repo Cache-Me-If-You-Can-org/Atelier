@@ -31,7 +31,7 @@ function PhotoPicker({
     <div
       className={[g.stack, g.gapSm, css.photoWrapper].join(' ')}
     >
-      <div 
+      <div
         className={[g.stack, g.gapSm, css.scrollContainer].join(' ')}
         ref={scrollContainerRef}
         onScroll={handleScroll}
