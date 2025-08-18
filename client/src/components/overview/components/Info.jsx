@@ -41,7 +41,7 @@ function Info({
       style={{ display: isFullScreen ? 'none' : '' }}
     >
       <div className={[g.stack, g.gapMd].join(' ')}>
-        <div className={[g.group, g.gapSm, g.alignCenter].join(' ')}>
+        {getReviewCount(ratings) > 0 && <div className={[g.group, g.gapSm, g.alignCenter].join(' ')}>
           <QuarterStarRating rating={calculateStars(ratings)} />
           <a
             className={g.textSm}
@@ -56,7 +56,7 @@ function Info({
           >
             {`Read all ${getReviewCount(ratings)} reviews`}
           </a>
-        </div>
+        </div>}
         <div className={g.stack}>
           <p className={[g.textMd, g.upper].join(' ')}>{product.category}</p>
           <h2 className={[g.textLg, g.bold].join(' ')}>{product.name}</h2>

@@ -6,7 +6,6 @@ import Info from './components/Info';
 import * as g from '../global.module.css';
 
 function Overview({ product, ratings }) {
-  // const [product, setProduct] = useState(null);
   const [styles, setStyles] = useState(null);
   const [selectedStyle, setSelectedStyle] = useState(0);
   const [isFullScreen, setIsFullScreen] = useState(false);
