@@ -42,6 +42,54 @@ function Answer({ answer }) {
     setIsOpen(true);
     setUrl(photo);
   }
+  if (answer.photos.length === 0) {
+    return (
+      <div className={[styles.answer, g.stack, g.gapSm].join(' ')}>
+        <div className={g.textSm}>{answer.body}</div>
+        <div className={[styles.answerDetails, g.textXs, g.gapSm].join(' ')}>
+          <div>
+            {'by '}
+            <span className={answer.answerer_name === 'Seller' ? styles.sellerName : ''}>
+              {answer.answerer_name}
+            </span>
+            {`, ${date.slice(3)}`}
+          </div>
+          <div>
+            {' | '}
+          </div>
+          <div className={styles.helpfulness}>
+            {'Helpful? '}
+            {isHelpful ? (
+              <span>
+                &nbsp;
+              </span>
+            ) : (
+              <input
+                className={g.btnLinkify}
+                type='button'
+                onClick={helpfulHandler}
+                value='Yes'
+              />
+            )}
+            {` (${helpfulness})`}
+          </div>
+          <div>
+            {' | '}
+          </div>
+          <div>
+            {isReported ? (<div>Reported</div>) : (
+              <input
+                type='button'
+                className={g.btnLinkify}
+                value='Report'
+                onClick={report}
+              />
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className={[styles.answer, g.stack, g.gapSm].join(' ')}>
       <div className={g.textSm}>{answer.body}</div>
