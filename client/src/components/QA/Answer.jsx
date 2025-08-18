@@ -93,7 +93,7 @@ function Answer({ answer }) {
   return (
     <div className={[styles.answer, g.stack, g.gapSm].join(' ')}>
       <div className={g.textSm}>{answer.body}</div>
-      <div>
+      <div className={[g.flex, g.start, g.gapSm].join(' ')}>
         {answer.photos.map((photo) => (
           <button type='button' className={styles.unstyledBtn} onClick={() => expandPhoto(photo.url)} key={photo.id}>
             <Thumbnail

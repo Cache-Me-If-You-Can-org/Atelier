@@ -58,6 +58,8 @@ button.unstyledBtn, input.unstyledBtn{
   background: none;
   border: none;
   cursor: pointer;
+  color: var(--color-dark);
+  padding: 0;
 }
 .emphasize, .search input::placeholder {
   text-transform: uppercase;
