@@ -27,10 +27,8 @@ function Question({ productName, question }) {
   return (
     <div className={g.stack}>
       <div className={[styles.question, g.textMd].join(' ')}>
-        <div>
-          <strong>Q:</strong>
-          <strong className={styles.questionBody}>{question.question_body}</strong>
-        </div>
+        <strong>Q:</strong>
+        <strong className={styles.questionBody}>{question.question_body}</strong>
         <div className={[styles.questionDetails, g.textXs].join(' ')}>
           {'Helpful? '}
           <span>
@@ -46,6 +44,8 @@ function Question({ productName, question }) {
           </span>
           <span>
             {' | '}
+          </span>
+          <span>
             <input
               className={g.btnLinkify}
               type='button'

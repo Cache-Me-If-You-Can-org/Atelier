@@ -6,6 +6,7 @@
   padding: 0px 10px 10px;
   font-size: small;
   line-height: normal;
+  line-break: anywhere;
 }
 .answerDetails {
   color: gray;
@@ -19,12 +20,16 @@
   justify-content: space-between;
   margin-top: 5px;
   margin-bottom: 5px;
+  gap: 10px;
 }
 .questionBody {
-  padding-left: 10px;
+  line-break: anywhere;
+  flex-grow: 2;
 }
 .questionDetails {
   color: gray;
+  display: flex;
+  align-items: baseline;
 }
 .answersList {
   display: flex;
