@@ -23,7 +23,7 @@ function ImageWithButton({
           className={styles.overlayBtn}
           onClick={(e) => {
             e.stopPropagation();
-            remove();
+            remove((prev) => prev.filter((item) => item !== related.id));
           }}
         >
           &times;
@@ -87,10 +87,12 @@ export default function Card({
 }) {
   const [product, setProduct] = useState(null);
   const [originalProduct, setOriginalProduct] = useState(null);
-  const [productImages, setProductImages] = useState(null);
+  const [salePrice, setSalePrice] = useState(null);
+  const [images, setImages] = useState(null);
   const [ratings, setRatings] = useState(null);
 
   useEffect(() => {
+    setImages(null);
     // Fetch basic data (price, name, category)
     axios.get(`/products/${productId}`)
       .then((res) => {
@@ -110,13 +112,16 @@ export default function Card({
         // Fetch images for slide show and thumbnail
         return axios.get(`/products/${productId}/styles`);
       })
-      .then((res) => setProductImages(res.data.results[0].photos))
+      .then((res) => {
+        setSalePrice(res.data.results[0].sale_price);
+        setImages(res.data.results[0].photos);
+      })
       .catch((err) => {
         console.error('error loading product by id:', err);
       });
   }, [originalProductId, productId]);
 
-  if (!productImages) {
+  if (!images) {
     return (
       <div className={styles.productCard}>
         <div className='thumbnail-square' style={{ height: 200 }}>
@@ -140,11 +145,30 @@ export default function Card({
       role='button'
       tabIndex='0'
     >
-      <ImageWithButton url={productImages[0].thumbnail_url ? productImages[0].thumbnail_url : 'https://blocks.astratic.com/img/general-img-landscape.png'} related={product} original={originalProduct} remove={remove} />
+      <ImageWithButton url={images[0].thumbnail_url ? images[0].thumbnail_url : 'https://blocks.astratic.com/img/general-img-landscape.png'} related={product} original={originalProduct} remove={remove} />
       <div className={styles.productCardInfo}>
         <small>{product.category.toUpperCase()}</small>
         <h4>{product.name}</h4>
-        <small>{product.default_price}</small>
+        <div>
+          {salePrice ? (
+            <>
+              <small style={{ textDecoration: 'line-through' }}>
+                $
+                {product.default_price}
+              </small>
+              <small style={{ color: 'red' }}>
+                $
+                {salePrice}
+              </small>
+            </>
+          )
+            : (
+              <small>
+                $
+                {product.default_price}
+              </small>
+            )}
+        </div>
         <div className={styles.cardStars}>
           <QuarterStarRating rating={number} />
         </div>
