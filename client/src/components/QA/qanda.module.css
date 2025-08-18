@@ -73,3 +73,6 @@ button.unstyledBtn, input.unstyledBtn{
   flex-shrink: 0;
   align-items: baseline;
 }
+.formModal input, .formModal textarea {
+  width: 80%;
+}
