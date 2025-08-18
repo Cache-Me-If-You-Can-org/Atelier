@@ -1,24 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CaretDown, CaretUp } from '@phosphor-icons/react';
 import Image from '../../shared/Image';
-// import { checkScrollable } from '../lib/helpers';
+import { getScrollIndicators, scrollToImageInContainer } from '../lib/helpers';
 import * as css from '../styles/photo_picker.module.css';
 import * as g from '../../global.module.css';
 
 function PhotoPicker({
   selectedImage, setSelectedImage, photos,
 }) {
-  const [indicators, setIndicators] = useState({ showTop: true, showBottom: true });
+  const [indicators, setIndicators] = useState({ showTop: false, showBottom: false });
   const scrollContainerRef = useRef(null);
 
   const handleScroll = () => {
     if (scrollContainerRef.current) {
-      const container = scrollContainerRef.current;
-      const showTop = container.scrollTop > 0;
-      const showBottom = container.scrollHeight - container.scrollTop - container.clientHeight > 1;
-      setIndicators({ showTop, showBottom });
+      const newIndicators = getScrollIndicators(scrollContainerRef.current);
+      setIndicators(newIndicators);
     }
   };
+
+  // Scroll to selected image when it changes
+  useEffect(() => {
+    scrollToImageInContainer(scrollContainerRef, selectedImage);
+  }, [selectedImage]);
 
   useEffect(() => {
     handleScroll();
@@ -26,37 +29,41 @@ function PhotoPicker({
 
   return (
     <div
-      className={[g.stack, g.gapSm, css.thumbnailWrapper].join(' ')}
-      ref={scrollContainerRef}
-      onScroll={handleScroll}
+      className={[g.stack, g.gapSm, css.photoWrapper].join(' ')}
     >
-      {/* {indicators.showTop && (
+      <div 
+        className={[g.stack, g.gapSm, css.scrollContainer].join(' ')}
+        ref={scrollContainerRef}
+        onScroll={handleScroll}
+      >
+        {photos.map((photo, i) => (
+          <button
+            key={crypto.randomUUID()}
+            type='button'
+            className={css.photo}
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedImage(i);
+            }}
+          >
+            <Image src={photo.thumbnail_url} />
+            <div
+              className={css.photoIndicator}
+              style={{ backgroundColor: selectedImage === i ? 'brown' : 'transparent' }}
+            />
+          </button>
+        ))}
+      </div>
+      {indicators.showTop && (
         <div className={[g.center, css.topScroll].join(' ')}>
-          <CaretUp className={[g.textMd, css.scrollIndicator].join(' ')} weight='bold' />
+          <CaretUp className={[g.textMd, css.icon].join(' ')} weight='bold' />
         </div>
-      )} */}
-      {photos.map((photo, i) => (
-        <button
-          key={photo.thumbnail_url}
-          type='button'
-          className={css.thumbnail}
-          onClick={(e) => {
-            e.stopPropagation();
-            setSelectedImage(i);
-          }}
-        >
-          <Image src={photo.thumbnail_url} />
-          <div
-            className={css.indicator}
-            style={{ backgroundColor: selectedImage === i ? 'brown' : 'transparent' }}
-          />
-        </button>
-      ))}
-      {/* {indicators.showBottom && (
+      )}
+      {indicators.showBottom && (
         <div className={[g.center, css.bottomScroll].join(' ')}>
-          <CaretDown className={[g.textMd, css.scrollIndicator].join(' ')} weight='bold' />
+          <CaretDown className={[g.textMd, css.icon].join(' ')} weight='bold' />
         </div>
-      )} */}
+      )}
     </div>
   );
 }
