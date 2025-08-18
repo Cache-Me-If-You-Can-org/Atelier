@@ -86,6 +86,7 @@ function Question({ productName, question }) {
             setNewAnswer={setNewAnswer}
           />
         )}
+        style={{ width: '50%' }}
       />
     </div>
   );

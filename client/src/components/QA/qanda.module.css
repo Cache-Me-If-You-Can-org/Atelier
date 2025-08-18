@@ -3,7 +3,7 @@
   padding-bottom: var(--spacing-sm);
 }
 .answer {
-  padding: 0px 10px 10px;
+  padding-bottom: 10px;
   font-size: small;
   line-height: normal;
   line-break: anywhere;
@@ -37,6 +37,7 @@
   display: flex;
   align-items: baseline;
   max-height: 50vh;
+  gap: var(--spacing-sm);
 }
 .search {
   display: flex;
@@ -74,5 +75,5 @@ button.unstyledBtn, input.unstyledBtn{
   align-items: baseline;
 }
 .formModal input, .formModal textarea {
-  width: 80%;
+  width: 100%;
 }

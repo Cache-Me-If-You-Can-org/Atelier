@@ -102,6 +102,7 @@ function QuestionsList({ product }) {
             setNewQuestion={setNewQuestion}
           />
         )}
+        style={{ width: '50%' }}
       />
     </div>
   );
