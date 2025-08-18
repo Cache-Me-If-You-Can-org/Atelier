@@ -25,13 +25,14 @@ function Info({
   }, [selectedStyle]);
 
   const postToCart = () => {
-    if (!skuId) return;
-    
-    return axios.post(
-      '/cart', 
-      JSON.stringify({ sku_id: parseInt(skuId, 10) }), 
-      { headers: { 'Content-Type': 'application/json' } }
-    );
+    if (skuId) {
+      return axios.post(
+        '/cart',
+        JSON.stringify({ sku_id: Number(skuId) }),
+        { headers: { 'Content-Type': 'application/json' } },
+      );
+    }
+    return new Error('no selected sku');
   };
 
   return (
@@ -47,7 +48,7 @@ function Info({
             href='#ratingsAndReviews'
             onClick={(e) => {
               e.preventDefault();
-              document.getElementById('ratingsAndReviews').scrollIntoView({ 
+              document.getElementById('ratingsAndReviews').scrollIntoView({
                 behavior: 'smooth',
                 block: 'start',
               });
