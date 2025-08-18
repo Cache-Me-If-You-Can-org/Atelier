@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AnswersList from './AnswersList';
 import * as styles from './qanda.module.css';
@@ -12,13 +12,24 @@ function Question({ productName, question }) {
   const [isOpen, setIsOpen] = useState(false);
   const [newAnswer, setNewAnswer] = useState({});
 
+  useEffect(() => {
+    const helpful = localStorage.getItem(`helpful_${question.question_id}`);
+    if (helpful) {
+      setIsHelpful(helpful);
+    }
+  }, [question.question_id]);
+
   function helpfulHandler() {
-    if (!isHelpful) {
+    const helpful = localStorage.getItem(`helpful_${question.question_id}`);
+    if (!helpful) {
       setIsHelpful(true);
+      localStorage.setItem(`helpful_${question.question_id}`, true);
       axios.put(`/qa/questions/${question.question_id}/helpful`)
         .then(() => {
           setHelpfulness(helpfulness + 1);
         });
+    } else {
+      setIsHelpful(true);
     }
   }
   function addAnswer() {
@@ -32,12 +43,18 @@ function Question({ productName, question }) {
         <div className={[styles.questionDetails, g.textXs].join(' ')}>
           <div className={styles.helpfulness}>
             {'Helpful? '}
-            <input
-              className={g.btnLinkify}
-              type='button'
-              onClick={helpfulHandler}
-              value='Yes'
-            />
+            {isHelpful ? (
+              <span>
+                &nbsp;
+              </span>
+            ) : (
+              <input
+                className={g.btnLinkify}
+                type='button'
+                onClick={helpfulHandler}
+                value='Yes'
+              />
+            )}
             {` (${helpfulness})`}
           </div>
           <div>

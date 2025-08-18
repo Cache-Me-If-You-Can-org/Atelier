@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as styles from './qanda.module.css';
 import * as g from '../global.module.css';
@@ -9,23 +9,31 @@ import Modal from '../shared/Modal';
 function Answer({ answer }) {
   let date = new Date(answer.date);
   date = date.toDateString();
-  const [reported, setReported] = useState(false);
+  const [isReported, setIsReported] = useState(false);
   const [isHelpful, setIsHelpful] = useState(false);
   const [helpfulness, setHelpfulness] = useState(answer.helpfulness);
   const [isOpen, setIsOpen] = useState(false);
   const [url, setUrl] = useState(null);
 
+  useEffect(() => {
+    const helpful = localStorage.getItem(`helpful_${answer.answer_id}`);
+    if (helpful) {
+      setIsHelpful(helpful);
+    }
+  }, [answer.answer_id]);
   function report() {
     axios.put(`/qa/answers/${answer.answer_id}/report`)
       .then(() => {
-        setReported(true);
+        setIsReported(true);
       });
   }
   function helpfulHandler() {
-    if (!isHelpful) {
-      setIsHelpful(true);
+    const helpful = localStorage.getItem(`helpful_${answer.answer_id}`);
+    if (!helpful) {
       axios.put(`/qa/answers/${answer.answer_id}/helpful`)
         .then(() => {
+          setIsHelpful(true);
+          localStorage.setItem(`helpful_${answer.answer_id}`, true);
           setHelpfulness(helpfulness + 1);
         });
     }
@@ -65,30 +73,34 @@ function Answer({ answer }) {
         <div>
           {' | '}
         </div>
-        <div>
+        <div className={styles.helpfulness}>
           {'Helpful? '}
-          <input
-            className={g.btnLinkify}
-            type='button'
-            onClick={helpfulHandler}
-            value='Yes'
-          />
+          {isHelpful ? (
+            <span>
+              &nbsp;
+            </span>
+          ) : (
+            <input
+              className={g.btnLinkify}
+              type='button'
+              onClick={helpfulHandler}
+              value='Yes'
+            />
+          )}
           {` (${helpfulness})`}
         </div>
         <div>
           {' | '}
         </div>
         <div>
-          <input
-            type='button'
-            className={g.btnLinkify}
-            value={reported ? 'Reported' : 'Report'}
-            onClick={() => {
-              if (!reported) {
-                report();
-              }
-            }}
-          />
+          {isReported ? (<div>Reported</div>) : (
+            <input
+              type='button'
+              className={g.btnLinkify}
+              value='Report'
+              onClick={report}
+            />
+          )}
         </div>
       </div>
     </div>
