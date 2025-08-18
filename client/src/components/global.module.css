@@ -60,6 +60,10 @@
   align-items: center;
 }
 
+.alignStart {
+  align-items: flex-start;
+}
+
 /* Spacing Classes */
 .gapSm {
   gap: var(--spacing-sm);
