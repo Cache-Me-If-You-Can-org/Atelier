@@ -39,6 +39,12 @@
 .addOutfit {
   cursor: pointer;
   text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.addOutfitText {
+  flex-grow: 1;
 }
 
 .carouselArrow {
