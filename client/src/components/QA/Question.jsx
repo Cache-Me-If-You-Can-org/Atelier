@@ -30,29 +30,27 @@ function Question({ productName, question }) {
         <strong>Q:</strong>
         <strong className={styles.questionBody}>{question.question_body}</strong>
         <div className={[styles.questionDetails, g.textXs].join(' ')}>
-          {'Helpful? '}
-          <span>
+          <div className={styles.helpfulness}>
+            {'Helpful? '}
             <input
               className={g.btnLinkify}
               type='button'
               onClick={helpfulHandler}
               value='Yes'
             />
-          </span>
-          <span>
             {` (${helpfulness})`}
-          </span>
-          <span>
+          </div>
+          <div>
             {' | '}
-          </span>
-          <span>
+          </div>
+          <div>
             <input
               className={g.btnLinkify}
               type='button'
               onClick={addAnswer}
               value='Add Answer'
             />
-          </span>
+          </div>
         </div>
       </div>
       <AnswersList

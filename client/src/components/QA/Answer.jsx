@@ -55,44 +55,41 @@ function Answer({ answer }) {
         />
       </div>
       <div className={[styles.answerDetails, g.textXs].join(' ')}>
-        <span>
+        <div>
           {'by '}
-        </span>
-        <span className={answer.answerer_name === 'Seller' ? styles.sellerName : ''}>
-          {answer.answerer_name}
-        </span>
-        <span>
+          <span className={answer.answerer_name === 'Seller' ? styles.sellerName : ''}>
+            {answer.answerer_name}
+          </span>
           {`, ${date.slice(3)}`}
-        </span>
-        <span>
-          {' | Helpful? '}
-          <span>
-            <input
-              className={g.btnLinkify}
-              type='button'
-              onClick={helpfulHandler}
-              value='Yes'
-            />
-          </span>
-          <span>
-            {` (${helpfulness})`}
-          </span>
-        </span>
-        <span>
+        </div>
+        <div>
           {' | '}
-          <span>
-            <input
-              type='button'
-              className={g.btnLinkify}
-              value={reported ? 'Reported' : 'Report'}
-              onClick={() => {
-                if (!reported) {
-                  report();
-                }
-              }}
-            />
-          </span>
-        </span>
+        </div>
+        <div>
+          {'Helpful? '}
+          <input
+            className={g.btnLinkify}
+            type='button'
+            onClick={helpfulHandler}
+            value='Yes'
+          />
+          {` (${helpfulness})`}
+        </div>
+        <div>
+          {' | '}
+        </div>
+        <div>
+          <input
+            type='button'
+            className={g.btnLinkify}
+            value={reported ? 'Reported' : 'Report'}
+            onClick={() => {
+              if (!reported) {
+                report();
+              }
+            }}
+          />
+        </div>
       </div>
     </div>
   );

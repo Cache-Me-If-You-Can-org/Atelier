@@ -10,6 +10,10 @@
 }
 .answerDetails {
   color: gray;
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+  gap: 10px;
 }
 .questionsList {
   max-height: 80vh;
@@ -30,6 +34,7 @@
   color: gray;
   display: flex;
   align-items: baseline;
+  gap: 10px;
 }
 .answersList {
   display: flex;
@@ -62,4 +67,9 @@ button.unstyledBtn, input.unstyledBtn{
 }
 .multiBtn {
   margin-right: var(--spacing-sm);
+}
+.helpfulness {
+  display:flex;
+  flex-shrink: 0;
+  align-items: baseline;
 }
