@@ -37,10 +37,10 @@ function Question({ productName, question }) {
   }
   return (
     <div className={g.stack}>
-      <div className={[styles.question, g.textMd].join(' ')}>
+      <div className={[styles.question, g.textMd, g.gapSm].join(' ')}>
         <strong>Q:</strong>
         <strong className={styles.questionBody}>{question.question_body}</strong>
-        <div className={[styles.questionDetails, g.textXs].join(' ')}>
+        <div className={[styles.questionDetails, g.textXs, g.gapSm].join(' ')}>
           <div className={styles.helpfulness}>
             {'Helpful? '}
             {isHelpful ? (

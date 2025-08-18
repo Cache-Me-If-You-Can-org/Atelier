@@ -62,7 +62,7 @@ function Answer({ answer }) {
           )}
         />
       </div>
-      <div className={[styles.answerDetails, g.textXs].join(' ')}>
+      <div className={[styles.answerDetails, g.textXs, g.gapSm].join(' ')}>
         <div>
           {'by '}
           <span className={answer.answerer_name === 'Seller' ? styles.sellerName : ''}>
