@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as g from '../../global.module.css';
 import * as styles from '../reviews.module.css';
+import { v4 as uuidv4 } from 'uuid';
 
 function StarRatingBreakdown({
   ratings,
@@ -60,7 +61,7 @@ function StarRatingBreakdown({
                 &nbsp;
               </span>
             ))}
-            <button className={styles.clearStarFiltersBtn} onClick={() => clearFilters()} type='button'>Clear filters</button>
+            <button className={`${styles.clearStarFiltersBtn} ${g.textXs}`} onClick={() => clearFilters()} type='button'>Clear filters</button>
           </div>
         )
         : (
@@ -68,7 +69,7 @@ function StarRatingBreakdown({
         )}
       <ul className={styles.ratingsBreakdownList}>
         {percentages.map((percentageListItem) => (
-          <li key={crypto.randomUUID()} className={styles.ratingBreakdown}>
+          <li key={uuidv4()} className={styles.ratingBreakdown}>
             <button
               onClick={() => addFilter(percentageListItem.index)}
               type='button'

@@ -70,6 +70,12 @@
   min-width: auto;
   border: none;
   border-bottom: solid var(--color-dark) 1px;
+  text-transform: inherit;
+}
+
+.reviewTilesHelpfulSection button:disabled {
+  color: var(--color-border);
+  border-color: var(--color-border);
 }
 
 .reviewTilesHelpfulSection p {
@@ -125,8 +131,8 @@
 
 .reviewPhotoSm {
   border: solid #ccc 1px;
-  width: 100px;
-  height: 100px;
+  width: 69px;
+  height: 69px;
 }
 
 .reviewPhotoLg{
@@ -313,6 +319,7 @@
 }
 
 .clearStarFiltersBtn {
+  text-transform: inherit;
   border: none;
   min-width: auto;
   text-decoration: underline;

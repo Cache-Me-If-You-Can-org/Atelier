@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
+import Sort from './Sort';
 import * as g from '../../global.module.css';
 import * as styles from '../reviews.module.css';
 
-function ReviewsFilters({ totalReviews, filterTotalReviews, handleRelevantSelection }) {
+function ReviewsFilters({ totalReviews, filterTotalReviews }) {
   const [selectedFilter, setSelectedFilter] = useState('relevance');
   const safeReviews = Array.isArray(totalReviews) ? totalReviews : [];
 
   const filter = (filterVal) => {
     const currentFilter = filterVal[0];
+
     if (currentFilter === 'newest') {
-      totalReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
-      filterTotalReviews(totalReviews);
+      filterTotalReviews(Sort.byNewest(totalReviews));
     } else if (currentFilter === 'helpful') {
-      totalReviews.sort((a, b) => (b.helpfulness) - (a.helpfulness));
-      filterTotalReviews(totalReviews);
+      filterTotalReviews(Sort.byHelpfulness(totalReviews));
     } else if (currentFilter === 'relevance') {
-      handleRelevantSelection();
+      filterTotalReviews(Sort.byRelevance(totalReviews));
     }
   };
 

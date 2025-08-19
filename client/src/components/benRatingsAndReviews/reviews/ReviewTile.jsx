@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TruncatedText from './TruncatedText';
 import QuarterStarRating from '../../shared/QuarterStarRating';
 import ReviewsServices from '../services/ReviewsServices';
@@ -12,17 +12,31 @@ function ReviewsList({ review }) {
   const [reported, setReported] = useState(false);
   const [isHelpful, setIsHelpful] = useState(false);
   const [helpfulness, setHelpfulness] = useState(review.helpfulness);
+  const [url, setUrl] = useState(null);
   const date = new Date(review.date);
 
-  const year = date.getFullYear();
-  const monthName = date.toLocaleString('en-US', { month: 'long' });
-  const day = date.getDate().toString().padStart(2, '0');
+  const year = date.getUTCFullYear();
+  const monthName = date.toLocaleString('en-US', { month: 'long', timeZone: 'UTC' });
+  const day = date.getUTCDate().toString().padStart(2, '0');
 
   const formattedDate = `${monthName} ${day}, ${year}`;
+
+  useEffect(() => {
+    const helpful = localStorage.getItem(`helpful_${review.review_id}`);
+    if (helpful === 'true') {
+      setIsHelpful(true);
+    }
+
+    const flagged = localStorage.getItem(`reported_${review.review_id}`);
+    if (flagged === 'true') {
+      setReported(true);
+    }
+  }, [review.review_id]);
 
   const handleHelpfulClick = (id) => {
     ReviewsServices.markReviewAsHelpful(id, () => {
       setIsHelpful(true);
+      localStorage.setItem(`helpful_${review.review_id}`, 'true');
       setHelpfulness(helpfulness + 1);
     });
   };
@@ -30,9 +44,14 @@ function ReviewsList({ review }) {
   const handleReportClick = (id) => {
     ReviewsServices.reportReview(id, () => {
       setReported(true);
+      localStorage.setItem(`reported_${review.review_id}`, 'true');
     });
   };
 
+  function expandPhoto(photo) {
+    setIsOpen(true);
+    setUrl(photo);
+  }
   return (
     <div className={styles.reviewTileWrapper}>
       <div className={styles.reviewTileHeading}>
@@ -55,17 +74,21 @@ function ReviewsList({ review }) {
             {review.photos.map((photo) => (
               <div key={photo.id}>
                 <button type='button' onClick={() => setIsOpen(true)}>
-                  <Image className={styles.reviewPhotoSm} src={photo.url} />
+                  <Image
+                    onClick={() => expandPhoto(photo.url)}
+                    className={styles.reviewPhotoSm}
+                    src={photo.url}
+                  />
                 </button>
-                <Modal
-                  isOpen={isOpen}
-                  setIsOpen={setIsOpen}
-                  Module={
-                    <Image className={styles.reviewPhotoLg} src={photo.url} />
-                  }
-                />
               </div>
             ))}
+            <Modal
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              Module={
+                <Image className={styles.reviewPhotoLg} src={url} />
+              }
+            />
           </div>
         )
         : null}
@@ -80,13 +103,13 @@ function ReviewsList({ review }) {
         <p>
           Helpful?
           <span>
-            <button onClick={() => handleHelpfulClick(review.review_id)} disabled={isHelpful} type='button'>Yes</button>
+            <button className={g.textXs} onClick={() => handleHelpfulClick(review.review_id)} disabled={isHelpful} type='button'>Yes</button>
             (
             {helpfulness}
             )
           </span>
           <span>
-            <button onClick={() => handleReportClick(review.review_id)} disabled={reported} type='button'>{reported ? 'Review reported' : 'Report'}</button>
+            <button className={g.textXs} onClick={() => handleReportClick(review.review_id)} disabled={reported} type='button'>{reported ? 'Review reported' : 'Report'}</button>
           </span>
         </p>
       </div>
