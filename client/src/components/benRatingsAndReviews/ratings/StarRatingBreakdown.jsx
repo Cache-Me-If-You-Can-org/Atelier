@@ -60,7 +60,7 @@ function StarRatingBreakdown({
                 &nbsp;
               </span>
             ))}
-            <button className={styles.clearStarFiltersBtn} onClick={() => clearFilters()} type='button'>Clear filters</button>
+            <button className={`${styles.clearStarFiltersBtn} ${g.textXs}`} onClick={() => clearFilters()} type='button'>Clear filters</button>
           </div>
         )
         : (

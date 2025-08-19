@@ -104,7 +104,7 @@ function AddReview({
         </div>
         <div className={styles.starWrapper}>
           <QuarterStarRating isReview size={24} getRating={setStars} />
-          <p>{starMeaning[stars - 1]}</p>
+          <p className={g.textXs}>{starMeaning[stars - 1]}</p>
         </div>
       </div>
       <div className={styles.formBlock}>
