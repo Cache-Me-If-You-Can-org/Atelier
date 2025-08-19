@@ -37,6 +37,7 @@ export default function Modal({
   setIsOpen,
   Module,
   style = {},
+  disableClose,
 }) {
   if (!isOpen) return null;
 
@@ -45,7 +46,7 @@ export default function Modal({
       id='activeModal'
       className={shared.modal}
     >
-      <div className={shared['modal-content']} style={style}>
+      <div className={shared['modal-content']} style={style} >
         <span
           className={shared.close}
           onKeyPress={() => {}}
@@ -55,6 +56,7 @@ export default function Modal({
           }}
           role='button'
           tabIndex='0'
+          hidden={disableClose}
         >
           &times;
         </span>
