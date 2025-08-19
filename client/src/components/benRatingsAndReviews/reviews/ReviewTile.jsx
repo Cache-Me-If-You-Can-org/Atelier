@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TruncatedText from './TruncatedText';
 import QuarterStarRating from '../../shared/QuarterStarRating';
 import ReviewsServices from '../services/ReviewsServices';
@@ -21,9 +21,22 @@ function ReviewsList({ review }) {
 
   const formattedDate = `${monthName} ${day}, ${year}`;
 
+  useEffect(() => {
+    const helpful = localStorage.getItem(`helpful_${review.review_id}`);
+    if (helpful === 'true') {
+      setIsHelpful(true);
+    }
+
+    const flagged = localStorage.getItem(`reported_${review.review_id}`);
+    if (flagged === 'true') {
+      setReported(true);
+    }
+  }, [review.review_id]);
+
   const handleHelpfulClick = (id) => {
     ReviewsServices.markReviewAsHelpful(id, () => {
       setIsHelpful(true);
+      localStorage.setItem(`helpful_${review.review_id}`, 'true');
       setHelpfulness(helpfulness + 1);
     });
   };
@@ -31,8 +44,10 @@ function ReviewsList({ review }) {
   const handleReportClick = (id) => {
     ReviewsServices.reportReview(id, () => {
       setReported(true);
+      localStorage.setItem(`reported_${review.review_id}`, 'true');
     });
   };
+
   function expandPhoto(photo) {
     setIsOpen(true);
     setUrl(photo);
