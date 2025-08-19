@@ -4,6 +4,7 @@ import Image from '../../shared/Image';
 import { getScrollIndicators, scrollToImageInContainer } from '../lib/helpers';
 import * as css from '../styles/photo_picker.module.css';
 import * as g from '../../global.module.css';
+import { v4 as uuidv4 } from 'uuid';
 
 function PhotoPicker({
   selectedImage, setSelectedImage, photos,
@@ -38,7 +39,7 @@ function PhotoPicker({
       >
         {photos.map((photo, i) => (
           <button
-            key={crypto.randomUUID()}
+            key={uuidv4()}
             type='button'
             className={css.photo}
             onClick={(e) => {
