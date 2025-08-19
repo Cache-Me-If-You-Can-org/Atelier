@@ -48,7 +48,7 @@ function AnswerForm({
   }
 
   return (
-    <div>
+    <div className={styles.formModal}>
       <h3>Submit your Answer </h3>
       <h5>
         {productName}

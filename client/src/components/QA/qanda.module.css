@@ -3,12 +3,16 @@
   padding-bottom: var(--spacing-sm);
 }
 .answer {
-  padding: 0px 10px 10px;
+  padding-bottom: 10px;
   font-size: small;
   line-height: normal;
+  line-break: anywhere;
 }
 .answerDetails {
   color: gray;
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
 }
 .questionsList {
   max-height: 80vh;
@@ -21,19 +25,24 @@
   margin-bottom: 5px;
 }
 .questionBody {
-  padding-left: 10px;
+  line-break: anywhere;
+  flex-grow: 2;
 }
 .questionDetails {
   color: gray;
+  display: flex;
+  align-items: baseline;
 }
 .answersList {
   display: flex;
   align-items: baseline;
   max-height: 50vh;
+  gap: var(--spacing-sm);
 }
 .search {
   display: flex;
   flex-direction: column;
+  margin-bottom: var(--spacing-sm);
 }
 .error {
   color: red;
@@ -50,6 +59,8 @@ button.unstyledBtn, input.unstyledBtn{
   background: none;
   border: none;
   cursor: pointer;
+  color: var(--color-dark);
+  padding: 0;
 }
 .emphasize, .search input::placeholder {
   text-transform: uppercase;
@@ -57,4 +68,12 @@ button.unstyledBtn, input.unstyledBtn{
 }
 .multiBtn {
   margin-right: var(--spacing-sm);
+}
+.helpfulness {
+  display:flex;
+  flex-shrink: 0;
+  align-items: baseline;
+}
+.formModal input, .formModal textarea {
+  width: 100%;
 }
