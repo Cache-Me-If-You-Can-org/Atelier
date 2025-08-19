@@ -12,7 +12,7 @@ function StyleSelector({
       <div className={[g.group, g.gapSm, g.alignStart].join(' ')}>
         <div className={[g.group, g.gapSm, g.alignCenter].join(' ')}>
           <p className={[g.textMd, g.bold, g.upper].join(' ')}>style</p>
-          <CaretRight className={g.textMd} weight='bold'/>
+          <CaretRight className={g.textMd} weight='bold' />
         </div>
         <p className={[g.textMd, g.upper].join(' ')}>{styles[selectedStyle].name}</p>
       </div>

@@ -25,13 +25,14 @@ function Info({
   }, [selectedStyle]);
 
   const postToCart = () => {
-    if (!skuId) return;
-    
-    return axios.post(
-      '/cart', 
-      JSON.stringify({ sku_id: parseInt(skuId, 10) }), 
-      { headers: { 'Content-Type': 'application/json' } }
-    );
+    if (skuId) {
+      return axios.post(
+        '/cart',
+        JSON.stringify({ sku_id: Number(skuId) }),
+        { headers: { 'Content-Type': 'application/json' } },
+      );
+    }
+    return new Error('no selected sku');
   };
 
   return (
@@ -40,14 +41,14 @@ function Info({
       style={{ display: isFullScreen ? 'none' : '' }}
     >
       <div className={[g.stack, g.gapMd].join(' ')}>
-        <div className={[g.group, g.gapSm, g.alignCenter].join(' ')}>
+        {getReviewCount(ratings) > 0 && <div className={[g.group, g.gapSm, g.alignCenter].join(' ')}>
           <QuarterStarRating rating={calculateStars(ratings)} />
           <a
             className={g.textSm}
             href='#ratingsAndReviews'
             onClick={(e) => {
               e.preventDefault();
-              document.getElementById('ratingsAndReviews').scrollIntoView({ 
+              document.getElementById('ratingsAndReviews').scrollIntoView({
                 behavior: 'smooth',
                 block: 'start',
               });
@@ -55,7 +56,7 @@ function Info({
           >
             {`Read all ${getReviewCount(ratings)} reviews`}
           </a>
-        </div>
+        </div>}
         <div className={g.stack}>
           <p className={[g.textMd, g.upper].join(' ')}>{product.category}</p>
           <h2 className={[g.textLg, g.bold].join(' ')}>{product.name}</h2>

@@ -8,16 +8,16 @@ function getQtys(style, sku) {
 
 function getScrollIndicators(element) {
   if (!element) return { showTop: false, showBottom: false };
-  
+
   const { scrollTop, scrollHeight, clientHeight } = element;
   const showTop = scrollTop > 0;
   const showBottom = scrollHeight - scrollTop - clientHeight > 1;
-  
+
   return { showTop, showBottom };
 }
 
 function getInStockSkus(style) {
-  return Object.keys(style.skus).filter(sku => style.skus[sku].quantity > 0);
+  return Object.keys(style.skus).filter((sku) => style.skus[sku].quantity > 0);
 }
 
 function hasInStockItems(style) {
@@ -32,7 +32,7 @@ function getQtysWithLimit(style, sku) {
 
 function formatSizeOptions(style) {
   if (!hasInStockItems(style)) return [];
-  
+
   const inStockSkus = getInStockSkus(style);
   return inStockSkus.map((sku) => ({
     label: style.skus[sku].size,
@@ -42,7 +42,7 @@ function formatSizeOptions(style) {
 
 function formatQuantityOptions(style, skuId) {
   if (!skuId || !hasInStockItems(style)) return [];
-  
+
   return getQtysWithLimit(style, skuId).map((amount) => ({
     label: amount,
     value: amount,
@@ -54,7 +54,7 @@ function scrollToImageInContainer(containerRef, imageIndex) {
 
   const container = containerRef.current;
   const photos = container.children;
-  
+
   if (imageIndex < 0 || imageIndex >= photos.length) return;
 
   const targetPhoto = photos[imageIndex];
@@ -67,17 +67,17 @@ function scrollToImageInContainer(containerRef, imageIndex) {
   if (isAboveView || isBelowView) {
     targetPhoto.scrollIntoView({
       behavior: 'smooth',
-      block: 'nearest'
+      block: 'nearest',
     });
   }
 }
 
-export { 
-  getSkus, 
-  getQtys, 
+export {
+  getSkus,
+  getQtys,
   getScrollIndicators,
-  getInStockSkus, 
-  hasInStockItems, 
+  getInStockSkus,
+  hasInStockItems,
   getQtysWithLimit,
   formatSizeOptions,
   formatQuantityOptions,

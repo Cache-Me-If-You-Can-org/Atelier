@@ -47,7 +47,7 @@ export default function App({ productId }) {
         {`${totalReviewCount} reviews for product ${product.id} with a rating of ${productRating}`}
       </div>
       <Overview product={product} ratings={ratings} />
-      <div className={[g.container, g.stack, g.gapLg].join(' ')}>
+      <div className={[g.containerMd, g.stack, g.gapLg].join(' ')}>
         <RelatedAndOutfit
           sectionId='relatedProductsAndOutfit'
           productId={product.id}

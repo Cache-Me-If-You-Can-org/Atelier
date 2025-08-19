@@ -27,15 +27,15 @@ function CartForm({
     }
   }, [skuId]);
 
-  useEffect(() => {
-    resetAllStates();
-  }, [selectedStyle]);
-
   const resetAllStates = () => {
     setShowSizeMessage(false);
     setIsAddedToCart(false);
     setIsSizeSelectOpen(false);
   };
+
+  useEffect(() => {
+    resetAllStates();
+  }, [selectedStyle]);
 
   const handleSizeSelection = (value) => {
     setSkuId(value);
@@ -71,24 +71,24 @@ function CartForm({
       <Select
         className={css.fill}
         onChange={handleSizeSelection}
-        value=""
+        value=''
         options={[]}
-        placeholder="OUT OF STOCK"
-        disabled={true}
+        placeholder='OUT OF STOCK'
+        disabled
       />
       <Select
         onChange={handleQuantitySelection}
-        value=""
+        value=''
         options={[]}
-        placeholder="-"
-        disabled={true}
+        placeholder='-'
+        disabled
       />
     </div>
   );
 
   const renderSizeMessage = () => {
     if (!showSizeMessage) return null;
-    
+
     return (
       <div className={css.sizeMessage}>
         Please select size
@@ -103,7 +103,7 @@ function CartForm({
         onChange={handleSizeSelection}
         value={skuId || ''}
         options={formatSizeOptions(currentStyle)}
-        placeholder="Select Size"
+        placeholder='Select Size'
         disabled={false}
         isOpen={isSizeSelectOpen}
         onOpenChange={setIsSizeSelectOpen}
@@ -118,30 +118,26 @@ function CartForm({
     </div>
   );
 
+  if (!hasStock) { return renderOutOfStockView(); }
+
   return (
     <>
-      {!hasStock ? renderOutOfStockView() :
-        <>
-          <div className={g.stack}>
-            {renderSizeMessage()}
-            {renderDropdowns()}
-          </div>
-          <div className={g.flex}>
-            <button
-              type='button'
-              className={[g.center, g.sb, css.fill].join(' ')}
-              onClick={handleAddToCartClick}
-            >
-              Add to Cart
-              {isAddedToCart ? 
-                <Check className={g.textMd} weight='bold' /> 
-                :
-                <Plus className={g.textMd} weight='bold' />
-              }
-            </button> 
-          </div>
-        </>
-      }
+      <div className={g.stack}>
+        {renderSizeMessage()}
+        {renderDropdowns()}
+      </div>
+      <div className={g.flex}>
+        <button
+          type='button'
+          className={[g.center, g.sb, css.fill].join(' ')}
+          onClick={handleAddToCartClick}
+        >
+          Add to Cart
+          {isAddedToCart
+            ? <Check className={g.textMd} weight='bold' />
+            : <Plus className={g.textMd} weight='bold' />}
+        </button>
+      </div>
     </>
   );
 }
