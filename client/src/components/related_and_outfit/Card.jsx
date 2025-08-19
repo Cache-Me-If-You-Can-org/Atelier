@@ -15,7 +15,14 @@ function ImageWithButton({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className='thumbnail-square' style={{ height: 200 }}>
+    <div
+      className='thumbnail-square'
+      style={{ height: 200 }}
+      onClick={(e) => e.stopPropagation()}
+      onKeyPress={() => {}}
+      tabIndex='0'
+      role='button'
+    >
       <img className='thumbnail-image' src={url} alt={original.name} style={{ objectPosition: 'center bottom' }} />
       {remove ? (
         <button
