@@ -7,9 +7,10 @@ import * as gbl from '../global.module.css';
 // import InfiniteScroll from 'react-infinite-scroll-component';
 import Modal from '../shared/Modal';
 import AddReview from './AddReview';
+import { v4 as uuidv4 } from 'uuid';
 
 function getKey() {
-  return crypto.randomUUID();
+  return uuidv4();
 }
 //
 export default function ReviewList({

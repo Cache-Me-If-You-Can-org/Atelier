@@ -3,9 +3,10 @@ import _ from 'lodash';
 import * as lcl from './ratingsAndReviews.module.css';
 import * as gbl from '../global.module.css';
 import QuarterStarRating from '../shared/QuarterStarRating';
+import { v4 as uuidv4 } from 'uuid';
 
 function getKey() {
-  return crypto.randomUUID();
+  return uuidv4();
 }
 
 export default function Ratings({
