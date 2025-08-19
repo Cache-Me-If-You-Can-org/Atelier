@@ -10,6 +10,7 @@ import AddReview from './addReview/AddReview';
 import Sort from './Sort';
 import * as g from '../../global.module.css';
 import * as styles from '../reviews.module.css';
+import { v4 as uuidv4 } from 'uuid';
 
 function ReviewsList({
   productId, meta, starFilters,
@@ -106,7 +107,7 @@ function ReviewsList({
       <div id='reviews' className={styles.reviewsList}>
         {filteredReviews.length > 0 ? (
           filteredReviews.map((review) => (
-            <div key={crypto.randomUUID()} id='review-tile'>
+            <div key={uuidv4()} id='review-tile'>
               <ReviewTile review={review} />
             </div>
           ))
