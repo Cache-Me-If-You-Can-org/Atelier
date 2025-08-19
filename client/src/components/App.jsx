@@ -16,6 +16,7 @@ export default function App({ productId }) {
   const [totalReviewCount, setTotalReviewCount] = useState(0);
   const [productRating, setProductRating] = useState(0);
   const [ratings, setRatings] = useState(null);
+  const [meta, setMeta] = useState(null);
 
   useEffect(() => {
     // We have to reset the states to null so nothing tries to render
@@ -30,6 +31,7 @@ export default function App({ productId }) {
         });
       })
       .then((res) => {
+        setMeta(res.data);
         setRatings(res.data.ratings);
       })
       .catch((err) => {
@@ -57,9 +59,8 @@ export default function App({ productId }) {
         <QA product={product} />
         <RatingsAndReviews
           sectionId='ratingsAndReviews'
-          productId={product.id}
-          setTotalReviewCount={setTotalReviewCount}
-          setProductRating={setProductRating}
+          productName={product.name}
+          meta={meta}
         />
         <BenRatingsAndReviews productId={product.id} />
       </div>
