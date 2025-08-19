@@ -18,8 +18,12 @@ function Ratings({ meta, getFilters }) {
     0,
   );
 
+  function roundDownToOneDecimal(num) {
+    return Math.floor(num * 10) / 10;
+  }
+
   const averageRating = totalScore > 0 ? totalScore / totalRatings : 0;
-  const displayRating = averageRating.toFixed(1);
+  const displayRating = roundDownToOneDecimal(averageRating);
 
   const starFilters = (filterArray) => {
     getFilters(filterArray);
@@ -31,7 +35,7 @@ function Ratings({ meta, getFilters }) {
       <div className={styles.ratingsHeader}>
         <h3 className={styles.ratingsAverage}>{displayRating}</h3>
         <div className={styles.ratingsStars}>
-          <QuarterStarRating rating={averageRating} size={18} />
+          <QuarterStarRating rating={displayRating} size={18} />
         </div>
       </div>
       <div className={styles.ratingsBreakdown}>
