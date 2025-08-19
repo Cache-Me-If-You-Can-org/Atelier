@@ -7,15 +7,17 @@ import * as styles from './relatedOutfit.module.css';
 
 function AddOutfitButton({ addNewItem, productId }) {
   return (
-    <div className={`${styles.productCard} ${styles.addOutfit}`}>
+    <div
+      className={`${styles.productCard} ${styles.addOutfit}`}
+      onClick={() => {
+        addNewItem(productId);
+      }}
+      onKeyPress={() => {}}
+      role='button'
+      tabIndex='0'
+    >
       <span
         className={styles.addOutfitText}
-        onClick={() => {
-          addNewItem(productId);
-        }}
-        onKeyPress={() => {}}
-        role='button'
-        tabIndex='0'
       >
         <p>+</p>
         <p>Add to Outfit</p>
