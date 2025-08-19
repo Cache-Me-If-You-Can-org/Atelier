@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import _ from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
 import Review from './Review';
 import * as lcl from './ratingsAndReviews.module.css';
 import * as gbl from '../global.module.css';
@@ -9,7 +10,7 @@ import Modal from '../shared/Modal';
 import AddReview from './AddReview';
 
 function getKey() {
-  return crypto.randomUUID();
+  return uuidv4();
 }
 //
 export default function ReviewList({
@@ -79,7 +80,7 @@ export default function ReviewList({
   useEffect(() => {
     setPage(1);
     getReviews([], prodId, setReviews);
-  }, [sort, filters]);
+  }, [sort, filters, helpful]);
 
   return (
     <article className={lcl.reviews} id='reviewlist'>

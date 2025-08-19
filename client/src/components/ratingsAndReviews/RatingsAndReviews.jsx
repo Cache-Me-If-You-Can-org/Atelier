@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import Ratings from './Ratings';
 import ReviewList from './ReviewList';
 import * as lcl from './ratingsAndReviews.module.css';
@@ -21,16 +20,12 @@ export default function RatingsAndReviews({
     Quality: ['Poor', 'Below Average', 'What I expected', 'Pretty great', 'Perfect'],
   };
 
-  const [errMsg, setErrMsg] = useState(null);
-
   return (
     <section id={sectionId}>
 
       <title>Ratings & Reviews</title>
       <div className={lcl.RRcontainer}>
         <h3>RATINGS & REVIEWS</h3>
-
-        {errMsg && <div>{errMsg}</div>}
 
         <div className={gbl.group}>
           <Ratings
