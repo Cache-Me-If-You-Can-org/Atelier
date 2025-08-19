@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 import { format, parseISO } from 'date-fns';
 import { Check } from '@phosphor-icons/react';
 import validator from 'validator';
@@ -7,6 +8,10 @@ import * as lcl from './ratingsAndReviews.module.css';
 import * as gbl from '../global.module.css';
 import Modal from '../shared/Modal';
 import QuarterStarRating from '../shared/QuarterStarRating';
+
+function getKey() {
+  return uuidv4();
+}
 
 export default function Review({
   review, showHR, reported, setReported, helpful, setHelpful,
@@ -86,7 +91,7 @@ export default function Review({
                       <input
                         type='image'
                         className={lcl.thumbnail}
-                        key={val.id}
+                        key={getKey()}
                         id={val.id}
                         onClick={() => handleOnClickThumbnail(val.url)}
                         onKeyPress={() => handleOnClickThumbnail(val.url)}
