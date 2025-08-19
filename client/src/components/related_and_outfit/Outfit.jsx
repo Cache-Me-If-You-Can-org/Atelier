@@ -9,6 +9,7 @@ function AddOutfitButton({ addNewItem, productId }) {
   return (
     <div className={`${styles.productCard} ${styles.addOutfit}`}>
       <span
+        className={styles.addOutfitText}
         onClick={() => {
           addNewItem(productId);
         }}
@@ -23,7 +24,7 @@ function AddOutfitButton({ addNewItem, productId }) {
   );
 }
 
-function useOutfit() {
+export default function Outfit({ productId, setSelectedProductId }) {
   const [outfit, setOutfit] = useState(() => {
     const saved = Cookies.get('outfit');
     return saved ? JSON.parse(saved) : [];
@@ -33,33 +34,15 @@ function useOutfit() {
     Cookies.set('outfit', JSON.stringify(outfit), { expires: 7, path: '/' });
   }, [outfit]);
 
-  const addItem = (productId) => {
+  const addItem = (id) => {
     setOutfit((prev) => {
-      const exists = prev.find((id) => id === productId);
+      const exists = prev.find((currentId) => currentId === id);
       if (exists) {
         return prev;
       }
-      return [...prev, productId];
+      return [...prev, id];
     });
   };
-
-  const removeItem = (productId) => {
-    setOutfit((prev) => prev.filter((item) => item.productId !== productId));
-  };
-
-  return {
-    outfit,
-    addItem,
-    removeItem,
-  };
-}
-
-export default function Outfit({ productId, setSelectedProductId }) {
-  const {
-    outfit,
-    addItem,
-    removeItem,
-  } = useOutfit();
 
   return (
     <div className={styles.relatedOutfit}>
@@ -71,7 +54,7 @@ export default function Outfit({ productId, setSelectedProductId }) {
             key={`key-${id}`}
             productId={id}
             originalProductId={productId}
-            remove={removeItem}
+            remove={setOutfit}
             setSelectedProductId={setSelectedProductId}
           />
         ))}

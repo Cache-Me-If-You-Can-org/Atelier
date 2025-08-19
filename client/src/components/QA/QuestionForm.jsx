@@ -41,7 +41,7 @@ function QuestionForm({
     }
   }
   return (
-    <div>
+    <div className={styles.formModal}>
       <h3>Ask Your Question </h3>
       <h5>
         {'About the '}

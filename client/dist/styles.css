@@ -15,19 +15,19 @@
 
 
   /* Font Sizes */
-  --text-xs: 0.625rem;
-  --text-sm: 0.75rem;
-  --text-md: 0.875rem;
-  --text-lg: 2rem;
+  --text-xs: 0.6rem;
+  --text-sm: 0.875rem;
+  --text-md: 0.975rem;
+  --text-lg: 2.4rem;
 
   /* Font Weight */
   --text-reg: normal;
   --text-bold: bold;
 
   /* Spacing */
-  --spacing-sm: 0.625rem;
+  --spacing-sm: 0.75rem;
   --spacing-md: 1rem;
-  --spacing-lg: 1.25rem;
+  --spacing-lg: 3rem;
 }
 
 /* Dark Mode */

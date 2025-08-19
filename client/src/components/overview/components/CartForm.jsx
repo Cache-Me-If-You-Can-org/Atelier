@@ -1,7 +1,7 @@
-import React from 'react';
-import { Plus } from '@phosphor-icons/react';
+import React, { useState, useEffect } from 'react';
+import { Plus, Check } from '@phosphor-icons/react';
 import Select from './Select';
-import { getSkus, getQtys } from '../lib/helpers';
+import { hasInStockItems, formatSizeOptions, formatQuantityOptions } from '../lib/helpers';
 import * as g from '../../global.module.css';
 import * as css from '../styles/cart_form.module.css';
 
@@ -14,39 +14,128 @@ function CartForm({
   qty,
   postToCart,
 }) {
+  const [showSizeMessage, setShowSizeMessage] = useState(false);
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
+  const [isSizeSelectOpen, setIsSizeSelectOpen] = useState(false);
+
+  const currentStyle = styles[selectedStyle];
+  const hasStock = hasInStockItems(currentStyle);
+
+  useEffect(() => {
+    if (skuId) {
+      setShowSizeMessage(false);
+    }
+  }, [skuId]);
+
+  const resetAllStates = () => {
+    setShowSizeMessage(false);
+    setIsAddedToCart(false);
+    setIsSizeSelectOpen(false);
+  };
+
+  useEffect(() => {
+    resetAllStates();
+  }, [selectedStyle]);
+
+  const handleSizeSelection = (value) => {
+    setSkuId(value);
+    setQty(1);
+  };
+
+  const handleQuantitySelection = (value) => {
+    setQty(Number(value));
+  };
+
+  const promptSizeSelection = () => {
+    setShowSizeMessage(true);
+    setIsSizeSelectOpen(true);
+  };
+
+  const handleAddToCartClick = () => {
+    if (!skuId) {
+      promptSizeSelection();
+      return;
+    }
+    postToCart()
+      .then(() => {
+        setIsAddedToCart(true);
+        setTimeout(() => setIsAddedToCart(false), 2000);
+      })
+      .catch((error) => {
+        console.error('Failed to add to cart:', error);
+      });
+  };
+
+  const renderOutOfStockView = () => (
+    <div className={[g.group, g.gapMd, g.fullWidth].join(' ')}>
+      <Select
+        className={css.fill}
+        onChange={handleSizeSelection}
+        value=''
+        options={[]}
+        placeholder='OUT OF STOCK'
+        disabled
+      />
+      <Select
+        onChange={handleQuantitySelection}
+        value=''
+        options={[]}
+        placeholder='-'
+        disabled
+      />
+    </div>
+  );
+
+  const renderSizeMessage = () => {
+    if (!showSizeMessage) return null;
+
+    return (
+      <div className={css.sizeMessage}>
+        Please select size
+      </div>
+    );
+  };
+
+  const renderDropdowns = () => (
+    <div className={[g.group, g.gapMd, g.fullWidth].join(' ')}>
+      <Select
+        className={css.fill}
+        onChange={handleSizeSelection}
+        value={skuId || ''}
+        options={formatSizeOptions(currentStyle)}
+        placeholder='Select Size'
+        disabled={false}
+        isOpen={isSizeSelectOpen}
+        onOpenChange={setIsSizeSelectOpen}
+      />
+      <Select
+        onChange={handleQuantitySelection}
+        value={skuId ? qty : ''}
+        options={formatQuantityOptions(currentStyle, skuId)}
+        placeholder={skuId ? qty : '-'}
+        disabled={!skuId}
+      />
+    </div>
+  );
+
+  if (!hasStock) { return renderOutOfStockView(); }
+
   return (
     <>
-      <div className={[g.group, g.gapSm, g.fullWidth].join(' ')}>
-        <Select
-          className={css.fill}
-          options={getSkus(styles[selectedStyle]).map((sku) => (
-            {
-              label: styles[selectedStyle].skus[sku].size,
-              value: sku,
-            }
-          ))}
-          onChange={(value) => setSkuId(value)}
-          value={skuId}
-        />
-        <Select
-          options={getQtys(styles[selectedStyle], skuId).map((amount) => (
-            {
-              label: amount,
-              value: amount,
-            }
-          ))}
-          onChange={(value) => setQty(value)}
-          value={qty}
-        />
+      <div className={g.stack}>
+        {renderSizeMessage()}
+        {renderDropdowns()}
       </div>
-      <div className={[g.group, css.gap].join(' ')}>
+      <div className={g.flex}>
         <button
-          type='submit'
+          type='button'
           className={[g.center, g.sb, css.fill].join(' ')}
-          onClick={postToCart}
+          onClick={handleAddToCartClick}
         >
-          Add to bag
-          <Plus className={g.textMd} weight='bold' />
+          Add to Cart
+          {isAddedToCart
+            ? <Check className={g.textMd} weight='bold' />
+            : <Plus className={g.textMd} weight='bold' />}
         </button>
       </div>
     </>

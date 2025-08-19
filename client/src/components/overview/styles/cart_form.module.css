@@ -5,3 +5,9 @@
 .fill {
   flex: 1;
 }
+
+.sizeMessage {
+  color: #d32f2f;
+  font-size: var(--text-sm);
+  margin-bottom: var(--spacing-sm);
+}

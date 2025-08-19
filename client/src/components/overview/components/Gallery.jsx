@@ -13,6 +13,8 @@ function Gallery({
 }) {
   const [selectedImage, setSelectedImage] = useState(0);
   const [displayImage, setDisplayImage] = useState(styles[selectedStyle].photos[selectedImage].url);
+  const [isInZoomMode, setIsInZoomMode] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
 
   useEffect(() => {
     setDisplayImage(styles[selectedStyle].photos[selectedImage].url);
@@ -36,17 +38,62 @@ function Gallery({
     }
   };
 
+  const handleFullscreenClick = () => {
+    if (isInZoomMode) {
+      setIsInZoomMode(false);
+    }
+    setIsFullScreen((prev) => !prev);
+  };
+
+  const handleGalleryClick = () => {
+    if (!isFullScreen) {
+      setIsFullScreen(true);
+    } else {
+      setIsInZoomMode((prev) => !prev);
+    }
+  };
+
+  const handleMouseMove = (e) => {
+    if (isInZoomMode) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      setMousePosition({ x, y });
+    }
+  };
+
+  const imageStyle = isInZoomMode ? {
+    transform: 'scale(2.5)',
+    transformOrigin: `${mousePosition.x}% ${mousePosition.y}%`,
+    transition: 'transform-origin 0.1s ease-out',
+    objectFit: 'contain',
+  } : {};
+
+  const galleryStyle = () => {
+    if (isInZoomMode) {
+      return { cursor: 'zoom-out' };
+    }
+    if (isFullScreen) {
+      return { cursor: 'zoom-in' };
+    }
+    return { cursor: 'pointer' };
+  };
+
   return (
     <div
       role='button'
       className={css.galleryWrapper}
-      style={{ cursor: isFullScreen ? 'zoom-out' : 'zoom-in' }}
+      style={galleryStyle()}
       tabIndex='0'
-      onClick={() => setIsFullScreen((prev) => !prev)}
+      onClick={handleGalleryClick}
       onKeyDown={handleKeyPress}
+      onMouseMove={handleMouseMove}
     >
-      <Image src={displayImage} />
-      <div className={css.overlay}>
+      <Image
+        src={displayImage}
+        style={imageStyle}
+      />
+      <div className={`${css.overlay} ${isInZoomMode ? css.overlayHidden : ''}`}>
         <div className={[g.group, g.fullHeight].join(' ')}>
           <PhotoPicker
             selectedImage={selectedImage}
@@ -57,6 +104,10 @@ function Gallery({
             <div className={css.fullscreen}>
               <CornersOut
                 className={[g.pointer, g.textLg, css.icon].join(' ')}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleFullscreenClick();
+                }}
               />
             </div>
             <div className={[g.group, g.sb, css.arrows].join(' ')}>
