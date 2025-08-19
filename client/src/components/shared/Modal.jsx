@@ -46,7 +46,7 @@ export default function Modal({
       id='activeModal'
       className={shared.modal}
     >
-      <div className={shared['modal-content']} style={style} >
+      <div className={shared['modal-content']} style={style}>
         <span
           className={shared.close}
           onKeyPress={() => {}}
