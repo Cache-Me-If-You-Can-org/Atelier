@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as shared from './shared.module.css';
 import * as g from '../global.module.css';
 import Thumbnail from './Thumbnail';
+import { v4 as uuidv4 } from 'uuid';
 
 function PhotoForm({
   photos = [],
@@ -44,7 +45,7 @@ function PhotoForm({
         {currPhotos.map((url) => (
           url ? (
             <Thumbnail
-              key={crypto.randomUUID()}
+              key={uuidv4()}
               className={g.mSm}
               src={url}
             />
