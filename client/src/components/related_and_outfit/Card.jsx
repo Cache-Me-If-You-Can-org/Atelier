@@ -15,14 +15,7 @@ function ImageWithButton({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div
-      className='thumbnail-square'
-      style={{ height: 200 }}
-      onClick={(e) => e.stopPropagation()}
-      onKeyPress={() => {}}
-      tabIndex='0'
-      role='button'
-    >
+    <div className='thumbnail-square' style={{ height: 200 }}>
       <img className='thumbnail-image' src={url} alt={original.name} style={{ objectPosition: 'center bottom' }} />
       {remove ? (
         <button
@@ -37,7 +30,12 @@ function ImageWithButton({
         </button>
       )
         : (
-          <>
+          <div
+            onClick={(e) => e.stopPropagation()}
+            onKeyPress={() => {}}
+            tabIndex='0'
+            role='button'
+          >
             <button
               type='button'
               className={styles.overlayBtn}
@@ -56,7 +54,7 @@ function ImageWithButton({
               Module={<ComparisonTable related={related} original={original} />}
               style={{ width: '40%' }}
             />
-          </>
+          </div>
         )}
     </div>
   );
