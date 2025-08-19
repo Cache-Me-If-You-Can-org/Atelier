@@ -26,7 +26,11 @@ function BenRatingsAndReviews({ productId }) {
           <Ratings getFilters={getFilters} productId={productId} meta={meta} />
         </div>
         <div className={styles.reviewsWrapper}>
-          <ReviewsList starFilters={starFilters} productId={productId} meta={meta} />
+          <ReviewsList
+            starFilters={starFilters}
+            productId={productId}
+            meta={meta}
+          />
         </div>
       </div>
     </div>

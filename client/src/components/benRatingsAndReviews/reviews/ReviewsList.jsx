@@ -11,7 +11,9 @@ import Sort from './Sort';
 import * as g from '../../global.module.css';
 import * as styles from '../reviews.module.css';
 
-function ReviewsList({ productId, meta, starFilters }) {
+function ReviewsList({
+  productId, meta, starFilters,
+}) {
   const [totalReviews, setTotalReviews] = useState([]);
   const [visibleReviews, setVisibleReviews] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -78,7 +80,6 @@ function ReviewsList({ productId, meta, starFilters }) {
     const scrollPosition = lastChild.offsetTop + 100;
 
     if (scrollAction === 'top' && firstChild) {
-      console.log('top');
       firstChild.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
