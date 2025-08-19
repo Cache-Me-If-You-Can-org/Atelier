@@ -5,7 +5,6 @@ import * as lcl from './ratingsAndReviews.module.css';
 import * as gbl from '../global.module.css';
 import QuarterStarRating from '../shared/QuarterStarRating';
 
-uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
 function getKey() {
   return uuidv4();
 }
