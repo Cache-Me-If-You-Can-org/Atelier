@@ -1,6 +1,7 @@
 import React from 'react';
 import * as g from '../../global.module.css';
 import * as styles from '../reviews.module.css';
+import { v4 as uuidv4 } from 'uuid';
 
 function ProductBreakdown({ characteristics }) {
   const ratingsMap = {
@@ -48,7 +49,7 @@ function ProductBreakdown({ characteristics }) {
             </div>
             <div className={`${styles.ratingsTitles} ${g.textXs}`}>
               {prodBreakdown.ratings.map((rating) => (
-                <span key={crypto.randomUUID()}>{rating}</span>
+                <span key={uuidv4()}>{rating}</span>
               ))}
             </div>
           </li>

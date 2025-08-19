@@ -50,7 +50,7 @@ function PhotoForm({
               src={url}
             />
           ) : (
-            <div key={crypto.randomUUID()} className={[shared.placeholderImage, g.mSm].join(' ')} />
+            <div key={uuidv4()} className={[shared.placeholderImage, g.mSm].join(' ')} />
           )
         ))}
       </div>
