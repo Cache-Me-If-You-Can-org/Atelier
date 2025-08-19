@@ -30,7 +30,12 @@ function ImageWithButton({
         </button>
       )
         : (
-          <>
+          <div
+            onClick={(e) => e.stopPropagation()}
+            onKeyPress={() => {}}
+            tabIndex='0'
+            role='button'
+          >
             <button
               type='button'
               className={styles.overlayBtn}
@@ -49,7 +54,7 @@ function ImageWithButton({
               Module={<ComparisonTable related={related} original={original} />}
               style={{ width: '40%' }}
             />
-          </>
+          </div>
         )}
     </div>
   );

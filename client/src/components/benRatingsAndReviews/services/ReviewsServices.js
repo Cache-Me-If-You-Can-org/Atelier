@@ -1,14 +1,8 @@
 import axios from 'axios';
 
-const api = axios.create({
-  // TODO: Change this for deployment:
-  baseURL: 'http://localhost:3000',
-  timeout: 5000,
-});
-
 const ReviewsServices = {
   getReviews: (productId, count, page, callback) => {
-    api
+    axios
       .get('/reviews/', {
         params: {
           product_id: productId,
@@ -24,7 +18,7 @@ const ReviewsServices = {
       });
   },
   getMeta: (productId, callback) => {
-    api
+    axios
       .get('/reviews/meta/', {
         params: {
           product_id: productId,
@@ -38,7 +32,7 @@ const ReviewsServices = {
       });
   },
   addReview: (reviewData, callback) => {
-    api
+    axios
       .post('/reviews', reviewData)
       .then((response) => {
         callback(response.data);
@@ -48,7 +42,7 @@ const ReviewsServices = {
       });
   },
   markReviewAsHelpful: (reviewId, callback) => {
-    api
+    axios
       .put(`/reviews/${reviewId}/helpful`)
       .then((response) => {
         callback(response.data);
@@ -58,7 +52,7 @@ const ReviewsServices = {
       });
   },
   reportReview: (reviewId, callback) => {
-    api
+    axios
       .put(`/reviews/${reviewId}/report`)
       .then((response) => {
         callback(response.data);

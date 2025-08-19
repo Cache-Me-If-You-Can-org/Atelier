@@ -1,0 +1,315 @@
+/* RatingsAndReviews.module.css */
+
+.errormessage {
+  color: red;
+  font-size: larger;
+}
+
+
+.legend {
+  font-size: smaller;
+}
+
+.image {
+  radius: 5px;
+}
+
+.radio {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.left {
+  justify-content: start;
+}
+/****************************/
+/* BEGIN: RatingsAndReviews */
+
+.spaceVertical {
+  margin: 10px 0;
+}
+
+.RRcontainer {
+  margin: 0 2%;
+}
+
+.horizontalpadding {
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.verticalpadding{
+  margin-top: 3px;
+  margin-bottom:3px;
+}
+/* END:   RatingsAndReviews */
+/****************************/
+
+
+/***********************/
+/* BEGIN: Ratings      */
+
+.filters {
+  font-size: smaller;
+  width: 100%;
+}
+
+.filters .clear {
+  text-decoration: underline;
+  margin: 0;
+}
+
+.clear:hover{
+  font-weight:bold;
+}
+
+
+.progress {
+  border-style: none;
+  background-color: lightgreen;
+  height: 8px;
+  padding: 0;
+  width: 100%;
+  margin: 0 0 0 3% ;
+
+}
+
+.progress::-webkit-progress-bar {
+  background-color: lightgrey;
+}
+
+.range {
+  margin: 10px 0;
+}
+
+.range .bar{
+  justify-content: space-between;
+  width: 100%;
+  font-size:smaller;
+}
+
+.ratings {
+  width: 100%;
+  margin: 0;
+  max-width: 300px;
+  font-size: smaller;
+}
+
+.rating {
+  font-family:Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  font-weight: bolder;
+}
+
+.slider {
+  -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 5px;
+    background: lightgray;
+    outline: none;
+    opacity: 0.7;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: url('../../assets/caret-down-solid-full.svg');
+  cursor:auto;
+}
+
+
+.starrating {
+  margin: 0 10%;
+}
+
+.starcount {
+  width: 5%;
+  margin: 0 2%;
+  text-align: right;
+}
+
+.stars {
+  margin: 0;
+}
+
+.stars .filters:hover {
+  background-color:lightgrey;
+}
+/* .stars .filter:hover {
+  background-color:antiquewhite;
+} */
+
+.stars .label {
+  width: 20%;
+  font-size: smaller;
+}
+
+
+
+/* END:   Ratings      */
+/***********************/
+
+
+/***********************/
+/* BEGIN: Reviews      */
+.scrollable {
+  height: 70vh;
+  width: 100%;
+  overflow: auto;
+  bottom: 0;
+  max-width: 500px;
+}
+/* END:   Reviews      */
+/***********************/
+
+
+/***********************/
+/* BEGIN: ReviewList   */
+.listtitle {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.reviewlist {
+  width: 100%;
+  margin: 0  2% ;
+
+}
+
+/* .ratings {
+  width: 100%;
+  margin: 0 5px;
+  min-width: 200px;
+  max-width: 300px;
+} */
+
+.reviews {
+  width: 100%;
+  margin: 0;
+  max-width: 100%;
+}
+
+.sort {
+  border-style: none;
+  text-decoration: underline;
+  background: none;
+}
+
+/* END:   ReviewList   */
+/***********************/
+
+/***********************/
+/* BEGIN: Review       */
+.review {
+  margin-right: 5px;
+}
+
+.buttonPadding {
+  margin: 10px;
+}
+
+.review .bold {
+  font-weight:bold;
+}
+
+.helpful {
+font-size:small;
+}
+
+.icon {
+  margin-left:2px;
+  margin-right: 5px;
+}
+
+.link {
+  font-size: smaller;
+  font-weight: bold;
+  border-style: none;
+}
+
+.helpful .link {
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+.link:hover {
+  background-color: lightgrey;
+}
+.review .response {
+  background-color:lightgray;
+}
+
+
+.rowspace {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.thumbnail {
+  height: 80px;
+  /* width: 100px; */
+  /* gap: 20px;
+  overflow-y: auto; */
+  margin: 5px 15px;
+  border-radius: 5px;
+}
+
+.thumbnailplaceholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 5px;;
+  /* gap: 20px;
+  overflow-y: auto; */
+  background-color: lightgrey;
+  justify-content: center;
+  color: grey;
+  font-size:xx-large;
+  margin: 5px 15px;
+}
+
+.thumbnailgroup {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.verified {
+  font-size:smaller;
+}
+
+.wrap {
+  inline-size: 60vh;
+  overflow-wrap: break-word;
+}
+/* END:   Review       */
+/***********************/
+
+/***********************/
+/* BEGIN: Add Review       */
+
+.formTitle {
+  font-weight: bold;
+}
+
+.subTitle {
+  font-weight:bold;
+  font-size: smaller;
+}
+
+.charWidth {
+  width: 110px;
+}
+
+.required {
+  font-size:small;
+  vertical-align: super;
+}
+
+.validationErr {
+  color: red;
+}
+/* END:   Add Review       */
+/***********************/
+

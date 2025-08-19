@@ -37,6 +37,7 @@ export default function Modal({
   setIsOpen,
   Module,
   style = {},
+  disableClose,
 }) {
   if (!isOpen) return null;
 
@@ -55,6 +56,7 @@ export default function Modal({
           }}
           role='button'
           tabIndex='0'
+          hidden={disableClose}
         >
           &times;
         </span>
