@@ -11,12 +11,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.get("/reviews/sort", (req,res) => {
-  // console.log('method',req.method);
-  // console.log('url', req.url);
-  // console.log('params',req.params);
-  // console.log('query', req.query);
-  // console.log('body', req.body);
-  let newQuery={
+ let newQuery={
     page: '1',
     count: '9999',
     sort: req.query.sort,
@@ -28,7 +23,6 @@ app.get("/reviews/sort", (req,res) => {
   let newUrl=req.url.slice(0,countNum)+'9999'+req.url.slice(req.url.indexOf('&',countNum));
   newUrl=newUrl.slice(0,pageNum)+'1'+newUrl.slice(newUrl.indexOf('&',pageNum));
   newUrl='/reviews/'+newUrl.slice(newUrl.indexOf('?'));
-  console.log(newUrl);
 
   axios( {
     method: req.method,
@@ -52,17 +46,14 @@ app.get("/reviews/sort", (req,res) => {
     }
 
     if(sortType === 'newest') {
-      console.log('newest');
       pageData.sort((a, b) => new Date(b.date) - new Date(a.date));
     }
 
     if(sortType === 'helpful') {
-      console.log('helpful');
       pageData.sort((a, b) => b.helpfulness - a.helpfulness);
     }
 
     if(sortType === 'relevant') {
-      console.log('relevant');
       pageData.sort((a, b) => {
         if (b.helpfulness !== a.helpfullness) {
           return a.helpfulness - b.helpfulness;
@@ -90,12 +81,6 @@ app.get("/reviews/sort", (req,res) => {
 
 
 app.all("/*", (req, res) => {
-  // console.log(req.method);
-  // console.log(req.url);
-  // console.log(req.params);
-  // console.log('query', req.query);
-  // console.log('body', req.body);
-  // console.log(`${process.env.API_URL}${req.url}`);
   axios( {
     method: req.method,
     url: `${process.env.API_URL}${req.url}`,
