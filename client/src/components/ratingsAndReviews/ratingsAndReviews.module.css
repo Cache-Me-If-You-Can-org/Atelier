@@ -116,7 +116,7 @@
   appearance: none;
   width: 25px;
   height: 25px;
-  background: url('../../assets/caret-down-solid-full.svg');
+  background: url('../assets/caret-down-solid-full.svg');
   cursor:auto;
 }
 
