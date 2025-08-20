@@ -3,6 +3,7 @@ import * as shared from './shared.module.css';
 import * as g from '../global.module.css';
 import Thumbnail from './Thumbnail';
 import { v4 as uuidv4 } from 'uuid';
+import validator from 'validator';
 
 function PhotoForm({
   photos = [],
@@ -13,7 +14,7 @@ function PhotoForm({
   const [canUpload, setCanUpload] = useState(true);
   const [inputValue, setInputValue] = useState('');
   const [noUrl, setNoUrl] = useState(false);
-
+  const [noValidUrl, setNoValidUrl] = useState(false);
   useEffect(() => {
     setCanUpload(currPhotos.includes(''));
   }, [currPhotos]);
@@ -23,9 +24,16 @@ function PhotoForm({
 
     if (!url) {
       setNoUrl(true);
+      setNoValidUrl(false);
       return;
     }
     setNoUrl(false);
+    if (validator.isURL(url)) {
+      setNoValidUrl(false);
+    } else {
+      setNoValidUrl(true);
+      return;
+    }
 
     const firstEmptyIndex = currPhotos.indexOf('');
     if (firstEmptyIndex === -1) {
@@ -59,6 +67,7 @@ function PhotoForm({
         <div>
           <p>Upload your image: </p>
           {noUrl && <p className={shared.error}>You must enter a URL</p>}
+          {noValidUrl && <p className={shared.error}>You must enter a valid URL</p>}
           <input
             id='photos_upload'
             value={inputValue}
