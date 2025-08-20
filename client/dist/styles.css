@@ -8,6 +8,7 @@
   --color-dark: #525252;
   --color-light: #EBEBEB;
   --color-faded: #8c8a8a;
+  --color-error: #fc4848eb;
 
   /* deprecated the following color variables */
   --color-text: black;
