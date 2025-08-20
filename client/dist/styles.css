@@ -7,7 +7,7 @@
   --color-bg: white;
   --color-dark: #525252;
   --color-light: #EBEBEB;
-  --color-faded-dark: #8c8a8a;
+  --color-faded: #8c8a8a;
 
   /* deprecated the following color variables */
   --color-text: black;
@@ -37,6 +37,7 @@
   --color-bg: #525252;
   --color-dark: #EBEBEB;
   --color-light: #525252;
+  --color-faded: #d3d0d0;
 
   /* deprecated the following color variables */
   --color-text: white;
