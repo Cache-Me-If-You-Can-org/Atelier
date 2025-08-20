@@ -331,7 +331,7 @@
 .formTitle {
   text-align: center;
   margin-bottom: var(--spacing-md);
-  color: #333;
+  color: var(--color-dark);
 }
 
 .radioLabel {
@@ -340,7 +340,7 @@
   text-align: center;
   margin-bottom: 5px;
   font-weight: bold;
-  color: #333;
+  color: var(--color-dark);
   margin-right: 40px;
 }
 
@@ -360,7 +360,7 @@
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
-  color: #333;
+  color: var(--color-dark);
   margin-right: 40px;
 }
 
