@@ -33,7 +33,7 @@
 /* Dark Mode */
 [data-theme="dark"] {
   /* Colors */
-  --color-bg: black;
+  --color-bg: #525252;
   --color-dark: #EBEBEB;
   --color-light: #525252;
 

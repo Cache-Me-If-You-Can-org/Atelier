@@ -1,0 +1,13 @@
+.navbar {
+    background-color: var(--color-dark);
+}
+
+.logo {
+    color: var(--color-light);
+}
+
+.toggleThemeButton {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    font-size: var(--text-lg);
+}

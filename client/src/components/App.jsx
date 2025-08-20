@@ -4,6 +4,7 @@ import Overview from './overview/Overview';
 import RelatedAndOutfit from './RelatedAndOutfit';
 import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews';
 import BenRatingsAndReviews from './benRatingsAndReviews/BenRatingsAndReviews';
+import Navbar from './Navbar';
 import QA from './QA/index';
 import * as g from './global.module.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -14,6 +15,7 @@ export default function App({ productId }) {
   const [selectedProductId, setSelectedProductId] = useState(productId);
   const [product, setProduct] = useState(null);
   const [meta, setMeta] = useState(null);
+  const [theme, setTheme] = useState('light');
 
   const fetchMeta = () => (
     axios.get('/reviews/meta', {
@@ -26,6 +28,9 @@ export default function App({ productId }) {
         console.error('failed to fetch meta', err);
       })
   );
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     // We have to reset the states to null so nothing tries to render
@@ -53,6 +58,7 @@ export default function App({ productId }) {
 
   return (
     <div className={[g.stack, g.gapLg].join(' ')}>
+      <Navbar theme={theme} setTheme={setTheme} />
       <Overview product={product} ratings={meta.ratings} />
       <div className={[g.containerMd, g.stack, g.gapLg].join(' ')}>
         <RelatedAndOutfit
