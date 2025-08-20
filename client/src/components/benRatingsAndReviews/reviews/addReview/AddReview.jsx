@@ -6,7 +6,7 @@ import * as g from '../../../global.module.css';
 import * as styles from '../../reviews.module.css';
 
 function AddReview({
-  productId, meta, handleAddReview,
+  productId, meta, handleAddReview, productName,
 }) {
   const [recommend, setRecommend] = useState('');
   const [characteristics, setCharacteristics] = useState({});
@@ -91,7 +91,7 @@ function AddReview({
       <h1 className={g.textLg}>Write Your Review</h1>
       <h2 className={g.textMd}>
         About the&nbsp;
-        {/* {productName} */}
+        {productName}
       </h2>
 
       <div className={styles.formBlock}>
@@ -232,6 +232,9 @@ function AddReview({
             name='nickname'
             placeholder='Your nickname'
           />
+          <p className={g.textXs}>
+            For privacy reasons, do not use your full name or email address
+          </p>
         </label>
         <label className={styles.formLabel} htmlFor='email'>
           <h3 className={g.textMd}>
@@ -249,6 +252,7 @@ function AddReview({
             name='email'
             placeholder='Your email'
           />
+          <p className={g.textXs}>For authentication reasons, you will not be emailed</p>
         </label>
       </div>
       <button type='submit'>Submit</button>

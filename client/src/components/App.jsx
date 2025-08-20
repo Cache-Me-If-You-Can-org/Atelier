@@ -18,6 +18,19 @@ export default function App({ productId }) {
   const [ratings, setRatings] = useState(null);
   const [meta, setMeta] = useState(null);
 
+  const fetchMeta = () => (
+    axios.get('/reviews/meta', {
+      params: { product_id: product.id },
+    })
+      .then((res) => {
+        setMeta(res.data);
+        setRatings(res.data.ratings);
+      })
+      .catch((err) => {
+        console.error('failed to fetch meta', err);
+      })
+  );
+
   useEffect(() => {
     // We have to reset the states to null so nothing tries to render
     // when we change products
@@ -59,7 +72,12 @@ export default function App({ productId }) {
           productName={product.name}
           meta={meta}
         />
-        <BenRatingsAndReviews productId={product.id} />
+        <BenRatingsAndReviews
+          productId={product.id}
+          productName={product.name}
+          ratings={ratings}
+          fetchMeta={fetchMeta}
+        />
       </div>
     </div>
   );
