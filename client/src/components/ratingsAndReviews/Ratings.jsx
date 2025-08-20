@@ -68,9 +68,6 @@ export default function Ratings({
           {/* <div className={gbl.center}>{reviewCount}</div> */}
         </div>
         <div className={gbl.stack}>
-          {/* <div className={gbl.center}>
-            <div>Rating Breakdown</div>
-          </div> */}
           <div className={`${gbl.group} ${gbl.center} ${lcl.filters}`}>
 
             { filters.size > 0 ? (
@@ -112,7 +109,7 @@ export default function Ratings({
               </button>
             ))}
           </div>
-          <p>
+          <p className={lcl.recommended}>
             {pctRecommend}
             % of reviews recommend this product
           </p>
@@ -121,7 +118,7 @@ export default function Ratings({
             {Object.keys(cDef).map((range) => (meta.characteristics[range]
               ? (
                 <div key={meta.characteristics[range].id} className={lcl.spaceVertical}>
-                  <div>{range}</div>
+                  <div className={lcl.barLabel}>{range}</div>
                   <input type='range' min='0' max='50' defaultValue={meta.characteristics[range].value * 10} disabled className={lcl.slider} id={range.name} />
                   <div className={`${gbl.group} ${lcl.bar} ${lcl.label}`}>
                     <div className={lcl.label}>{cDef[range][0]}</div>

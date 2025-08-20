@@ -13,8 +13,8 @@ export default function App({ productId }) {
   // replaces [selectedProduct, setSelectedProduct]
   const [selectedProductId, setSelectedProductId] = useState(productId);
   const [product, setProduct] = useState(null);
-  const [totalReviewCount, setTotalReviewCount] = useState(0);
-  const [productRating, setProductRating] = useState(0);
+  // const [totalReviewCount, setTotalReviewCount] = useState(0);
+  // const [productRating, setProductRating] = useState(0);
   const [ratings, setRatings] = useState(null);
   const [meta, setMeta] = useState(null);
 
@@ -45,21 +45,21 @@ export default function App({ productId }) {
 
   return (
     <div className={[g.stack, g.gapLg].join(' ')}>
-      <Overview product={product} ratings={ratings} />
+      {/* <Overview product={product} ratings={ratings} /> */}
       <div className={[g.containerMd, g.stack, g.gapLg].join(' ')}>
-        <RelatedAndOutfit
+        {/* <RelatedAndOutfit
           sectionId='relatedProductsAndOutfit'
           productId={product.id}
           product={product}
           setSelectedProductId={setSelectedProductId}
-        />
-        <QA product={product} />
+        /> */}
+        {/* <QA product={product} /> */}
         <RatingsAndReviews
           sectionId='ratingsAndReviews'
           productName={product.name}
           meta={meta}
         />
-        <BenRatingsAndReviews productId={product.id} />
+        {/* <BenRatingsAndReviews productId={product.id} /> */}
       </div>
     </div>
   );
