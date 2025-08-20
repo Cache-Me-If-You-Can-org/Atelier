@@ -145,5 +145,5 @@
   border: none;
   text-decoration: underline;
   cursor: pointer;
-  color: gray;
+  color: inherit;
 }
