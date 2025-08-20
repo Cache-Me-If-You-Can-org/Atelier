@@ -13,7 +13,7 @@ import * as styles from '../reviews.module.css';
 import { v4 as uuidv4 } from 'uuid';
 
 function ReviewsList({
-  productId, meta, starFilters,
+  productId, meta, starFilters, productName, fetchMeta, ratings,
 }) {
   const [totalReviews, setTotalReviews] = useState([]);
   const [visibleReviews, setVisibleReviews] = useState([]);
@@ -69,6 +69,7 @@ function ReviewsList({
       console.log(response);
       setIsOpen(false);
       getRelevant();
+      fetchMeta();
     });
   };
 
@@ -101,6 +102,7 @@ function ReviewsList({
   return (
     <div className={styles.reviewsListWrapper}>
       <ReviewsFilters
+        ratings={ratings}
         totalReviews={totalReviews}
         filterTotalReviews={filterReviews}
       />
@@ -131,6 +133,7 @@ function ReviewsList({
         setIsOpen={setIsOpen}
         Module={(
           <AddReview
+            productName={productName}
             productId={productId}
             handleAddReview={addNewreview}
             meta={meta}
