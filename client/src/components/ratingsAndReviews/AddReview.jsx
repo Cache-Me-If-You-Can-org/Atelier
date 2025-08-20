@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import _ from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
 import validator from 'validator';
 import * as lcl from './ratingsAndReviews.module.css';
 import * as gbl from '../global.module.css';
@@ -222,7 +223,7 @@ export default function AddReview({
                       {cDef[range][0]}
                       &nbsp;&nbsp;
                     </span>
-                    <div className={`${gbl.group}${lcl.legend}`} key={getKey()}>
+                    <div className={`${gbl.group} ${lcl.legend}`} key={getKey()}>
 
                       {cDef[range].map((item, idx) => (
                         <input

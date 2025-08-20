@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import _ from 'lodash';
 import * as lcl from './ratingsAndReviews.module.css';
 import * as gbl from '../global.module.css';
