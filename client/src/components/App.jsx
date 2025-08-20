@@ -13,9 +13,6 @@ export default function App({ productId }) {
   // replaces [selectedProduct, setSelectedProduct]
   const [selectedProductId, setSelectedProductId] = useState(productId);
   const [product, setProduct] = useState(null);
-  const [totalReviewCount, setTotalReviewCount] = useState(0);
-  const [productRating, setProductRating] = useState(0);
-  const [ratings, setRatings] = useState(null);
   const [meta, setMeta] = useState(null);
 
   const fetchMeta = () => (
@@ -24,7 +21,6 @@ export default function App({ productId }) {
     })
       .then((res) => {
         setMeta(res.data);
-        setRatings(res.data.ratings);
       })
       .catch((err) => {
         console.error('failed to fetch meta', err);
@@ -35,7 +31,7 @@ export default function App({ productId }) {
     // We have to reset the states to null so nothing tries to render
     // when we change products
     setProduct(null);
-    setRatings(null);
+    setMeta(null);
     axios.get(`/products/${selectedProductId}`)
       .then((res) => {
         setProduct(res.data);
@@ -45,20 +41,19 @@ export default function App({ productId }) {
       })
       .then((res) => {
         setMeta(res.data);
-        setRatings(res.data.ratings);
       })
       .catch((err) => {
         console.error('failed to get products', err);
       });
   }, [selectedProductId]);
 
-  if (product === null || ratings === null) {
-    return (<div>loading...</div>);
+  if (product === null || meta === null) {
+    return (<div className={g.center}>loading...</div>);
   }
 
   return (
     <div className={[g.stack, g.gapLg].join(' ')}>
-      <Overview product={product} ratings={ratings} />
+      <Overview product={product} ratings={meta.ratings} />
       <div className={[g.containerMd, g.stack, g.gapLg].join(' ')}>
         <RelatedAndOutfit
           sectionId='relatedProductsAndOutfit'
@@ -75,7 +70,7 @@ export default function App({ productId }) {
         <BenRatingsAndReviews
           productId={product.id}
           productName={product.name}
-          ratings={ratings}
+          ratings={meta.ratings}
           fetchMeta={fetchMeta}
         />
       </div>
