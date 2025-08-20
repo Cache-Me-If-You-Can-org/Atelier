@@ -6,10 +6,12 @@
   /* refactoring to following names */
   --color-bg: white;
   --color-dark: #525252;
+  --color-ultraDark: #000;
   --color-light: #EBEBEB;
+  --color-ultraLight: #fff;
 
   /* deprecated the following color variables */
-  --color-text: black;
+  --color-text: var(--color-ultraDark);
   --color-border: darkgray;
   --color-icon: rgb(40, 40, 40);
 
@@ -33,13 +35,19 @@
 /* Dark Mode */
 [data-theme="dark"] {
   /* Colors */
-  --color-bg: #525252;
+  --color-bg: #2e2e2e;
   --color-dark: #EBEBEB;
   --color-light: #525252;
 
   /* deprecated the following color variables */
-  --color-text: white;
+  --color-text: var(--color-ultraLight);
   --color-border: lightgray;
+}
+
+[data-theme="dark"] button {
+  background-color: var(--color-ultraLight);
+  border: solid 1px var(--color-ultraLight);
+  color: var(--color-bg);
 }
 
 /* CSS Reset: remove hidden default values affecting html tags */

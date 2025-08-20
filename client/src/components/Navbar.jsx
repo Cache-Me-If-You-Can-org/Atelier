@@ -10,16 +10,16 @@ function Navbar({ theme, setTheme }) {
         <div className={[g.textLg, g.bold, css.logo].join(' ')}>
           Company Name
         </div>
-        <button 
-          type='button' 
+        <button
+          type='button'
           onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
           className={css.toggleThemeButton}
         >
           {theme === 'light' ? <Sun /> : <Moon />}
-        </button>        
+        </button>
       </div>
     </div>
-  )
+  );
 }
 
 export default Navbar;
