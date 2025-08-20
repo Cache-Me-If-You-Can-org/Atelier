@@ -5,6 +5,7 @@ import * as g from '../global.module.css';
 import Image from '../shared/Image';
 import Thumbnail from '../shared/Thumbnail';
 import Modal from '../shared/Modal';
+import validator from 'validator';
 
 function Answer({ answer }) {
   let date = new Date(answer.date);
@@ -14,13 +15,15 @@ function Answer({ answer }) {
   const [helpfulness, setHelpfulness] = useState(answer.helpfulness);
   const [isOpen, setIsOpen] = useState(false);
   const [url, setUrl] = useState(null);
+  const [validPhotos, setValidPhotos] = useState([]);
 
   useEffect(() => {
     const helpful = localStorage.getItem(`helpful_${answer.answer_id}`);
     if (helpful) {
       setIsHelpful(helpful);
     }
-  }, [answer.answer_id]);
+    setValidPhotos(answer.photos.filter((photo) => validator.isURL(photo.url)));
+  }, [answer.answer_id, answer.photos]);
   function report() {
     axios.put(`/qa/answers/${answer.answer_id}/report`)
       .then(() => {
@@ -42,7 +45,7 @@ function Answer({ answer }) {
     setIsOpen(true);
     setUrl(photo);
   }
-  if (answer.photos.length === 0) {
+  if (validPhotos.length === 0) {
     return (
       <div className={[styles.answer, g.stack, g.gapSm].join(' ')}>
         <div className={g.textSm}>{answer.body}</div>
@@ -94,11 +97,11 @@ function Answer({ answer }) {
     <div className={[styles.answer, g.stack, g.gapSm].join(' ')}>
       <div className={g.textSm}>{answer.body}</div>
       <div className={[g.flex, g.start, g.gapSm].join(' ')}>
-        {answer.photos.map((photo) => (
-          <button type='button' className={styles.unstyledBtn} onClick={() => expandPhoto(photo.url)} key={photo.id}>
+        {validPhotos.map((validPhoto) => (
+          <button type='button' className={styles.unstyledBtn} onClick={() => expandPhoto(validPhoto.url)} key={validPhoto.id}>
             <Thumbnail
               className={g.flex}
-              src={photo.url}
+              src={validPhoto.url}
             />
           </button>
         ))}

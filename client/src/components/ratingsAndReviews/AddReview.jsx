@@ -8,7 +8,6 @@ import * as gbl from '../global.module.css';
 import Modal from '../shared/Modal';
 import LoadImage from './LoadImage';
 import QuarterStarRating from '../shared/QuarterStarRating';
-import { v4 as uuidv4 } from 'uuid';
 
 export default function AddReview({
   meta, productName, cDef, setIsOpenReview, reviewAdded,
