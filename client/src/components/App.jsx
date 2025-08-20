@@ -45,9 +45,6 @@ export default function App({ productId }) {
 
   return (
     <div className={[g.stack, g.gapLg].join(' ')}>
-      <div className={[g.center, g.stack].join(' ')}>
-        {`${totalReviewCount} reviews for product ${product.id} with a rating of ${productRating}`}
-      </div>
       <Overview product={product} ratings={ratings} />
       <div className={[g.containerMd, g.stack, g.gapLg].join(' ')}>
         <RelatedAndOutfit

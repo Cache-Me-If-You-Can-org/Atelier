@@ -80,7 +80,7 @@ export default function ReviewList({
   useEffect(() => {
     setPage(1);
     getReviews([], prodId, setReviews);
-  }, [sort, filters, helpful]);
+  }, [sort, filters, markedHelpful]);
 
   return (
     <article className={lcl.reviews} id='reviewlist'>
