@@ -1,5 +1,5 @@
 .red {
-  color: red;
+  color: var(--color-red);
 }
 .gap {
   gap: 10px

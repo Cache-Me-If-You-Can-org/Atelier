@@ -1,0 +1,28 @@
+.navbar {
+    background-color: var(--color-ultraDark);
+}
+
+[data-theme="dark"] .navbar {
+    background-color: var(--color-ultraLight);
+}
+
+.logo {
+    color: var(--color-ultraLight);
+}
+
+[data-theme="dark"] .logo {
+    color: var(--color-ultraDark);
+}
+
+[data-theme="dark"] .toggleThemeButton {
+    background: none;
+    border-color: var(--color-ultraLight);
+    color: var(--color-ultraDark);
+}
+
+.toggleThemeButton {
+    background-color: none;
+    color: var(--color-light);
+    font-size: var(--text-lg);
+    border-color: var(--color-ultraDark);
+}

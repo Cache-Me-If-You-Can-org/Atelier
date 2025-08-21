@@ -4,6 +4,7 @@ import Overview from './overview/Overview';
 import RelatedAndOutfit from './RelatedAndOutfit';
 import RatingsAndReviews from './ratingsAndReviews/RatingsAndReviews';
 import BenRatingsAndReviews from './benRatingsAndReviews/BenRatingsAndReviews';
+import Navbar from './Navbar';
 import QA from './QA/index';
 import * as g from './global.module.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -13,10 +14,8 @@ export default function App({ productId }) {
   // replaces [selectedProduct, setSelectedProduct]
   const [selectedProductId, setSelectedProductId] = useState(productId);
   const [product, setProduct] = useState(null);
-  const [totalReviewCount, setTotalReviewCount] = useState(0);
-  const [productRating, setProductRating] = useState(0);
-  const [ratings, setRatings] = useState(null);
   const [meta, setMeta] = useState(null);
+  const [theme, setTheme] = useState('light');
 
   const fetchMeta = () => (
     axios.get('/reviews/meta', {
@@ -24,18 +23,20 @@ export default function App({ productId }) {
     })
       .then((res) => {
         setMeta(res.data);
-        setRatings(res.data.ratings);
       })
       .catch((err) => {
         console.error('failed to fetch meta', err);
       })
   );
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     // We have to reset the states to null so nothing tries to render
     // when we change products
     setProduct(null);
-    setRatings(null);
+    setMeta(null);
     axios.get(`/products/${selectedProductId}`)
       .then((res) => {
         setProduct(res.data);
@@ -45,20 +46,20 @@ export default function App({ productId }) {
       })
       .then((res) => {
         setMeta(res.data);
-        setRatings(res.data.ratings);
       })
       .catch((err) => {
         console.error('failed to get products', err);
       });
   }, [selectedProductId]);
 
-  if (product === null || ratings === null) {
-    return (<div>loading...</div>);
+  if (product === null || meta === null) {
+    return (<div className={g.center}>loading...</div>);
   }
 
   return (
     <div className={[g.stack, g.gapLg].join(' ')}>
-      <Overview product={product} ratings={ratings} />
+      <Navbar theme={theme} setTheme={setTheme} />
+      <Overview product={product} ratings={meta.ratings} />
       <div className={[g.containerMd, g.stack, g.gapLg].join(' ')}>
         <RelatedAndOutfit
           sectionId='relatedProductsAndOutfit'
@@ -75,7 +76,7 @@ export default function App({ productId }) {
         <BenRatingsAndReviews
           productId={product.id}
           productName={product.name}
-          ratings={ratings}
+          ratings={meta.ratings}
           fetchMeta={fetchMeta}
         />
       </div>
