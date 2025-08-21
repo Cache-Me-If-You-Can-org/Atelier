@@ -62,13 +62,13 @@ export default function App({ productId }) {
       <Navbar theme={theme} setTheme={setTheme} />
       <Overview product={product} ratings={meta.ratings} />
       <div className={[g.containerMd, g.stack, g.gapLg].join(' ')}>
-        {/* <RelatedAndOutfit
+        <RelatedAndOutfit
           sectionId='relatedProductsAndOutfit'
           productId={product.id}
           product={product}
           setSelectedProductId={setSelectedProductId}
-        /> */}
-        {/* <QA product={product} /> */}
+        />
+        <QA product={product} />
         <RatingsAndReviews
           sectionId='ratingsAndReviews'
           productName={product.name}
