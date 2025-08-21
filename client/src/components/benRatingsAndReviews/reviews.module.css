@@ -73,6 +73,11 @@
   text-transform: inherit;
 }
 
+[data-theme="dark"] .reviewTilesHelpfulSection button {
+  background: none;
+  color: var(--color-ultraLight);
+}
+
 .reviewTilesHelpfulSection button:disabled {
   color: var(--color-border);
   border-color: var(--color-border);
@@ -229,6 +234,8 @@
   width: 100%;
   display: flex;
   align-items: center;
+  background: none;
+  color: var(--color-dark);
 }
 
 .starTitle {
@@ -313,9 +320,21 @@
   opacity: 0.6;
 }
 
+[data-theme="dark"]  .starFilterSelected,
 .starFilterSelected {
   background-color: #fdec9f;
   box-shadow: 0 0 8px rgb(250 216 0);
+  color: var(--color-ultraDark);
+}
+
+/* [data-theme="dark"] .starFilterSelected {
+  color: var(--color-dark);
+} */
+
+[data-theme="dark"] .clearStarFiltersBtn {
+  background: none;
+  border: none;
+  color: var(--color-dark);
 }
 
 .clearStarFiltersBtn {

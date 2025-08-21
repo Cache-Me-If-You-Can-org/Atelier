@@ -223,6 +223,12 @@ font-size:small;
   margin-right: 5px;
 }
 
+[data-theme="dark"] .link {
+  background: none;
+  border: none;
+  color: var(--color-dark);
+}
+
 .link {
   font-size: smaller;
   font-weight: bold;
@@ -232,6 +238,12 @@ font-size:small;
 .helpful .link {
   font-weight: normal;
   text-decoration: underline;
+  background: none;
+  border: none;
+}
+
+[data-theme="dark"] .helpful .link {
+  color: var(--color-dark);
 }
 
 .link:hover {
