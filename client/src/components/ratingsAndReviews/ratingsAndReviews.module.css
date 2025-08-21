@@ -23,12 +23,12 @@
   justify-content: start;
 }
 
-button {
+#ratingsAndReviews button {
   min-width: 0;
   text-transform: inherit;
 }
 
-[data-theme="dark"] button {
+[data-theme="dark"] #ratingsAndReviews button {
   background-color: transparent;
   border: none;
   color: var(--color-ultraLight);
