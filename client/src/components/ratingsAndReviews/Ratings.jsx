@@ -91,6 +91,7 @@ export default function Ratings({
               <button
                 type='button'
                 key={getKey()}
+                // className={`${gbl.group} ${gbl.center} ${lcl.filters} ${lcl.link}`}
                 className={`${gbl.group} ${gbl.center} ${lcl.filters} ${lcl.link}`}
                 id={`${star} Stars`}
                 onClick={(e) => handleOnClickStar(e)}

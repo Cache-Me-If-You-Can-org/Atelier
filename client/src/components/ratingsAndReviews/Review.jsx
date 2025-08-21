@@ -116,7 +116,7 @@ export default function Review({
             </div>
           )
             : (
-              <>I recommend this product</>
+              null
             )
         }
 
