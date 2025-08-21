@@ -105,7 +105,6 @@ a {
 button {
   padding: var(--spacing-sm);
   background-color: var(--color-ultraLight);
-  /* background-color: transparent; */
   border-radius: 0;
   border: solid 1px var(--color-ultraDark);
   min-width: 45px;
@@ -121,9 +120,6 @@ button {
   border: solid 1px var(--color-ultraLight);
   color: var(--color-bg);
 }
-/* button:hover {
-  background-color: #e8e8e8;
-} */
 
 
 
