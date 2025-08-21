@@ -26,7 +26,12 @@
 button {
   min-width: 0;
   text-transform: inherit;
-    background-color: transparent;
+}
+
+[data-theme="dark"] button {
+  background-color: transparent;
+  border: none;
+  color: var(--color-ultraLight);
 }
 
 /****************************/
@@ -62,7 +67,7 @@ button {
 /* BEGIN: Ratings      */
 
 .filters {
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
   width: 100%;
 }
 
@@ -74,6 +79,7 @@ button {
 
 .clear:hover{
   font-weight:bold;
+  background-color: transparent;
 }
 
 
@@ -153,7 +159,8 @@ button {
 }
 
 .stars .filters:hover {
-  background-color:lightgrey;
+  background-color:antiquewhite;
+  color:black;
 }
 /* .stars .filter:hover {
   background-color:antiquewhite;
@@ -188,6 +195,7 @@ button {
   overflow: auto;
   bottom: 0;
   max-width: 500px;
+  min-height: 500px;
 }
 /* END:   Reviews      */
 /***********************/
@@ -222,7 +230,14 @@ button {
 .sort {
   border-style: none;
   text-decoration: underline;
-  /* background: none; */
+  background: transparent;
+}
+
+[data-theme="dark"] .sort {
+  color: white;
+  border-style: none;
+  text-decoration: underline;
+  background: transparent;
 }
 
 /* END:   ReviewList   */
@@ -269,9 +284,9 @@ button {
   text-decoration: underline;
 }
 
-.link:hover {
+/* .link:hover {
   background-color: lightgrey;
-}
+} */
 
 .review .responsetitle {
   background-color:lightgray;

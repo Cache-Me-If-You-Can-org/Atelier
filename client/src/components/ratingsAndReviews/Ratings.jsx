@@ -76,7 +76,7 @@ export default function Ratings({
                 &nbsp; &nbsp;
                 <button
                   type='button'
-                  className={`${lcl.clear} ${lcl.link}`}
+                  className={`${lcl.link}`}
                   onClick={() => handleOnClickClearFilters()}
                   onKeyPress={() => handleOnClickClearFilters()}
                 >
