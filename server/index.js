@@ -55,8 +55,8 @@ app.get("/reviews/sort", (req,res) => {
 
     if(sortType === 'relevant') {
       pageData.sort((a, b) => {
-        if (b.helpfulness !== a.helpfullness) {
-          return a.helpfulness - b.helpfulness;
+        if (b.helpfulness !== a.helpfulness) {
+          return b.helpfulness - a.helpfulness;
         }
         return new Date(b.date) - new Date(a.date);
       })
