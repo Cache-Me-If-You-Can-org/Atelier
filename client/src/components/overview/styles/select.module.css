@@ -47,7 +47,7 @@
   display: flex;
   justify-content: center;
   padding-bottom: 4px;
-  background: linear-gradient(to bottom, var(--color-bg) 0%, transparent 100%);
+  background: linear-gradient(to bottom, var(--color-ultraLight) 0%, transparent 100%);
   pointer-events: none;
 }
 
@@ -59,13 +59,13 @@
   display: flex;
   justify-content: center;
   padding-bottom: 4px;
-  background: linear-gradient(to top, var(--color-bg) 0%, transparent 100%);
+  background: linear-gradient(to top, var(--color-ultraLight) 0%, transparent 100%);
   pointer-events: none;
 }
 
 
 .scrollIndicator {
-  color: var(--color-dark);
+  color: var(--color-darker);
 }
 
 .selectOption {
@@ -76,19 +76,19 @@
 }
 
 .selectOption:hover {
-  background: var(--color-light);
+  background: var(--color-lighter);
 }
 
 .active {
-  background: #e6f3ff;
+  background: #c6e0f8;
 }
 
 .disabled {
   opacity: 0.6;
   cursor: not-allowed;
-  background: var(--color-light);
+  background: var(--color-lighter);
 }
 
 .disabled:hover {
-  background: var(--color-light);
+  background: var(--color-lighter);
 }
