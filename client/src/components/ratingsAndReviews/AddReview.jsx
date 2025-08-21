@@ -390,6 +390,7 @@ export default function AddReview({
             idx={currentImageIdx}
             allowOverlay={false}
             allowClose={false}
+            style={{ width: '10px' }}
           />
         )}
       />
