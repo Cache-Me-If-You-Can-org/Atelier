@@ -50,6 +50,7 @@ function AnswersList({ questionId, newAnswer }) {
           axios.get(`/qa/questions/${questionId}/answers`, { params: { count: 999 } })
             .then((res) => {
               setAllAnswers(res.data.results.sort(sortSellerFirst));
+              setDisplayedAnswers(res.data.results.sort(sortSellerFirst));
             })
             .catch((err) => { throw new Error(err); });
         })

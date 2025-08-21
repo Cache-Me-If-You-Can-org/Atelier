@@ -9,7 +9,7 @@
   line-break: anywhere;
 }
 .answerDetails {
-  color: gray;
+  color: var(--color-gray);
   display: flex;
   justify-content: flex-start;
   align-items: baseline;
@@ -29,7 +29,7 @@
   flex-grow: 2;
 }
 .questionDetails {
-  color: gray;
+  color: var(--color-gray);
   display: flex;
   align-items: baseline;
 }
@@ -45,7 +45,7 @@
   margin-bottom: var(--spacing-sm);
 }
 .error {
-  color: red;
+  color: var(--color-red);
   white-space: pre;
 }
 .scrollable {
@@ -59,15 +59,12 @@ button.unstyledBtn, input.unstyledBtn{
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--color-dark);
   padding: 0;
+  color: var(--color-dark);
 }
 .emphasize, .search input::placeholder {
   text-transform: uppercase;
   font-weight: bold;
-}
-.multiBtn {
-  margin-right: var(--spacing-sm);
 }
 .helpfulness {
   display:flex;
