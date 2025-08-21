@@ -1,9 +1,5 @@
 .navbar {
-    background-color: var(--color-ultraDark);
-}
-
-[data-theme="dark"] .navbar {
-    background-color: var(--color-ultraLight);
+    background-color: var(--color-dark);
 }
 
 .logo {
@@ -11,18 +7,18 @@
 }
 
 [data-theme="dark"] .logo {
-    color: var(--color-ultraDark);
+    color: var(--color-darker);
+}
+
+.toggleThemeButton {
+    background-color: transparent;
+    color: var(--color-ultraLight);
+    font-size: var(--text-lg);
+    border: none;
 }
 
 [data-theme="dark"] .toggleThemeButton {
     background: none;
-    border-color: var(--color-ultraLight);
-    color: var(--color-ultraDark);
-}
-
-.toggleThemeButton {
-    background-color: none;
-    color: var(--color-light);
-    font-size: var(--text-lg);
-    border-color: var(--color-ultraDark);
+    color: var(--color-darker);
+    border: none;
 }
