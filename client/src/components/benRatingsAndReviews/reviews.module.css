@@ -234,8 +234,19 @@
   width: 100%;
   display: flex;
   align-items: center;
-  background: none;
+  /* background: none; */
   color: var(--color-dark);
+}
+
+[data-theme="dark"] .ratingBreakdown button {
+  background: none;
+}
+
+[data-theme="dark"] .ratingBreakdown .starFilterHover:hover,
+[data-theme="dark"] .ratingBreakdown .starFilterSelected {
+  background-color: #908c35;
+  box-shadow: 0 0 8px rgb(255 248 40);
+  color: var(--color-ultraDark);
 }
 
 .starTitle {
