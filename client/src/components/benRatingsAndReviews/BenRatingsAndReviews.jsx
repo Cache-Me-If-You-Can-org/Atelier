@@ -5,7 +5,7 @@ import ReviewsServices from './services/ReviewsServices';
 import * as g from '../global.module.css';
 import * as styles from './reviews.module.css';
 
-function BenRatingsAndReviews({ productId }) {
+function BenRatingsAndReviews({ productId, productName, fetchMeta, ratings }) {
   const [meta, setMeta] = useState([]);
   const [starFilters, setStarFilters] = useState([]);
 
@@ -27,9 +27,12 @@ function BenRatingsAndReviews({ productId }) {
         </div>
         <div className={styles.reviewsWrapper}>
           <ReviewsList
+            productName={productName}
             starFilters={starFilters}
             productId={productId}
             meta={meta}
+            fetchMeta={fetchMeta}
+            ratings={ratings}
           />
         </div>
       </div>

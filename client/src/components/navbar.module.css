@@ -1,0 +1,24 @@
+.navbar {
+    background-color: var(--color-dark);
+}
+
+.logo {
+    color: var(--color-ultraLight);
+}
+
+[data-theme="dark"] .logo {
+    color: var(--color-darker);
+}
+
+.toggleThemeButton {
+    background-color: transparent;
+    color: var(--color-ultraLight);
+    font-size: var(--text-lg);
+    border: none;
+}
+
+[data-theme="dark"] .toggleThemeButton {
+    background: none;
+    color: var(--color-darker);
+    border: none;
+}

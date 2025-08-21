@@ -3,6 +3,12 @@
   display: inline-block;
 }
 
+[data-theme="dark"] .overlayBtn {
+  background: none;
+  border: none;
+  color: var(--color-ultraLight);
+}
+
 .overlayBtn {
   position: absolute;
   top: -5px;

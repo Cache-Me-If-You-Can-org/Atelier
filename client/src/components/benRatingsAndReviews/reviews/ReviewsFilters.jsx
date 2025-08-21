@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import Sort from './Sort';
+import { getReviewCount } from '../../lib/helpers';
 import * as g from '../../global.module.css';
 import * as styles from '../reviews.module.css';
 
-function ReviewsFilters({ totalReviews, filterTotalReviews }) {
+function ReviewsFilters({ ratings, totalReviews, filterTotalReviews }) {
   const [selectedFilter, setSelectedFilter] = useState('relevance');
-  const safeReviews = Array.isArray(totalReviews) ? totalReviews : [];
+
+  const reviewCount = getReviewCount(ratings);
 
   const filter = (filterVal) => {
     const currentFilter = filterVal[0];
@@ -22,7 +24,7 @@ function ReviewsFilters({ totalReviews, filterTotalReviews }) {
   return (
     <div className={styles.reviewsFilter}>
       <label className={`${styles.reviewsFilterTitle} ${g.textMd}`} htmlFor='reviewsFilters'>
-        {safeReviews.length}
+        {reviewCount}
         &nbsp;
         reviews, sorted by&nbsp;
       </label>

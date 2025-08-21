@@ -128,7 +128,6 @@
   cursor:auto;
 }
 
-
 .starrating {
   margin: 0 10%;
 }
@@ -242,6 +241,12 @@ font-size: var(--text-xs);
   margin-right: var(--spacing-sm);
 }
 
+[data-theme="dark"] .link {
+  background: none;
+  border: none;
+  color: var(--color-dark);
+}
+
 .link {
   font-weight: var(--text-reg);
   border-style: none;
@@ -249,6 +254,12 @@ font-size: var(--text-xs);
 
 .helpful .link {
   text-decoration: underline;
+  background: none;
+  border: none;
+}
+
+[data-theme="dark"] .helpful .link {
+  color: var(--color-dark);
 }
 
 .link:hover {
