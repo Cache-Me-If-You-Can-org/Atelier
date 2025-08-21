@@ -25,7 +25,6 @@ function ImageWithButton({
             e.stopPropagation();
             remove((prev) => prev.filter((item) => item !== related.id));
           }}
-          style={{ background: 'transparent' }}
         >
           &times;
         </button>
@@ -46,7 +45,6 @@ function ImageWithButton({
                 e.stopPropagation();
                 setIsOpen(true);
               }}
-              style={{ background: 'transparent' }}
             >
               {hover ? '★' : '☆'}
             </button>
