@@ -200,7 +200,7 @@ button {
 
 .slick-prev::before,
 .slick-next::before {
-  color: black !important;
+  color: var(--color-text) !important;
 }
 
 .slick-track {
