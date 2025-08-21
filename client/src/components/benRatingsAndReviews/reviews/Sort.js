@@ -18,7 +18,11 @@ const Sort = {
       .sort((a, b) => b.relevanceScore - a.relevanceScore);
   },
 
-  byNewest: (reviews) => [...reviews].sort((a, b) => new Date(b.date) - new Date(a.date)),
+  byNewest: (reviews) => [...reviews].sort((a, b) => {
+    const dateDiff = new Date(b.date) - new Date(a.date);
+    if (dateDiff !== 0) return dateDiff;
+    return b.review_id - a.review_id; // tie-breaker
+  }),
 
   byHelpfulness: (reviews) => [...reviews].sort((a, b) => b.helpfulness - a.helpfulness),
 

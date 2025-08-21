@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PhotoForm from '../shared/PhotoForm';
 import Modal from '../shared/Modal';
 import * as styles from './qanda.module.css';
+import * as g from '../global.module.css';
 
 function AnswerForm({
   productName, question, setIsOpen, setNewAnswer,
@@ -70,8 +71,8 @@ function AnswerForm({
         <input id='email' placeholder='Example: jack@email.com' maxLength='60' />
       </div>
       <p>For authentication reasons, you will not be emailed </p>
-      <button type='button' onClick={() => { setPhotoIsOpen(true); }}>Add photos</button>
-      <button type='button' onClick={submitAnswerHandler}>Submit answer</button>
+      <button className={g.multiBtn} type='button' onClick={() => { setPhotoIsOpen(true); }}>Add photos</button>
+      <button className={g.multiBtn} type='button' onClick={submitAnswerHandler}>Submit answer</button>
       <Modal
         isOpen={photoIsOpen}
         setIsOpen={setPhotoIsOpen}
@@ -84,6 +85,7 @@ function AnswerForm({
             isModal
           />
         )}
+        style={{ width: '40%' }}
       />
     </div>
   );

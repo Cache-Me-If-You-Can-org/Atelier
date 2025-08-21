@@ -15,7 +15,7 @@ export default function App({ productId }) {
   const [selectedProductId, setSelectedProductId] = useState(productId);
   const [product, setProduct] = useState(null);
   const [meta, setMeta] = useState(null);
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
 
   const fetchMeta = () => (
     axios.get('/reviews/meta', {
@@ -30,6 +30,7 @@ export default function App({ productId }) {
   );
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
   }, [theme]);
 
   useEffect(() => {

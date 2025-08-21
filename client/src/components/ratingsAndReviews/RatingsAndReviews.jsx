@@ -25,7 +25,7 @@ export default function RatingsAndReviews({
 
       <title>Ratings & Reviews</title>
       <div className={lcl.RRcontainer}>
-        <h3>RATINGS & REVIEWS</h3>
+        <p className={lcl.sectionHeading}>RATINGS & REVIEWS</p>
 
         <div className={gbl.group}>
           <Ratings

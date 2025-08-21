@@ -70,12 +70,13 @@ function PhotoForm({
           {noValidUrl && <p className={shared.error}>You must enter a valid URL</p>}
           <input
             id='photos_upload'
+            className={g.multiBtn}
             value={inputValue}
             placeholder='image url'
             onChange={(e) => setInputValue(e.target.value)}
           />
-          <button type='button' onClick={submitPhotoHandler}>Upload</button>
-          {isModal ? <button type='button' onClick={() => setIsOpen(false)}>Done</button> : null}
+          <button className={g.multiBtn} type='button' onClick={submitPhotoHandler}>Upload</button>
+          {isModal ? <button className={g.multiBtn} type='button' onClick={() => setIsOpen(false)}>Done</button> : null}
         </div>
       ) : (
         <div>
@@ -85,7 +86,7 @@ function PhotoForm({
             &nbsp;
             photos may be uploaded
           </p>
-          {isModal ? <button type='button' onClick={() => setIsOpen(false)}>Done</button> : null}
+          {isModal ? <button className={g.multiBtn} type='button' onClick={() => setIsOpen(false)}>Done</button> : null}
         </div>
       )}
     </div>

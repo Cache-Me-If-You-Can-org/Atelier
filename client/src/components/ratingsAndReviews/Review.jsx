@@ -55,7 +55,7 @@ export default function Review({
               <div>
                 <QuarterStarRating rating={review.rating} size={24} />
               </div>
-              <div>{format(parseISO(review.date), 'MMMM d, yyyy')}</div>
+              <div className={lcl.date}>{format(parseISO(review.date), 'MMMM d, yyyy')}</div>
             </div>
             <div className={lcl.bold}>{review.summary ? review.summary.slice(0, 60) : null }</div>
           </div>
@@ -110,13 +110,13 @@ export default function Review({
 
         { /* recommended (conditional) */
           review.recommend ? (
-            <div className={gbl.group}>
+            <div className={`${gbl.group} ${lcl.recommend}`}>
               <Check size={20} />
               <span>&nbsp;I recommend this product</span>
             </div>
           )
             : (
-              <>I recommend this product</>
+              null
             )
         }
 
@@ -125,10 +125,10 @@ export default function Review({
 
           {review.verified
             ? (
-              <span>
+              <span className={lcl.verified}>
                 {review.reviewer_name}
                 ,&nbsp;
-                <span className={lcl.verified}>Verified Purchaser</span>
+                <span>Verified Purchaser</span>
               </span>
             )
             : (<span>{review.reviewer_name}</span>)}
@@ -140,9 +140,9 @@ export default function Review({
 
         { /* response from seller (conditional) */
           review.response ? (
-            <div className={`${gbl.stack} ${lcl.response} ${lcl.rowspace}`}>
-              <div className={lcl.bold}>Response:</div>
-              <div>{review.response}</div>
+            <div className={`${gbl.stack} ${lcl.rowspace}`}>
+              <div className={lcl.responsetitle}>Response:</div>
+              <div className={lcl.responsebody}>{review.response}</div>
             </div>
           )
             : null
@@ -151,15 +151,16 @@ export default function Review({
         <div className={`${gbl.group} ${lcl.rowspace} ${lcl.helpful} ${gbl.center} ${lcl.left}`}>
           {/* actions - Helpful, report */}
           <span>Helpful? </span>
-          <button type='button' className={`${lcl.horizontalpadding} ${lcl.link}`} id='Yes' onClick={(e) => handleOnClickHelpful(e)} disabled={helpful.includes(review.review_id)}>Yes</button>
-          <button type='button' className={`${lcl.horizontalpadding} ${lcl.link}`} id='No' onClick={(e) => handleOnClickHelpful(e)} disabled={helpful.includes(review.review_id)}>No</button>
+          <button type='button' className={`${lcl.horizontalpadding} ${lcl.helpful} ${lcl.link}`} id='Yes' onClick={(e) => handleOnClickHelpful(e)} disabled={helpful.includes(review.review_id)}>Yes</button>
           <span className={lcl.horizontalpadding}>
             (
             { review.helpfulness ? (review.helpfulness) : ('0')}
             )
           </span>
+          <button type='button' className={`${lcl.horizontalpadding} ${lcl.helpful} ${lcl.link}`} id='No' onClick={(e) => handleOnClickHelpful(e)} disabled={helpful.includes(review.review_id)}>No</button>
+
           <span className={lcl.horizontalpadding}>|</span>
-          <button type='button' className={`${lcl.horizontalpadding} ${lcl.link}`} onClick={() => handleOnClickReport()} disabled={reported.includes(review.review_id)}>Report</button>
+          <button type='button' className={`${lcl.horizontalpadding}  ${lcl.helpful}  ${lcl.link}`} onClick={() => handleOnClickReport()} disabled={reported.includes(review.review_id)}>Report</button>
         </div>
 
         { showHR && (<hr />) }

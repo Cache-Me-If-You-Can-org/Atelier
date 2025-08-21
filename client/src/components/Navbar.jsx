@@ -8,7 +8,7 @@ function Navbar({ theme, setTheme }) {
     <div className={[g.containerLg, g.fullWidth].join(' ')}>
       <div className={[g.group, g.alignCenter, g.sb, g.pMd, g.fullWidth, css.navbar].join(' ')}>
         <div className={[g.textLg, g.bold, css.logo].join(' ')}>
-          Company Name
+          Atelier
         </div>
         <button
           type='button'
